@@ -1,0 +1,10 @@
+RewriteEngine On
+RewriteBase /
+
+# Allow direct access to existing files and directories
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# Angular SPA fallback
+RewriteRule ^ index.html [L]
