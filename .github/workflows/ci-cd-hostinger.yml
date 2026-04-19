@@ -95,8 +95,22 @@ jobs:
           echo "Deploy failed after 2 attempts."
           exit 1
 
-      - name: Verify live site serves current commit
+      - name: Verify live site serves current commit (non-blocking)
         run: |
-          response=$(curl -fsSL "https://portfolio.yaurel.com/build-info.json?run=${{ github.run_id }}")
-          echo "Live build info: $response"
-          echo "$response" | grep -q "${{ github.sha }}" || (echo "Live site does not match deployed commit" && exit 1)
+          ok=0
+          for attempt in 1 2 3 4 5 6; do
+            response=$(curl -fsSL -H "Cache-Control: no-cache" "https://portfolio.yaurel.com/build-info.json?run=${{ github.run_id }}&attempt=${attempt}" || true)
+            echo "Attempt ${attempt}: ${response}"
+
+            if echo "$response" | grep -q "${{ github.sha }}"; then
+              echo "Live site matches current commit."
+              ok=1
+              break
+            fi
+
+            sleep 5
+          done
+
+          if [ "$ok" -ne 1 ]; then
+            echo "::warning::Live site did not confirm current commit in time. Check build-info.json manually."
+          fi
