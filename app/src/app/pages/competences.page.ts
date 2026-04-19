@@ -4,6 +4,7 @@ type Skill = {
   title: string;
   domain: 'Technique' | 'Transversal';
   level: string;
+  detailPath?: string;
 };
 
 @Component({
@@ -26,6 +27,9 @@ type Skill = {
             <p class="chip">{{ skill.domain }}</p>
             <h2>{{ skill.title }}</h2>
             <p>Niveau actuel : <strong>{{ skill.level }}</strong></p>
+            @if (skill.detailPath) {
+              <a class="card-link" [href]="skill.detailPath">Voir le détail</a>
+            }
           </article>
         }
       </div>
@@ -35,7 +39,12 @@ type Skill = {
 export class CompetencesPage {
   // J'utilise un tableau clair pour pouvoir brancher facilement ces données sur l'API plus tard.
   protected readonly skills: Skill[] = [
-    { title: 'Architecture web mutualisée (WordPress multisite)', domain: 'Technique', level: 'Avancé' },
+    {
+      title: 'Architecture web mutualisée (WordPress multisite)',
+      domain: 'Technique',
+      level: 'Avancé',
+      detailPath: '/competences/architecture-web-mutualisee',
+    },
     { title: 'Développement de plugins WordPress', domain: 'Technique', level: 'Avancé' },
     { title: 'Intégrations API REST', domain: 'Technique', level: 'Intermédiaire +' },
     { title: 'Performance front-end et optimisation', domain: 'Technique', level: 'Intermédiaire +' },

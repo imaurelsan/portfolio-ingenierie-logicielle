@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { CompetenceArchitecturePage } from './pages/competence-architecture.page';
 import { CompetencesPage } from './pages/competences.page';
 import { ContactPage } from './pages/contact.page';
 import { HomePage } from './pages/home.page';
@@ -10,6 +11,7 @@ export const routes: Routes = [
 	{ path: '', component: HomePage },
 	{ path: 'presentation', component: PresentationPage },
 	{ path: 'competences', component: CompetencesPage },
+	{ path: 'competences/architecture-web-mutualisee', component: CompetenceArchitecturePage },
 	{ path: 'realisations', component: RealisationsPage },
 	{ path: 'parcours', component: ParcoursPage },
 	{ path: 'contact', component: ContactPage },
