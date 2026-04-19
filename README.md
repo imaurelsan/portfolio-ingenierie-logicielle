@@ -7,5 +7,7 @@ Portfolio basé sur une architecture web mutualisée et évolutive
 
 ## Assets locaux
 
-- Polices : assets/fonts
-- Images et logo : assets/images
+- Polices : app/src/assets/fonts
+- Images et logo : app/src/assets/images
+
+Note : les assets utilisés par le site en production doivent être placés dans app/src/assets.
