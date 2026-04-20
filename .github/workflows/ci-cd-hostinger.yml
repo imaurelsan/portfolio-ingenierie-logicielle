@@ -122,7 +122,32 @@ jobs:
             exit 1
           fi
 
-      - name: Verify live site serves current commit (non-blocking)
+      - name: Deploy assets explicitly via FTPS with retries
+        env:
+          HOSTINGER_FTP_SERVER: ${{ secrets.HOSTINGER_FTP_SERVER }}
+          HOSTINGER_FTP_USERNAME: ${{ secrets.HOSTINGER_FTP_USERNAME }}
+          HOSTINGER_FTP_PASSWORD: ${{ secrets.HOSTINGER_FTP_PASSWORD }}
+        run: |
+          success=0
+          for attempt in 1 2 3; do
+            echo "FTPS assets deploy attempt ${attempt}"
+
+            lftp -u "$HOSTINGER_FTP_USERNAME","$HOSTINGER_FTP_PASSWORD" "$HOSTINGER_FTP_SERVER" -e "set ftp:ssl-force true; set ftp:ssl-protect-data true; set ssl:verify-certificate no; set net:timeout 25; set net:max-retries 2; set net:reconnect-interval-base 5; set net:reconnect-interval-max 15; set cmd:fail-exit yes; mkdir -p /public_html/portfolio/assets; mirror -R --delete --verbose dist/app/browser/assets/ /public_html/portfolio/assets/; bye" && success=1 || true
+
+            if [ "$success" -eq 1 ]; then
+              echo "FTPS assets deploy completed."
+              break
+            fi
+
+            sleep 15
+          done
+
+          if [ "$success" -ne 1 ]; then
+            echo "Assets deploy failed after 3 attempts."
+            exit 1
+          fi
+
+      - name: Verify live site serves current commit
         working-directory: .
         run: |
           ok=0
@@ -140,14 +165,27 @@ jobs:
           done
 
           if [ "$ok" -ne 1 ]; then
-            echo "::warning::Live site did not confirm current commit in time. Check build-info.json manually."
+            echo "Live site did not confirm current commit in time."
+            exit 1
           fi
 
-      - name: Verify live image endpoint (non-blocking)
+      - name: Verify live image endpoint
         working-directory: .
         run: |
-          image_headers=$(curl -sI -H "Cache-Control: no-cache" "https://portfolio.yaurel.com/assets/images/logo-ay-hori-noir-creux.png?run=${{ github.run_id }}")
-          echo "$image_headers"
-          if ! echo "$image_headers" | grep -qi "Content-Type: image/"; then
-            echo "::warning::Live image endpoint is not returning an image content-type yet."
+          ok=0
+          for attempt in 1 2 3 4 5 6; do
+            image_headers=$(curl -sI -H "Cache-Control: no-cache" "https://portfolio.yaurel.com/assets/images/logo-ay-hori-noir-creux.png?run=${{ github.run_id }}&attempt=${attempt}")
+            echo "$image_headers"
+
+            if echo "$image_headers" | grep -qi "Content-Type: image/"; then
+              ok=1
+              break
+            fi
+
+            sleep 5
+          done
+
+          if [ "$ok" -ne 1 ]; then
+            echo "Live image endpoint is not returning image content-type."
+            exit 1
           fi
