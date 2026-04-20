@@ -30,6 +30,11 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Generate build metadata asset
+        run: |
+          mkdir -p src/assets
+          echo "{\"commit\":\"${{ github.sha }}\",\"shortCommit\":\"${GITHUB_SHA::7}\",\"run\":\"${{ github.run_id }}\",\"date\":\"$(date -u +%Y-%m-%dT%H:%M:%SZ)\"}" > src/assets/build-info.json
+
       - name: Build production bundle
         run: npm run build -- --configuration production
 
@@ -52,10 +57,6 @@ jobs:
         with:
           name: angular-dist
           path: dist
-
-      - name: Stamp deployed commit
-        run: |
-          echo "{\"commit\":\"${{ github.sha }}\",\"run\":\"${{ github.run_id }}\",\"date\":\"$(date -u +%Y-%m-%dT%H:%M:%SZ)\"}" > dist/build-info.json
 
       - name: Deploy via FTPS (attempt 1)
         id: deploy_attempt_1
@@ -103,7 +104,7 @@ jobs:
         run: |
           ok=0
           for attempt in 1 2 3 4 5 6; do
-            response=$(curl -fsSL -H "Cache-Control: no-cache" "https://portfolio.yaurel.com/build-info.json?run=${{ github.run_id }}&attempt=${attempt}" || true)
+            response=$(curl -fsSL -H "Cache-Control: no-cache" "https://portfolio.yaurel.com/assets/build-info.json?run=${{ github.run_id }}&attempt=${attempt}" || true)
             echo "Attempt ${attempt}: ${response}"
 
             if echo "$response" | grep -q "${{ github.sha }}"; then

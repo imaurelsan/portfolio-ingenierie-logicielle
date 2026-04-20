@@ -27,5 +27,8 @@
 
   <footer class="app-footer">
     <p>© {{ currentYear }} Aurel YAHOUEDEOU - Portfolio</p>
+    @if (buildLabel) {
+      <p class="build-meta">{{ buildLabel }}</p>
+    }
   </footer>
 </div>

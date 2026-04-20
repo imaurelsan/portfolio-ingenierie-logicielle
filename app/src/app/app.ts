@@ -6,6 +6,11 @@ type NavLink = {
   path: string;
 };
 
+type BuildInfo = {
+  shortCommit?: string;
+  date?: string;
+};
+
 @Component({
   selector: 'app-root',
   imports: [RouterOutlet, RouterLink, RouterLinkActive],
@@ -24,4 +29,25 @@ export class App {
   ];
 
   protected readonly currentYear = new Date().getFullYear();
+  protected buildLabel = '';
+
+  constructor() {
+    // Cette lecture du metadata de build permet de prouver rapidement la version servie en production.
+    fetch(`assets/build-info.json?t=${Date.now()}`)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('build-info unavailable');
+        }
+
+        return response.json() as Promise<BuildInfo>;
+      })
+      .then((buildInfo) => {
+        const commit = buildInfo.shortCommit ? `commit ${buildInfo.shortCommit}` : '';
+        const date = buildInfo.date ? `deployed ${new Date(buildInfo.date).toLocaleString('fr-FR')}` : '';
+        this.buildLabel = [commit, date].filter(Boolean).join(' - ');
+      })
+      .catch(() => {
+        this.buildLabel = '';
+      });
+  }
 }
