@@ -75,7 +75,7 @@ portfolio-ingenierie-logicielle/
 ├─ docs/
 │  ├─ plan-portfolio-iscod.md (plan public partageable, sans notes personnelles)
 │  ├─ devops-hostinger.md (guide d'exploitation CI/CD et déploiement)
-│  └─ support-soutenance-base.md (base du support oral centré problématique)
+│  └─ private/support-soutenance-base.md (base du support oral en dossier privé)
 └─ README.md (présentation générale du repo)
 ```
 
@@ -123,8 +123,6 @@ Chaque compétence inclut :
 
 Chaque réalisation inclut :
 - Présentation/définition du projet
-- Script oral en 4 phrases (version soutenance)
-- 2 KPIs minimum (valeur + impact)
 - Objectifs, contexte, enjeux, risques
 - Étapes de réalisation
 - Acteurs et interactions
