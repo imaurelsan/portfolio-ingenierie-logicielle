@@ -51,21 +51,46 @@ jobs:
     needs: build
     if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
 
+    defaults:
+      run:
+        working-directory: app
+
     steps:
-      - name: Download build artifact
-        uses: actions/download-artifact@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          name: angular-dist
-          path: dist
+          node-version: 22
+          cache: npm
+          cache-dependency-path: app/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Generate build metadata asset
+        run: |
+          mkdir -p src/assets
+          echo "{\"commit\":\"${{ github.sha }}\",\"shortCommit\":\"${GITHUB_SHA::7}\",\"run\":\"${{ github.run_id }}\",\"date\":\"$(date -u +%Y-%m-%dT%H:%M:%SZ)\"}" > src/assets/build-info.json
+
+      - name: Build production bundle
+        run: npm run build -- --configuration production
 
       - name: Debug artifact structure
         run: |
-          echo "dist root:" 
-          ls -la dist || true
-          echo "dist/assets:" 
-          ls -la dist/assets || true
-          echo "dist/assets/images:" 
-          ls -la dist/assets/images || true
+          echo "dist/app/browser root:"
+          ls -la dist/app/browser || true
+          echo "dist/app/browser/assets:"
+          ls -la dist/app/browser/assets || true
+          echo "dist/app/browser/assets/images:"
+          ls -la dist/app/browser/assets/images || true
+
+      - name: Ensure assets are present before deploy
+        run: |
+          test -f dist/app/browser/assets/images/logo-ay-hori-noir-creux.png
+          test -f dist/app/browser/assets/images/photo-identite.jpg
+          test -f dist/app/browser/assets/build-info.json
 
       - name: Install lftp
         run: |
@@ -82,7 +107,7 @@ jobs:
           for attempt in 1 2 3; do
             echo "FTPS deploy attempt ${attempt}"
 
-            lftp -u "$HOSTINGER_FTP_USERNAME","$HOSTINGER_FTP_PASSWORD" "$HOSTINGER_FTP_SERVER" -e "set ftp:ssl-force true; set ftp:ssl-protect-data true; set ssl:verify-certificate no; set net:timeout 25; set net:max-retries 2; set net:reconnect-interval-base 5; set net:reconnect-interval-max 15; set cmd:fail-exit yes; mirror -R --delete --verbose dist/ /public_html/portfolio/; bye" && success=1 || true
+            lftp -u "$HOSTINGER_FTP_USERNAME","$HOSTINGER_FTP_PASSWORD" "$HOSTINGER_FTP_SERVER" -e "set ftp:ssl-force true; set ftp:ssl-protect-data true; set ssl:verify-certificate no; set net:timeout 25; set net:max-retries 2; set net:reconnect-interval-base 5; set net:reconnect-interval-max 15; set cmd:fail-exit yes; mirror -R --delete --verbose dist/app/browser/ /public_html/portfolio/; bye" && success=1 || true
 
             if [ "$success" -eq 1 ]; then
               echo "FTPS deploy completed."
@@ -98,6 +123,7 @@ jobs:
           fi
 
       - name: Verify live site serves current commit (non-blocking)
+        working-directory: .
         run: |
           ok=0
           for attempt in 1 2 3 4 5 6; do
@@ -118,6 +144,7 @@ jobs:
           fi
 
       - name: Verify live image endpoint (non-blocking)
+        working-directory: .
         run: |
           image_headers=$(curl -sI -H "Cache-Control: no-cache" "https://portfolio.yaurel.com/assets/images/logo-ay-hori-noir-creux.png?run=${{ github.run_id }}")
           echo "$image_headers"
