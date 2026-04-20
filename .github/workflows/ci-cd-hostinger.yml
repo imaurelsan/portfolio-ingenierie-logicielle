@@ -113,8 +113,7 @@ jobs:
             exit 1
           fi
 
-      - name: Verify live site serves current commit (non-blocking)
-        continue-on-error: true
+      - name: Verify live site serves current commit
         working-directory: .
         run: |
           ok=0
@@ -132,11 +131,11 @@ jobs:
           done
 
           if [ "$ok" -ne 1 ]; then
-            echo "::warning::Live site did not confirm current commit in time."
+            echo "Live site did not confirm current commit in time."
+            exit 1
           fi
 
-      - name: Verify live image endpoint (non-blocking)
-        continue-on-error: true
+      - name: Verify live image endpoint
         working-directory: .
         run: |
           ok=0
@@ -153,5 +152,6 @@ jobs:
           done
 
           if [ "$ok" -ne 1 ]; then
-            echo "::warning::Live image endpoint is not returning image content-type."
+            echo "Live image endpoint is not returning image content-type."
+            exit 1
           fi
