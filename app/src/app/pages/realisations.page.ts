@@ -22,6 +22,7 @@ type Project = {
           <article class="card card--project" [id]="project.slug">
             <h2>{{ project.title }}</h2>
             <p>{{ project.summary }}</p>
+            <a class="card-link" [href]="'/realisations/' + project.slug">Voir le détail</a>
             <p class="card-meta-title">Compétences mobilisées</p>
             <ul class="card-meta-list">
               @for (skill of project.relatedSkills; track skill.path) {
