@@ -88,7 +88,7 @@ jobs:
 
       - name: Ensure assets are present before deploy
         run: |
-          test -f dist/app/browser/assets/images/logo-ay-hori-noir-creux.png
+          test -f dist/app/browser/assets/images/logo-ay-carre-bg-blanc.png
           test -f dist/app/browser/assets/images/photo-identite.jpg
           test -f dist/app/browser/assets/build-info.json
 
@@ -150,7 +150,7 @@ jobs:
         run: |
           ok=0
           for attempt in 1 2 3 4 5 6; do
-            image_headers=$(curl -sI -H "Cache-Control: no-cache" "https://portfolio.yaurel.com/assets/images/logo-ay-hori-noir-creux.png?run=${{ github.run_id }}&attempt=${attempt}")
+            image_headers=$(curl -sI -H "Cache-Control: no-cache" "https://portfolio.yaurel.com/assets/images/logo-ay-carre-bg-blanc.png?run=${{ github.run_id }}&attempt=${attempt}")
             echo "$image_headers"
 
             if echo "$image_headers" | grep -qi "Content-Type: image/"; then
