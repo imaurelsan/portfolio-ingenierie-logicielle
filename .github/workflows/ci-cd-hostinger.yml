@@ -73,6 +73,7 @@ jobs:
           port: 21
           local-dir: dist/
           server-dir: /public_html/portfolio/
+          state-name: .ftp-deploy-sync-state-main.json
           dangerous-clean-slate: false
 
       - name: Pause before retry
@@ -92,12 +93,54 @@ jobs:
           port: 21
           local-dir: dist/
           server-dir: /public_html/portfolio/
+          state-name: .ftp-deploy-sync-state-main.json
           dangerous-clean-slate: false
 
       - name: Fail if deployment attempts failed
         if: steps.deploy_attempt_1.outcome == 'failure' && steps.deploy_attempt_2.outcome == 'failure'
         run: |
           echo "Deploy failed after 2 attempts."
+          exit 1
+
+      - name: Deploy assets via FTPS (attempt 1)
+        id: deploy_assets_attempt_1
+        continue-on-error: true
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.HOSTINGER_FTP_SERVER }}
+          username: ${{ secrets.HOSTINGER_FTP_USERNAME }}
+          password: ${{ secrets.HOSTINGER_FTP_PASSWORD }}
+          protocol: ftps
+          port: 21
+          local-dir: dist/assets/
+          server-dir: /public_html/portfolio/assets/
+          state-name: .ftp-deploy-sync-state-assets.json
+          dangerous-clean-slate: false
+
+      - name: Pause before assets retry
+        if: steps.deploy_assets_attempt_1.outcome == 'failure'
+        run: sleep 15
+
+      - name: Deploy assets via FTPS (attempt 2 if needed)
+        id: deploy_assets_attempt_2
+        if: steps.deploy_assets_attempt_1.outcome == 'failure'
+        continue-on-error: true
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.HOSTINGER_FTP_SERVER }}
+          username: ${{ secrets.HOSTINGER_FTP_USERNAME }}
+          password: ${{ secrets.HOSTINGER_FTP_PASSWORD }}
+          protocol: ftps
+          port: 21
+          local-dir: dist/assets/
+          server-dir: /public_html/portfolio/assets/
+          state-name: .ftp-deploy-sync-state-assets.json
+          dangerous-clean-slate: false
+
+      - name: Fail if assets deployment attempts failed
+        if: steps.deploy_assets_attempt_1.outcome == 'failure' && steps.deploy_assets_attempt_2.outcome == 'failure'
+        run: |
+          echo "Assets deploy failed after 2 attempts."
           exit 1
 
       - name: Verify live site serves current commit (non-blocking)
@@ -118,4 +161,12 @@ jobs:
 
           if [ "$ok" -ne 1 ]; then
             echo "::warning::Live site did not confirm current commit in time. Check build-info.json manually."
+          fi
+
+      - name: Verify live image endpoint (non-blocking)
+        run: |
+          image_headers=$(curl -sI -H "Cache-Control: no-cache" "https://portfolio.yaurel.com/assets/images/logo-ay-hori-noir-creux.png?run=${{ github.run_id }}")
+          echo "$image_headers"
+          if ! echo "$image_headers" | grep -qi "Content-Type: image/"; then
+            echo "::warning::Live image endpoint is not returning an image content-type yet."
           fi
