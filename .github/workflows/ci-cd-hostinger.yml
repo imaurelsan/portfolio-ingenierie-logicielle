@@ -77,15 +77,6 @@ jobs:
       - name: Build production bundle
         run: npm run build -- --configuration production
 
-      - name: Debug artifact structure
-        run: |
-          echo "dist/app/browser root:"
-          ls -la dist/app/browser || true
-          echo "dist/app/browser/assets:"
-          ls -la dist/app/browser/assets || true
-          echo "dist/app/browser/assets/images:"
-          ls -la dist/app/browser/assets/images || true
-
       - name: Ensure assets are present before deploy
         run: |
           test -f dist/app/browser/assets/images/logo-ay-carre-bg-blanc.png

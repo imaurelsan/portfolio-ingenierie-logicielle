@@ -13,7 +13,7 @@ type NavLink = {
   styleUrl: './app.scss'
 })
 export class App {
-  // J'ai centralisé la navigation pour garder un menu lisible et facile à maintenir.
+  // Ici je centralise la navigation pour garder un menu lisible et facile a maintenir.
   protected readonly navLinks: NavLink[] = [
     { label: 'Accueil', path: '/' },
     { label: 'Présentation', path: '/presentation' },
@@ -23,5 +23,6 @@ export class App {
     { label: 'Contact', path: '/contact' },
   ];
 
+  // J'affiche l'annee courante automatiquement pour eviter les oublis de mise a jour manuelle.
   protected readonly currentYear = new Date().getFullYear();
 }

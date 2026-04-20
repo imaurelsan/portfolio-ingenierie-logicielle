@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 
 type Skill = {
+  slug: string;
   title: string;
   domain: 'Technique' | 'Transversal';
   level: string;
-  detailPath?: string;
 };
 
 @Component({
@@ -27,9 +27,7 @@ type Skill = {
             <p class="chip">{{ skill.domain }}</p>
             <h2>{{ skill.title }}</h2>
             <p>Niveau actuel : <strong>{{ skill.level }}</strong></p>
-            @if (skill.detailPath) {
-              <a class="card-link" [href]="skill.detailPath">Voir le détail</a>
-            }
+            <a class="card-link" [href]="'/competences/' + skill.slug">Voir le détail</a>
           </article>
         }
       </div>
@@ -37,22 +35,22 @@ type Skill = {
   `,
 })
 export class CompetencesPage {
-  // J'utilise un tableau clair pour pouvoir brancher facilement ces données sur l'API plus tard.
+  // Ici je garde les competences dans un tableau clair pour pouvoir les brancher facilement sur l'API plus tard.
   protected readonly skills: Skill[] = [
     {
+      slug: 'architecture-web-mutualisee',
       title: 'Architecture web mutualisée (WordPress multisite)',
       domain: 'Technique',
       level: 'Avancé',
-      detailPath: '/competences/architecture-web-mutualisee',
     },
-    { title: 'Développement de plugins WordPress', domain: 'Technique', level: 'Avancé' },
-    { title: 'Intégrations API REST', domain: 'Technique', level: 'Intermédiaire +' },
-    { title: 'Performance front-end et optimisation', domain: 'Technique', level: 'Intermédiaire +' },
-    { title: 'Sécurité applicative', domain: 'Technique', level: 'Intermédiaire +' },
-    { title: 'Gestion de projet agile', domain: 'Transversal', level: 'Intermédiaire +' },
-    { title: 'Communication technique', domain: 'Transversal', level: 'Intermédiaire +' },
-    { title: 'UX/UI orientée usage', domain: 'Transversal', level: 'Intermédiaire +' },
-    { title: 'Automatisation et productivité', domain: 'Transversal', level: 'Intermédiaire +' },
-    { title: 'Analyse critique et prise de décision', domain: 'Transversal', level: 'Intermédiaire +' },
+    { slug: 'developpement-plugins-wordpress', title: 'Développement de plugins WordPress', domain: 'Technique', level: 'Avancé' },
+    { slug: 'integrations-api-rest', title: 'Intégrations API REST', domain: 'Technique', level: 'Intermédiaire +' },
+    { slug: 'performance-front-optimisation', title: 'Performance front-end et optimisation', domain: 'Technique', level: 'Intermédiaire +' },
+    { slug: 'securite-applicative', title: 'Sécurité applicative', domain: 'Technique', level: 'Intermédiaire +' },
+    { slug: 'gestion-projet-agile', title: 'Gestion de projet agile', domain: 'Transversal', level: 'Intermédiaire +' },
+    { slug: 'communication-technique', title: 'Communication technique', domain: 'Transversal', level: 'Intermédiaire +' },
+    { slug: 'ux-ui-orientee-usage', title: 'UX/UI orientée usage', domain: 'Transversal', level: 'Intermédiaire +' },
+    { slug: 'automatisation-amelioration-continue', title: 'Automatisation et productivité', domain: 'Transversal', level: 'Intermédiaire +' },
+    { slug: 'analyse-critique-decision-technique', title: 'Analyse critique et prise de décision', domain: 'Transversal', level: 'Intermédiaire +' },
   ];
 }

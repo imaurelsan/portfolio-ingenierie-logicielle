@@ -1,5 +1,6 @@
 <div class="app-shell">
   <header class="app-header">
+    <!-- Ici je garde le logo cliquable pour offrir un retour rapide vers l'accueil depuis n'importe quelle page. -->
     <a class="brand" routerLink="/" aria-label="Retour à l'accueil">
       <img src="assets/images/logo-ay-carre-bg-blanc.png" alt="Logo AY" />
       <div>
@@ -8,6 +9,7 @@
       </div>
     </a>
 
+    <!-- Ici je boucle sur les liens de menu pour éviter de dupliquer le HTML et garder la navigation simple à maintenir. -->
     <nav class="main-nav" aria-label="Navigation principale">
       @for (link of navLinks; track link.path) {
         <a
@@ -22,6 +24,7 @@
   </header>
 
   <main class="app-main">
+    <!-- Ici le router affiche la page active sans recharger tout le shell global. -->
     <router-outlet></router-outlet>
   </main>
 

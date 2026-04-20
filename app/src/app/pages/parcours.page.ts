@@ -30,7 +30,7 @@ type TimelineItem = {
   `,
 })
 export class ParcoursPage {
-  // J'ai structuré cette frise pour respecter le format anti-chronologique demandé dans ta grille.
+  // Ici je structure la frise en anti-chronologique pour rester conforme a la grille d'evaluation.
   protected readonly timeline: TimelineItem[] = [
     {
       period: '2024 - 2026',

@@ -38,7 +38,7 @@ type Project = {
   `,
 })
 export class RealisationsPage {
-  // J'ai listé les projets retenus pour coller à ta grille et à ton discours de soutenance.
+  // J'ai retenu ces projets pour rester aligne avec la grille d'evaluation et l'argumentaire de soutenance.
   protected readonly projects: Project[] = [
     {
       slug: 'project-360-content-bridge',
@@ -49,6 +49,14 @@ export class RealisationsPage {
         {
           title: 'Architecture web mutualisée (WordPress multisite)',
           path: '/competences/architecture-web-mutualisee',
+        },
+        {
+          title: 'Développement de plugins WordPress',
+          path: '/competences/developpement-plugins-wordpress',
+        },
+        {
+          title: 'Intégrations API REST',
+          path: '/competences/integrations-api-rest',
         },
       ],
     },
@@ -62,6 +70,14 @@ export class RealisationsPage {
           title: 'Architecture web mutualisée (WordPress multisite)',
           path: '/competences/architecture-web-mutualisee',
         },
+        {
+          title: 'Performance web et optimisation front',
+          path: '/competences/performance-front-optimisation',
+        },
+        {
+          title: 'Automatisation et amélioration continue',
+          path: '/competences/automatisation-amelioration-continue',
+        },
       ],
     },
     {
@@ -74,6 +90,14 @@ export class RealisationsPage {
           title: 'Architecture web mutualisée (WordPress multisite)',
           path: '/competences/architecture-web-mutualisee',
         },
+        {
+          title: 'Sécurité applicative',
+          path: '/competences/securite-applicative',
+        },
+        {
+          title: 'Automatisation et amélioration continue',
+          path: '/competences/automatisation-amelioration-continue',
+        },
       ],
     },
     {
@@ -84,7 +108,15 @@ export class RealisationsPage {
       relatedSkills: [
         {
           title: 'Analyse critique et prise de décision',
-          path: '/competences',
+          path: '/competences/analyse-critique-decision-technique',
+        },
+        {
+          title: 'Communication technique',
+          path: '/competences/communication-technique',
+        },
+        {
+          title: 'UX/UI orientée usage',
+          path: '/competences/ux-ui-orientee-usage',
         },
       ],
     },
@@ -96,7 +128,15 @@ export class RealisationsPage {
       relatedSkills: [
         {
           title: 'UX/UI orientée usage',
-          path: '/competences',
+          path: '/competences/ux-ui-orientee-usage',
+        },
+        {
+          title: 'Gestion de projet agile',
+          path: '/competences/gestion-projet-agile',
+        },
+        {
+          title: 'Analyse critique et prise de décision',
+          path: '/competences/analyse-critique-decision-technique',
         },
       ],
     },
