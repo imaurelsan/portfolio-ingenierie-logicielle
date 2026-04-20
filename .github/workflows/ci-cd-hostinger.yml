@@ -116,9 +116,16 @@ jobs:
       - name: Verify live site serves current commit
         working-directory: .
         run: |
+          # Ici je laisse au serveur le temps de propager le nouveau build avant de verifier.
+          sleep 20
+
           ok=0
-          for attempt in 1 2 3 4 5 6; do
-            response=$(curl -fsSL -H "Cache-Control: no-cache" "https://portfolio.yaurel.com/assets/build-info.json?run=${{ github.run_id }}&attempt=${attempt}" || true)
+          for attempt in 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24; do
+            response=$(curl -fsSL \
+              -H "Cache-Control: no-cache, no-store, must-revalidate" \
+              -H "Pragma: no-cache" \
+              -H "Expires: 0" \
+              "https://portfolio.yaurel.com/assets/build-info.json?sha=${{ github.sha }}&run=${{ github.run_id }}&attempt=${attempt}" || true)
             echo "Attempt ${attempt}: ${response}"
 
             if echo "$response" | grep -q "${{ github.sha }}"; then
@@ -139,8 +146,12 @@ jobs:
         working-directory: .
         run: |
           ok=0
-          for attempt in 1 2 3 4 5 6; do
-            image_headers=$(curl -sI -H "Cache-Control: no-cache" "https://portfolio.yaurel.com/assets/images/logo-ay-carre-bg-blanc.png?run=${{ github.run_id }}&attempt=${attempt}")
+          for attempt in 1 2 3 4 5 6 7 8 9 10 11 12; do
+            image_headers=$(curl -sI \
+              -H "Cache-Control: no-cache, no-store, must-revalidate" \
+              -H "Pragma: no-cache" \
+              -H "Expires: 0" \
+              "https://portfolio.yaurel.com/assets/images/logo-ay-carre-bg-blanc.png?sha=${{ github.sha }}&run=${{ github.run_id }}&attempt=${attempt}")
             echo "$image_headers"
 
             if echo "$image_headers" | grep -qi "Content-Type: image/"; then
