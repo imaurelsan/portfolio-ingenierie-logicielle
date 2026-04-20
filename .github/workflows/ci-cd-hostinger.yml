@@ -90,6 +90,25 @@ jobs:
       - name: Show generated build metadata
         run: cat dist/app/browser/assets/build-info.json
 
+      - name: Create compatibility alias for live cached main bundle
+        working-directory: .
+        run: |
+          # Ici je publie aussi le bundle courant sous le hash encore servi en live pour casser le blocage de cache index.
+          current_main=$(ls app/dist/app/browser/main-*.js | head -n1)
+          current_main_name=$(basename "$current_main")
+
+          live_main=$(curl -fsSL -H "Cache-Control: no-cache" "https://portfolio.yaurel.com" | grep -oE 'main-[A-Z0-9]+\.js' | head -n1 || true)
+
+          echo "Current main: ${current_main_name}"
+          echo "Live main from index: ${live_main}"
+
+          if [ -n "$live_main" ] && [ "$live_main" != "$current_main_name" ]; then
+            cp "$current_main" "app/dist/app/browser/${live_main}"
+            echo "Compatibility alias created: ${live_main} -> ${current_main_name}"
+          else
+            echo "No compatibility alias needed."
+          fi
+
       - name: Ensure assets are present before deploy
         run: |
           test -f dist/app/browser/assets/images/logo-ay-carre-bg-blanc.png
