@@ -38,6 +38,11 @@ jobs:
       - name: Build production bundle
         run: npm run build -- --configuration production
 
+      - name: Write build metadata in dist
+        run: |
+          mkdir -p dist/app/browser/assets
+          echo "{\"commit\":\"${{ github.sha }}\",\"shortCommit\":\"${GITHUB_SHA::7}\",\"run\":\"${{ github.run_id }}\",\"date\":\"$(date -u +%Y-%m-%dT%H:%M:%SZ)\"}" > dist/app/browser/assets/build-info.json
+
       - name: Upload build artifact
         uses: actions/upload-artifact@v4
         with:
@@ -76,6 +81,14 @@ jobs:
 
       - name: Build production bundle
         run: npm run build -- --configuration production
+
+      - name: Write build metadata in dist
+        run: |
+          mkdir -p dist/app/browser/assets
+          echo "{\"commit\":\"${{ github.sha }}\",\"shortCommit\":\"${GITHUB_SHA::7}\",\"run\":\"${{ github.run_id }}\",\"date\":\"$(date -u +%Y-%m-%dT%H:%M:%SZ)\"}" > dist/app/browser/assets/build-info.json
+
+      - name: Show generated build metadata
+        run: cat dist/app/browser/assets/build-info.json
 
       - name: Ensure assets are present before deploy
         run: |
