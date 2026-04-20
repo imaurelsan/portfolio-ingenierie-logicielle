@@ -1,5 +1,10 @@
 # Plan Portfolio ISCOD (version publique)
 
+Note de confidentialité :
+- Ce document doit rester strictement public et partageable.
+- Aucun contenu personnel, sensible ou brouillon oral ne doit etre ajoute ici.
+- Les notes privees sont conservees uniquement dans docs/private/plan-portfolio-iscod-prive.md (non versionne).
+
 ## 1) Décision d'architecture
 
 Problématique retenue (verrouillée avec mon Learning Coach) :
@@ -36,16 +41,16 @@ Choix d'hébergement - portfolio.yaurel.com :
 Pages principales :
 1. Accueil
 2. Présentation générale
-3. Compétences (vue comparative)
-4. Compétence détail (x10)
-5. Réalisations (vue commune x5)
-6. Réalisation détail (x5)
+3. Compétences (vue comparative /competences)
+4. Compétence détail dynamique (x10, route /competences/:slug)
+5. Réalisations (vue commune x5 /realisations)
+6. Réalisation détail dynamique (x5, route /realisations/:slug)
 7. Parcours (frise anti-chronologique)
 8. Contact
 
 Navigation obligatoire :
 - Menu persistant sur toutes les pages
-- Liens croisés compétence -> réalisation et réalisation -> compétence
+- Liens croisés compétence -> réalisation détail et réalisation -> compétence détail
 - Identité (nom + photo) visible partout (header + footer compact)
 
 ## 3 bis) Arborescence du projet (repère opérationnel)
@@ -66,14 +71,14 @@ portfolio-ingenierie-logicielle/
 │  │  ├─ app/
 │  │  │  ├─ app.ts (shell principal et navigation globale)
 │  │  │  ├─ app.html (structure du shell: header, router-outlet, footer)
-│  │  │  ├─ app.routes.ts (routes du portfolio)
-│  │  │  └─ pages/ (pages métier: accueil, présentation, compétences, réalisations, parcours, contact)
+│  │  │  ├─ app.routes.ts (routes du portfolio, dont routes dynamiques :slug)
+│  │  │  └─ pages/ (pages métier: accueil, présentation, compétences, réalisations, parcours, contact, détails)
 │  │  └─ assets/
 │  │     ├─ fonts/ (polices locales du design)
 │  │     └─ images/ (photo, logo, visuels de sections)
 │  └─ dist/app/browser/ (artefact statique final déployé en production)
 ├─ docs/
-│  ├─ plan-portfolio-iscod.md (plan projet, stratégie, grille de réalisation)
+│  ├─ plan-portfolio-iscod.md (plan public partageable, sans notes personnelles)
 │  ├─ devops-hostinger.md (guide d'exploitation CI/CD et déploiement)
 │  └─ support-soutenance-base.md (base du support oral centré problématique)
 └─ README.md (présentation générale du repo)

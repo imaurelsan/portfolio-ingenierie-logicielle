@@ -391,7 +391,7 @@ const COMPETENCES: CompetenceDetail[] = [
           <ul class="detail-list detail-list--links">
             @for (project of skill.projects; track project.slug) {
               <li>
-                <a [href]="'/realisations#' + project.slug">{{ project.title }}</a>
+                <a [href]="'/realisations/' + project.slug">{{ project.title }}</a>
                 <p>{{ project.why }}</p>
               </li>
             }
