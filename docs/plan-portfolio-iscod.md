@@ -1,10 +1,5 @@
 # Plan Portfolio ISCOD (version publique)
 
-Note de confidentialité :
-- Ce document doit rester strictement public et partageable.
-- Aucun contenu personnel, sensible ou brouillon oral ne doit etre ajoute ici.
-- Les notes privees sont conservees uniquement dans docs/private/plan-portfolio-iscod-prive.md (non versionne).
-
 ## 1) Décision d'architecture
 
 Problématique retenue (verrouillée avec mon Learning Coach) :
