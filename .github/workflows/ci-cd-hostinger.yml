@@ -126,26 +126,15 @@ jobs:
           HOSTINGER_FTP_USERNAME: ${{ secrets.HOSTINGER_FTP_USERNAME }}
           HOSTINGER_FTP_PASSWORD: ${{ secrets.HOSTINGER_FTP_PASSWORD }}
         run: |
-          # Ici je deploie sur plusieurs chemins "sous-domaine" plausibles pour absorber une variation de config Hostinger.
-          target_dirs=(
-            "/public_html/portfolio/"
-            "/public_html/portfolio.yaurel.com/"
-            "/public_html/subdomains/portfolio/public_html/"
-          )
+          # Cible unique pour eviter les deploiements multiples et ambigus.
+          target_dir="/public_html/portfolio/"
 
           success=0
           for attempt in 1 2 3 4 5; do
             echo "FTPS deploy attempt ${attempt}"
 
-            deployed_any=0
-            for target_dir in "${target_dirs[@]}"; do
-              echo "Trying FTPS mirror to ${target_dir}"
-              lftp -u "$HOSTINGER_FTP_USERNAME","$HOSTINGER_FTP_PASSWORD" "$HOSTINGER_FTP_SERVER" -e "set ftp:ssl-force true; set ftp:ssl-protect-data true; set ftp:passive-mode true; set ftp:prefer-epsv false; set ssl:verify-certificate no; set net:timeout 45; set net:max-retries 8; set net:reconnect-interval-base 10; set net:reconnect-interval-max 60; set cmd:fail-exit yes; mirror -R --delete --verbose --parallel=1 --ignore-time --transfer-all ./dist/app/browser/ ${target_dir}; bye" && deployed_any=1 || true
-            done
-
-            if [ "$deployed_any" -eq 1 ]; then
-              success=1
-            fi
+            echo "Trying FTPS mirror to ${target_dir}"
+            lftp -u "$HOSTINGER_FTP_USERNAME","$HOSTINGER_FTP_PASSWORD" "$HOSTINGER_FTP_SERVER" -e "set ftp:ssl-force true; set ftp:ssl-protect-data true; set ftp:passive-mode true; set ftp:prefer-epsv false; set ssl:verify-certificate no; set net:timeout 45; set net:max-retries 8; set net:reconnect-interval-base 10; set net:reconnect-interval-max 60; set cmd:fail-exit yes; mirror -R --delete --verbose --parallel=1 --ignore-time --transfer-all ./dist/app/browser/ ${target_dir}; bye" && success=1 || true
 
             if [ "$success" -eq 1 ]; then
               echo "FTPS deploy completed."
@@ -166,21 +155,15 @@ jobs:
           HOSTINGER_FTP_USERNAME: ${{ secrets.HOSTINGER_FTP_USERNAME }}
           HOSTINGER_FTP_PASSWORD: ${{ secrets.HOSTINGER_FTP_PASSWORD }}
         run: |
-          target_dirs=(
-            "/public_html/portfolio"
-            "/public_html/portfolio.yaurel.com"
-            "/public_html/subdomains/portfolio/public_html"
-          )
+          target_dir="/public_html/portfolio"
 
           found=0
-          for target_dir in "${target_dirs[@]}"; do
-            remote_info=$(lftp -u "$HOSTINGER_FTP_USERNAME","$HOSTINGER_FTP_PASSWORD" "$HOSTINGER_FTP_SERVER" -e "set ftp:ssl-force true; set ftp:ssl-protect-data true; set ftp:passive-mode true; set ftp:prefer-epsv false; set ssl:verify-certificate no; set net:timeout 45; set cmd:fail-exit yes; cat ${target_dir}/assets/build-info.json; bye" || true)
-            echo "Remote FTP build-info [${target_dir}]: ${remote_info}"
+          remote_info=$(lftp -u "$HOSTINGER_FTP_USERNAME","$HOSTINGER_FTP_PASSWORD" "$HOSTINGER_FTP_SERVER" -e "set ftp:ssl-force true; set ftp:ssl-protect-data true; set ftp:passive-mode true; set ftp:prefer-epsv false; set ssl:verify-certificate no; set net:timeout 45; set cmd:fail-exit yes; cat ${target_dir}/assets/build-info.json; bye" || true)
+          echo "Remote FTP build-info [${target_dir}]: ${remote_info}"
 
-            if echo "$remote_info" | grep -q "${{ github.sha }}"; then
-              found=1
-            fi
-          done
+          if echo "$remote_info" | grep -q "${{ github.sha }}"; then
+            found=1
+          fi
 
           if [ "$found" -ne 1 ]; then
             echo "No FTP target contains current commit metadata."
