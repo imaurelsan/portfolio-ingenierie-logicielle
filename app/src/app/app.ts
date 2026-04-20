@@ -23,6 +23,17 @@ export class App {
     { label: 'Contact', path: '/contact' },
   ];
 
+  // Ici je pilote l'ouverture du menu mobile (hamburger) sans impacter l'affichage desktop.
+  protected isMobileNavOpen = false;
+
   // J'affiche l'annee courante automatiquement pour eviter les oublis de mise a jour manuelle.
   protected readonly currentYear = new Date().getFullYear();
+
+  protected toggleMobileNav(): void {
+    this.isMobileNavOpen = !this.isMobileNavOpen;
+  }
+
+  protected closeMobileNav(): void {
+    this.isMobileNavOpen = false;
+  }
 }

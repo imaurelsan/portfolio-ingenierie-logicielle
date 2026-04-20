@@ -1,7 +1,7 @@
 <div class="app-shell">
   <header class="app-header">
     <!-- On garde le logo cliquable pour offrir un retour rapide vers l'accueil depuis n'importe quelle page. -->
-    <a class="brand" routerLink="/" aria-label="Retour à l'accueil">
+    <a class="brand" routerLink="/" aria-label="Retour à l'accueil" (click)="closeMobileNav()">
       <img src="assets/images/logo-ay-carre-bg-blanc.png" alt="Logo AY" />
       <div>
         <p class="brand__kicker">Portfolio</p>
@@ -9,13 +9,33 @@
       </div>
     </a>
 
+    <!-- Ici j'affiche un bouton hamburger en mobile pour garder un header compact et lisible. -->
+    <button
+      class="nav-toggle"
+      type="button"
+      [attr.aria-expanded]="isMobileNavOpen"
+      aria-controls="main-navigation"
+      aria-label="Ouvrir ou fermer le menu"
+      (click)="toggleMobileNav()"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
     <!-- Ici je boucle sur les liens de menu pour éviter de dupliquer le HTML et garder la navigation simple à maintenir. -->
-    <nav class="main-nav" aria-label="Navigation principale">
+    <nav
+      id="main-navigation"
+      class="main-nav"
+      [class.main-nav--open]="isMobileNavOpen"
+      aria-label="Navigation principale"
+    >
       @for (link of navLinks; track link.path) {
         <a
           [routerLink]="link.path"
           routerLinkActive="is-active"
           [routerLinkActiveOptions]="{ exact: link.path === '/' }"
+          (click)="closeMobileNav()"
         >
           {{ link.label }}
         </a>
