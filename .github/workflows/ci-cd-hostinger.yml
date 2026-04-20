@@ -122,31 +122,6 @@ jobs:
             exit 1
           fi
 
-      - name: Deploy assets explicitly via FTPS with retries
-        env:
-          HOSTINGER_FTP_SERVER: ${{ secrets.HOSTINGER_FTP_SERVER }}
-          HOSTINGER_FTP_USERNAME: ${{ secrets.HOSTINGER_FTP_USERNAME }}
-          HOSTINGER_FTP_PASSWORD: ${{ secrets.HOSTINGER_FTP_PASSWORD }}
-        run: |
-          success=0
-          for attempt in 1 2 3; do
-            echo "FTPS assets deploy attempt ${attempt}"
-
-            lftp -u "$HOSTINGER_FTP_USERNAME","$HOSTINGER_FTP_PASSWORD" "$HOSTINGER_FTP_SERVER" -e "set ftp:ssl-force true; set ftp:ssl-protect-data true; set ssl:verify-certificate no; set net:timeout 25; set net:max-retries 2; set net:reconnect-interval-base 5; set net:reconnect-interval-max 15; set cmd:fail-exit yes; mkdir -p /public_html/portfolio/assets; mirror -R --delete --verbose dist/app/browser/assets/ /public_html/portfolio/assets/; bye" && success=1 || true
-
-            if [ "$success" -eq 1 ]; then
-              echo "FTPS assets deploy completed."
-              break
-            fi
-
-            sleep 15
-          done
-
-          if [ "$success" -ne 1 ]; then
-            echo "Assets deploy failed after 3 attempts."
-            exit 1
-          fi
-
       - name: Verify live site serves current commit
         working-directory: .
         run: |
