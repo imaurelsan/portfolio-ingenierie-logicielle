@@ -123,6 +123,8 @@ Chaque compétence inclut :
 
 Chaque réalisation inclut :
 - Présentation/définition du projet
+- Script oral en 4 phrases (version soutenance)
+- 2 KPIs minimum (valeur + impact)
 - Objectifs, contexte, enjeux, risques
 - Étapes de réalisation
 - Acteurs et interactions
