@@ -126,8 +126,8 @@ jobs:
           HOSTINGER_FTP_USERNAME: ${{ secrets.HOSTINGER_FTP_USERNAME }}
           HOSTINGER_FTP_PASSWORD: ${{ secrets.HOSTINGER_FTP_PASSWORD }}
         run: |
-          # Cible unique pour eviter les deploiements multiples et ambigus.
-          target_dir="/public_html/portfolio/"
+          # Sur Hostinger FTP, la racine est souvent deja /public_html.
+          target_dir="/portfolio/"
 
           success=0
           for attempt in 1 2 3 4 5; do
@@ -155,7 +155,7 @@ jobs:
           HOSTINGER_FTP_USERNAME: ${{ secrets.HOSTINGER_FTP_USERNAME }}
           HOSTINGER_FTP_PASSWORD: ${{ secrets.HOSTINGER_FTP_PASSWORD }}
         run: |
-          target_dir="/public_html/portfolio"
+          target_dir="/portfolio"
 
           found=0
           remote_info=$(lftp -u "$HOSTINGER_FTP_USERNAME","$HOSTINGER_FTP_PASSWORD" "$HOSTINGER_FTP_SERVER" -e "set ftp:ssl-force true; set ftp:ssl-protect-data true; set ftp:passive-mode true; set ftp:prefer-epsv false; set ssl:verify-certificate no; set net:timeout 45; set cmd:fail-exit yes; cat ${target_dir}/assets/build-info.json; bye" || true)
@@ -197,7 +197,7 @@ jobs:
 
           if [ "$ok" -ne 1 ]; then
             echo "Live site did not confirm current commit in time."
-            echo "::warning::FTP upload is OK but the subdomain is likely not serving /public_html/portfolio or is heavily cached."
+            echo "::warning::FTP upload is OK but the subdomain is likely not serving /portfolio or is heavily cached."
           fi
 
       - name: Verify live image endpoint (non-blocking)
