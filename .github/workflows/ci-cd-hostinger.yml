@@ -125,9 +125,11 @@ jobs:
           HOSTINGER_FTP_SERVER: ${{ secrets.HOSTINGER_FTP_SERVER }}
           HOSTINGER_FTP_USERNAME: ${{ secrets.HOSTINGER_FTP_USERNAME }}
           HOSTINGER_FTP_PASSWORD: ${{ secrets.HOSTINGER_FTP_PASSWORD }}
+          HOSTINGER_FTP_TARGET_DIR: ${{ secrets.HOSTINGER_FTP_TARGET_DIR }}
         run: |
-          # Cette cible correspond au dossier visible dans le File Manager Hostinger.
-          target_dir="/public_html/portfolio/"
+          # Cible configurable pour s'adapter au home FTP reel du compte Hostinger.
+          target_dir="${HOSTINGER_FTP_TARGET_DIR:-/public_html/portfolio/}"
+          echo "Using FTPS target_dir=${target_dir}"
 
           success=0
           for attempt in 1 2 3 4 5; do
@@ -154,8 +156,10 @@ jobs:
           HOSTINGER_FTP_SERVER: ${{ secrets.HOSTINGER_FTP_SERVER }}
           HOSTINGER_FTP_USERNAME: ${{ secrets.HOSTINGER_FTP_USERNAME }}
           HOSTINGER_FTP_PASSWORD: ${{ secrets.HOSTINGER_FTP_PASSWORD }}
+          HOSTINGER_FTP_TARGET_DIR: ${{ secrets.HOSTINGER_FTP_TARGET_DIR }}
         run: |
-          target_dir="/public_html/portfolio"
+          target_dir="${HOSTINGER_FTP_TARGET_DIR:-/public_html/portfolio}"
+          target_dir="${target_dir%/}"
 
           found=0
           remote_info=$(lftp -u "$HOSTINGER_FTP_USERNAME","$HOSTINGER_FTP_PASSWORD" "$HOSTINGER_FTP_SERVER" -e "set ftp:ssl-force true; set ftp:ssl-protect-data true; set ftp:passive-mode true; set ftp:prefer-epsv false; set ssl:verify-certificate no; set net:timeout 45; set cmd:fail-exit yes; cat ${target_dir}/assets/build-info.json; bye" || true)
@@ -197,7 +201,7 @@ jobs:
 
           if [ "$ok" -ne 1 ]; then
             echo "Live site did not confirm current commit in time."
-            echo "::warning::FTP upload is OK but the subdomain is likely not serving /public_html/portfolio or is heavily cached."
+            echo "::warning::FTP upload is OK but the subdomain is likely not serving ${target_dir} or is heavily cached."
           fi
 
       - name: Verify live image endpoint (non-blocking)
