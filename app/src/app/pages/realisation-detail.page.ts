@@ -6,19 +6,11 @@ type LinkedSkill = {
   path: string;
 };
 
-type KpiItem = {
-  label: string;
-  value: string;
-  impact: string;
-};
-
 type RealisationDetail = {
   slug: string;
   order: string;
   title: string;
   context: string;
-  oralPitch: string[];
-  kpis: KpiItem[];
   objectives: string[];
   steps: string[];
   stakeholders: string[];
@@ -36,24 +28,6 @@ const REALISATIONS: RealisationDetail[] = [
     title: '360-content-bridge',
     context:
       "Plugin WordPress conçu pour simplifier les opérations d'import/export de contenu dans un contexte multi-projets.",
-    oralPitch: [
-      'J\'ai conçu ce plugin pour fiabiliser les transferts de contenus entre environnements WordPress.',
-      'Le besoin métier était de réduire les manipulations manuelles et les risques d\'erreur.',
-      'J\'ai structuré la logique d\'import/export autour de règles de validation simples et maintenables.',
-      'Le résultat est un gain de temps opérationnel et une base réutilisable pour d\'autres projets.',
-    ],
-    kpis: [
-      {
-        label: 'Temps de migration de contenu',
-        value: 'Baisse sensible vs manuel',
-        impact: 'Réduction des opérations répétitives en phase de maintenance.',
-      },
-      {
-        label: 'Risque d\'erreur humaine',
-        value: 'Réduit',
-        impact: 'Moins d\'écarts entre source et cible lors des transferts.',
-      },
-    ],
     objectives: [
       'Accélérer les opérations de contenu répétitives.',
       'Réduire le risque d’erreur humaine lors des transferts.',
@@ -94,24 +68,6 @@ const REALISATIONS: RealisationDetail[] = [
     title: '360-media-auto-cleanup',
     context:
       'Plugin WordPress qui automatise le nettoyage des médias orphelins pour limiter les coûts de stockage et garder un parc propre.',
-    oralPitch: [
-      'J\'ai développé ce plugin pour automatiser une tâche de maintenance souvent oubliée.',
-      'L\'enjeu principal était de nettoyer sans supprimer des médias encore utiles.',
-      'J\'ai donc privilégié une logique prudente avec contrôle et validation.',
-      'Le projet améliore durablement l\'hygiène technique et limite la dérive de stockage.',
-    ],
-    kpis: [
-      {
-        label: 'Volume médias orphelins',
-        value: 'En baisse continue',
-        impact: 'Réduction de la dette de stockage sur le long terme.',
-      },
-      {
-        label: 'Temps de nettoyage manuel',
-        value: 'Fortement réduit',
-        impact: 'L\'équipe peut se concentrer sur des tâches à plus forte valeur.',
-      },
-    ],
     objectives: [
       'Identifier les médias non utilisés.',
       'Proposer une suppression maîtrisée et réversible.',
@@ -152,24 +108,6 @@ const REALISATIONS: RealisationDetail[] = [
     title: '360tranquilité',
     context:
       'Plugin WordPress orienté supervision, sécurité et exploitation pour stabiliser les environnements de production.',
-    oralPitch: [
-      'J\'ai porté ce projet pour centraliser des besoins de sécurité et d\'exploitation dans un seul plugin.',
-      'Le contexte imposait une solution modulaire, évolutive et exploitable au quotidien.',
-      'J\'ai avancé par incréments pour sécuriser chaque brique sans casser l\'ensemble.',
-      'Le projet apporte une meilleure visibilité opérationnelle et un socle de durcissement durable.',
-    ],
-    kpis: [
-      {
-        label: 'Couverture des contrôles',
-        value: 'Modules clés centralisés',
-        impact: 'Vision unifiée des points de vigilance techniques.',
-      },
-      {
-        label: 'Réactivité incident',
-        value: 'Améliorée',
-        impact: 'Diagnostic plus rapide grâce aux outils de supervision.',
-      },
-    ],
     objectives: [
       'Centraliser des fonctionnalités de protection utiles.',
       'Aider à détecter rapidement les incidents.',
@@ -210,24 +148,6 @@ const REALISATIONS: RealisationDetail[] = [
     title: 'crewai-projet-agent-voyage',
     context:
       'Projet IA orienté planification de voyage pour produire des scénarios utiles et compréhensibles rapidement.',
-    oralPitch: [
-      'J\'ai lancé ce projet pour tester un cas d\'usage IA concret et mesurable.',
-      'Le défi était de garder des réponses exploitables sans complexifier l\'expérience utilisateur.',
-      'J\'ai structuré les cas d\'usage puis itéré sur la qualité des sorties.',
-      'Le résultat est un prototype pertinent qui m\'a fait progresser sur le cadrage d\'un produit IA.',
-    ],
-    kpis: [
-      {
-        label: 'Pertinence des scénarios',
-        value: 'En progression',
-        impact: 'Meilleure adéquation entre demande utilisateur et réponse proposée.',
-      },
-      {
-        label: 'Temps de génération',
-        value: 'Rapide',
-        impact: 'Expérience plus fluide lors des essais utilisateur.',
-      },
-    ],
     objectives: [
       'Structurer une logique d’assistance utilisateur.',
       'Produire des résultats exploitables sans complexité excessive.',
@@ -268,24 +188,6 @@ const REALISATIONS: RealisationDetail[] = [
     title: 'v0-vastrion-mobile-prototype',
     context:
       'Prototype de marketplace B2B/B2C en cours de développement, avec un focus sur l’expérience mobile et la clarté du parcours.',
-    oralPitch: [
-      'J\'ai conçu ce prototype pour valider rapidement une vision produit de marketplace mobile.',
-      'L\'objectif était de prioriser les parcours essentiels avant l\'industrialisation complète.',
-      'J\'ai avancé par itérations UX/UI en gardant un cadre de décision pragmatique.',
-      'Le prototype sert aujourd\'hui de base de discussion solide pour la feuille de route.',
-    ],
-    kpis: [
-      {
-        label: 'Parcours MVP couverts',
-        value: 'Principaux parcours validés',
-        impact: 'Vision produit clarifiée pour les prochaines étapes.',
-      },
-      {
-        label: 'Lisibilité mobile',
-        value: 'Bonne base',
-        impact: 'Meilleure compréhension de l\'offre sur petit écran.',
-      },
-    ],
     objectives: [
       'Poser un socle produit exploitable rapidement.',
       'Valider les parcours principaux côté utilisateur.',
@@ -336,30 +238,6 @@ const REALISATIONS: RealisationDetail[] = [
           <h2>Présentation et contexte</h2>
           <p>{{ project.context }}</p>
         </article>
-
-        <div class="two-columns">
-          <article class="panel detail-block">
-            <h2>Comment expliquer cette réalisation en 4 phrases</h2>
-            <ul class="detail-list">
-              @for (line of project.oralPitch; track line) {
-                <li>{{ line }}</li>
-              }
-            </ul>
-          </article>
-
-          <article class="panel detail-block">
-            <h2>Indicateurs et impacts (KPI)</h2>
-            <div class="cards-grid metrics-grid">
-              @for (kpi of project.kpis; track kpi.label) {
-                <article class="card">
-                  <h3>{{ kpi.label }}</h3>
-                  <p class="metric-value">{{ kpi.value }}</p>
-                  <p>{{ kpi.impact }}</p>
-                </article>
-              }
-            </div>
-          </article>
-        </div>
 
         <div class="two-columns">
           <article class="panel detail-block">
