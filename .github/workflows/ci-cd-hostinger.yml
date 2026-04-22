@@ -128,20 +128,24 @@ jobs:
           HOSTINGER_FTP_TARGET_DIR: ${{ secrets.HOSTINGER_FTP_TARGET_DIR }}
           ALLOW_FTP_ROOT_DEPLOY: ${{ secrets.ALLOW_FTP_ROOT_DEPLOY }}
         run: |
-          # Cible configurable pour s'adapter au home FTP reel.
-          target_dir="${HOSTINGER_FTP_TARGET_DIR:-/portfolio/}"
-          if [ "$target_dir" = "/" ] && [ "${ALLOW_FTP_ROOT_DEPLOY}" != "true" ]; then
+          preferred_target="${HOSTINGER_FTP_TARGET_DIR:-/portfolio/}"
+          if [ "$preferred_target" = "/" ] && [ "${ALLOW_FTP_ROOT_DEPLOY}" != "true" ]; then
             echo "Root deploy not allowed. Falling back to /portfolio/."
-            target_dir="/portfolio/"
+            preferred_target="/portfolio/"
           fi
-          echo "Using FTPS target_dir=${target_dir}"
+
+          target_dirs=("$preferred_target" "/portfolio/" "/public_html/portfolio/")
+          unique_target_dirs=($(printf "%s\n" "${target_dirs[@]}" | awk '!seen[$0]++'))
+          echo "Using FTPS target candidates: ${unique_target_dirs[*]}"
 
           success=0
           for attempt in 1 2 3 4 5; do
             echo "FTPS deploy attempt ${attempt}"
 
-            echo "Trying FTPS mirror to ${target_dir}"
-            lftp -u "$HOSTINGER_FTP_USERNAME","$HOSTINGER_FTP_PASSWORD" "$HOSTINGER_FTP_SERVER" -e "set ftp:ssl-force true; set ftp:ssl-protect-data true; set ftp:passive-mode true; set ftp:prefer-epsv false; set ssl:verify-certificate no; set net:timeout 45; set net:max-retries 8; set net:reconnect-interval-base 10; set net:reconnect-interval-max 60; set cmd:fail-exit yes; mirror -R --delete --verbose --parallel=1 --ignore-time --transfer-all ./dist/app/browser/ ${target_dir}; bye" && success=1 || true
+            for target_dir in "${unique_target_dirs[@]}"; do
+              echo "Trying FTPS mirror to ${target_dir}"
+              lftp -u "$HOSTINGER_FTP_USERNAME","$HOSTINGER_FTP_PASSWORD" "$HOSTINGER_FTP_SERVER" -e "set ftp:ssl-force true; set ftp:ssl-protect-data true; set ftp:passive-mode true; set ftp:prefer-epsv false; set ssl:verify-certificate no; set net:timeout 45; set net:max-retries 8; set net:reconnect-interval-base 10; set net:reconnect-interval-max 60; set cmd:fail-exit yes; mirror -R --delete --verbose --parallel=1 --ignore-time --transfer-all ./dist/app/browser/ ${target_dir}; bye" && success=1 || true
+            done
 
             if [ "$success" -eq 1 ]; then
               echo "FTPS deploy completed."
@@ -164,19 +168,23 @@ jobs:
           HOSTINGER_FTP_TARGET_DIR: ${{ secrets.HOSTINGER_FTP_TARGET_DIR }}
           ALLOW_FTP_ROOT_DEPLOY: ${{ secrets.ALLOW_FTP_ROOT_DEPLOY }}
         run: |
-          target_dir="${HOSTINGER_FTP_TARGET_DIR:-/portfolio}"
-          if [ "$target_dir" = "/" ] && [ "${ALLOW_FTP_ROOT_DEPLOY}" != "true" ]; then
-            target_dir="/portfolio"
+          preferred_target="${HOSTINGER_FTP_TARGET_DIR:-/portfolio}"
+          if [ "$preferred_target" = "/" ] && [ "${ALLOW_FTP_ROOT_DEPLOY}" != "true" ]; then
+            preferred_target="/portfolio"
           fi
-          target_dir="${target_dir%/}"
+          target_dirs=("$preferred_target" "/portfolio" "/public_html/portfolio")
+          unique_target_dirs=($(printf "%s\n" "${target_dirs[@]}" | awk '!seen[$0]++'))
 
           found=0
-          remote_info=$(lftp -u "$HOSTINGER_FTP_USERNAME","$HOSTINGER_FTP_PASSWORD" "$HOSTINGER_FTP_SERVER" -e "set ftp:ssl-force true; set ftp:ssl-protect-data true; set ftp:passive-mode true; set ftp:prefer-epsv false; set ssl:verify-certificate no; set net:timeout 45; set cmd:fail-exit yes; cat ${target_dir}/assets/build-info.json; bye" || true)
-          echo "Remote FTP build-info [${target_dir}]: ${remote_info}"
+          for target_dir in "${unique_target_dirs[@]}"; do
+            target_dir="${target_dir%/}"
+            remote_info=$(lftp -u "$HOSTINGER_FTP_USERNAME","$HOSTINGER_FTP_PASSWORD" "$HOSTINGER_FTP_SERVER" -e "set ftp:ssl-force true; set ftp:ssl-protect-data true; set ftp:passive-mode true; set ftp:prefer-epsv false; set ssl:verify-certificate no; set net:timeout 45; set cmd:fail-exit yes; cat ${target_dir}/assets/build-info.json; bye" || true)
+            echo "Remote FTP build-info [${target_dir}]: ${remote_info}"
 
-          if echo "$remote_info" | grep -q "${{ github.sha }}"; then
-            found=1
-          fi
+            if echo "$remote_info" | grep -q "${{ github.sha }}"; then
+              found=1
+            fi
+          done
 
           if [ "$found" -ne 1 ]; then
             echo "No FTP target contains current commit metadata."
