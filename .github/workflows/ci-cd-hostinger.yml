@@ -126,8 +126,8 @@ jobs:
           HOSTINGER_FTP_USERNAME: ${{ secrets.HOSTINGER_FTP_USERNAME }}
           HOSTINGER_FTP_PASSWORD: ${{ secrets.HOSTINGER_FTP_PASSWORD }}
         run: |
-          # La racine FTP correspond au document root effectivement servi.
-          target_dir="/"
+          # Cible sure: dossier portfolio dedie, sans toucher a la racine WordPress.
+          target_dir="/portfolio/"
           echo "Using FTPS target_dir=${target_dir}"
 
           success=0
@@ -156,9 +156,8 @@ jobs:
           HOSTINGER_FTP_USERNAME: ${{ secrets.HOSTINGER_FTP_USERNAME }}
           HOSTINGER_FTP_PASSWORD: ${{ secrets.HOSTINGER_FTP_PASSWORD }}
         run: |
-          target_dir="/"
+          target_dir="/portfolio"
           target_dir="${target_dir%/}"
-          if [ -z "$target_dir" ]; then target_dir="/"; fi
 
           found=0
           remote_info=$(lftp -u "$HOSTINGER_FTP_USERNAME","$HOSTINGER_FTP_PASSWORD" "$HOSTINGER_FTP_SERVER" -e "set ftp:ssl-force true; set ftp:ssl-protect-data true; set ftp:passive-mode true; set ftp:prefer-epsv false; set ssl:verify-certificate no; set net:timeout 45; set cmd:fail-exit yes; cat ${target_dir}/assets/build-info.json; bye" || true)
