@@ -126,8 +126,8 @@ jobs:
           HOSTINGER_FTP_USERNAME: ${{ secrets.HOSTINGER_FTP_USERNAME }}
           HOSTINGER_FTP_PASSWORD: ${{ secrets.HOSTINGER_FTP_PASSWORD }}
         run: |
-          # Cible sure: dossier portfolio dedie, sans toucher a la racine WordPress.
-          target_dir="/portfolio/"
+          # Cible explicite apres restauration Hostinger.
+          target_dir="/public_html/portfolio/"
           echo "Using FTPS target_dir=${target_dir}"
 
           success=0
@@ -156,7 +156,7 @@ jobs:
           HOSTINGER_FTP_USERNAME: ${{ secrets.HOSTINGER_FTP_USERNAME }}
           HOSTINGER_FTP_PASSWORD: ${{ secrets.HOSTINGER_FTP_PASSWORD }}
         run: |
-          target_dir="/portfolio"
+          target_dir="/public_html/portfolio"
           target_dir="${target_dir%/}"
 
           found=0
