@@ -1,6 +1,12 @@
 RewriteEngine On
 RewriteBase /
 
+# Ici je desactive le cache LiteSpeed au niveau serveur pour que les fichiers mis a jour par le deploiement
+# soient immediatement servis sans passer par le cache de l'edge Hostinger.
+<IfModule LiteSpeed>
+    CacheLookup off
+</IfModule>
+
 # Ici je desactive le cache de l'index pour que le navigateur charge toujours le dernier bundle hashé.
 <IfModule mod_headers.c>
 	<Files "index.html">
