@@ -10,14 +10,14 @@ import { RealisationsPage } from './pages/realisations.page';
 
 // Ici je centralise toutes les routes pour garder une lecture claire de la navigation du portfolio.
 export const routes: Routes = [
-	{ path: '', component: HomePage },
-	{ path: 'presentation', component: PresentationPage },
-	{ path: 'competences', component: CompetencesPage },
-	{ path: 'competences/:slug', component: CompetenceDetailPage },
-	{ path: 'realisations', component: RealisationsPage, pathMatch: 'full' },
-	{ path: 'realisations/:slug', component: RealisationDetailPage },
-	{ path: 'parcours', component: ParcoursPage },
-	{ path: 'contact', component: ContactPage },
+	{ path: '', component: HomePage, title: 'Accueil | Aurel YAHOUEDEOU' },
+	{ path: 'presentation', component: PresentationPage, title: 'Présentation | Aurel YAHOUEDEOU' },
+	{ path: 'competences', component: CompetencesPage, title: 'Compétences | Aurel YAHOUEDEOU' },
+	{ path: 'competences/:slug', component: CompetenceDetailPage, title: 'Détail compétence | Aurel YAHOUEDEOU' },
+	{ path: 'realisations', component: RealisationsPage, title: 'Réalisations | Aurel YAHOUEDEOU', pathMatch: 'full' },
+	{ path: 'realisations/:slug', component: RealisationDetailPage, title: 'Détail réalisation | Aurel YAHOUEDEOU' },
+	{ path: 'parcours', component: ParcoursPage, title: 'Parcours | Aurel YAHOUEDEOU' },
+	{ path: 'contact', component: ContactPage, title: 'Contact | Aurel YAHOUEDEOU' },
 	// Ici je redirige les URLs inconnues vers l'accueil pour eviter une page vide en production.
 	{ path: '**', redirectTo: '' },
 ];
