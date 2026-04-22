@@ -134,29 +134,26 @@ jobs:
             preferred_target="/portfolio/"
           fi
 
-          target_dirs=("$preferred_target" "/portfolio/" "/public_html/portfolio/")
-          unique_target_dirs=($(printf "%s\n" "${target_dirs[@]}" | awk '!seen[$0]++'))
-          echo "Using FTPS target candidates: ${unique_target_dirs[*]}"
+          target_dir="$preferred_target"
+          echo "Using FTPS target: ${target_dir}"
 
           success=0
-          for attempt in 1 2 3 4 5; do
+          for attempt in 1 2 3; do
             echo "FTPS deploy attempt ${attempt}"
 
-            for target_dir in "${unique_target_dirs[@]}"; do
-              echo "Trying FTPS mirror to ${target_dir}"
-              lftp -u "$HOSTINGER_FTP_USERNAME","$HOSTINGER_FTP_PASSWORD" "$HOSTINGER_FTP_SERVER" -e "set ftp:ssl-force true; set ftp:ssl-protect-data true; set ftp:passive-mode true; set ftp:prefer-epsv false; set ssl:verify-certificate no; set net:timeout 45; set net:max-retries 8; set net:reconnect-interval-base 10; set net:reconnect-interval-max 60; set cmd:fail-exit yes; mirror -R --delete --verbose --parallel=1 --ignore-time --transfer-all ./dist/app/browser/ ${target_dir}; bye" && success=1 || true
-            done
+            echo "Trying FTPS mirror to ${target_dir}"
+            lftp -u "$HOSTINGER_FTP_USERNAME","$HOSTINGER_FTP_PASSWORD" "$HOSTINGER_FTP_SERVER" -e "set ftp:ssl-force true; set ftp:ssl-protect-data true; set ftp:passive-mode true; set ftp:prefer-epsv false; set ssl:verify-certificate no; set net:timeout 30; set net:max-retries 3; set net:reconnect-interval-base 5; set net:reconnect-interval-max 20; set cmd:fail-exit yes; mirror -R --delete --verbose --parallel=1 --ignore-time --transfer-all ./dist/app/browser/ ${target_dir}; bye" && success=1 || true
 
             if [ "$success" -eq 1 ]; then
               echo "FTPS deploy completed."
               break
             fi
 
-            sleep 30
+            sleep 10
           done
 
           if [ "$success" -ne 1 ]; then
-            echo "Deploy failed after 5 attempts."
+            echo "Deploy failed after 3 attempts."
             exit 1
           fi
 
@@ -172,19 +169,17 @@ jobs:
           if [ "$preferred_target" = "/" ] && [ "${ALLOW_FTP_ROOT_DEPLOY}" != "true" ]; then
             preferred_target="/portfolio"
           fi
-          target_dirs=("$preferred_target" "/portfolio" "/public_html/portfolio")
-          unique_target_dirs=($(printf "%s\n" "${target_dirs[@]}" | awk '!seen[$0]++'))
+          target_dir="$preferred_target"
+          target_dir="${target_dir%/}"
+          if [ -z "$target_dir" ]; then target_dir="/"; fi
 
           found=0
-          for target_dir in "${unique_target_dirs[@]}"; do
-            target_dir="${target_dir%/}"
-            remote_info=$(lftp -u "$HOSTINGER_FTP_USERNAME","$HOSTINGER_FTP_PASSWORD" "$HOSTINGER_FTP_SERVER" -e "set ftp:ssl-force true; set ftp:ssl-protect-data true; set ftp:passive-mode true; set ftp:prefer-epsv false; set ssl:verify-certificate no; set net:timeout 45; set cmd:fail-exit yes; cat ${target_dir}/assets/build-info.json; bye" || true)
-            echo "Remote FTP build-info [${target_dir}]: ${remote_info}"
+          remote_info=$(lftp -u "$HOSTINGER_FTP_USERNAME","$HOSTINGER_FTP_PASSWORD" "$HOSTINGER_FTP_SERVER" -e "set ftp:ssl-force true; set ftp:ssl-protect-data true; set ftp:passive-mode true; set ftp:prefer-epsv false; set ssl:verify-certificate no; set net:timeout 30; set cmd:fail-exit yes; cat ${target_dir}/assets/build-info.json; bye" || true)
+          echo "Remote FTP build-info [${target_dir}]: ${remote_info}"
 
-            if echo "$remote_info" | grep -q "${{ github.sha }}"; then
-              found=1
-            fi
-          done
+          if echo "$remote_info" | grep -q "${{ github.sha }}"; then
+            found=1
+          fi
 
           if [ "$found" -ne 1 ]; then
             echo "No FTP target contains current commit metadata."
