@@ -9,7 +9,7 @@ import { RouterLink } from '@angular/router';
       <div class="hero__identity">
         <img class="hero__photo" src="assets/images/photo-identite.jpg" alt="Photo d'identité d'Aurel YAHOUEDEOU" />
         <div class="hero__text">
-          <p class="hero__kicker">Portfolio d'ingénierie logicielle</p>
+          <p class="hero__kicker">Portfolio d'ingénierie logicielle • Déploiement validé</p>
           <h1>Aurel YAHOUEDEOU</h1>
           <p>
             Développeur fullstack junior, orienté architecture web mutualisée, performance et maintenabilité.
