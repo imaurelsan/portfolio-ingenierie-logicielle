@@ -43,48 +43,53 @@ type CertificationItem = {
         <ol class="journey-list">
           @for (item of experiences; track item.role + item.company) {
             <li class="journey-item">
-              <div class="journey-item__summary">
-                <p class="timeline__period">{{ item.period }}</p>
-                <h3>{{ item.role }}</h3>
-                <div class="journey-item__place">
-                  @if (item.website) {
-                    <a [href]="item.website" target="_blank" rel="noopener">{{ item.company }}</a>
-                  } @else {
-                    <span>{{ item.company }}</span>
-                  }
-                  <span>{{ item.city }}</span>
-                </div>
+              <div class="journey-item__logo">
                 <div class="logo-chip">
                   <img [src]="item.logo" [alt]="'Logo ' + item.company" />
                 </div>
+                <p class="timeline__period">{{ item.period }}</p>
               </div>
 
-              <details class="journey-item__details">
-                <summary>Voir le détail de l'expérience</summary>
-                <p><strong>Responsabilité :</strong> {{ item.responsibility }}</p>
-                <p><strong>Statut :</strong> {{ item.status }}</p>
-                <ul class="detail-list">
-                  @for (line of item.details; track line) {
-                    <li>{{ line }}</li>
-                  }
-                </ul>
-                <p class="card-meta-title">Réalisations liées</p>
-                <ul class="detail-list detail-list--links">
-                  @for (project of item.linkedProjects; track project.path) {
-                    <li>
-                      <a [href]="project.path">{{ project.title }}</a>
-                    </li>
-                  }
-                </ul>
-                <p class="card-meta-title">Compétences liées</p>
-                <ul class="detail-list detail-list--links">
-                  @for (skill of item.linkedSkills; track skill.path) {
-                    <li>
-                      <a [href]="skill.path">{{ skill.title }}</a>
-                    </li>
-                  }
-                </ul>
-              </details>
+              <div class="journey-item__content">
+                <div class="journey-item__summary">
+                  <h3>{{ item.role }}</h3>
+                  <div class="journey-item__place">
+                    @if (item.website) {
+                      <a [href]="item.website" target="_blank" rel="noopener">{{ item.company }}</a>
+                    } @else {
+                      <span>{{ item.company }}</span>
+                    }
+                    <span>{{ item.city }}</span>
+                  </div>
+                </div>
+
+                <details class="journey-item__details">
+                  <summary>Voir le détail de l'expérience</summary>
+                  <p><strong>Responsabilité :</strong> {{ item.responsibility }}</p>
+                  <p><strong>Statut :</strong> {{ item.status }}</p>
+                  <ul class="detail-list">
+                    @for (line of item.details; track line) {
+                      <li>{{ line }}</li>
+                    }
+                  </ul>
+                  <p class="card-meta-title">Réalisations liées</p>
+                  <ul class="detail-list detail-list--links">
+                    @for (project of item.linkedProjects; track project.path) {
+                      <li>
+                        <a [href]="project.path">{{ project.title }}</a>
+                      </li>
+                    }
+                  </ul>
+                  <p class="card-meta-title">Compétences liées</p>
+                  <ul class="detail-list detail-list--links">
+                    @for (skill of item.linkedSkills; track skill.path) {
+                      <li>
+                        <a [href]="skill.path">{{ skill.title }}</a>
+                      </li>
+                    }
+                  </ul>
+                </details>
+              </div>
             </li>
           }
         </ol>
@@ -95,26 +100,31 @@ type CertificationItem = {
         <ol class="journey-list">
           @for (item of formations; track item.degree + item.school) {
             <li class="journey-item">
-              <div class="journey-item__summary">
-                <p class="timeline__period">{{ item.period }}</p>
-                <h3>{{ item.degree }}</h3>
-                <div class="journey-item__place">
-                  <a [href]="item.website" target="_blank" rel="noopener">{{ item.school }}</a>
-                  <span>{{ item.city }}</span>
-                </div>
+              <div class="journey-item__logo">
                 <div class="logo-chip">
                   <img [src]="item.logo" [alt]="'Logo ' + item.school" />
                 </div>
+                <p class="timeline__period">{{ item.period }}</p>
               </div>
 
-              <details class="journey-item__details">
-                <summary>Voir le détail de la formation</summary>
-                <ul class="detail-list">
-                  @for (line of item.details; track line) {
-                    <li>{{ line }}</li>
-                  }
-                </ul>
-              </details>
+              <div class="journey-item__content">
+                <div class="journey-item__summary">
+                  <h3>{{ item.degree }}</h3>
+                  <div class="journey-item__place">
+                    <a [href]="item.website" target="_blank" rel="noopener">{{ item.school }}</a>
+                    <span>{{ item.city }}</span>
+                  </div>
+                </div>
+
+                <details class="journey-item__details">
+                  <summary>Voir le détail de la formation</summary>
+                  <ul class="detail-list">
+                    @for (line of item.details; track line) {
+                      <li>{{ line }}</li>
+                    }
+                  </ul>
+                </details>
+              </div>
             </li>
           }
         </ol>
@@ -130,6 +140,24 @@ type CertificationItem = {
             </li>
           }
         </ul>
+      </article>
+
+      <article class="panel detail-block">
+        <h2>Entreprises avec lesquelles j'ai collaboré</h2>
+        <div class="logo-marquee" aria-label="Logos des entreprises">
+          <div class="logo-marquee__track">
+            @for (logo of companyLogos; track logo.logo + logo.name) {
+              <div class="logo-marquee__item">
+                <img [src]="logo.logo" [alt]="'Logo ' + logo.name" />
+              </div>
+            }
+            @for (logo of companyLogos; track logo.logo + '-duplicate') {
+              <div class="logo-marquee__item">
+                <img [src]="logo.logo" [alt]="'Logo ' + logo.name" />
+              </div>
+            }
+          </div>
+        </div>
       </article>
     </section>
   `,
@@ -366,5 +394,16 @@ export class ParcoursPage {
       date: '2023',
       title: 'Certification : Développement Web et Web Mobile (RNCP37674).',
     },
+  ];
+
+  protected readonly companyLogos = [
+    { name: 'ASKI-DA Group', logo: 'assets/images/entreprises/1-logo-askida-group.png' },
+    { name: "Empow'Her Global", logo: 'assets/images/entreprises/2-logo-empowher-global.png' },
+    { name: 'Agence YELE', logo: 'assets/images/entreprises/3-logo-agence-yele.png' },
+    { name: 'AY Studio', logo: 'assets/images/entreprises/4-logo-ay-studio.png' },
+    { name: 'Master Soft', logo: 'assets/images/entreprises/5-logo-master-soft.png' },
+    { name: 'A.N.T Bénin', logo: 'assets/images/entreprises/6-logo-ant-benin.png' },
+    { name: 'COS LEPI', logo: 'assets/images/entreprises/7-logo-cos-lepi.png' },
+    { name: 'AGORA CENTER', logo: 'assets/images/entreprises/8-logo-agora-center.png' },
   ];
 }

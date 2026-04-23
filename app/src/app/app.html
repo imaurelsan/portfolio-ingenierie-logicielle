@@ -2,7 +2,7 @@
   <header class="app-header">
     <!-- L'identité est volontairement compacte: texte + un seul visuel contextualisé selon la page. -->
     <a class="brand" routerLink="/" aria-label="Retour à l'accueil" (click)="closeMobileNav()">
-      <img class="brand__avatar" [src]="brandImageSrc" [alt]="brandImageAlt" />
+      <img class="brand__avatar" [class.brand__avatar--symbol]="isHomePage" [src]="brandImageSrc" [alt]="brandImageAlt" />
       <div>
         <p class="brand__kicker">Portfolio</p>
         <p class="brand__title">Aurel YAHOUEDEOU</p>
@@ -11,13 +11,32 @@
 
     <div class="header-actions">
       <button
-        class="theme-toggle"
+        class="search-toggle"
+        type="button"
+        aria-label="Ouvrir la recherche rapide"
+        [attr.aria-expanded]="isQuickNavOpen"
+        aria-controls="quick-navigation"
+        (click)="isQuickNavOpen ? closeQuickNav() : openQuickNav()"
+      >
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10.5 3a7.5 7.5 0 0 1 5.98 12.03l4.24 4.24a1 1 0 0 1-1.42 1.42l-4.24-4.24A7.5 7.5 0 1 1 10.5 3Zm0 2a5.5 5.5 0 1 0 0 11 5.5 5.5 0 0 0 0-11Z"/></svg>
+      </button>
+
+      <button
+        class="theme-switch"
         type="button"
         [attr.aria-pressed]="isLightTheme"
         [attr.aria-label]="isLightTheme ? 'Activer le mode sombre' : 'Activer le mode clair'"
         (click)="toggleTheme()"
       >
-        {{ isLightTheme ? 'Sombre' : 'Clair' }}
+        <span class="theme-switch__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M12 4.2a1 1 0 0 1 1 1V6a1 1 0 1 1-2 0v-.8a1 1 0 0 1 1-1Zm0 12.8a1 1 0 0 1 1 1v.8a1 1 0 1 1-2 0V18a1 1 0 0 1 1-1Zm7.8-5.8a1 1 0 0 1 1 1 1 1 0 0 1-1 1H19a1 1 0 1 1 0-2h.8Zm-14.8 0a1 1 0 1 1 0 2H4.2a1 1 0 1 1 0-2H5Zm11.08-4.88a1 1 0 0 1 1.42 0 1 1 0 0 1 0 1.42l-.56.57a1 1 0 0 1-1.42-1.42l.56-.57Zm-8.02 8.02a1 1 0 0 1 1.42 0 1 1 0 0 1 0 1.42l-.56.57a1 1 0 0 1-1.42-1.42l.56-.57Zm8.58 2a1 1 0 0 1 1.42 1.42l-.56.57a1 1 0 0 1-1.42-1.42l.56-.57Zm-8.58-8.58a1 1 0 0 1 1.42 1.42l-.56.57a1 1 0 1 1-1.42-1.42l.56-.57ZM12 8a4 4 0 1 1 0 8 4 4 0 0 1 0-8Z"/></svg>
+        </span>
+        <span class="theme-switch__track" aria-hidden="true">
+          <span class="theme-switch__thumb"></span>
+        </span>
+        <span class="theme-switch__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M14.8 4.3a1 1 0 0 1 .2 1.12A7 7 0 1 0 18.6 15a1 1 0 0 1 1.12.2 1 1 0 0 1 .14 1.2A9 9 0 1 1 13.6 3.16a1 1 0 0 1 1.2.14Z"/></svg>
+        </span>
       </button>
 
       <!-- Ici j'affiche un bouton hamburger en mobile pour garder un header compact et lisible. -->
@@ -53,6 +72,28 @@
         </a>
       }
     </nav>
+
+    @if (isQuickNavOpen) {
+      <div id="quick-navigation" class="quick-nav" role="dialog" aria-label="Recherche rapide">
+        <label for="quick-nav-input">Aller rapidement à une section</label>
+        <input
+          id="quick-nav-input"
+          type="search"
+          placeholder="Ex: compétences, parcours..."
+          [value]="quickNavQuery"
+          (input)="onQuickNavInput($event)"
+        />
+
+        <div class="quick-nav__results">
+          @for (item of quickNavResults; track item.path) {
+            <a [routerLink]="item.path" (click)="onQuickNavSelect()">{{ item.label }}</a>
+          }
+          @if (quickNavResults.length === 0) {
+            <p>Aucune section ne correspond à cette recherche.</p>
+          }
+        </div>
+      </div>
+    }
   </header>
 
   <main class="app-main">

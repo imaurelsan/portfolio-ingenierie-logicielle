@@ -29,19 +29,17 @@ type Proof = {
       <div class="hero__identity hero__identity--enhanced">
         <div class="hero__portrait">
           <img class="hero__photo" src="assets/images/photo-identite.jpg" alt="Photo d'identité d'Aurel YAHOUEDEOU" />
-          <p class="hero__portrait-note">Profil hybride: sécurité, architecture web, développement orienté maintenance.</p>
+          <p class="hero__portrait-note">
+            Profil hybride: designer UI/UX, artiste visuel, lead technique orienté produit et développeur web fullstack junior.
+          </p>
         </div>
 
         <div class="hero__text">
-          <p class="hero__kicker">Candidat au titre d'Expert en ingénierie logicielle</p>
-          <h1>Je transforme des contraintes techniques en solutions web maintenables et utiles.</h1>
+          <p class="hero__kicker">Ingénieur réseaux, systèmes et sécurité · en reconversion vers l'ingénierie logicielle</p>
+          <h1>Je conçois des solutions web claires, fiables et utiles.</h1>
           <p class="hero__lede">
-            Ce portfolio présente moins un parcours chronologique qu'une méthode de travail: concevoir sobrement,
-            industrialiser proprement et rendre les décisions techniques explicables.
-          </p>
-          <p class="hero__problem">
-            Fil conducteur de soutenance: comment concevoir une architecture web mutualisée et évolutive, capable de
-            réduire les coûts tout en renforçant la qualité, la sécurité et la vitesse de maintenance ?
+            Ce portfolio montre ma façon de travailler: cadrer proprement, livrer avec méthode et relier la technique à
+            la valeur d'usage.
           </p>
 
           <div class="hero__actions">
@@ -68,7 +66,7 @@ type Proof = {
         </article>
         <article class="stat-card stat-card--pulse">
           <h2>1</h2>
-          <p>problématique d'architecture qui structure toute la lecture</p>
+          <p>cap clair: contribuer vite aujourd'hui, progresser vite demain</p>
         </article>
       </div>
     </section>

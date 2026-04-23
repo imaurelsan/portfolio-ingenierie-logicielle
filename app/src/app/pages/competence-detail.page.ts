@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
@@ -375,6 +376,8 @@ const COMPETENCES: CompetenceDetail[] = [
   selector: 'app-competence-detail-page',
   template: `
     <section class="page-section">
+      <button class="btn btn--ghost btn--back" type="button" (click)="goBack()">Retour à la page précédente</button>
+
       @if (competence; as skill) {
         <header class="section-header">
           <p class="section-header__kicker">{{ skill.order }}</p>
@@ -449,8 +452,13 @@ const COMPETENCES: CompetenceDetail[] = [
 })
 export class CompetenceDetailPage {
   private readonly route = inject(ActivatedRoute);
+    private readonly location = inject(Location);
 
   protected readonly competence = COMPETENCES.find(
     (item) => item.slug === this.route.snapshot.paramMap.get('slug')
   );
+
+    protected goBack(): void {
+      this.location.back();
+    }
 }

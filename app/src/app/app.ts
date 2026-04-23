@@ -34,6 +34,17 @@ export class App {
 
   protected isLightTheme = false;
   protected currentPath = this.normalizePath(this.router.url);
+  protected isQuickNavOpen = false;
+  protected quickNavQuery = '';
+
+  protected readonly quickNavLinks: NavLink[] = [
+    { label: 'Accueil', path: '/' },
+    { label: 'Présentation', path: '/presentation' },
+    { label: 'Compétences', path: '/competences' },
+    { label: 'Réalisations', path: '/realisations' },
+    { label: 'Parcours', path: '/parcours' },
+    { label: 'Contact', path: '/contact' },
+  ];
 
   constructor() {
     this.router.events
@@ -44,7 +55,7 @@ export class App {
 
     const savedTheme = localStorage.getItem('portfolio-theme');
     this.isLightTheme = savedTheme === 'light';
-    document.body.classList.toggle('theme-light', this.isLightTheme);
+    this.applyTheme();
   }
 
   protected get isHomePage(): boolean {
@@ -52,11 +63,24 @@ export class App {
   }
 
   protected get brandImageSrc(): string {
-    return this.isHomePage ? '/favicon.svg' : 'assets/images/photo-identite.jpg';
+    if (!this.isHomePage) {
+      return 'assets/images/photo-identite.jpg';
+    }
+
+    return this.isLightTheme ? '/favicon-noir.svg' : '/favicon.svg';
   }
 
   protected get brandImageAlt(): string {
     return this.isHomePage ? 'Symbole du site' : "Photo d'Aurel YAHOUEDEOU";
+  }
+
+  protected get quickNavResults(): NavLink[] {
+    const normalized = this.quickNavQuery.trim().toLowerCase();
+    if (!normalized) {
+      return this.quickNavLinks;
+    }
+
+    return this.quickNavLinks.filter((link) => link.label.toLowerCase().includes(normalized));
   }
 
   protected toggleMobileNav(): void {
@@ -67,10 +91,38 @@ export class App {
     this.isMobileNavOpen = false;
   }
 
+  protected openQuickNav(): void {
+    this.isQuickNavOpen = true;
+  }
+
+  protected closeQuickNav(): void {
+    this.isQuickNavOpen = false;
+    this.quickNavQuery = '';
+  }
+
+  protected onQuickNavInput(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    this.quickNavQuery = input.value;
+  }
+
+  protected onQuickNavSelect(): void {
+    this.closeQuickNav();
+    this.closeMobileNav();
+  }
+
   protected toggleTheme(): void {
     this.isLightTheme = !this.isLightTheme;
-    document.body.classList.toggle('theme-light', this.isLightTheme);
+    this.applyTheme();
     localStorage.setItem('portfolio-theme', this.isLightTheme ? 'light' : 'dark');
+  }
+
+  private applyTheme(): void {
+    document.body.classList.toggle('theme-light', this.isLightTheme);
+    const iconHref = this.isLightTheme ? '/favicon-noir.svg' : '/favicon.svg';
+    const iconLinks = document.querySelectorAll<HTMLLinkElement>('link[rel="icon"], link[rel="shortcut icon"]');
+    iconLinks.forEach((link) => {
+      link.href = iconHref;
+    });
   }
 
   private normalizePath(url: string): string {

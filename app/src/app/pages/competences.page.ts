@@ -9,6 +9,8 @@ type Skill = {
   progress: number;
 };
 
+type SkillFilter = 'Tous' | 'Technique' | 'Transversal';
+
 @Component({
   selector: 'app-competences-page',
   template: `
@@ -23,8 +25,21 @@ type Skill = {
         mes axes de progression et leur lien avec mes réalisations.
       </p>
 
+      <div class="segment-filter" role="group" aria-label="Filtrer les compétences">
+        @for (item of filters; track item) {
+          <button
+            type="button"
+            class="segment-filter__item"
+            [class.segment-filter__item--active]="item === selectedFilter"
+            (click)="setFilter(item)"
+          >
+            {{ item }}
+          </button>
+        }
+      </div>
+
       <div class="cards-grid cards-grid--skills">
-        @for (skill of skills; track skill.title) {
+        @for (skill of filteredSkills; track skill.title) {
           <article class="card">
             <p class="chip">{{ skill.domain }}</p>
             <h2>{{ skill.title }}</h2>
@@ -41,6 +56,21 @@ type Skill = {
   `,
 })
 export class CompetencesPage {
+  protected readonly filters: SkillFilter[] = ['Tous', 'Technique', 'Transversal'];
+  protected selectedFilter: SkillFilter = 'Tous';
+
+  protected get filteredSkills(): Skill[] {
+    if (this.selectedFilter === 'Tous') {
+      return this.skills;
+    }
+
+    return this.skills.filter((skill) => skill.domain === this.selectedFilter);
+  }
+
+  protected setFilter(filter: SkillFilter): void {
+    this.selectedFilter = filter;
+  }
+
   // Ici je garde les competences dans un tableau clair pour pouvoir les brancher facilement sur l'API plus tard.
   protected readonly skills: Skill[] = [
     {

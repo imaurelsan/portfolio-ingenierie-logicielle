@@ -83,11 +83,11 @@ a {
 .page-section {
 	width: min(1120px, 100%);
 	margin: 0 auto;
-	padding: 2rem 0.45rem;
+	padding: 2.8rem 0.45rem;
 }
 
 .page-section--home {
-	padding-top: 0.7rem;
+	padding-top: 1.2rem;
 }
 
 .section-header {
@@ -140,8 +140,8 @@ a {
 .two-columns {
 	display: grid;
 	grid-template-columns: repeat(2, minmax(0, 1fr));
-	gap: 1.2rem;
-	margin-top: 1.2rem;
+	gap: 1.45rem;
+	margin-top: 1.45rem;
 }
 
 .panel,
@@ -159,7 +159,7 @@ a {
 .card,
 .contact-card,
 .timeline__item {
-	padding: 1.25rem;
+	padding: 1.45rem;
 }
 
 .panel h2,
@@ -172,7 +172,7 @@ a {
 .cards-grid {
 	display: grid;
 	grid-template-columns: repeat(2, minmax(0, 1fr));
-	gap: 1.2rem;
+	gap: 1.45rem;
 }
 
 .cards-grid--skills {
@@ -221,10 +221,30 @@ a {
 }
 
 .card-meta-list {
-	margin: 0.4rem 0 0;
-	padding-left: 1rem;
+	margin: 0.65rem 0 0;
+	padding: 0;
+	list-style: none;
 	display: grid;
-	gap: 0.3rem;
+	gap: 0.5rem;
+}
+
+.card-meta-list li {
+	display: grid;
+	grid-template-columns: 14px 1fr;
+	gap: 0.45rem;
+	align-items: center;
+}
+
+.card-meta-list li::before {
+	content: '';
+	width: 9px;
+	height: 9px;
+	border-radius: 999px;
+	background: color-mix(in srgb, var(--c-accent) 76%, #9ce3d8 24%);
+}
+
+.card-meta-list--pretty {
+	margin-top: 0.8rem;
 }
 
 .card--project a {
@@ -241,7 +261,8 @@ a {
 	color: #9ce3d8;
 	border-radius: 999px;
 	padding: 0.16rem 0.56rem;
-	font-size: 0.74rem;
+	font-size: 0.92rem;
+	font-family: 'Zuume', 'Montserrat', sans-serif;
 	letter-spacing: 0.08em;
 	text-transform: uppercase;
 }
@@ -250,7 +271,7 @@ a {
 	width: min(1120px, 100%);
 	margin: 0 auto;
 	display: grid;
-	gap: 1.25rem;
+	gap: 1.6rem;
 }
 
 .hero__identity {
@@ -263,7 +284,7 @@ a {
 	background: linear-gradient(130deg, rgba(21, 48, 48, 0.9) 0%, rgba(48, 48, 47, 0.92) 62%);
 	border: 1px solid rgba(189, 189, 189, 0.22);
 	border-radius: 20px;
-	padding: 1.4rem;
+	padding: 1.65rem;
 	box-shadow: var(--shadow-soft);
 	animation: fade-up 720ms ease both;
 }
@@ -286,7 +307,7 @@ a {
 
 .hero__portrait-note {
 	margin: 0;
-	font-size: 0.85rem;
+	font-size: 0.9rem;
 	line-height: 1.45;
 	color: #dceceb;
 }
@@ -301,13 +322,13 @@ a {
 
 .hero__text h1 {
 	margin: 0 0 0.4rem;
-	font-size: clamp(2rem, 4.6vw, 3.6rem);
-	max-width: 18ch;
+	font-size: clamp(1.8rem, 4vw, 3rem);
+	max-width: 16ch;
 }
 
 .hero__lede {
 	max-width: 60ch;
-	font-size: 1rem;
+	font-size: 1.02rem;
 	line-height: 1.65;
 }
 
@@ -335,8 +356,8 @@ a {
 .hero__actions {
 	display: flex;
 	flex-wrap: wrap;
-	gap: 0.6rem;
-	margin-top: 0.35rem;
+	gap: 0.72rem;
+	margin-top: 0.5rem;
 }
 
 .hero__signals {
@@ -373,10 +394,14 @@ a {
 .btn {
 	display: inline-flex;
 	align-items: center;
+	justify-content: center;
 	text-decoration: none;
 	border-radius: 999px;
-	font-weight: 700;
-	padding: 0.56rem 0.95rem;
+	font-weight: 600;
+	font-family: 'Zuume', 'Montserrat', sans-serif;
+	font-size: 1rem;
+	letter-spacing: 0.07em;
+	padding: 0.62rem 1rem;
 }
 
 .btn--primary {
@@ -385,8 +410,12 @@ a {
 }
 
 .btn--ghost {
-	color: #ffffff;
+	color: var(--c-text);
 	border: 1px solid rgba(189, 189, 189, 0.5);
+}
+
+.btn--back {
+	margin-bottom: 1.1rem;
 }
 
 .hero__stats {
@@ -424,6 +453,10 @@ a {
 .proof-list {
 	display: grid;
 	gap: 1.15rem;
+}
+
+.proof-list {
+	gap: 1rem;
 }
 
 .focus-grid {
@@ -492,9 +525,9 @@ a {
 .proof-board {
 	display: grid;
 	grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
-	gap: 1.25rem;
+	gap: 1.6rem;
 	align-items: start;
-	padding: 1.25rem;
+	padding: 1.65rem;
 	background: linear-gradient(180deg, rgba(16, 31, 31, 0.78) 0%, rgba(48, 48, 47, 0.9) 100%);
 	border: 1px solid rgba(189, 189, 189, 0.22);
 	border-radius: 20px;
@@ -508,12 +541,17 @@ a {
 
 .proof-item {
 	display: grid;
-	gap: 0.55rem;
-	padding: 1.15rem;
+	gap: 0.75rem;
+	padding: 1.35rem;
 	text-decoration: none;
 	background: rgba(12, 24, 24, 0.52);
 	border: 1px solid rgba(189, 189, 189, 0.18);
 	border-radius: 16px;
+}
+
+.metric-chip {
+	margin-top: 1.05rem;
+	margin-bottom: 1.05rem;
 }
 
 .proof-item__tag {
@@ -608,6 +646,32 @@ a {
 	margin: 0;
 	font-size: clamp(1.05rem, 2vw, 1.6rem);
 }
+
+.segment-filter {
+	display: inline-flex;
+	flex-wrap: wrap;
+	gap: 0.5rem;
+	margin: 0.1rem 0 1.15rem;
+}
+
+.segment-filter__item {
+	border: 1px solid color-mix(in srgb, var(--c-muted) 46%, transparent);
+	background: color-mix(in srgb, var(--c-surface) 88%, transparent);
+	color: var(--c-text);
+	padding: 0.42rem 0.82rem;
+	border-radius: 999px;
+	font-family: 'Zuume', 'Montserrat', sans-serif;
+	font-size: 0.95rem;
+	letter-spacing: 0.08em;
+	cursor: pointer;
+}
+
+.segment-filter__item--active {
+	background: color-mix(in srgb, var(--c-accent) 82%, transparent);
+	color: #102d2c;
+	border-color: color-mix(in srgb, var(--c-accent) 72%, transparent);
+}
+
 .journey-list {
 	margin: 0;
 	padding: 0;
@@ -622,7 +686,19 @@ a {
 	border: 1px solid rgba(189, 189, 189, 0.2);
 	background: rgba(8, 22, 22, 0.38);
 	display: grid;
-	gap: 0.85rem;
+	grid-template-columns: 210px 1fr;
+	gap: 1.15rem;
+}
+
+.journey-item__logo {
+	display: grid;
+	align-content: start;
+	gap: 0.75rem;
+}
+
+.journey-item__content {
+	display: grid;
+	gap: 0.8rem;
 }
 
 .journey-item__summary {
@@ -652,15 +728,16 @@ a {
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
-	width: fit-content;
-	padding: 0.45rem 0.6rem;
+	width: 100%;
+	min-height: 126px;
+	padding: 0.9rem;
 	border-radius: 12px;
 	background: #ffffff;
 	border: 1px solid rgba(0, 0, 0, 0.08);
 }
 
 .logo-chip img {
-	height: 40px;
+	height: 76px;
 	width: auto;
 	object-fit: contain;
 }
@@ -702,21 +779,93 @@ a {
 	text-decoration: none;
 }
 
+.logo-marquee {
+	overflow: hidden;
+	border-radius: 12px;
+	border: 1px solid rgba(189, 189, 189, 0.2);
+	background: color-mix(in srgb, var(--c-surface) 88%, transparent);
+	padding: 0.8rem 0;
+}
+
+.logo-marquee__track {
+	display: flex;
+	align-items: center;
+	gap: 1.3rem;
+	width: fit-content;
+	animation: marquee 26s linear infinite;
+}
+
+.logo-marquee__item {
+	flex: 0 0 auto;
+	width: 160px;
+	height: 82px;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 10px;
+	background: #ffffff;
+	border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.logo-marquee__item img {
+	max-width: 126px;
+	max-height: 58px;
+	object-fit: contain;
+}
+
 .metrics-grid .metric-value {
 	font-size: 1.05rem;
 	font-weight: 700;
 	color: #9ce3d8;
 }
 
-.contact-card ul {
-	margin: 0.85rem 0 0;
-	padding-left: 1rem;
+.contact-links {
 	display: grid;
 	gap: 0.55rem;
 }
 
+.contact-link {
+	display: grid;
+	grid-template-columns: 22px 1fr;
+	gap: 0.65rem;
+	align-items: center;
+	padding: 0.6rem 0.7rem;
+	text-decoration: none;
+	border-radius: 12px;
+	border: 1px solid color-mix(in srgb, var(--c-muted) 36%, transparent);
+	background: color-mix(in srgb, var(--c-surface-soft) 86%, transparent);
+	color: var(--c-text);
+}
+
+.contact-link:hover {
+	border-color: color-mix(in srgb, var(--c-accent) 68%, transparent);
+	background: color-mix(in srgb, var(--c-accent) 22%, transparent);
+}
+
+.contact-link svg {
+	width: 18px;
+	height: 18px;
+	fill: color-mix(in srgb, var(--c-accent) 88%, #9ce3d8 12%);
+}
+
+.contact-link span {
+	display: grid;
+	gap: 0.08rem;
+}
+
+.contact-link strong {
+	font-size: 0.92rem;
+}
+
+.contact-link small {
+	font-size: 0.82rem;
+	color: var(--c-muted);
+}
+
 .contact-actions {
 	margin-top: 1rem;
+	display: grid;
+	gap: 0.55rem;
 }
 
 .contact-form {
@@ -747,6 +896,12 @@ a {
 	grid-template-columns: 210px 1fr;
 	gap: 1.2rem;
 	align-items: center;
+}
+
+.presentation-stack {
+	display: grid;
+	gap: 1.25rem;
+	margin-bottom: 0.2rem;
 }
 
 .presentation-hero img {
@@ -780,6 +935,28 @@ a {
 	font-size: clamp(1.2rem, 2.4vw, 1.7rem);
 }
 
+.icon-list {
+	margin: 0.85rem 0 0;
+	padding: 0;
+	list-style: none;
+	display: grid;
+	gap: 0.65rem;
+}
+
+.icon-list li {
+	display: grid;
+	grid-template-columns: 20px 1fr;
+	gap: 0.6rem;
+	align-items: start;
+}
+
+.icon-list svg {
+	width: 18px;
+	height: 18px;
+	fill: color-mix(in srgb, var(--c-accent) 84%, #9ce3d8 16%);
+	transform: translateY(0.15rem);
+}
+
 .project-visual {
 	min-height: 128px;
 	padding: 0.75rem;
@@ -808,6 +985,16 @@ a {
 	color: color-mix(in srgb, var(--c-text) 82%, var(--c-accent));
 }
 
+@keyframes marquee {
+	from {
+		transform: translateX(0);
+	}
+
+	to {
+		transform: translateX(-50%);
+	}
+}
+
 @media (max-width: 980px) {
 	.cards-grid--skills {
 		grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -829,6 +1016,18 @@ a {
 	.entry-grid,
 	.proof-board {
 		grid-template-columns: 1fr;
+	}
+
+	.journey-item {
+		grid-template-columns: 1fr;
+	}
+
+	.logo-chip {
+		min-height: 100px;
+	}
+
+	.logo-chip img {
+		height: 60px;
 	}
 }
 

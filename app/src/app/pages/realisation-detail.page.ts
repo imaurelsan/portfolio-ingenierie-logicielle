@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
@@ -246,6 +247,8 @@ const REALISATIONS: RealisationDetail[] = [
   selector: 'app-realisation-detail-page',
   template: `
     <section class="page-section">
+      <button class="btn btn--ghost btn--back" type="button" (click)="goBack()">Retour à la page précédente</button>
+
       @if (realisation; as project) {
         <header class="section-header">
           <p class="section-header__kicker">{{ project.order }}</p>
@@ -345,8 +348,13 @@ const REALISATIONS: RealisationDetail[] = [
 })
 export class RealisationDetailPage {
   private readonly route = inject(ActivatedRoute);
+  private readonly location = inject(Location);
 
   protected readonly realisation = REALISATIONS.find(
     (item) => item.slug === this.route.snapshot.paramMap.get('slug')
   );
+
+  protected goBack(): void {
+    this.location.back();
+  }
 }

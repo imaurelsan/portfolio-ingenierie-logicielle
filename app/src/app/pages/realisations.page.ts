@@ -27,13 +27,13 @@ type Project = {
               <p>{{ project.visualHint }}</p>
               <span>Zone de capture projet (à remplacer)</span>
             </div>
-            <p class="chip">{{ project.keyMetric }}</p>
+            <p class="chip metric-chip">{{ project.keyMetric }}</p>
             <h2>{{ project.title }}</h2>
             <p class="project-tagline">{{ project.tagline }}</p>
             <p>{{ project.summary }}</p>
             <a class="card-link" [href]="'/realisations/' + project.slug">Voir le détail</a>
             <p class="card-meta-title">Compétences mobilisées</p>
-            <ul class="card-meta-list">
+            <ul class="card-meta-list card-meta-list--pretty">
               @for (skill of project.relatedSkills; track skill.path) {
                 <li>
                   <a [href]="skill.path">{{ skill.title }}</a>
