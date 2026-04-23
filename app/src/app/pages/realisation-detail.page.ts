@@ -93,7 +93,7 @@ const REALISATIONS: RealisationDetail[] = [
     ],
     resultsForMe: [
       'Approfondissement de mon approche de sécurisation des automatismes.',
-      'Meilleure maîtrise des compromis entre performance et sûreté.',
+      'Meilleure compréhension des compromis entre performance et sûreté.',
     ],
     resultsForCompany: [
       'Réduction du volume de fichiers inutiles.',

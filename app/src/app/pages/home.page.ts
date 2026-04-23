@@ -33,7 +33,7 @@ type Proof = {
         </div>
 
         <div class="hero__text">
-          <p class="hero__kicker">Expert en ingénierie logicielle</p>
+          <p class="hero__kicker">Candidat au titre d'Expert en ingénierie logicielle</p>
           <h1>Je transforme des contraintes techniques en solutions web maintenables et utiles.</h1>
           <p class="hero__lede">
             Ce portfolio présente moins un parcours chronologique qu'une méthode de travail: concevoir sobrement,
@@ -169,7 +169,7 @@ export class HomePage {
     },
     {
       title: 'Comparer mes compétences entre elles',
-      description: 'Pour voir rapidement ce que je maîtrise le mieux, ce que je consolide encore et comment cela s’articule.',
+      description: 'Pour voir rapidement les compétences où je suis le plus à l’aise aujourd’hui, celles que je consolide encore et leur articulation.',
       path: '/competences',
       cta: 'Voir la cartographie',
     },

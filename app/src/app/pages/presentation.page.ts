@@ -9,18 +9,38 @@ import { Component } from '@angular/core';
         <h1>Qui je suis et comment je travaille</h1>
       </header>
 
-      <div class="text-block">
+      <div class="panel presentation-hero">
+        <img src="assets/images/photo-identite.jpg" alt="Portrait d'Aurel YAHOUEDEOU" />
+        <div class="text-block">
+          <p>
+            J'ai d'abord validé un Master en Réseaux, Systèmes et Sécurité. Ensuite, j'ai choisi de me reconvertir vers
+            le développement logiciel pour construire des produits plus créatifs, utiles et durables.
+          </p>
+          <p>
+            Aujourd'hui, je combine ce socle avec une pratique concrète du web: front-end moderne, back-end,
+            WordPress multisite et développement de plugins orientés usage.
+          </p>
+          <p>
+            Mon objectif est clair: évoluer sur un rôle fullstack qui relie architecture, expérience utilisateur et
+            qualité de livraison, sans prétendre tout maîtriser d'emblée.
+          </p>
+          <ul class="presentation-chips">
+            <li>Développeur fullstack junior</li>
+            <li>Profil hybride sécurité + produit</li>
+            <li>Curieux IA, design et expériences interactives</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="panel text-block presentation-focus">
+        <h2>Ce que je recherche</h2>
         <p>
-          J'ai d'abord validé un Master en Réseaux, Systèmes et Sécurité. Ensuite, j'ai choisi de me reconvertir vers
-          le développement logiciel pour construire des produits plus créatifs, utiles et durables.
+          Je cherche une équipe où je peux contribuer rapidement sur des sujets concrets, tout en continuant à progresser
+          sur l'architecture, l'industrialisation et la communication technique.
         </p>
         <p>
-          Aujourd'hui, je combine mon socle sécurité/réseau avec une pratique concrète du web : front-end moderne,
-          back-end, API REST, WordPress multisite et conception de plugins orientés métier.
-        </p>
-        <p>
-          J'accorde beaucoup d'importance à l'expérience utilisateur, à l'accessibilité et à la qualité d'exécution.
-          Je travaille en collaboration avec les métiers, et je structure mes livrables pour qu'ils restent maintenables.
+          Je préfère les environnements où l'on valorise la qualité de code, la collaboration et la capacité à transformer
+          des contraintes métier en solutions lisibles.
         </p>
       </div>
 

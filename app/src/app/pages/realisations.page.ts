@@ -3,7 +3,10 @@ import { Component } from '@angular/core';
 type Project = {
   slug: string;
   title: string;
+  tagline: string;
   summary: string;
+  keyMetric: string;
+  visualHint: string;
   repository: string;
   relatedSkills: Array<{ title: string; path: string }>;
 };
@@ -20,7 +23,13 @@ type Project = {
       <div class="cards-grid">
         @for (project of projects; track project.title) {
           <article class="card card--project" [id]="project.slug">
+            <div class="project-visual">
+              <p>{{ project.visualHint }}</p>
+              <span>Zone de capture projet (à remplacer)</span>
+            </div>
+            <p class="chip">{{ project.keyMetric }}</p>
             <h2>{{ project.title }}</h2>
+            <p class="project-tagline">{{ project.tagline }}</p>
             <p>{{ project.summary }}</p>
             <a class="card-link" [href]="'/realisations/' + project.slug">Voir le détail</a>
             <p class="card-meta-title">Compétences mobilisées</p>
@@ -44,7 +53,10 @@ export class RealisationsPage {
     {
       slug: 'project-360-content-bridge',
       title: '360-content-bridge',
+      tagline: 'Rendre les transferts de contenu fiables et plus rapides à exploiter.',
       summary: "Plugin d'import/export WordPress conçu pour accélérer la maintenance de contenus à l'échelle.",
+      keyMetric: '-40% temps opérationnel estimé',
+      visualHint: 'Flux import/export multisite',
       repository: 'https://github.com/imaurelsan/360-content-bridge',
       relatedSkills: [
         {
@@ -64,7 +76,10 @@ export class RealisationsPage {
     {
       slug: 'project-360-media-auto-cleanup',
       title: '360-media-auto-cleanup',
+      tagline: 'Nettoyer sans casser : automatisation prudente des médias orphelins.',
       summary: "Plugin de nettoyage des médias orphelins pour réduire le poids des instances et les coûts de stockage.",
+      keyMetric: '-25% stockage estimé',
+      visualHint: 'Audit et nettoyage médias',
       repository: 'https://github.com/imaurelsan/360-media-auto-cleanup',
       relatedSkills: [
         {
@@ -84,7 +99,10 @@ export class RealisationsPage {
     {
       slug: 'project-360tranquilite',
       title: '360tranquilité',
+      tagline: 'Unifier sécurité, monitoring et exploitation dans un socle modulaire.',
       summary: 'Plugin WordPress open-source de monitoring, sécurité et exploitation opérationnelle.',
+      keyMetric: '+1 socle opérationnel centralisé',
+      visualHint: 'Console de supervision WordPress',
       repository: 'https://github.com/imaurelsan/360tranquilite',
       relatedSkills: [
         {
@@ -104,7 +122,10 @@ export class RealisationsPage {
     {
       slug: 'project-crewai-voyage',
       title: 'crewai-projet-agent-voyage',
+      tagline: 'Transformer une expérimentation IA en parcours lisible pour l’utilisateur.',
       summary: "Agent IA de planification de voyage orienté scénarios et gain de temps utilisateur.",
+      keyMetric: 'Prototype fonctionnel en itérations courtes',
+      visualHint: 'Scénarios de recommandations IA',
       repository: 'https://github.com/imaurelsan/crewai-projet-agent-voyage',
       relatedSkills: [
         {
@@ -124,7 +145,10 @@ export class RealisationsPage {
     {
       slug: 'project-v0-vastrion-mobile-prototype',
       title: 'v0-vastrion-mobile-prototype',
+      tagline: 'Poser une base produit claire avant industrialisation.',
       summary: 'Prototype d’une marketplace B2B/B2C de services, actuellement en développement.',
+      keyMetric: 'MVP cadré en 4 parcours prioritaires',
+      visualHint: 'Wireframes et parcours mobile',
       repository: 'https://github.com/imaurelsan/v0-vastrion-mobile-prototype',
       relatedSkills: [
         {

@@ -42,7 +42,7 @@ const COMPETENCES: CompetenceDetail[] = [
       },
     ],
     selfReview: [
-      'Niveau actuel : avancé.',
+      'Niveau actuel : intermédiaire avancé, en consolidation.',
       'Place dans mon profil : compétence socle, prioritaire pour construire des solutions économiquement viables.',
       'Vitesse d’acquisition : rapide grâce à la répétition sur plusieurs projets en environnement réel.',
       'Recul : je recommande de documenter très tôt les exceptions de périmètre pour éviter la complexité cachée.',
@@ -77,7 +77,7 @@ const COMPETENCES: CompetenceDetail[] = [
       },
     ],
     selfReview: [
-      'Niveau actuel : avancé.',
+      'Niveau actuel : intermédiaire, en consolidation.',
       'Place dans mon profil : compétence centrale de production et de différenciation.',
       'Vitesse d’acquisition : soutenue via des projets concrets livrés en entreprise.',
       'Recul : un plugin utile n’est pas seulement fonctionnel, il doit rester explicable et maintenable dans la durée.',
@@ -113,7 +113,7 @@ const COMPETENCES: CompetenceDetail[] = [
       },
     ],
     selfReview: [
-      'Niveau actuel : intermédiaire avancé.',
+      'Niveau actuel : débutant, en progression active.',
       'Place dans mon profil : compétence structurante pour l’évolutivité des produits.',
       'Vitesse d’acquisition : progressive, renforcée par des cas d’intégration réels.',
       'Recul : la qualité d’une API se joue autant dans les erreurs et cas limites que dans le chemin nominal.',
@@ -148,7 +148,7 @@ const COMPETENCES: CompetenceDetail[] = [
       },
     ],
     selfReview: [
-      'Niveau actuel : intermédiaire avancé.',
+      'Niveau actuel : intermédiaire, avec progression régulière.',
       'Place dans mon profil : compétence clé pour la qualité d’usage.',
       'Vitesse d’acquisition : bonne, grâce au cycle audit-correction-mesure.',
       'Recul : il faut éviter les optimisations isolées et privilégier une stratégie continue.',
@@ -183,7 +183,7 @@ const COMPETENCES: CompetenceDetail[] = [
       },
     ],
     selfReview: [
-      'Niveau actuel : intermédiaire avancé.',
+      'Niveau actuel : intermédiaire, avec progression régulière.',
       'Place dans mon profil : compétence historique et différenciante.',
       'Vitesse d’acquisition : forte, grâce à mon parcours initial en sécurité puis à l’application web.',
       'Recul : la sécurité utile est celle qui reste activable et comprise par les équipes.',
@@ -215,7 +215,7 @@ const COMPETENCES: CompetenceDetail[] = [
       },
     ],
     selfReview: [
-      'Niveau actuel : intermédiaire avancé.',
+      'Niveau actuel : intermédiaire, avec progression régulière.',
       'Place dans mon profil : compétence transverse essentielle pour livrer dans les temps.',
       'Vitesse d’acquisition : régulière, principalement par la pratique terrain.',
       'Recul : la priorisation doit rester transparente pour éviter les incompréhensions côté métier.',
@@ -250,7 +250,7 @@ const COMPETENCES: CompetenceDetail[] = [
       },
     ],
     selfReview: [
-      'Niveau actuel : intermédiaire avancé.',
+      'Niveau actuel : intermédiaire, avec progression régulière.',
       'Place dans mon profil : compétence clé pour la coordination et la confiance.',
       'Vitesse d’acquisition : progressive, renforcée par des contextes multi-acteurs.',
       'Recul : mieux communiquer, c’est aussi mieux cadrer la décision et ses impacts.',
@@ -285,7 +285,7 @@ const COMPETENCES: CompetenceDetail[] = [
       },
     ],
     selfReview: [
-      'Niveau actuel : intermédiaire avancé.',
+      'Niveau actuel : intermédiaire, avec progression régulière.',
       'Place dans mon profil : compétence de différenciation produit et expérience utilisateur.',
       'Vitesse d’acquisition : régulière grâce au travail conjoint avec des designers.',
       'Recul : une bonne interface est d’abord une interface compréhensible et actionnable.',
@@ -320,7 +320,7 @@ const COMPETENCES: CompetenceDetail[] = [
       },
     ],
     selfReview: [
-      'Niveau actuel : intermédiaire avancé.',
+      'Niveau actuel : débutant, en progression active.',
       'Place dans mon profil : compétence accélératrice de qualité et de productivité.',
       'Vitesse d’acquisition : rapide sur les derniers mois grâce à la pratique CI/CD.',
       'Recul : l’automatisation utile est celle qui reste compréhensible, diagnostiquable et maintenable.',
@@ -355,7 +355,7 @@ const COMPETENCES: CompetenceDetail[] = [
       },
     ],
     selfReview: [
-      'Niveau actuel : intermédiaire avancé.',
+      'Niveau actuel : intermédiaire, avec progression régulière.',
       'Place dans mon profil : compétence de pilotage stratégique des choix techniques.',
       'Vitesse d’acquisition : progressive, enrichie par des contextes variés.',
       'Recul : décider vite est utile, mais décider juste reste la priorité.',
