@@ -50,7 +50,7 @@ export class CompetencesPage {
     { slug: 'gestion-projet-agile', title: 'Gestion de projet agile', domain: 'Transversal', level: 'Intermédiaire +' },
     { slug: 'communication-technique', title: 'Communication technique', domain: 'Transversal', level: 'Intermédiaire +' },
     { slug: 'ux-ui-orientee-usage', title: 'UX/UI orientée usage', domain: 'Transversal', level: 'Intermédiaire +' },
-    { slug: 'automatisation-amelioration-continue', title: 'Automatisation et productivité', domain: 'Transversal', level: 'Intermédiaire +' },
+    { slug: 'automatisation-amelioration-continue', title: 'Automatisation et amélioration continue', domain: 'Transversal', level: 'Intermédiaire +' },
     { slug: 'analyse-critique-decision-technique', title: 'Analyse critique et prise de décision', domain: 'Transversal', level: 'Intermédiaire +' },
   ];
 }

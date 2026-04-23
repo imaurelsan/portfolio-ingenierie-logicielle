@@ -42,6 +42,24 @@ import { Component } from '@angular/core';
             <li>Construire une spécialisation IA appliquée au développement</li>
           </ul>
         </article>
+
+        <article class="panel">
+          <h2>Mes principales qualités humaines</h2>
+          <ul>
+            <li>Discipline et régularité dans l’exécution</li>
+            <li>Capacité d’adaptation dans des contextes changeants</li>
+            <li>Sens du collectif et de la communication constructive</li>
+          </ul>
+        </article>
+
+        <article class="panel">
+          <h2>Mes centres d’intérêt</h2>
+          <ul>
+            <li>R&D : IA appliquée, optimisation web, sécurité</li>
+            <li>Création : design visuel, UI/UX, photographie</li>
+            <li>Équilibre personnel : sport, lecture, apprentissage continu</li>
+          </ul>
+        </article>
       </div>
     </section>
   `,

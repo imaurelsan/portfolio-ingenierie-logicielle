@@ -1,21 +1,12 @@
 import { Component, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-type SectionCard = {
+type Anecdote = {
   title: string;
-  detail: string;
-};
-
-type EvolutionItem = {
-  horizon: string;
-  target: string;
-  action: string;
-};
-
-type LinkedProject = {
-  slug: string;
-  title: string;
-  why: string;
+  situation: string;
+  result: string;
+  valueAdded: string;
+  linkedProject: { title: string; path: string };
 };
 
 type CompetenceDetail = {
@@ -23,11 +14,10 @@ type CompetenceDetail = {
   order: string;
   title: string;
   definition: string[];
-  evidences: SectionCard[];
-  results: SectionCard[];
+  anecdotes: Anecdote[];
   selfReview: string[];
-  evolution: EvolutionItem[];
-  projects: LinkedProject[];
+  evolution: string[];
+  projects: Array<{ title: string; path: string }>;
 };
 
 const COMPETENCES: CompetenceDetail[] = [
@@ -36,28 +26,34 @@ const COMPETENCES: CompetenceDetail[] = [
     order: 'Compétence détaillée 1/10',
     title: 'Architecture web mutualisée (WordPress multisite)',
     definition: [
-      'Je conçois une architecture où plusieurs sites partagent un socle technique commun avec une gouvernance claire.',
-      "Dans mon contexte, ce choix répond à un besoin multi-projets : livrer plus vite sans augmenter la charge de maintenance.",
+      'Je définis cette compétence comme la capacité à concevoir un socle unique pour plusieurs sites, avec des règles communes et des variations contrôlées.',
+      'Dans un contexte où les coûts de maintenance et la cohérence technique deviennent critiques, l’architecture mutualisée reste une réponse actuelle et durable.',
     ],
-    evidences: [
-      { title: 'Socle multisite', detail: 'Mise en place d’un cadre mutualisé pour standardiser les interventions.' },
-      { title: 'Composants réutilisables', detail: 'Plugins et structures activables selon les besoins de chaque site.' },
-    ],
-    results: [
-      { title: 'Maintenance', detail: 'Interventions transverses simplifiées sur plusieurs projets.' },
-      { title: 'Cohérence', detail: 'Standards techniques plus stables entre les sites.' },
+    anecdotes: [
+      {
+        title: 'Mise en place d’un socle multisite en entreprise',
+        situation:
+          'Avant l’architecture multisite, chaque site fonctionnait avec ses propres plugins et configurations, ce qui rendait les mises à jour longues et risquées.',
+        result:
+          'La centralisation du thème, des plugins et de la structure a réduit les opérations répétitives et amélioré la cohérence entre sites.',
+        valueAdded:
+          'J’ai contribué à rendre la maintenance plus lisible et plus contrôlable, tout en identifiant les limites quand certains besoins deviennent trop spécifiques.',
+        linkedProject: { title: '360-content-bridge', path: '/realisations/project-360-content-bridge' },
+      },
     ],
     selfReview: [
-      'Mon niveau est avancé sur la structuration multisite et la réutilisabilité.',
-      'Je dois encore automatiser davantage les contrôles avant production.',
+      'Niveau actuel : avancé.',
+      'Place dans mon profil : compétence socle, prioritaire pour construire des solutions économiquement viables.',
+      'Vitesse d’acquisition : rapide grâce à la répétition sur plusieurs projets en environnement réel.',
+      'Recul : je recommande de documenter très tôt les exceptions de périmètre pour éviter la complexité cachée.',
     ],
     evolution: [
-      { horizon: 'Court terme (3 mois)', target: 'Renforcer la validation en CI/CD', action: 'Ajouter des contrôles qualité et sécurité systématiques.' },
-      { horizon: 'Moyen terme (6-12 mois)', target: 'Améliorer la résilience', action: 'Mettre en place rollback versionné et supervision centralisée.' },
+      'Objectif moyen terme : renforcer encore la résilience et la supervision du multisite.',
+      'Autoformation prévue : approfondir les patterns d’architecture évolutive et de gouvernance technique.',
     ],
     projects: [
-      { slug: 'project-360-content-bridge', title: '360-content-bridge', why: 'Cas concret de maintenance mutualisée.' },
-      { slug: 'project-360tranquilite', title: '360tranquilité', why: 'Renforcement de l’exploitation dans la durée.' },
+      { title: '360-content-bridge', path: '/realisations/project-360-content-bridge' },
+      { title: '360tranquilité', path: '/realisations/project-360tranquilite' },
     ],
   },
   {
@@ -65,29 +61,35 @@ const COMPETENCES: CompetenceDetail[] = [
     order: 'Compétence détaillée 2/10',
     title: 'Développement de plugins WordPress',
     definition: [
-      'Je développe des plugins modulaires pour isoler la logique métier hors thème.',
-      'Cette approche permet de réutiliser des fonctionnalités entre plusieurs projets.',
+      'Je définis cette compétence comme la capacité à encapsuler une logique métier dans un plugin modulaire, maintenable et versionnable.',
+      'Avec la montée des besoins d’industrialisation WordPress, cette compétence reste stratégique pour limiter la dépendance aux extensions externes.',
     ],
-    evidences: [
-      { title: '360-content-bridge', detail: 'Plugin d’import/export orienté fiabilité opérationnelle.' },
-      { title: '360-media-auto-cleanup', detail: 'Plugin d’automatisation de maintenance médias.' },
-    ],
-    results: [
-      { title: 'Réutilisation', detail: 'Développement accéléré grâce à des briques communes.' },
-      { title: 'Maintenabilité', detail: 'Évolutions isolées sans impacter toute l’application.' },
+    anecdotes: [
+      {
+        title: 'Conception d’un plugin de monitoring et sécurité',
+        situation:
+          'Le besoin était de centraliser plusieurs fonctionnalités opérationnelles dans un seul plugin au lieu d’empiler de nombreuses extensions tierces.',
+        result:
+          'Le plugin modulaire a permis de gagner du temps sur les opérations récurrentes et de mieux maîtriser les évolutions futures.',
+        valueAdded:
+          'J’ai structuré le code pour permettre l’ajout progressif de modules et j’ai renforcé ma discipline sur la documentation et le versionning.',
+        linkedProject: { title: '360tranquilité', path: '/realisations/project-360tranquilite' },
+      },
     ],
     selfReview: [
-      'Je suis autonome sur la structure d’un plugin et son cycle de vie.',
-      'Je veux renforcer la couverture de tests et la documentation développeur.',
+      'Niveau actuel : avancé.',
+      'Place dans mon profil : compétence centrale de production et de différenciation.',
+      'Vitesse d’acquisition : soutenue via des projets concrets livrés en entreprise.',
+      'Recul : un plugin utile n’est pas seulement fonctionnel, il doit rester explicable et maintenable dans la durée.',
     ],
     evolution: [
-      { horizon: 'Court terme (3 mois)', target: 'Améliorer la qualité logicielle', action: 'Ajouter des tests sur les cas critiques.' },
-      { horizon: 'Moyen terme (6-12 mois)', target: 'Standardiser la maintenance', action: 'Documenter un template technique commun.' },
+      'Objectif moyen terme : augmenter la robustesse des modules et la couverture de tests.',
+      'Formation prévue : consolider les pratiques de qualité logicielle appliquées à WordPress.',
     ],
     projects: [
-      { slug: 'project-360-content-bridge', title: '360-content-bridge', why: 'Exemple direct de plugin métier.' },
-      { slug: 'project-360-media-auto-cleanup', title: '360-media-auto-cleanup', why: 'Automatisation orientée exploitation.' },
-      { slug: 'project-360tranquilite', title: '360tranquilité', why: 'Plugin multi-modules de supervision.' },
+      { title: '360-content-bridge', path: '/realisations/project-360-content-bridge' },
+      { title: '360-media-auto-cleanup', path: '/realisations/project-360-media-auto-cleanup' },
+      { title: '360tranquilité', path: '/realisations/project-360tranquilite' },
     ],
   },
   {
@@ -95,28 +97,34 @@ const COMPETENCES: CompetenceDetail[] = [
     order: 'Compétence détaillée 3/10',
     title: 'Intégrations API REST et interconnexion services',
     definition: [
-      'Je structure les échanges de données entre le front et les services back.',
-      'Je m’appuie sur des contrats de données clairs pour limiter le couplage.',
+      'Je définis cette compétence comme la capacité à relier des systèmes via des contrats de données fiables, sans exposer inutilement la logique métier.',
+      'Dans des environnements hybrides, l’interconnexion de services est aujourd’hui un levier clé d’automatisation.',
     ],
-    evidences: [
-      { title: 'Architecture front/back', detail: 'Préparation d’un flux Angular vers WordPress via API REST.' },
-      { title: 'Normalisation des données', detail: 'Définition de champs exploitables par plusieurs vues.' },
-    ],
-    results: [
-      { title: 'Évolutivité', detail: 'Front et back peuvent évoluer plus indépendamment.' },
-      { title: 'Interopérabilité', detail: 'Réutilisation des données sur différents écrans.' },
+    anecdotes: [
+      {
+        title: 'Connexion de WordPress à des services externes',
+        situation:
+          'Plusieurs tâches étaient faites manuellement, avec des risques d’erreurs et une faible traçabilité.',
+        result:
+          'La mise en place d’appels API sécurisés et de traitements serveur a automatisé les échanges de données et amélioré la fiabilité globale.',
+        valueAdded:
+          'J’ai pris en charge le cadrage des formats, la gestion des erreurs et la protection des logiques sensibles.',
+        linkedProject: { title: '360-content-bridge', path: '/realisations/project-360-content-bridge' },
+      },
     ],
     selfReview: [
-      'Je maîtrise les intégrations REST classiques en contexte applicatif.',
-      'Je dois progresser sur le versionning d’API et la traçabilité des erreurs.',
+      'Niveau actuel : intermédiaire avancé.',
+      'Place dans mon profil : compétence structurante pour l’évolutivité des produits.',
+      'Vitesse d’acquisition : progressive, renforcée par des cas d’intégration réels.',
+      'Recul : la qualité d’une API se joue autant dans les erreurs et cas limites que dans le chemin nominal.',
     ],
     evolution: [
-      { horizon: 'Court terme (3 mois)', target: 'Renforcer la robustesse des appels', action: 'Ajouter une gestion d’erreurs et de repli plus explicite.' },
-      { horizon: 'Moyen terme (6-12 mois)', target: 'Stabiliser les contrats', action: 'Documenter les endpoints et conventions de version.' },
+      'Objectif moyen terme : formaliser davantage les contrats et conventions de version.',
+      'Autoformation prévue : approfondissement sur la résilience des intégrations et l’observabilité.',
     ],
     projects: [
-      { slug: 'project-360-content-bridge', title: '360-content-bridge', why: 'Échanges structurés entre composants.' },
-      { slug: 'project-v0-vastrion-mobile-prototype', title: 'v0-vastrion-mobile-prototype', why: 'Interopérabilité attendue sur une marketplace.' },
+      { title: '360-content-bridge', path: '/realisations/project-360-content-bridge' },
+      { title: 'v0-vastrion-mobile-prototype', path: '/realisations/project-v0-vastrion-mobile-prototype' },
     ],
   },
   {
@@ -124,28 +132,34 @@ const COMPETENCES: CompetenceDetail[] = [
     order: 'Compétence détaillée 4/10',
     title: 'Performance web et optimisation front',
     definition: [
-      'J’optimise le front pour améliorer le chargement et la fluidité.',
-      'La performance est traitée comme un critère produit, pas uniquement technique.',
+      'Je définis cette compétence comme l’ensemble des actions qui réduisent le temps de chargement et améliorent la perception utilisateur.',
+      'La performance est une exigence actuelle, à la fois UX, SEO et économique.',
     ],
-    evidences: [
-      { title: 'Build production', detail: 'Pipeline Angular orientée bundle optimisé.' },
-      { title: 'Composants homogènes', detail: 'Réutilisation de structures UI pour limiter la complexité.' },
-    ],
-    results: [
-      { title: 'Expérience utilisateur', detail: 'Navigation plus fluide sur desktop et mobile.' },
-      { title: 'Stabilité de livraison', detail: 'Optimisations déployées de façon reproductible.' },
+    anecdotes: [
+      {
+        title: 'Optimisation de sites et suivi Lighthouse',
+        situation:
+          'Plusieurs sites présentaient un chargement ralenti par des médias lourds et des scripts peu utiles.',
+        result:
+          'Les optimisations d’images, de scripts et de chargement ont amélioré la vitesse perçue et les scores de performance.',
+        valueAdded:
+          'J’ai traité la performance comme un ensemble cohérent de petites décisions plutôt qu’un correctif ponctuel.',
+        linkedProject: { title: '360-media-auto-cleanup', path: '/realisations/project-360-media-auto-cleanup' },
+      },
     ],
     selfReview: [
-      'Je suis opérationnel sur les optimisations front les plus utiles en production.',
-      'Je dois systématiser les seuils de performance dans la CI.',
+      'Niveau actuel : intermédiaire avancé.',
+      'Place dans mon profil : compétence clé pour la qualité d’usage.',
+      'Vitesse d’acquisition : bonne, grâce au cycle audit-correction-mesure.',
+      'Recul : il faut éviter les optimisations isolées et privilégier une stratégie continue.',
     ],
     evolution: [
-      { horizon: 'Court terme (3 mois)', target: 'Mesurer régulièrement les performances', action: 'Ajouter une checklist Lighthouse avant release.' },
-      { horizon: 'Moyen terme (6-12 mois)', target: 'Réduire les régressions', action: 'Introduire des garde-fous automatiques dans la pipeline.' },
+      'Objectif moyen terme : systématiser des seuils de performance dans la CI/CD.',
+      'Autoformation prévue : approfondir Core Web Vitals et budgets de performance.',
     ],
     projects: [
-      { slug: 'project-360-media-auto-cleanup', title: '360-media-auto-cleanup', why: 'Réduction du poids inutile côté médias.' },
-      { slug: 'project-v0-vastrion-mobile-prototype', title: 'v0-vastrion-mobile-prototype', why: 'Prototype mobile orienté rapidité.' },
+      { title: '360-media-auto-cleanup', path: '/realisations/project-360-media-auto-cleanup' },
+      { title: 'v0-vastrion-mobile-prototype', path: '/realisations/project-v0-vastrion-mobile-prototype' },
     ],
   },
   {
@@ -153,56 +167,66 @@ const COMPETENCES: CompetenceDetail[] = [
     order: 'Compétence détaillée 5/10',
     title: 'Sécurité applicative et durcissement WordPress',
     definition: [
-      'Je mets en place des mécanismes de protection, détection et contrôle adaptés au contexte.',
-      'Je privilégie une approche progressive et réversible en production.',
+      'Je définis cette compétence comme la capacité à réduire l’exposition au risque applicatif par des mécanismes simples, utiles et maintenables.',
+      'Dans un contexte d’attaques fréquentes sur les CMS, le durcissement WordPress reste un enjeu immédiat.',
     ],
-    evidences: [
-      { title: '360tranquilité', detail: 'Modules de sécurité et supervision orientés exploitation.' },
-      { title: 'Hygiène de release', detail: 'Contrôles de base intégrés au cycle de livraison.' },
-    ],
-    results: [
-      { title: 'Réduction des risques', detail: 'Moins d’exposition aux erreurs de configuration.' },
-      { title: 'Réactivité', detail: 'Meilleure capacité de diagnostic en cas d’incident.' },
+    anecdotes: [
+      {
+        title: 'Durcissement progressif de sites WordPress',
+        situation:
+          'Des points faibles revenaient régulièrement : accès admin exposé, extensions peu fiables, contrôles insuffisants.',
+        result:
+          'La mise en place de limitations d’accès, sécurisation d’endpoints et surveillance ciblée a renforcé la stabilité globale.',
+        valueAdded:
+          'J’ai combiné mon socle réseau/sécurité avec des fonctionnalités plugin orientées exploitation réelle.',
+        linkedProject: { title: '360tranquilité', path: '/realisations/project-360tranquilite' },
+      },
     ],
     selfReview: [
-      'Je maîtrise les fondamentaux de sécurité applicative sur WordPress.',
-      'Je veux renforcer la formalisation des scénarios de réponse incident.',
+      'Niveau actuel : intermédiaire avancé.',
+      'Place dans mon profil : compétence historique et différenciante.',
+      'Vitesse d’acquisition : forte, grâce à mon parcours initial en sécurité puis à l’application web.',
+      'Recul : la sécurité utile est celle qui reste activable et comprise par les équipes.',
     ],
     evolution: [
-      { horizon: 'Court terme (3 mois)', target: 'Mieux standardiser les vérifications', action: 'Définir une checklist sécurité par release.' },
-      { horizon: 'Moyen terme (6-12 mois)', target: 'Monter en détection proactive', action: 'Améliorer la supervision et les alertes exploitables.' },
+      'Objectif moyen terme : mieux formaliser les scénarios de réponse incident.',
+      'Formation prévue : approfondir les pratiques de sécurité applicative orientées DevSecOps.',
     ],
-    projects: [
-      { slug: 'project-360tranquilite', title: '360tranquilité', why: 'Projet principal lié à cette compétence.' },
-    ],
+    projects: [{ title: '360tranquilité', path: '/realisations/project-360tranquilite' }],
   },
   {
     slug: 'gestion-projet-agile',
     order: 'Compétence détaillée 6/10',
     title: 'Gestion de projet agile et priorisation',
     definition: [
-      'Je pilote le projet en itérations courtes avec des priorités orientées valeur.',
-      'Je garde une trajectoire claire malgré les imprévus techniques.',
+      'Je définis cette compétence comme la capacité à prioriser par valeur, à découper les livrables et à piloter sous contrainte.',
+      'Dans des contextes où les demandes évoluent vite, l’agilité pragmatique est une compétence indispensable.',
     ],
-    evidences: [
-      { title: 'Découpage par jalons', detail: 'Planification progressive design, pages, CI/CD, stabilisation.' },
-      { title: 'Arbitrage pragmatique', detail: 'Priorisation des éléments indispensables à la soutenance.' },
-    ],
-    results: [
-      { title: 'Visibilité', detail: 'Roadmap plus lisible pour suivre l’avancement.' },
-      { title: 'Livraison incrémentale', detail: 'Chaque phase produit une valeur présentable.' },
+    anecdotes: [
+      {
+        title: 'Arbitrages entre rapidité et qualité',
+        situation:
+          'Sur plusieurs projets, les demandes se sont enchaînées avec des objectifs parfois contradictoires.',
+        result:
+          'Le découpage des tâches et la priorisation par impact ont permis de livrer sans perdre le cap technique.',
+        valueAdded:
+          'J’ai appris à estimer plus réalistement et à assumer des compromis explicites.',
+        linkedProject: { title: 'v0-vastrion-mobile-prototype', path: '/realisations/project-v0-vastrion-mobile-prototype' },
+      },
     ],
     selfReview: [
-      'Je tiens bien les priorités quand le contexte bouge rapidement.',
-      'Je dois mieux formaliser les rétrospectives pour capitaliser.',
+      'Niveau actuel : intermédiaire avancé.',
+      'Place dans mon profil : compétence transverse essentielle pour livrer dans les temps.',
+      'Vitesse d’acquisition : régulière, principalement par la pratique terrain.',
+      'Recul : la priorisation doit rester transparente pour éviter les incompréhensions côté métier.',
     ],
     evolution: [
-      { horizon: 'Court terme (3 mois)', target: 'Mieux tracer les décisions', action: 'Journaliser les arbitrages fonctionnels et techniques.' },
-      { horizon: 'Moyen terme (6-12 mois)', target: 'Améliorer la prédictibilité', action: 'Suivre des indicateurs de charge et de vélocité.' },
+      'Objectif moyen terme : mieux outiller la mesure d’effort et de valeur livrée.',
+      'Formation prévue : approfondir les cadres agile de pilotage multi-projets.',
     ],
     projects: [
-      { slug: 'project-v0-vastrion-mobile-prototype', title: 'v0-vastrion-mobile-prototype', why: 'Projet en cours à pilotage adaptatif.' },
-      { slug: 'project-360tranquilite', title: '360tranquilité', why: 'Évolutions progressives par incréments.' },
+      { title: 'v0-vastrion-mobile-prototype', path: '/realisations/project-v0-vastrion-mobile-prototype' },
+      { title: '360tranquilité', path: '/realisations/project-360tranquilite' },
     ],
   },
   {
@@ -210,28 +234,34 @@ const COMPETENCES: CompetenceDetail[] = [
     order: 'Compétence détaillée 7/10',
     title: 'Communication technique avec parties prenantes',
     definition: [
-      'Je transforme les choix techniques en messages compréhensibles pour des profils non techniques.',
-      'Cela facilite l’alignement entre contraintes métier et implémentation.',
+      'Je définis cette compétence comme la capacité à traduire des contraintes techniques en décisions compréhensibles par des profils non techniques.',
+      'Dans les projets digitaux, cette compétence réduit fortement les malentendus et les dérives de périmètre.',
     ],
-    evidences: [
-      { title: 'Documentation structurée', detail: 'Rédaction de plans et guides orientés décision.' },
-      { title: 'Argumentaire oral', detail: 'Explication simple de l’architecture en 5 phrases.' },
-    ],
-    results: [
-      { title: 'Alignement', detail: 'Décisions techniques mieux comprises et mieux acceptées.' },
-      { title: 'Moins d’ambiguïtés', detail: 'Réduction des allers-retours sur les attentes.' },
+    anecdotes: [
+      {
+        title: 'Dialogue entre design, technique et usage',
+        situation:
+          'Certaines propositions visuelles étaient peu compatibles avec les contraintes de performance ou d’accessibilité.',
+        result:
+          'L’explication des compromis a permis d’aligner les choix et d’éviter des allers-retours coûteux.',
+        valueAdded:
+          'J’ai joué un rôle de pont entre besoins fonctionnels et faisabilité technique.',
+        linkedProject: { title: 'v0-vastrion-mobile-prototype', path: '/realisations/project-v0-vastrion-mobile-prototype' },
+      },
     ],
     selfReview: [
-      'Je suis à l’aise sur la vulgarisation technique sans perdre la rigueur.',
-      'Je dois encore standardiser mes supports de communication.',
+      'Niveau actuel : intermédiaire avancé.',
+      'Place dans mon profil : compétence clé pour la coordination et la confiance.',
+      'Vitesse d’acquisition : progressive, renforcée par des contextes multi-acteurs.',
+      'Recul : mieux communiquer, c’est aussi mieux cadrer la décision et ses impacts.',
     ],
     evolution: [
-      { horizon: 'Court terme (3 mois)', target: 'Uniformiser les supports', action: 'Créer un format type pour enjeux, risques et décisions.' },
-      { horizon: 'Moyen terme (6-12 mois)', target: 'Renforcer la coordination', action: 'Mettre en place des points techniques réguliers.' },
+      'Objectif moyen terme : standardiser mes supports de communication technique.',
+      'Autoformation prévue : approfondir les techniques de facilitation et de synthèse décisionnelle.',
     ],
     projects: [
-      { slug: 'project-360-content-bridge', title: '360-content-bridge', why: 'Nécessite cadrage et pédagogie technique.' },
-      { slug: 'project-v0-vastrion-mobile-prototype', title: 'v0-vastrion-mobile-prototype', why: 'Contexte d’arbitrages fréquents.' },
+      { title: 'crewai-projet-agent-voyage', path: '/realisations/project-crewai-voyage' },
+      { title: 'v0-vastrion-mobile-prototype', path: '/realisations/project-v0-vastrion-mobile-prototype' },
     ],
   },
   {
@@ -239,28 +269,34 @@ const COMPETENCES: CompetenceDetail[] = [
     order: 'Compétence détaillée 8/10',
     title: 'UX/UI orientée usage et accessibilité',
     definition: [
-      'Je conçois des interfaces lisibles, cohérentes et orientées objectifs utilisateur.',
-      'Je veille à l’accessibilité de base et à la clarté du parcours.',
+      'Je définis cette compétence comme la capacité à concevoir des interfaces lisibles et utiles, au service d’un usage concret.',
+      'Avec l’exigence actuelle d’inclusivité et de clarté, l’accessibilité n’est plus optionnelle.',
     ],
-    evidences: [
-      { title: 'Design system portfolio', detail: 'Mise en place de styles cohérents et composants réutilisables.' },
-      { title: 'Navigation explicite', detail: 'Liens croisés compétences et réalisations pour guider la lecture.' },
-    ],
-    results: [
-      { title: 'Lisibilité', detail: 'Contenu plus facile à comprendre pour le jury.' },
-      { title: 'Cohérence', detail: 'Expérience homogène sur toutes les pages.' },
+    anecdotes: [
+      {
+        title: 'Conception d’interfaces avec attention à l’accessibilité',
+        situation:
+          'Le besoin était de produire des interfaces simples à comprendre, avec une hiérarchie visuelle claire.',
+        result:
+          'Le travail sur contrastes, navigation et structure a amélioré la lisibilité et l’efficacité des parcours.',
+        valueAdded:
+          'J’ai intégré très tôt la logique d’usage, au-delà de la seule esthétique.',
+        linkedProject: { title: 'v0-vastrion-mobile-prototype', path: '/realisations/project-v0-vastrion-mobile-prototype' },
+      },
     ],
     selfReview: [
-      'Je produis des interfaces propres et structurées.',
-      'Je dois approfondir les tests utilisateurs et l’accessibilité avancée.',
+      'Niveau actuel : intermédiaire avancé.',
+      'Place dans mon profil : compétence de différenciation produit et expérience utilisateur.',
+      'Vitesse d’acquisition : régulière grâce au travail conjoint avec des designers.',
+      'Recul : une bonne interface est d’abord une interface compréhensible et actionnable.',
     ],
     evolution: [
-      { horizon: 'Court terme (3 mois)', target: 'Renforcer l’accessibilité', action: 'Contrôler systématiquement clavier, aria et contrastes.' },
-      { horizon: 'Moyen terme (6-12 mois)', target: 'Valider davantage par l’usage', action: 'Recueillir des retours et itérer sur les pages clés.' },
+      'Objectif moyen terme : renforcer la validation par tests utilisateurs.',
+      'Autoformation prévue : approfondir les référentiels d’accessibilité et les méthodes UX de terrain.',
     ],
     projects: [
-      { slug: 'project-v0-vastrion-mobile-prototype', title: 'v0-vastrion-mobile-prototype', why: 'Prototype très orienté expérience utilisateur.' },
-      { slug: 'project-crewai-voyage', title: 'crewai-projet-agent-voyage', why: 'Nécessité de simplifier des parcours complexes.' },
+      { title: 'v0-vastrion-mobile-prototype', path: '/realisations/project-v0-vastrion-mobile-prototype' },
+      { title: 'crewai-projet-agent-voyage', path: '/realisations/project-crewai-voyage' },
     ],
   },
   {
@@ -268,28 +304,34 @@ const COMPETENCES: CompetenceDetail[] = [
     order: 'Compétence détaillée 9/10',
     title: 'Automatisation et amélioration continue',
     definition: [
-      'J’automatise les tâches répétitives pour réduire les erreurs manuelles.',
-      'Je transforme les incidents en améliorations concrètes du process.',
+      'Je définis cette compétence comme la capacité à transformer des tâches manuelles fragiles en processus fiables, mesurables et répétables.',
+      'Dans l’ingénierie logicielle actuelle, l’automatisation est indispensable pour soutenir la cadence sans sacrifier la qualité.',
     ],
-    evidences: [
-      { title: 'CI/CD Hostinger', detail: 'Build et déploiement automatisés depuis GitHub Actions.' },
-      { title: 'Stabilisation workflow', detail: 'Ajustements successifs pour rendre le pipeline plus robuste.' },
-    ],
-    results: [
-      { title: 'Fiabilité', detail: 'Mises en ligne plus reproductibles.' },
-      { title: 'Productivité', detail: 'Moins de temps perdu sur les opérations manuelles.' },
+    anecdotes: [
+      {
+        title: 'Mise en place d’une CI/CD sur le portfolio',
+        situation:
+          'Les mises en ligne manuelles créaient des frictions, des délais et des risques d’erreurs.',
+        result:
+          'Le pipeline build/test/deploy automatise les livraisons et réduit significativement les interventions manuelles.',
+        valueAdded:
+          'J’ai stabilisé la chaîne jusqu’à obtenir un flux de déploiement reproductible et plus sûr.',
+        linkedProject: { title: 'v0-vastrion-mobile-prototype', path: '/realisations/project-v0-vastrion-mobile-prototype' },
+      },
     ],
     selfReview: [
-      'Je suis efficace sur l’automatisation utile en contexte projet.',
-      'Je dois encore améliorer les vérifications post-déploiement.',
+      'Niveau actuel : intermédiaire avancé.',
+      'Place dans mon profil : compétence accélératrice de qualité et de productivité.',
+      'Vitesse d’acquisition : rapide sur les derniers mois grâce à la pratique CI/CD.',
+      'Recul : l’automatisation utile est celle qui reste compréhensible, diagnostiquable et maintenable.',
     ],
     evolution: [
-      { horizon: 'Court terme (3 mois)', target: 'Stabiliser totalement la chaîne', action: 'Conserver des checks robustes et explicites.' },
-      { horizon: 'Moyen terme (6-12 mois)', target: 'Mesurer la qualité opérationnelle', action: 'Ajouter des indicateurs de suivi de release.' },
+      'Objectif moyen terme : enrichir les contrôles post-déploiement et le suivi de qualité.',
+      'Autoformation prévue : approfondir les pratiques DevOps/observabilité adaptées aux projets web.',
     ],
     projects: [
-      { slug: 'project-360tranquilite', title: '360tranquilité', why: 'Automatisation orientée exploitation.' },
-      { slug: 'project-360-media-auto-cleanup', title: '360-media-auto-cleanup', why: 'Automatisation de tâches récurrentes.' },
+      { title: '360-media-auto-cleanup', path: '/realisations/project-360-media-auto-cleanup' },
+      { title: '360tranquilité', path: '/realisations/project-360tranquilite' },
     ],
   },
   {
@@ -297,28 +339,34 @@ const COMPETENCES: CompetenceDetail[] = [
     order: 'Compétence détaillée 10/10',
     title: 'Analyse critique et prise de décision technique',
     definition: [
-      'J’évalue les options selon coûts, délais, risques et maintenabilité.',
-      'Je privilégie des choix défendables à l’oral et viables en production.',
+      'Je définis cette compétence comme la capacité à choisir entre plusieurs options en tenant compte du temps, du coût, du risque et de la maintenabilité.',
+      'Dans des contextes contraints, cette compétence conditionne la viabilité des projets à moyen terme.',
     ],
-    evidences: [
-      { title: 'Choix d’architecture', detail: 'Décision Angular + WordPress + Hostinger argumentée par la problématique.' },
-      { title: 'Arbitrage CI/CD', detail: 'Simplification du workflow pour renforcer la robustesse réelle.' },
-    ],
-    results: [
-      { title: 'Décisions traçables', detail: 'Chaque arbitrage est justifiable devant le jury.' },
-      { title: 'Risque maîtrisé', detail: 'Compromis explicites avant implémentation.' },
+    anecdotes: [
+      {
+        title: 'Arbitrages entre solution rapide et solution durable',
+        situation:
+          'Sur plusieurs projets, le choix devait être fait entre livrer vite ou poser une base plus propre mais plus longue à mettre en place.',
+        result:
+          'En prenant davantage en compte les impacts de maintenance, les décisions techniques sont devenues plus robustes dans le temps.',
+        valueAdded:
+          'J’ai renforcé ma capacité à argumenter des compromis défendables face aux contraintes réelles.',
+        linkedProject: { title: 'crewai-projet-agent-voyage', path: '/realisations/project-crewai-voyage' },
+      },
     ],
     selfReview: [
-      'Je tranche vite sans perdre la vision d’ensemble.',
-      'Je dois renforcer l’usage d’indicateurs chiffrés dans mes décisions.',
+      'Niveau actuel : intermédiaire avancé.',
+      'Place dans mon profil : compétence de pilotage stratégique des choix techniques.',
+      'Vitesse d’acquisition : progressive, enrichie par des contextes variés.',
+      'Recul : décider vite est utile, mais décider juste reste la priorité.',
     ],
     evolution: [
-      { horizon: 'Court terme (3 mois)', target: 'Mieux mesurer les choix', action: 'Associer un KPI à chaque décision structurante.' },
-      { horizon: 'Moyen terme (6-12 mois)', target: 'Capitaliser davantage', action: 'Constituer un historique de décisions et impacts.' },
+      'Objectif moyen terme : appuyer systématiquement les décisions sur des indicateurs chiffrés.',
+      'Autoformation prévue : approfondir l’évaluation d’architecture et la gestion de trade-offs.',
     ],
     projects: [
-      { slug: 'project-crewai-voyage', title: 'crewai-projet-agent-voyage', why: 'Arbitrages entre valeur, effort et expérience.' },
-      { slug: 'project-v0-vastrion-mobile-prototype', title: 'v0-vastrion-mobile-prototype', why: 'Décisions progressives dans un contexte de prototype.' },
+      { title: 'crewai-projet-agent-voyage', path: '/realisations/project-crewai-voyage' },
+      { title: 'v0-vastrion-mobile-prototype', path: '/realisations/project-v0-vastrion-mobile-prototype' },
     ],
   },
 ];
@@ -334,65 +382,54 @@ const COMPETENCES: CompetenceDetail[] = [
         </header>
 
         <article class="panel detail-block">
-          <h2>Définition contextualisée et actualité</h2>
+          <h2>1. Ma définition</h2>
           @for (paragraph of skill.definition; track paragraph) {
             <p>{{ paragraph }}</p>
           }
         </article>
 
         <article class="panel detail-block">
-          <h2>Preuves concrètes</h2>
-          <div class="cards-grid">
-            @for (item of skill.evidences; track item.title) {
-              <article class="card">
-                <h3>{{ item.title }}</h3>
-                <p>{{ item.detail }}</p>
-              </article>
-            }
-          </div>
-        </article>
-
-        <article class="panel detail-block">
-          <h2>Résultats mesurables et valeur ajoutée</h2>
-          <div class="cards-grid metrics-grid">
-            @for (item of skill.results; track item.title) {
-              <article class="card">
-                <h3>{{ item.title }}</h3>
-                <p class="metric-value">{{ item.detail }}</p>
-              </article>
-            }
-          </div>
-        </article>
-
-        <div class="two-columns">
-          <article class="panel detail-block">
-            <h2>Autocritique</h2>
-            @for (paragraph of skill.selfReview; track paragraph) {
-              <p>{{ paragraph }}</p>
-            }
-          </article>
-
-          <article class="panel detail-block">
-            <h2>Évolution cible</h2>
-            <ul class="detail-list">
-              @for (item of skill.evolution; track item.horizon) {
-                <li>
-                  <strong>{{ item.horizon }}</strong>
-                  <p>{{ item.target }}</p>
-                  <p>{{ item.action }}</p>
-                </li>
-              }
-            </ul>
-          </article>
-        </div>
-
-        <article class="panel detail-block">
-          <h2>Réalisations liées</h2>
-          <ul class="detail-list detail-list--links">
-            @for (project of skill.projects; track project.slug) {
+          <h2>2. Mes éléments de preuve</h2>
+          <ul class="detail-list detail-list--rich">
+            @for (anecdote of skill.anecdotes; track anecdote.title) {
               <li>
-                <a [href]="'/realisations/' + project.slug">{{ project.title }}</a>
-                <p>{{ project.why }}</p>
+                <h3>{{ anecdote.title }}</h3>
+                <p><strong>Contexte :</strong> {{ anecdote.situation }}</p>
+                <p><strong>Résultat :</strong> {{ anecdote.result }}</p>
+                <p><strong>Valeur ajoutée :</strong> {{ anecdote.valueAdded }}</p>
+                <p>
+                  <strong>Réalisation liée :</strong>
+                  <a [href]="anecdote.linkedProject.path">{{ anecdote.linkedProject.title }}</a>
+                </p>
+              </li>
+            }
+          </ul>
+        </article>
+
+        <article class="panel detail-block">
+          <h2>3. Mon autocritique</h2>
+          <ul class="detail-list">
+            @for (item of skill.selfReview; track item) {
+              <li>{{ item }}</li>
+            }
+          </ul>
+        </article>
+
+        <article class="panel detail-block">
+          <h2>4. Mon évolution dans cette compétence</h2>
+          <ul class="detail-list">
+            @for (item of skill.evolution; track item) {
+              <li>{{ item }}</li>
+            }
+          </ul>
+        </article>
+
+        <article class="panel detail-block">
+          <h2>Réalisations rattachées</h2>
+          <ul class="detail-list detail-list--links">
+            @for (project of skill.projects; track project.path) {
+              <li>
+                <a [href]="project.path">{{ project.title }}</a>
               </li>
             }
           </ul>
@@ -413,7 +450,6 @@ const COMPETENCES: CompetenceDetail[] = [
 export class CompetenceDetailPage {
   private readonly route = inject(ActivatedRoute);
 
-  // Ici je charge la competence depuis le slug URL pour eviter de maintenir 10 composants distincts.
   protected readonly competence = COMPETENCES.find(
     (item) => item.slug === this.route.snapshot.paramMap.get('slug')
   );

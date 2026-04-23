@@ -31,6 +31,15 @@
 	}
 }
 
+.brand__photo {
+	width: 38px;
+	height: 38px;
+	border-radius: 50%;
+	object-fit: cover;
+	border: 2px solid rgba(156, 227, 216, 0.72);
+	box-shadow: 0 0 0 2px rgba(21, 48, 48, 0.85);
+}
+
 .nav-toggle {
 	display: none;
 	align-items: center;
