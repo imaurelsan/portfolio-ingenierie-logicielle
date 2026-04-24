@@ -1,154 +1,108 @@
 # Plan Portfolio ISCOD (version publique)
 
-## 1) Décision d'architecture
+## 1) Problématique retenue
 
-Problématique retenue (verrouillée avec mon Learning Coach) :
-<< Comment mettre en place une architecture web mutualisée et évolutive pour répondre aux enjeux de maintenance, de performance et de coûts d'une entreprise multi-projets ? >>
+Comment mettre en place une architecture web mutualisée et évolutive pour répondre aux enjeux de maintenance, de performance et de coûts d'une entreprise multi-projets ?
 
-Architecture cible :
-- Back-office de contenu : WordPress sur yaurel.com
-- Front public du portfolio : Angular statique
-- Hébergement cible : Hostinger (mon hébergeur actuel) sans coût additionnel
-- Exposition du portfolio : portfolio.yaurel.com
-- Communication : API REST WordPress (natif + endpoints personnalisés)
+## 2) Architecture retenue
 
-Pourquoi ce choix ? :
-- Met en valeur une vraie séparation front/back
-- Montre une approche d'ingénierie logicielle (modulaire, évolutive, maintenable)
-- Capitalise sur ton environnement réel d'entreprise
-- Reste déployable rapidement avec une contrainte de 10 jours
+- Front public : Angular statique (SPA)
+- Back-office de contenu : WordPress (environnement existant)
+- Hébergement : Hostinger
+- Exposition : portfolio.yaurel.com
+- Communication envisagée : API REST WordPress (natif + endpoints ciblés)
 
-## 2) Sous-domaine (décision opérationnelle)
+## 3) Pourquoi ce choix
 
-Choix d'hébergement - portfolio.yaurel.com :
-- Avantages :
-  - Plus professionnel pour un jury et des recruteurs
-  - Clair pour séparer application portfolio et site principal
-  - Plus propre pour une évolution future (nouvelle version, CI/CD, migration)
-- Effort Hostinger : faible à moyen
-  - Création du sous-domaine dans hPanel
-  - Dossier web dédié (ex: public_html/portfolio)
-  - SSL automatique à vérifier
+- Séparation claire des responsabilités front/back
+- Meilleure maintenabilité du code et de l'exploitation
+- Performance solide via build statique optimisé
+- Coûts maîtrisés grâce à la mutualisation de l'infrastructure existante
+- Déploiement industrialisé via pipeline CI/CD
 
-
-## 3) Structure des pages (en respect des critères de la grille 100/100)
+## 4) Pages et navigation
 
 Pages principales :
 1. Accueil
-2. Présentation générale
-3. Compétences (vue comparative /competences)
-4. Compétence détail dynamique (x10, route /competences/:slug)
-5. Réalisations (vue commune x5 /realisations)
-6. Réalisation détail dynamique (x5, route /realisations/:slug)
-7. Parcours (frise anti-chronologique)
+2. Présentation
+3. Compétences
+4. Détail compétence (route dynamique)
+5. Réalisations
+6. Détail réalisation (route dynamique)
+7. Parcours
 8. Contact
 
-Navigation obligatoire :
-- Menu persistant sur toutes les pages
-- Liens croisés compétence -> réalisation détail et réalisation -> compétence détail
-- Identité (nom + photo) visible partout (header + footer compact)
+Règles de navigation :
+- Menu global persistant
+- Liens croisés compétences <-> réalisations
+- Identité visuelle cohérente sur tout le site
 
-## 3 bis) Arborescence du projet (repère opérationnel)
+## 5) État actuel du produit
+
+- Thème clair/sombre avec switch visuel
+- Header responsive avec menu mobile, fermeture par clic extérieur et touche Escape
+- Moteur de recherche de sections (matching par mots-clés)
+- Routes Angular titrées page par page
+- Formulaire de contact connecté à EmailJS
+- Parcours structuré en trois blocs visuellement distincts : expériences, formations, certifications
+- Wording orienté posture professionnelle (pas de formulation scolaire)
+
+## 6) Arborescence opérationnelle
 
 ```text
 portfolio-ingenierie-logicielle/
 ├─ .github/
 │  └─ workflows/
-│     └─ ci-cd-hostinger.yml (pipeline CI/CD: build Angular + déploiement FTPS Hostinger)
-├─ app/ (application Angular principale)
-│  ├─ angular.json (configuration du build Angular)
-│  ├─ package.json (scripts npm et dépendances front)
+│     └─ ci-cd-hostinger.yml
+├─ app/
+│  ├─ angular.json
+│  ├─ package.json
 │  ├─ public/
-│  │  └─ .htaccess (fallback SPA pour les routes Angular sur Hostinger)
+│  │  └─ .htaccess
 │  ├─ src/
-│  │  ├─ main.ts (point d'entrée Angular)
-│  │  ├─ styles.scss (thème global: variables, layout, composants visuels)
+│  │  ├─ index.html
+│  │  ├─ main.ts
+│  │  ├─ styles.scss
 │  │  ├─ app/
-│  │  │  ├─ app.ts (shell principal et navigation globale)
-│  │  │  ├─ app.html (structure du shell: header, router-outlet, footer)
-│  │  │  ├─ app.routes.ts (routes du portfolio, dont routes dynamiques :slug)
-│  │  │  └─ pages/ (pages métier: accueil, présentation, compétences, réalisations, parcours, contact, détails)
+│  │  │  ├─ app.ts
+│  │  │  ├─ app.html
+│  │  │  ├─ app.routes.ts
+│  │  │  ├─ pages/
+│  │  │  └─ services/
 │  │  └─ assets/
-│  │     ├─ fonts/ (polices locales du design)
-│  │     └─ images/ (photo, logo, visuels de sections)
-│  └─ dist/app/browser/ (artefact statique final déployé en production)
+│  │     ├─ fonts/
+│  │     └─ images/
+│  └─ dist/app/browser/
 ├─ docs/
-│  ├─ plan-portfolio-iscod.md (plan public partageable, sans notes personnelles)
-│  ├─ devops-hostinger.md (guide d'exploitation CI/CD et déploiement)
-│  └─ private/support-soutenance-base.md (base du support oral en dossier privé)
-└─ README.md (présentation générale du repo)
+│  ├─ devops-hostinger.md
+│  ├─ plan-portfolio-iscod.md
+│  └─ private/
+│     └─ plan-portfolio-iscod-prive.md
+└─ README.md
 ```
 
-Règle pratique pour ne pas se perdre :
-- Si tu modifies le rendu du site : va dans app/src/app/pages ou app/src/styles.scss
-- Si tu modifies la navigation : va dans app/src/app/app.routes.ts
-- Si tu modifies le déploiement : va dans .github/workflows/ci-cd-hostinger.yml
-- Si tu prépares ton argumentaire jury : va dans docs/
+## 7) Industrialisation et déploiement
 
-## 4) Liste de mes 10 compétences
+Pipeline GitHub Actions :
+- Build Angular production
+- Génération de metadata de build (commit/run/date)
+- Déploiement FTPS vers Hostinger
+- Vérifications post-déploiement (FTP et endpoint live)
 
-Techniques :
-1. Architecture web mutualisée (WordPress multisite)
-2. Développement plugin WordPress
-3. Intégrations API REST et interconnexion services
-4. Performance web et optimisation front
-5. Sécurité applicative et durcissement WordPress
+Secrets nécessaires :
+- HOSTINGER_FTP_SERVER
+- HOSTINGER_FTP_USERNAME
+- HOSTINGER_FTP_PASSWORD
+- HOSTINGER_FTP_TARGET_DIR
+- ALLOW_FTP_ROOT_DEPLOY (optionnel)
 
-Humaines/organisationnelles :
-6. Gestion de projet agile et priorisation
-7. Communication technique avec parties prenantes
-8. UX/UI orientée usage et accessibilité
-9. Automatisation et amélioration continue
-10. Analyse critique et prise de décision technique
+## 8) Valeur démontrée
 
-## 5) Liste des 5 réalisations
+- Maintenance : processus de livraison reproductible
+- Performance : bundle statique optimisé
+- Coûts : aucun serveur additionnel
+- Évolutivité : base prête pour enrichissements fonctionnels
 
-1. 360-content-bridge (plugin import/export WordPress)
-2. 360-media-auto-cleanup (plugin nettoyage médias orphelins)
-3. 360tranquillité (plugin multitâche monitoring + sécurité)
-4. crewai-projet-agent-voyage (agent IA de planification de voyages)
-5. v0-vastrion-mobile-prototype (marketplace services B2C/B2B, en cours)
+## 9) Message clé soutenance
 
-## 6) Structure d'une page compétence (selon ma grille d'éval)
-
-Chaque compétence inclut :
-- Définition contextualisée métier + actualité
-- 1 à 3 preuves (anecdotes concrètes)
-- Résultats mesurables + valeur ajoutée
-- Autocritique (niveau, limites, vitesse d'acquisition)
-- Évolution cible (moyen terme + formation associée)
-- Liste finale des réalisations liées (liens)
-
-## 7) Structure d'une page réalisation (selon ma grille d'éval)
-
-Chaque réalisation inclut :
-- Présentation/définition du projet
-- Objectifs, contexte, enjeux, risques
-- Étapes de réalisation
-- Acteurs et interactions
-- Résultats (pour toi et pour l'entreprise)
-- Suites du projet (court et moyen terme)
-- Regard critique
-- Liste des compétences mobilisées (liens)
-
-## 8) Direction design
-
-Polices :
-- Titres : Zuume (assets locaux)
-- Paragraphes : Montserrat
-
-Palette :
-- #2D2D2D
-- #30302F
-- #BDBDBD
-- #FFFFFF
-- #339989
-- #153030
-
-Intentions visuelles :
-- Haut contraste lisible
-- Héro impactant (photo + proposition de valeur)
-- Cartes réalisations premium
-- Motifs de fond subtils (pas fond plat)
-- Responsive mobile prioritaire
-
+Ce portfolio n'est pas un simple site vitrine. C'est un produit front industrialisé, déployé automatiquement, avec des choix d'architecture assumés et justifiés par des contraintes réelles (qualité, délais, coûts, maintenabilité).

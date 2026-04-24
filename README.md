@@ -1,67 +1,95 @@
 # portfolio-ingenierie-logicielle
 
-Portfolio de soutenance ISCOD base sur une architecture web mutualisée et évolutive.
+Portfolio professionnel d'Aurel YAHOUEDEOU, construit avec Angular et déployé automatiquement sur Hostinger.
 
 ## Objectif
 
-Ce projet démontre une approche d'ingénierie logicielle orientée:
-- maintenabilité (séparation front/back)
-- performance (build statique Angular)
-- maitrise des couts (hébergement existant)
+Ce projet met en avant une démarche d'ingénierie logicielle orientée :
+- maintenabilité (structure claire, séparation des responsabilités, composants Angular)
+- performance (build statique optimisé en production)
+- maîtrise des coûts (hébergement existant, automatisation CI/CD)
 
-## Architecture
+## Aperçu de l'architecture
 
-- Front public: Angular (application statique)
-- Back-office de contenu: WordPress
-- Hebergement: Hostinger
-- Sous-domaine cible: portfolio.yaurel.com
-- Communication: API REST WordPress
+- Front public : Angular 20 (SPA statique)
+- Hébergement : Hostinger (sous-domaine `portfolio.yaurel.com`)
+- Pipeline : GitHub Actions + déploiement FTPS automatisé
+- Build metadata : fichier `assets/build-info.json` généré à chaque build pour vérifier la version servie
+
+## Fonctionnalités principales
+
+- Navigation complète sur pages portfolio : accueil, présentation, compétences, réalisations, parcours, contact
+- Routes dynamiques :
+	- `competences/:slug`
+	- `realisations/:slug`
+- Thème clair/sombre avec switch visuel
+- Expérience responsive (desktop/tablette/mobile)
+- Moteur de recherche rapide de sections dans l'interface
+- Formulaire de contact branché à EmailJS
 
 ## Stack technique
 
-- Angular
+- Angular 20
 - TypeScript
 - SCSS
-- GitHub Actions (CI/CD)
-- FTPS (deploiement Hostinger)
+- EmailJS (`@emailjs/browser`)
+- GitHub Actions
+- FTPS (lftp)
 
-## Lancement du projet en local
+## Démarrage local
 
-Depuis le dossier app:
+Depuis le dossier `app` :
 
 ```bash
 npm install
 npm run start
 ```
 
-Build production:
+Application locale : `http://localhost:4200`
+
+## Build production
+
+Depuis le dossier `app` :
 
 ```bash
 npm run build -- --configuration production
 ```
 
-Sortie du build:
-- app/dist/app/browser
+Sortie du build :
+- `app/dist/app/browser`
 
-## Déploiement
+## Déploiement automatique
 
-Le déploiement est automatisé par le workflow:
-- .github/workflows/ci-cd-hostinger.yml
+Workflow CI/CD :
+- `.github/workflows/ci-cd-hostinger.yml`
 
-Principe:
-1. Build Angular en mode production
-2. Publication de l'artefact
-3. Envoi FTPS vers Hostinger
+Comportement principal :
+1. Build Angular sur GitHub Actions
+2. Génération des métadonnées de build (`build-info.json`)
+3. Déploiement FTPS vers le répertoire cible Hostinger
+4. Vérifications automatiques post-déploiement (fichier metadata et endpoint image)
 
-## Structure du dépot
+Secrets requis côté GitHub :
+- `HOSTINGER_FTP_SERVER`
+- `HOSTINGER_FTP_USERNAME`
+- `HOSTINGER_FTP_PASSWORD`
+- `HOSTINGER_FTP_TARGET_DIR`
+- `ALLOW_FTP_ROOT_DEPLOY` (optionnel, contrôle de sécurité)
 
-- app/: application Angular
-- docs/: documentation de projet
-- .github/workflows/: CI/CD
+## Structure du dépôt
 
-## Assets locaux
+- `app/` : application Angular
+- `docs/` : documentation projet et soutenance
+- `.github/workflows/` : pipeline CI/CD
 
-- Polices: app/src/assets/fonts
-- Images et logo: app/src/assets/images
+## Documentation utile
 
-Note: les assets utilisés par le site en production sont placés dans app/src/assets.
+- `docs/devops-hostinger.md` : guide d'exploitation et de déploiement
+- `docs/plan-portfolio-iscod.md` : plan projet public
+- `docs/private/plan-portfolio-iscod-prive.md` : base de préparation soutenance (dossier privé)
+
+## Notes importantes
+
+- Les assets de production sont sous `app/src/assets`.
+- Le fichier `app/src/index.html` porte les méta de base (titre, description, favicon statique).
+- Le portfolio est pensé comme un support professionnel ; le wording des contenus est formulé en ce sens.
