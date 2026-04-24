@@ -75,7 +75,7 @@ import { EmailService } from '../services/email.service';
 
         <div class="contact-card">
           <h2>Formulaire rapide</h2>
-          <p>Complète ce formulaire et clique sur Envoyer. Je recevrai ton message directement et te répondrai très bientôt.</p>
+          <p>Complétez ce formulaire et cliquez sur Envoyer. Je recevrai votre message directement et vous répondrai très bientôt.</p>
           <form class="contact-form" (ngSubmit)="sendMessage()">
             <label>
               Nom
@@ -95,7 +95,7 @@ import { EmailService } from '../services/email.service';
             </label>
 
             @if (statusMessage) {
-              <div [class.form-status]="true" [class]="'form-status--' + (isSuccess ? 'success' : 'error')">
+              <div class="form-status" [class.form-status--success]="isSuccess" [class.form-status--error]="!isSuccess">
                 {{ statusMessage }}
               </div>
             }

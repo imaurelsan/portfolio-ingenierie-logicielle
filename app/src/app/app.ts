@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, ElementRef, HostListener, ViewChild, inject } from '@angular/core';
 import { NavigationEnd, Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { filter } from 'rxjs/operators';
 
@@ -21,6 +21,11 @@ type SearchResult = {
 })
 export class App {
   private readonly router = inject(Router);
+
+  @ViewChild('quicknavpanel') private readonly quickNavPanel?: ElementRef<HTMLElement>;
+  @ViewChild('searchtogglebtn') private readonly searchToggleBtn?: ElementRef<HTMLButtonElement>;
+  @ViewChild('mainnavpanel') private readonly mainNavPanel?: ElementRef<HTMLElement>;
+  @ViewChild('navtogglebtn') private readonly navToggleBtn?: ElementRef<HTMLButtonElement>;
 
   // Ici je centralise la navigation pour garder un menu lisible et facile a maintenir.
   protected readonly navLinks: NavLink[] = [
@@ -45,12 +50,50 @@ export class App {
 
   // Système de recherche par mots-clés pour une meilleure expérience utilisateur.
   protected readonly searchDatabase: SearchResult[] = [
-    { label: 'Accueil', path: '/', keywords: ['accueil', 'home', 'portfolio', 'main'] },
-    { label: 'Présentation', path: '/presentation', keywords: ['présentation', 'qui suis-je', 'bio', 'profil', 'about', 'moi'] },
-    { label: 'Compétences', path: '/competences', keywords: ['compétences', 'skills', 'savoir', 'faire', 'technique', 'transversal', 'architecture', 'wordpress', 'api', 'security'] },
-    { label: 'Réalisations', path: '/realisations', keywords: ['réalisations', 'projets', 'projects', 'portfolio', 'réalisé', 'github', 'code'] },
-    { label: 'Parcours', path: '/parcours', keywords: ['parcours', 'expérience', 'formations', 'education', 'career', 'experience', 'entreprise', 'école', 'travail'] },
-    { label: 'Contact', path: '/contact', keywords: ['contact', 'email', 'message', 'formulaire', 'envoyer', 'coordonnées', 'réseaux', 'linkedin', 'instagram', 'github'] },
+    {
+      label: 'Accueil',
+      path: '/',
+      keywords: [
+        'accueil', 'hero', 'portfolio', 'axes', 'preuves', 'architecture', 'industrialisation', 'impact',
+      ],
+    },
+    {
+      label: 'Présentation',
+      path: '/presentation',
+      keywords: [
+        'presentation', 'profil', 'valeurs', 'positionnement', 'aurel', 'yahouedeou', 'bio', 'parcours global',
+      ],
+    },
+    {
+      label: 'Compétences',
+      path: '/competences',
+      keywords: [
+        'competences', 'niveau', 'avance', 'intermediaire', 'debutant', 'jauge', 'skills', 'wordpress', 'api',
+        'securite', 'communication', 'ux', 'ui', 'automatisation', 'agile',
+      ],
+    },
+    {
+      label: 'Réalisations',
+      path: '/realisations',
+      keywords: [
+        'realisations', 'projets', 'github', 'plugin', '360tranquilite', 'content bridge', 'media auto cleanup',
+      ],
+    },
+    {
+      label: 'Parcours',
+      path: '/parcours',
+      keywords: [
+        'parcours', 'experiences', 'formations', 'certifications', 'tests', 'educatel', 'iscod', 'esmt',
+        'master soft', 'aski da', 'empowher',
+      ],
+    },
+    {
+      label: 'Contact',
+      path: '/contact',
+      keywords: [
+        'contact', 'formulaire', 'email', 'telephone', 'linkedin', 'instagram', 'github', 'cv',
+      ],
+    },
   ];
 
   constructor() {
@@ -58,6 +101,8 @@ export class App {
       .pipe(filter((event): event is NavigationEnd => event instanceof NavigationEnd))
       .subscribe((event) => {
         this.currentPath = this.normalizePath(event.urlAfterRedirects);
+        this.closeQuickNav();
+        this.closeMobileNav();
       });
 
     const savedTheme = localStorage.getItem('portfolio-theme');
@@ -74,22 +119,29 @@ export class App {
       return 'assets/images/photo-identite.jpg';
     }
 
-    return this.isLightTheme ? '/favicon-noir.svg' : '/favicon.svg';
+    return '/favicon.svg';
   }
 
   protected get brandImageAlt(): string {
-    return this.isHomePage ? 'Symbole du site' : "Photo d'Aurel YAHOUEDEOU";
+    return this.isHomePage ? 'Symbole du site' : 'Aurel YAHOUEDEOU';
   }
 
   protected get quickNavResults(): SearchResult[] {
-    const normalized = this.quickNavQuery.trim().toLowerCase();
+    const normalized = this.normalizeText(this.quickNavQuery);
     if (!normalized) {
       return [];
     }
 
-    return this.searchDatabase.filter((result) =>
-      result.keywords.some((keyword) => keyword.includes(normalized) || normalized.includes(keyword.substring(0, 3)))
-    );
+    const tokens = normalized.split(/\s+/).filter((token) => token.length >= 2);
+    if (tokens.length === 0) {
+      return [];
+    }
+
+    return this.searchDatabase
+      .map((result) => ({ result, score: this.scoreResult(result, tokens) }))
+      .filter(({ score }) => score > 0)
+      .sort((a, b) => b.score - a.score)
+      .map(({ result }) => result);
   }
 
   protected toggleMobileNav(): void {
@@ -101,6 +153,7 @@ export class App {
   }
 
   protected openQuickNav(): void {
+    this.closeMobileNav();
     this.isQuickNavOpen = true;
   }
 
@@ -127,11 +180,65 @@ export class App {
 
   private applyTheme(): void {
     document.body.classList.toggle('theme-light', this.isLightTheme);
-    const iconHref = this.isLightTheme ? '/favicon-noir.svg' : '/favicon.svg';
-    const iconLinks = document.querySelectorAll<HTMLLinkElement>('link[rel="icon"], link[rel="shortcut icon"]');
-    iconLinks.forEach((link) => {
-      link.href = iconHref;
-    });
+  }
+
+  @HostListener('document:keydown.escape')
+  protected onEscapeKey(): void {
+    this.closeQuickNav();
+    this.closeMobileNav();
+  }
+
+  @HostListener('document:click', ['$event'])
+  protected onDocumentClick(event: MouseEvent): void {
+    const target = event.target as Node;
+
+    if (this.isQuickNavOpen) {
+      const isInsideQuickNav = !!this.quickNavPanel?.nativeElement.contains(target);
+      const isOnSearchButton = !!this.searchToggleBtn?.nativeElement.contains(target);
+      if (!isInsideQuickNav && !isOnSearchButton) {
+        this.closeQuickNav();
+      }
+    }
+
+    if (this.isMobileNavOpen) {
+      const isInsideMobileNav = !!this.mainNavPanel?.nativeElement.contains(target);
+      const isOnNavButton = !!this.navToggleBtn?.nativeElement.contains(target);
+      if (!isInsideMobileNav && !isOnNavButton) {
+        this.closeMobileNav();
+      }
+    }
+  }
+
+  private scoreResult(result: SearchResult, tokens: string[]): number {
+    const normalizedLabel = this.normalizeText(result.label);
+    const normalizedKeywords = result.keywords.map((keyword) => this.normalizeText(keyword));
+    let score = 0;
+
+    for (const token of tokens) {
+      if (normalizedLabel.includes(token)) {
+        score += 4;
+      }
+
+      for (const keyword of normalizedKeywords) {
+        if (keyword === token) {
+          score += 6;
+        } else if (keyword.startsWith(token)) {
+          score += 4;
+        } else if (keyword.includes(token)) {
+          score += 2;
+        }
+      }
+    }
+
+    return score;
+  }
+
+  private normalizeText(value: string): string {
+    return value
+      .toLowerCase()
+      .normalize('NFD')
+        .replaceAll(/[\u0300-\u036f]/g, '')
+      .trim();
   }
 
   private normalizePath(url: string): string {

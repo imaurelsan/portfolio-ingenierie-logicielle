@@ -18,10 +18,10 @@ export class EmailService {
   // 3. Créer un template avec variables: {{from_name}}, {{from_email}}, {{subject}}, {{message}}
   // 4. Mettre les IDs ci-dessous:
   
-  private readonly PUBLIC_KEY = 'YOUR_PUBLIC_KEY'; // À remplacer
-  private readonly SERVICE_ID = 'YOUR_SERVICE_ID'; // À remplacer
-  private readonly TEMPLATE_ID = 'YOUR_TEMPLATE_ID'; // À remplacer
-  private readonly TO_EMAIL = 'aurelandyou@gmail.com';
+  private readonly PUBLIC_KEY: string = 'w1pbqIBx-TVLgvCPk'; 
+  private readonly SERVICE_ID: string = 'service_blrx5al'; 
+  private readonly TEMPLATE_ID: string = 'template_573vv2s'; 
+  private readonly TO_EMAIL: string = 'aurelandyou@gmail.com';
 
   constructor() {
     this.initEmailJS();

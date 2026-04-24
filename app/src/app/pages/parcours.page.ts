@@ -29,6 +29,7 @@ type CertificationItem = {
   title: string;
   link?: string;
   school?: string;
+  logo?: string;
 };
 
 @Component({
@@ -40,7 +41,7 @@ type CertificationItem = {
         <h1>Frise anti-chronologique de mon évolution</h1>
       </header>
 
-      <article class="panel detail-block">
+      <article class="panel detail-block detail-block--experience">
         <h2>Expériences en entreprise</h2>
         <ol class="journey-list">
           @for (item of experiences; track item.role + item.company) {
@@ -97,7 +98,7 @@ type CertificationItem = {
         </ol>
       </article>
 
-      <article class="panel detail-block">
+      <article class="panel detail-block detail-block--formation">
         <h2>Formations</h2>
         <ol class="journey-list">
           @for (item of formations; track item.degree + item.school) {
@@ -132,11 +133,11 @@ type CertificationItem = {
         </ol>
       </article>
 
-      <article class="panel detail-block">
+      <article class="panel detail-block detail-block--certification">
         <h2>Tests et certifications</h2>
         <ul class="detail-list">
           @for (item of certifications; track item.title) {
-            <li>
+            <li class="certification-item">
               <strong>{{ item.date }}</strong>
               @if (item.link) {
                 <p><a [href]="item.link" target="_blank" rel="noopener">{{ item.title }}</a></p>
@@ -145,6 +146,11 @@ type CertificationItem = {
               }
               @if (item.school) {
                 <p class="certification-school">{{ item.school }}</p>
+              }
+              @if (item.logo) {
+                <div class="certification-logo">
+                  <img [src]="item.logo" [alt]="'Logo ' + (item.school || 'Établissement')" />
+                </div>
               }
             </li>
           }
@@ -384,11 +390,8 @@ export class ParcoursPage {
     {
       date: '2023',
       title: 'Certification : Développement Web et Web Mobile (RNCP37674).',
-    },
-    {
-      date: '2024 - En cours',
-      title: 'Formation Développeur Web',
       school: 'EDUCATEL',
+      logo: 'assets/images/formations/4-logo-educatel.png',
       link: 'https://www.educatel.fr/formation/web-informatique/developpeur-web',
     },
   ];

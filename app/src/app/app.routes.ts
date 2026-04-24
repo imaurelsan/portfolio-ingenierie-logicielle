@@ -10,7 +10,7 @@ import { RealisationsPage } from './pages/realisations.page';
 
 // Ici je centralise toutes les routes pour garder une lecture claire de la navigation du portfolio.
 export const routes: Routes = [
-	{ path: '', component: HomePage, title: 'Accueil | Aurel YAHOUEDEOU' },
+	{ path: '', component: HomePage, title: 'Aurel Yahouedeou' },
 	{ path: 'presentation', component: PresentationPage, title: 'Présentation | Aurel YAHOUEDEOU' },
 	{ path: 'competences', component: CompetencesPage, title: 'Compétences | Aurel YAHOUEDEOU' },
 	{ path: 'competences/:slug', component: CompetenceDetailPage, title: 'Détail compétence | Aurel YAHOUEDEOU' },
