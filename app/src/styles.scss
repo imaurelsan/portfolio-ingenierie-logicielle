@@ -809,6 +809,21 @@ a {
 	margin-bottom: 1.9rem;
 }
 
+.realisation-screenshot {
+	margin: 0 0 1.9rem;
+	border-radius: var(--radius-md);
+	overflow: hidden;
+	border: 1px solid color-mix(in srgb, var(--c-border) 60%, transparent);
+	box-shadow: 0 4px 18px color-mix(in srgb, var(--c-shadow) 20%, transparent);
+
+	img {
+		display: block;
+		width: 100%;
+		height: auto;
+		object-fit: cover;
+	}
+}
+
 .detail-block--experience {
 	border-left: 3px solid color-mix(in srgb, var(--c-accent) 72%, transparent);
 }

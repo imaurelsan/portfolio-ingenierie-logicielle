@@ -11,6 +11,7 @@ type RealisationDetail = {
   slug: string;
   order: string;
   title: string;
+  screenshot?: string;
   presentation: string;
   objectivesContextRisks: string[];
   steps: string[];
@@ -30,6 +31,7 @@ const REALISATIONS: RealisationDetail[] = [
     slug: 'project-360-content-bridge',
     order: 'Réalisation détaillée 1/5',
     title: '360-content-bridge',
+    screenshot: 'assets/images/screenshots-realisations/360-content-bridge.png',
     presentation:
       'Le projet consiste à faciliter les échanges de contenus entre différents sites WordPress, notamment dans un contexte multisite où certaines données doivent être partagées ou dupliquées.',
     objectivesContextRisks: [
@@ -73,6 +75,7 @@ const REALISATIONS: RealisationDetail[] = [
     slug: 'project-360-media-auto-cleanup',
     order: 'Réalisation détaillée 2/5',
     title: '360-media-auto-cleanup',
+    screenshot: 'assets/images/screenshots-realisations/360-media-auto-cleanup.png',
     presentation:
       'Le projet vise à identifier et nettoyer les médias orphelins sur des sites WordPress pour réduire la dette de stockage et améliorer l’hygiène opérationnelle.',
     objectivesContextRisks: [
@@ -115,6 +118,7 @@ const REALISATIONS: RealisationDetail[] = [
   {
     slug: 'project-360tranquilite',
     order: 'Réalisation détaillée 3/5',
+    screenshot: 'assets/images/screenshots-realisations/360-tranquillite.png',
     title: '360tranquilité',
     presentation:
       '360tranquilité est un plugin WordPress qui centralise des fonctions de sécurité, monitoring et exploitation pour éviter la dispersion des outils.',
@@ -158,6 +162,7 @@ const REALISATIONS: RealisationDetail[] = [
   {
     slug: 'project-crewai-voyage',
     order: 'Réalisation détaillée 4/5',
+    screenshot: 'assets/images/screenshots-realisations/travel-planner.png',
     title: 'crewai-projet-agent-voyage',
     presentation:
       'Ce projet académique explore la création d’un agent capable de proposer des itinéraires de voyage cohérents à partir d’entrées variables.',
@@ -201,6 +206,7 @@ const REALISATIONS: RealisationDetail[] = [
   {
     slug: 'project-v0-vastrion-mobile-prototype',
     order: 'Réalisation détaillée 5/5',
+    screenshot: 'assets/images/screenshots-realisations/vastrion-super-app.png',
     title: 'v0-vastrion-mobile-prototype',
     presentation:
       'Ce projet pose les fondations d’une marketplace de services en mode prototype, avec un focus sur les parcours utilisateur et l’exploration produit.',
@@ -254,6 +260,12 @@ const REALISATIONS: RealisationDetail[] = [
           <p class="section-header__kicker">{{ project.order }}</p>
           <h1>{{ project.title }}</h1>
         </header>
+
+        @if (project.screenshot) {
+          <figure class="realisation-screenshot">
+            <img [src]="project.screenshot" [alt]="'Capture — ' + project.title" />
+          </figure>
+        }
 
         <article class="panel detail-block">
           <h2>1. Présentation de la réalisation</h2>
