@@ -21,8 +21,8 @@ type SkillFilter = 'Tous' | 'Technique' | 'Transversal';
       </header>
 
       <p class="intro-text">
-        Je présente ici ma hiérarchie de compétences pour que le jury comprenne immédiatement mes points forts,
-        mes axes de progression et leur lien avec mes réalisations.
+        Cette cartographie présente mes compétences de manière claire: niveau actuel, axes de progression
+        et articulation concrète avec mes réalisations.
       </p>
 
       <div class="segment-filter" role="group" aria-label="Filtrer les compétences">

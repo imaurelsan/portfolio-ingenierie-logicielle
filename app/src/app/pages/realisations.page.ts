@@ -53,7 +53,7 @@ type Project = {
   `,
 })
 export class RealisationsPage {
-  // J'ai retenu ces projets pour rester aligne avec la grille d'evaluation et l'argumentaire de soutenance.
+  // J'ai retenu ces projets pour illustrer clairement mon niveau, ma méthode et mes résultats sur des cas concrets.
   protected readonly projects: Project[] = [
     {
       slug: 'project-360-content-bridge',

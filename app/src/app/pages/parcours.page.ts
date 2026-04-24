@@ -345,7 +345,7 @@ export class ParcoursPage {
       logo: 'assets/images/formations/1-logo-iscod.png',
       details: [
         'Montée en compétences sur architecture logicielle, industrialisation et pilotage projet.',
-        'Approche orientée pratique: cas réels, argumentation, soutenance, amélioration continue.',
+        'Approche orientée pratique: cas réels, argumentation technique et amélioration continue.',
       ],
     },
     {
