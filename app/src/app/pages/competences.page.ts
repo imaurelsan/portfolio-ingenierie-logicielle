@@ -46,7 +46,7 @@ type SkillFilter = 'Tous' | 'Technique' | 'Transversal';
             <p>Niveau actuel : <strong>{{ skill.level }}</strong></p>
             <p class="skill-note">{{ skill.note }}</p>
             <div class="skill-meter" role="presentation" aria-hidden="true">
-              <span [style.width.%]="skill.progress"></span>
+              <span [style.--progress-width.%]="skill.progress"></span>
             </div>
             <a class="card-link" [href]="'/competences/' + skill.slug">Voir le détail</a>
           </article>

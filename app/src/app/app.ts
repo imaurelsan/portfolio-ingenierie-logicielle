@@ -7,6 +7,12 @@ type NavLink = {
   path: string;
 };
 
+type SearchResult = {
+  label: string;
+  path: string;
+  keywords: string[];
+};
+
 @Component({
   selector: 'app-root',
   imports: [RouterOutlet, RouterLink, RouterLinkActive],
@@ -37,13 +43,14 @@ export class App {
   protected isQuickNavOpen = false;
   protected quickNavQuery = '';
 
-  protected readonly quickNavLinks: NavLink[] = [
-    { label: 'Accueil', path: '/' },
-    { label: 'Présentation', path: '/presentation' },
-    { label: 'Compétences', path: '/competences' },
-    { label: 'Réalisations', path: '/realisations' },
-    { label: 'Parcours', path: '/parcours' },
-    { label: 'Contact', path: '/contact' },
+  // Système de recherche par mots-clés pour une meilleure expérience utilisateur.
+  protected readonly searchDatabase: SearchResult[] = [
+    { label: 'Accueil', path: '/', keywords: ['accueil', 'home', 'portfolio', 'main'] },
+    { label: 'Présentation', path: '/presentation', keywords: ['présentation', 'qui suis-je', 'bio', 'profil', 'about', 'moi'] },
+    { label: 'Compétences', path: '/competences', keywords: ['compétences', 'skills', 'savoir', 'faire', 'technique', 'transversal', 'architecture', 'wordpress', 'api', 'security'] },
+    { label: 'Réalisations', path: '/realisations', keywords: ['réalisations', 'projets', 'projects', 'portfolio', 'réalisé', 'github', 'code'] },
+    { label: 'Parcours', path: '/parcours', keywords: ['parcours', 'expérience', 'formations', 'education', 'career', 'experience', 'entreprise', 'école', 'travail'] },
+    { label: 'Contact', path: '/contact', keywords: ['contact', 'email', 'message', 'formulaire', 'envoyer', 'coordonnées', 'réseaux', 'linkedin', 'instagram', 'github'] },
   ];
 
   constructor() {
@@ -74,13 +81,15 @@ export class App {
     return this.isHomePage ? 'Symbole du site' : "Photo d'Aurel YAHOUEDEOU";
   }
 
-  protected get quickNavResults(): NavLink[] {
+  protected get quickNavResults(): SearchResult[] {
     const normalized = this.quickNavQuery.trim().toLowerCase();
     if (!normalized) {
-      return this.quickNavLinks;
+      return [];
     }
 
-    return this.quickNavLinks.filter((link) => link.label.toLowerCase().includes(normalized));
+    return this.searchDatabase.filter((result) =>
+      result.keywords.some((keyword) => keyword.includes(normalized) || normalized.includes(keyword.substring(0, 3)))
+    );
   }
 
   protected toggleMobileNav(): void {

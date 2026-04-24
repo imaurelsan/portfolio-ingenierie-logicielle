@@ -27,6 +27,8 @@ type FormationItem = {
 type CertificationItem = {
   date: string;
   title: string;
+  link?: string;
+  school?: string;
 };
 
 @Component({
@@ -136,28 +138,17 @@ type CertificationItem = {
           @for (item of certifications; track item.title) {
             <li>
               <strong>{{ item.date }}</strong>
-              <p>{{ item.title }}</p>
+              @if (item.link) {
+                <p><a [href]="item.link" target="_blank" rel="noopener">{{ item.title }}</a></p>
+              } @else {
+                <p>{{ item.title }}</p>
+              }
+              @if (item.school) {
+                <p class="certification-school">{{ item.school }}</p>
+              }
             </li>
           }
         </ul>
-      </article>
-
-      <article class="panel detail-block">
-        <h2>Entreprises avec lesquelles j'ai collaboré</h2>
-        <div class="logo-marquee" aria-label="Logos des entreprises">
-          <div class="logo-marquee__track">
-            @for (logo of companyLogos; track logo.logo + logo.name) {
-              <div class="logo-marquee__item">
-                <img [src]="logo.logo" [alt]="'Logo ' + logo.name" />
-              </div>
-            }
-            @for (logo of companyLogos; track logo.logo + '-duplicate') {
-              <div class="logo-marquee__item">
-                <img [src]="logo.logo" [alt]="'Logo ' + logo.name" />
-              </div>
-            }
-          </div>
-        </div>
       </article>
     </section>
   `,
@@ -394,16 +385,11 @@ export class ParcoursPage {
       date: '2023',
       title: 'Certification : Développement Web et Web Mobile (RNCP37674).',
     },
-  ];
-
-  protected readonly companyLogos = [
-    { name: 'ASKI-DA Group', logo: 'assets/images/entreprises/1-logo-askida-group.png' },
-    { name: "Empow'Her Global", logo: 'assets/images/entreprises/2-logo-empowher-global.png' },
-    { name: 'Agence YELE', logo: 'assets/images/entreprises/3-logo-agence-yele.png' },
-    { name: 'AY Studio', logo: 'assets/images/entreprises/4-logo-ay-studio.png' },
-    { name: 'Master Soft', logo: 'assets/images/entreprises/5-logo-master-soft.png' },
-    { name: 'A.N.T Bénin', logo: 'assets/images/entreprises/6-logo-ant-benin.png' },
-    { name: 'COS LEPI', logo: 'assets/images/entreprises/7-logo-cos-lepi.png' },
-    { name: 'AGORA CENTER', logo: 'assets/images/entreprises/8-logo-agora-center.png' },
+    {
+      date: '2024 - En cours',
+      title: 'Formation Développeur Web',
+      school: 'EDUCATEL',
+      link: 'https://www.educatel.fr/formation/web-informatique/developpeur-web',
+    },
   ];
 }

@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { EmailService } from '../services/email.service';
 
 @Component({
   selector: 'app-contact-page',
@@ -74,25 +75,39 @@ import { FormsModule } from '@angular/forms';
 
         <div class="contact-card">
           <h2>Formulaire rapide</h2>
-          <p>Complète ce formulaire puis clique sur Envoyer pour ouvrir ton application e-mail avec le message déjà préparé.</p>
-          <form class="contact-form" (ngSubmit)="openMailDraft()">
+          <p>Complète ce formulaire et clique sur Envoyer. Je recevrai ton message directement et te répondrai très bientôt.</p>
+          <form class="contact-form" (ngSubmit)="sendMessage()">
             <label>
               Nom
-              <input type="text" name="name" [(ngModel)]="name" required />
+              <input type="text" name="name" [(ngModel)]="name" required [disabled]="isSubmitting" />
             </label>
             <label>
               E-mail
-              <input type="email" name="email" [(ngModel)]="email" required />
+              <input type="email" name="email" [(ngModel)]="email" required [disabled]="isSubmitting" />
             </label>
             <label>
               Objet
-              <input type="text" name="subject" [(ngModel)]="subject" required />
+              <input type="text" name="subject" [(ngModel)]="subject" required [disabled]="isSubmitting" />
             </label>
             <label>
               Message
-              <textarea name="message" rows="6" [(ngModel)]="message" required></textarea>
+              <textarea name="message" rows="6" [(ngModel)]="message" required [disabled]="isSubmitting"></textarea>
             </label>
-            <button class="btn btn--primary" type="submit">Envoyer</button>
+
+            @if (statusMessage) {
+              <div [class.form-status]="true" [class]="'form-status--' + (isSuccess ? 'success' : 'error')">
+                {{ statusMessage }}
+              </div>
+            }
+
+            <button 
+              class="btn btn--primary" 
+              type="submit" 
+              [disabled]="isSubmitting || !isFormValid()"
+              [class.btn--loading]="isSubmitting"
+            >
+              {{ isSubmitting ? 'Envoi en cours...' : 'Envoyer' }}
+            </button>
           </form>
         </div>
       </div>
@@ -100,21 +115,61 @@ import { FormsModule } from '@angular/forms';
   `,
 })
 export class ContactPage {
+  private readonly emailService = inject(EmailService);
+
   protected name = '';
   protected email = '';
   protected subject = 'Contact via portfolio';
   protected message = '';
+  protected isSubmitting = false;
+  protected statusMessage = '';
+  protected isSuccess = false;
 
-  protected openMailDraft(): void {
-    const mailTo = 'aurelandyou@gmail.com';
-    const safeSubject = encodeURIComponent(this.subject.trim() || 'Contact via portfolio');
-    const body = [
-      `Nom : ${this.name.trim()}`,
-      `E-mail : ${this.email.trim()}`,
-      '',
-      this.message.trim(),
-    ].join('\n');
+  protected async sendMessage(): Promise<void> {
+    if (!this.isFormValid()) return;
 
-    window.location.href = `mailto:${mailTo}?subject=${safeSubject}&body=${encodeURIComponent(body)}`;
+    this.isSubmitting = true;
+    this.statusMessage = '';
+
+    try {
+      const result = await this.emailService.sendContactMessage({
+        name: this.name.trim(),
+        email: this.email.trim(),
+        subject: this.subject.trim(),
+        message: this.message.trim(),
+      });
+
+      this.isSuccess = result.success;
+      this.statusMessage = result.message;
+
+      if (result.success) {
+        this.resetForm();
+        setTimeout(() => {
+          this.statusMessage = '';
+        }, 5000);
+      }
+    } catch (error) {
+      this.isSuccess = false;
+      this.statusMessage = 'Une erreur est survenue. Réessaye plus tard.';
+    } finally {
+      this.isSubmitting = false;
+    }
+  }
+
+  protected isFormValid(): boolean {
+    return (
+      this.name.trim().length > 0 &&
+      this.email.trim().length > 0 &&
+      this.subject.trim().length > 0 &&
+      this.message.trim().length > 0 &&
+      /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.email.trim())
+    );
+  }
+
+  private resetForm(): void {
+    this.name = '';
+    this.email = '';
+    this.subject = 'Contact via portfolio';
+    this.message = '';
   }
 }
