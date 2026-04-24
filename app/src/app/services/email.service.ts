@@ -54,19 +54,19 @@ export class EmailService {
       if (result.status === 200) {
         return {
           success: true,
-          message: 'Ton message a été envoyé avec succès! Je vais te répondre très bientôt.',
+          message: 'Votre message a bien été envoyé. Je vous répondrai très bientôt.',
         };
       }
 
       return {
         success: false,
-        message: 'Une erreur est survenue lors de l\'envoi. Réessaye plus tard.',
+        message: 'Une erreur est survenue lors de l\'envoi. Réessayez plus tard.',
       };
     } catch (error) {
       console.error('Email error:', error);
       return {
         success: false,
-        message: 'Une erreur est survenue lors de l\'envoi. Réessaye plus tard.',
+        message: 'Une erreur est survenue lors de l\'envoi. Réessayez plus tard.',
       };
     }
   }

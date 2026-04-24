@@ -31,11 +31,11 @@ type ImprovementPlan = {
         <p>
           Cette compétence consiste à concevoir une architecture où plusieurs sites partagent un socle technique
           commun, avec une gouvernance claire des thèmes, plugins et déploiements. Dans mon contexte, cela répond
-          directement à un enjeu d'entreprise multi-projets: livrer plus vite, sans multiplier les coûts de maintenance.
+          directement à un enjeu d'entreprise multi-projets : livrer plus vite, sans multiplier les coûts de maintenance.
         </p>
         <p>
           Elle reste actuelle car les organisations cherchent à standardiser leurs plateformes pour mieux absorber les
-          évolutions sécurité, performance et conformité, tout en gardant la possibilité d'adapter chaque site à un besoin métier.
+          évolutions de sécurité et de performance, tout en gardant la possibilité d'adapter chaque site à un besoin métier.
         </p>
       </article>
 
@@ -69,11 +69,11 @@ type ImprovementPlan = {
           <h2>Autocritique</h2>
           <p>
             Mon niveau est avancé sur la structure multisite et la création de composants réutilisables.
-            Ma limite actuelle se situe surtout sur l'industrialisation complète de la chaîne: observabilité centrale,
-            rollback automatisé et tests de non-régression systématiques sur tous les sites du réseau.
+            Ma limite actuelle se situe surtout sur l’automatisation complète de la chaîne : suivi centralisé,
+            retour arrière automatique et tests réguliers sur tous les sites du réseau.
           </p>
           <p>
-            Je peux déployer vite, mais je veux réduire davantage le risque humain en renforçant l'automatisation
+            Je peux déployer vite, mais je veux encore réduire le risque humain en renforçant l'automatisation
             de la validation avant mise en production.
           </p>
         </article>
@@ -119,12 +119,12 @@ export class CompetenceArchitecturePage {
     {
       title: 'Plugins et widgets custom mutualisables',
       detail:
-        'Conception de composants pouvant être activés site par site ou sur l’ensemble du réseau, avec logique réutilisable et maintenance simplifiée.',
+        'Conception de composants activables site par site ou sur tout le réseau, pour garder une logique simple et facile à maintenir.',
     },
     {
       title: 'Processus par environnements',
       detail:
-        'Mise en pratique d’une approche en trois phases (dev, staging, production) pour fiabiliser la mise en ligne et limiter les effets de bord.',
+        'Mise en pratique d’une approche en trois phases (dev, test, production) pour fiabiliser la mise en ligne et limiter les effets imprévus.',
     },
   ];
 
@@ -150,12 +150,12 @@ export class CompetenceArchitecturePage {
     {
       horizon: 'Court terme (3 mois)',
       target: 'Industrialiser les contrôles avant déploiement.',
-      action: 'Ajouter lint, tests ciblés et check qualité dans la pipeline CI/CD.',
+      action: 'Ajouter un lint, des tests ciblés et un contrôle qualité dans la pipeline CI/CD.',
     },
     {
       horizon: 'Moyen terme (6 à 12 mois)',
-      target: 'Améliorer la résilience opérationnelle.',
-      action: 'Mettre en place un rollback versionné, un monitoring unifié et des alertes exploitables.',
+      target: 'Rendre l’exploitation plus stable.',
+      action: 'Mettre en place un retour arrière versionné, un suivi centralisé et des alertes simples à lire.',
     },
   ];
 
@@ -163,17 +163,17 @@ export class CompetenceArchitecturePage {
     {
       slug: 'project-360-content-bridge',
       title: '360-content-bridge',
-      reason: 'Contribution directe à la maintenance multi-sites via des opérations de contenus structurées.',
+      reason: 'Contribution directe à la maintenance multi-sites grâce à des opérations de contenu mieux organisées.',
     },
     {
       slug: 'project-360-media-auto-cleanup',
       title: '360-media-auto-cleanup',
-      reason: 'Réduction de la charge de stockage et standardisation des bonnes pratiques de nettoyage.',
+      reason: 'Réduction de la charge de stockage et meilleure régularité des pratiques de nettoyage.',
     },
     {
       slug: 'project-360tranquilite',
       title: '360tranquilité',
-      reason: 'Complément sécurité et exploitation pour stabiliser un environnement mutualisé dans la durée.',
+      reason: 'Complément sécurité et exploitation pour garder un environnement mutualisé plus stable dans la durée.',
     },
   ];
 }

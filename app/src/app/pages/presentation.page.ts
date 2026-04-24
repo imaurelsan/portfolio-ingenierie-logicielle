@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
     <section class="page-section">
       <header class="section-header">
         <p class="section-header__kicker">Présentation générale</p>
-        <h1>Qui je suis et comment je travaille</h1>
+        <h1>Mon positionnement professionnel</h1>
       </header>
 
       <div class="presentation-stack">
@@ -14,21 +14,22 @@ import { Component } from '@angular/core';
           <img src="assets/images/photo-identite.jpg" alt="Portrait d'Aurel YAHOUEDEOU" />
           <div class="text-block">
             <p>
-              J'ai d'abord validé un Master en Réseaux, Systèmes et Sécurité. Ensuite, j'ai choisi de me reconvertir vers
-              le développement logiciel pour construire des produits plus créatifs, utiles et durables.
+              J'ai toujours évolué à la frontière entre création et ingénierie. Le design m'a appris à penser expérience
+              utilisateur, l'architecture réseau m'a appris à penser robustesse, et la sécurité m'a appris à penser
+              risques et responsabilités.
             </p>
             <p>
-              Aujourd'hui, je combine ce socle avec une pratique concrète du web: front-end moderne, back-end,
-              WordPress multisite et développement de plugins orientés usage.
+              En me réorientant vers le développement logiciel, j'ai trouvé un terrain où ces dimensions se rejoignent:
+              concevoir des produits utiles, fiables et compréhensibles, puis les livrer proprement.
             </p>
             <p>
-              Mon objectif est clair: évoluer sur un rôle fullstack qui relie architecture, expérience utilisateur et
-              qualité de livraison, sans prétendre tout maîtriser d'emblée.
+              Aujourd'hui, je construis mon profil autour de cette cohérence : relier design, architecture, sécurité et
+              développement pour créer des solutions utiles et solides.
             </p>
             <ul class="presentation-chips">
-              <li>Développeur fullstack junior</li>
-              <li>Profil hybride sécurité + produit</li>
-              <li>Curieux IA, design et expériences interactives</li>
+              <li>Fil conducteur : design -> architecture -> sécurité -> développement</li>
+              <li>Ma façon de travailler : être clair, utile et concret</li>
+              <li>Mon objectif : progresser vite sur un poste fullstack junior</li>
             </ul>
           </div>
         </div>
@@ -36,12 +37,12 @@ import { Component } from '@angular/core';
         <div class="panel text-block presentation-focus">
           <h2>Ce que je recherche</h2>
           <p>
-            Je cherche une équipe où je peux contribuer rapidement sur des sujets concrets, tout en continuant à progresser
-            sur l'architecture, l'industrialisation et la communication technique.
+            Je cherche un environnement où mon profil hybride peut apporter de la valeur : design, architecture, sécurité
+            et développement réunis au service de produits utiles.
           </p>
           <p>
-            Je préfère les environnements où l'on valorise la qualité de code, la collaboration et la capacité à transformer
-            des contraintes métier en solutions lisibles.
+            Je privilégie les équipes qui misent sur la qualité, la collaboration et la capacité à transformer des
+            contraintes métier en solutions simples, solides et lisibles.
           </p>
         </div>
       </div>

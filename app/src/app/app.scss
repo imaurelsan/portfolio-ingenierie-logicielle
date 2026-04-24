@@ -8,8 +8,8 @@
 	position: sticky;
 	top: 0;
 	z-index: 20;
-	display: flex;
-	justify-content: space-between;
+	display: grid;
+	grid-template-columns: minmax(220px, 1fr) auto minmax(320px, 1fr);
 	align-items: center;
 	gap: 1.1rem;
 	padding: 0.95rem 1.35rem;
@@ -54,6 +54,7 @@
 	justify-content: center;
 	gap: 0.55rem;
 	height: 40px;
+	justify-self: center;
 }
 
 .search-toggle {
@@ -116,6 +117,7 @@
 .theme-switch__icon img {
 	width: 100%;
 	height: 100%;
+	filter: brightness(0) invert(1);
 }
 
 .theme-switch__track {
@@ -187,6 +189,7 @@
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: flex-end;
+	justify-self: end;
 	gap: 0.45rem;
 
 	.main-nav__close,
@@ -199,10 +202,11 @@
 		color: var(--c-text);
 		border: 1px solid color-mix(in srgb, var(--c-muted) 48%, transparent);
 		border-radius: 999px;
-		padding: 0.42rem 0.84rem;
-			font-size: 0.96rem;
-			font-family: 'Zuume', 'Montserrat', sans-serif;
-			letter-spacing: 0.07em;
+		padding: 0.52rem 0.96rem;
+		font-size: 0.92rem;
+		font-family: 'Montserrat', sans-serif;
+		font-weight: 700;
+		letter-spacing: 0.04em;
 		transition: all 180ms ease;
 	}
 
@@ -261,6 +265,14 @@
 .theme-switch-fab img {
 	width: 28px;
 	height: 28px;
+	filter: brightness(0) invert(1);
+}
+
+body.theme-light {
+	.app-header .theme-switch__icon img,
+	.theme-switch-fab img {
+		filter: none;
+	}
 }
 
 .mobile-nav-backdrop {
@@ -353,6 +365,8 @@
 
 @media (max-width: 940px) {
 	.app-header {
+		display: flex;
+		justify-content: space-between;
 		align-items: center;
 		flex-wrap: wrap;
 	}
@@ -497,8 +511,8 @@
 		position: fixed;
 		bottom: 2rem;
 		right: 1.5rem;
-		width: 60px;
-		height: 60px;
+		width: 52px;
+		height: 52px;
 		border-radius: 50%;
 		background: var(--c-accent);
 		color: #153030;
@@ -512,6 +526,11 @@
 
 		&:active {
 			transform: scale(0.92);
+		}
+
+		img {
+			width: 22px;
+			height: 22px;
 		}
 	}
 }

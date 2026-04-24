@@ -21,7 +21,7 @@ type SkillFilter = 'Tous' | 'Technique' | 'Transversal';
       </header>
 
       <p class="intro-text">
-        Cette cartographie présente mes compétences de manière claire: niveau actuel, axes de progression
+        Cette cartographie présente mes compétences de manière claire : niveau actuel, axes de progression
         et articulation concrète avec mes réalisations.
       </p>
 
@@ -78,7 +78,7 @@ export class CompetencesPage {
       title: 'Architecture web mutualisée (WordPress multisite)',
       domain: 'Technique',
       level: 'Intermédiaire avancé',
-      note: 'Compétence socle déjà appliquée sur des cas réels, encore en consolidation sur les cas les plus complexes.',
+      note: 'Je l’ai déjà pratiquée sur des cas réels, mais je dois encore la renforcer sur les situations les plus complexes.',
       progress: 72,
     },
     {
@@ -86,7 +86,7 @@ export class CompetencesPage {
       title: 'Développement de plugins WordPress',
       domain: 'Technique',
       level: 'Intermédiaire',
-      note: 'Pratique régulière en entreprise, avec encore des axes de montée en robustesse et tests.',
+      note: 'Je la pratique régulièrement en entreprise, avec encore une marge de progression sur les tests et la solidité du code.',
       progress: 62,
     },
     {
@@ -94,7 +94,7 @@ export class CompetencesPage {
       title: 'Intégrations API REST',
       domain: 'Technique',
       level: 'Débutant',
-      note: 'Bases opérationnelles en place, phase d’apprentissage active sur la résilience et les contrats.',
+      note: 'J’ai les bases et je continue d’apprendre à mieux gérer les échanges de données, les erreurs et les cas limites.',
       progress: 34,
     },
     {
@@ -102,7 +102,7 @@ export class CompetencesPage {
       title: 'Performance front-end et optimisation',
       domain: 'Technique',
       level: 'Intermédiaire',
-      note: 'Méthode audit-correction déjà appliquée, à systématiser encore sur des seuils automatisés.',
+      note: 'J’ai déjà appliqué une logique audit puis correction, mais je dois encore mieux la rendre régulière et mesurable.',
       progress: 58,
     },
     {
@@ -110,7 +110,7 @@ export class CompetencesPage {
       title: 'Sécurité applicative',
       domain: 'Technique',
       level: 'Intermédiaire',
-      note: 'Socle fort via mon parcours initial, transposition web encore en progression continue.',
+      note: 'J’ai un bon socle grâce à mon parcours initial, et je continue à mieux l’appliquer au web.',
       progress: 60,
     },
     {
@@ -118,7 +118,7 @@ export class CompetencesPage {
       title: 'Gestion de projet agile',
       domain: 'Transversal',
       level: 'Intermédiaire',
-      note: 'Bonne autonomie sur priorisation et découpage, marge de progression sur les indicateurs.',
+      note: 'Je suis assez autonome pour prioriser et découper le travail, mais je dois encore progresser sur le suivi par indicateurs.',
       progress: 57,
     },
     {
@@ -126,7 +126,7 @@ export class CompetencesPage {
       title: 'Communication technique',
       domain: 'Transversal',
       level: 'Intermédiaire',
-      note: 'Confortable en vulgarisation, avec amélioration continue sur la formalisation des supports.',
+      note: 'Je suis à l’aise pour expliquer les sujets techniques simplement, même si je peux encore améliorer la clarté de mes supports.',
       progress: 56,
     },
     {
@@ -134,7 +134,7 @@ export class CompetencesPage {
       title: 'UX/UI orientée usage',
       domain: 'Transversal',
       level: 'Intermédiaire',
-      note: 'Pratique appliquée sur des projets concrets, encore en montée sur les tests utilisateurs.',
+      note: 'Je l’ai mise en pratique sur plusieurs projets, et je veux encore progresser sur les retours utilisateurs.',
       progress: 55,
     },
     {
@@ -142,7 +142,7 @@ export class CompetencesPage {
       title: 'Automatisation et amélioration continue',
       domain: 'Transversal',
       level: 'Débutant',
-      note: 'Premiers acquis réels en CI/CD, étape actuelle: fiabiliser et standardiser les contrôles.',
+      note: 'J’ai acquis de premières bases concrètes en CI/CD ; mon enjeu maintenant est de rendre tout cela plus fiable et plus régulier.',
       progress: 36,
     },
     {
@@ -150,7 +150,7 @@ export class CompetencesPage {
       title: 'Analyse critique et prise de décision',
       domain: 'Transversal',
       level: 'Intermédiaire',
-      note: 'Bon recul sur les compromis, avec objectif de mieux appuyer les décisions par des métriques.',
+      note: 'J’ai déjà du recul sur les choix à faire, et je veux maintenant mieux appuyer mes décisions sur des faits simples et mesurables.',
       progress: 59,
     },
   ];

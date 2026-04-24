@@ -75,7 +75,7 @@ type CertificationItem = {
                       <li>{{ line }}</li>
                     }
                   </ul>
-                  <p class="card-meta-title">Réalisations liées</p>
+                  <p class="card-meta-title">Réalisations clés liées</p>
                   <ul class="detail-list detail-list--links">
                     @for (project of item.linkedProjects; track project.path) {
                       <li>
@@ -83,7 +83,7 @@ type CertificationItem = {
                       </li>
                     }
                   </ul>
-                  <p class="card-meta-title">Compétences liées</p>
+                  <p class="card-meta-title">Compétences clés liées</p>
                   <ul class="detail-list detail-list--links">
                     @for (skill of item.linkedSkills; track skill.path) {
                       <li>
@@ -244,6 +244,7 @@ export class ParcoursPage {
       ],
       linkedProjects: [
         { title: 'v0-vastrion-mobile-prototype', path: '/realisations/project-v0-vastrion-mobile-prototype' },
+        { title: 'Portfolio design AY Studio', path: 'https://yaurel.com/wp-content/uploads/2026/04/Design-Portfolio-Aurel-Yahouedeou.pdf' },
       ],
       linkedSkills: [
         { title: 'Communication technique', path: '/competences/communication-technique' },
@@ -344,8 +345,8 @@ export class ParcoursPage {
       website: 'https://www.iscod.fr/',
       logo: 'assets/images/formations/1-logo-iscod.png',
       details: [
-        'Montée en compétences sur architecture logicielle, industrialisation et pilotage projet.',
-        'Approche orientée pratique: cas réels, argumentation technique et amélioration continue.',
+        'Montée en compétences sur l’architecture logicielle, l’automatisation et le pilotage de projet.',
+        'Approche orientée pratique : cas réels, argumentation technique et amélioration continue.',
       ],
     },
     {
@@ -381,7 +382,7 @@ export class ParcoursPage {
       logo: 'assets/images/formations/3-logo-esmt-dakar.png',
       details: [
         'Fondamentaux techniques en informatique, algorithmique, réseaux et électronique.',
-        'Base structurante de ma discipline technique et de ma méthode de travail.',
+        'Base solide pour ma discipline technique et ma méthode de travail.',
       ],
     },
   ];

@@ -53,13 +53,13 @@ type Project = {
   `,
 })
 export class RealisationsPage {
-  // J'ai retenu ces projets pour illustrer clairement mon niveau, ma méthode et mes résultats sur des cas concrets.
+  // J'ai retenu ces projets pour montrer simplement ce que j'ai fait, comment je l'ai fait et ce que cela a apporté.
   protected readonly projects: Project[] = [
     {
       slug: 'project-360-content-bridge',
       title: '360-content-bridge',
-      tagline: 'Rendre les transferts de contenu fiables et plus rapides à exploiter.',
-      summary: "Plugin d'import/export WordPress conçu pour accélérer la maintenance de contenus à l'échelle.",
+      tagline: 'Rendre les transferts de contenu plus sûrs et plus rapides.',
+      summary: "Plugin d'import/export WordPress conçu pour faciliter la maintenance de contenus sur plusieurs sites.",
       keyMetric: '-40% temps opérationnel estimé',
       visualHint: 'Flux import/export multisite',
       repository: 'https://github.com/imaurelsan/360-content-bridge',
@@ -81,8 +81,8 @@ export class RealisationsPage {
     {
       slug: 'project-360-media-auto-cleanup',
       title: '360-media-auto-cleanup',
-      tagline: 'Nettoyer sans casser : automatisation prudente des médias orphelins.',
-      summary: "Plugin de nettoyage des médias orphelins pour réduire le poids des instances et les coûts de stockage.",
+      tagline: 'Nettoyer sans casser : supprimer les médias inutiles avec prudence.',
+      summary: "Plugin de nettoyage des médias orphelins pour alléger les sites et réduire le stockage inutile.",
       keyMetric: '-25% stockage estimé',
       visualHint: 'Audit et nettoyage médias',
       repository: 'https://github.com/imaurelsan/360-media-auto-cleanup',
@@ -104,8 +104,8 @@ export class RealisationsPage {
     {
       slug: 'project-360tranquilite',
       title: '360tranquilité',
-      tagline: 'Unifier sécurité, monitoring et exploitation dans un socle modulaire.',
-      summary: 'Plugin WordPress open-source de monitoring, sécurité et exploitation opérationnelle.',
+      tagline: 'Réunir sécurité, suivi et exploitation dans un seul outil.',
+      summary: 'Plugin WordPress open source qui centralise des fonctions utiles pour la sécurité et le suivi.',
       keyMetric: '+1 socle opérationnel centralisé',
       visualHint: 'Console de supervision WordPress',
       repository: 'https://github.com/imaurelsan/360tranquilite',
@@ -127,8 +127,8 @@ export class RealisationsPage {
     {
       slug: 'project-crewai-voyage',
       title: 'crewai-projet-agent-voyage',
-      tagline: 'Transformer une expérimentation IA en parcours lisible pour l’utilisateur.',
-      summary: "Agent IA de planification de voyage orienté scénarios et gain de temps utilisateur.",
+      tagline: 'Transformer une idée IA en parcours simple pour l’utilisateur.',
+      summary: "Agent IA de planification de voyage pensé pour proposer des scénarios clairs et utiles.",
       keyMetric: 'Prototype fonctionnel en itérations courtes',
       visualHint: 'Scénarios de recommandations IA',
       repository: 'https://github.com/imaurelsan/crewai-projet-agent-voyage',
@@ -150,8 +150,8 @@ export class RealisationsPage {
     {
       slug: 'project-v0-vastrion-mobile-prototype',
       title: 'v0-vastrion-mobile-prototype',
-      tagline: 'Poser une base produit claire avant industrialisation.',
-      summary: 'Prototype d’une marketplace B2B/B2C de services, actuellement en développement.',
+      tagline: 'Poser une base produit claire avant d’aller plus loin.',
+      summary: 'Prototype d’une marketplace de services, encore en cours de construction.',
       keyMetric: 'MVP cadré en 4 parcours prioritaires',
       visualHint: 'Wireframes et parcours mobile',
       repository: 'https://github.com/imaurelsan/v0-vastrion-mobile-prototype',

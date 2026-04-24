@@ -28,7 +28,7 @@ const COMPETENCES: CompetenceDetail[] = [
     title: 'Architecture web mutualisée (WordPress multisite)',
     definition: [
       'Je définis cette compétence comme la capacité à concevoir un socle unique pour plusieurs sites, avec des règles communes et des variations contrôlées.',
-      'Dans un contexte où les coûts de maintenance et la cohérence technique deviennent critiques, l’architecture mutualisée reste une réponse actuelle et durable.',
+      'Quand plusieurs sites doivent rester cohérents sans coûter trop cher à maintenir, l’architecture mutualisée devient une réponse simple et utile.',
     ],
     anecdotes: [
       {
@@ -36,21 +36,21 @@ const COMPETENCES: CompetenceDetail[] = [
         situation:
           'Avant l’architecture multisite, chaque site fonctionnait avec ses propres plugins et configurations, ce qui rendait les mises à jour longues et risquées.',
         result:
-          'La centralisation du thème, des plugins et de la structure a réduit les opérations répétitives et amélioré la cohérence entre sites.',
+          'Le fait de centraliser le thème, les plugins et la structure a réduit les tâches répétitives et rendu l’ensemble plus cohérent.',
         valueAdded:
-          'J’ai contribué à rendre la maintenance plus lisible et plus contrôlable, tout en identifiant les limites quand certains besoins deviennent trop spécifiques.',
+          'J’ai aidé à rendre la maintenance plus claire et plus facile à gérer, tout en repérant les limites quand un besoin devient trop particulier.',
         linkedProject: { title: '360-content-bridge', path: '/realisations/project-360-content-bridge' },
       },
     ],
     selfReview: [
-      'Niveau actuel : intermédiaire avancé, en consolidation.',
-      'Place dans mon profil : compétence socle, prioritaire pour construire des solutions économiquement viables.',
-      'Vitesse d’acquisition : rapide grâce à la répétition sur plusieurs projets en environnement réel.',
-      'Recul : je recommande de documenter très tôt les exceptions de périmètre pour éviter la complexité cachée.',
+      'Niveau actuel : intermédiaire avancé ; je continue de la renforcer.',
+      'Place dans mon profil : c’est une compétence de base pour construire des solutions simples à maintenir.',
+      'Vitesse d’acquisition : j’ai progressé assez vite grâce à la répétition sur plusieurs projets réels.',
+      'Avec le recul : il faut documenter tôt les cas particuliers pour éviter les problèmes cachés plus tard.',
     ],
     evolution: [
-      'Objectif moyen terme : renforcer encore la résilience et la supervision du multisite.',
-      'Autoformation prévue : approfondir les patterns d’architecture évolutive et de gouvernance technique.',
+      'Objectif moyen terme : mieux fiabiliser et mieux suivre un multisite dans la durée.',
+      'Autoformation prévue : continuer à apprendre des façons simples de faire évoluer une architecture sans la compliquer.',
     ],
     projects: [
       { title: '360-content-bridge', path: '/realisations/project-360-content-bridge' },
@@ -62,8 +62,8 @@ const COMPETENCES: CompetenceDetail[] = [
     order: 'Compétence détaillée 2/10',
     title: 'Développement de plugins WordPress',
     definition: [
-      'Je définis cette compétence comme la capacité à encapsuler une logique métier dans un plugin modulaire, maintenable et versionnable.',
-      'Avec la montée des besoins d’industrialisation WordPress, cette compétence reste stratégique pour limiter la dépendance aux extensions externes.',
+      'Je définis cette compétence comme la capacité à mettre une logique métier dans un plugin clair, réutilisable et facile à faire évoluer.',
+      'C’est une compétence importante quand on veut moins dépendre d’extensions externes et garder la main sur ce qu’on construit.',
     ],
     anecdotes: [
       {
@@ -71,21 +71,21 @@ const COMPETENCES: CompetenceDetail[] = [
         situation:
           'Le besoin était de centraliser plusieurs fonctionnalités opérationnelles dans un seul plugin au lieu d’empiler de nombreuses extensions tierces.',
         result:
-          'Le plugin modulaire a permis de gagner du temps sur les opérations récurrentes et de mieux maîtriser les évolutions futures.',
+          'Le plugin modulaire a permis de gagner du temps sur les tâches répétitives et de mieux préparer les évolutions suivantes.',
         valueAdded:
-          'J’ai structuré le code pour permettre l’ajout progressif de modules et j’ai renforcé ma discipline sur la documentation et le versionning.',
+          'J’ai structuré le code pour pouvoir ajouter des modules petit à petit, tout en gardant une base lisible.',
         linkedProject: { title: '360tranquilité', path: '/realisations/project-360tranquilite' },
       },
     ],
     selfReview: [
-      'Niveau actuel : intermédiaire, en consolidation.',
-      'Place dans mon profil : compétence centrale de production et de différenciation.',
-      'Vitesse d’acquisition : soutenue via des projets concrets livrés en entreprise.',
-      'Recul : un plugin utile n’est pas seulement fonctionnel, il doit rester explicable et maintenable dans la durée.',
+      'Niveau actuel : intermédiaire ; je continue de progresser.',
+      'Place dans mon profil : c’est une compétence centrale dans mon travail actuel.',
+      'Vitesse d’acquisition : j’ai progressé grâce à des projets concrets livrés en entreprise.',
+      'Avec le recul : un plugin utile ne doit pas seulement marcher, il doit aussi rester compréhensible et facile à maintenir.',
     ],
     evolution: [
-      'Objectif moyen terme : augmenter la robustesse des modules et la couverture de tests.',
-      'Formation prévue : consolider les pratiques de qualité logicielle appliquées à WordPress.',
+      'Objectif moyen terme : rendre les modules plus solides et mieux testés.',
+      'Formation prévue : continuer à progresser sur les bonnes pratiques de qualité appliquées à WordPress.',
     ],
     projects: [
       { title: '360-content-bridge', path: '/realisations/project-360-content-bridge' },
@@ -98,8 +98,8 @@ const COMPETENCES: CompetenceDetail[] = [
     order: 'Compétence détaillée 3/10',
     title: 'Intégrations API REST et interconnexion services',
     definition: [
-      'Je définis cette compétence comme la capacité à relier des systèmes via des contrats de données fiables, sans exposer inutilement la logique métier.',
-      'Dans des environnements hybrides, l’interconnexion de services est aujourd’hui un levier clé d’automatisation.',
+      'Je définis cette compétence comme la capacité à faire communiquer des systèmes entre eux de façon claire et fiable.',
+      'Aujourd’hui, relier plusieurs services est souvent nécessaire pour gagner du temps et éviter les tâches manuelles.',
     ],
     anecdotes: [
       {
@@ -107,21 +107,21 @@ const COMPETENCES: CompetenceDetail[] = [
         situation:
           'Plusieurs tâches étaient faites manuellement, avec des risques d’erreurs et une faible traçabilité.',
         result:
-          'La mise en place d’appels API sécurisés et de traitements serveur a automatisé les échanges de données et amélioré la fiabilité globale.',
+          'La mise en place d’appels API sécurisés et de traitements côté serveur a permis d’automatiser les échanges de données et de réduire les erreurs.',
         valueAdded:
-          'J’ai pris en charge le cadrage des formats, la gestion des erreurs et la protection des logiques sensibles.',
+          'J’ai travaillé sur le format des données, la gestion des erreurs et la protection des parties sensibles.',
         linkedProject: { title: '360-content-bridge', path: '/realisations/project-360-content-bridge' },
       },
     ],
     selfReview: [
       'Niveau actuel : débutant, en progression active.',
-      'Place dans mon profil : compétence structurante pour l’évolutivité des produits.',
-      'Vitesse d’acquisition : progressive, renforcée par des cas d’intégration réels.',
-      'Recul : la qualité d’une API se joue autant dans les erreurs et cas limites que dans le chemin nominal.',
+      'Place dans mon profil : compétence importante pour faire évoluer un produit proprement.',
+      'Vitesse d’acquisition : je progresse au fil des cas d’intégration rencontrés.',
+      'Avec le recul : une API ne se juge pas seulement quand tout va bien, mais aussi sur sa façon de gérer les erreurs.',
     ],
     evolution: [
-      'Objectif moyen terme : formaliser davantage les contrats et conventions de version.',
-      'Autoformation prévue : approfondissement sur la résilience des intégrations et l’observabilité.',
+      'Objectif moyen terme : mieux formaliser les formats d’échange et les versions.',
+      'Autoformation prévue : continuer à apprendre à rendre les intégrations plus fiables et plus faciles à suivre.',
     ],
     projects: [
       { title: '360-content-bridge', path: '/realisations/project-360-content-bridge' },
@@ -134,7 +134,7 @@ const COMPETENCES: CompetenceDetail[] = [
     title: 'Performance web et optimisation front',
     definition: [
       'Je définis cette compétence comme l’ensemble des actions qui réduisent le temps de chargement et améliorent la perception utilisateur.',
-      'La performance est une exigence actuelle, à la fois UX, SEO et économique.',
+      'La performance est aujourd’hui un point important, à la fois pour l’expérience utilisateur, la visibilité web et les coûts.',
     ],
     anecdotes: [
       {
@@ -155,8 +155,8 @@ const COMPETENCES: CompetenceDetail[] = [
       'Recul : il faut éviter les optimisations isolées et privilégier une stratégie continue.',
     ],
     evolution: [
-      'Objectif moyen terme : systématiser des seuils de performance dans la CI/CD.',
-      'Autoformation prévue : approfondir Core Web Vitals et budgets de performance.',
+      'Objectif moyen terme : définir des seuils de performance clairs dans la CI/CD.',
+      'Autoformation prévue : continuer à progresser sur les indicateurs simples de performance web.',
     ],
     projects: [
       { title: '360-media-auto-cleanup', path: '/realisations/project-360-media-auto-cleanup' },
@@ -191,7 +191,7 @@ const COMPETENCES: CompetenceDetail[] = [
     ],
     evolution: [
       'Objectif moyen terme : mieux formaliser les scénarios de réponse incident.',
-      'Formation prévue : approfondir les pratiques de sécurité applicative orientées DevSecOps.',
+      'Formation prévue : approfondir les bonnes pratiques de sécurité appliquées au développement web.',
     ],
     projects: [{ title: '360tranquilité', path: '/realisations/project-360tranquilite' }],
   },
@@ -222,8 +222,8 @@ const COMPETENCES: CompetenceDetail[] = [
       'Recul : la priorisation doit rester transparente pour éviter les incompréhensions côté métier.',
     ],
     evolution: [
-      'Objectif moyen terme : mieux outiller la mesure d’effort et de valeur livrée.',
-      'Formation prévue : approfondir les cadres agile de pilotage multi-projets.',
+      'Objectif moyen terme : mieux mesurer l’effort fourni et la valeur livrée.',
+      'Formation prévue : approfondir les méthodes agiles de pilotage sur plusieurs projets.',
     ],
     projects: [
       { title: 'v0-vastrion-mobile-prototype', path: '/realisations/project-v0-vastrion-mobile-prototype' },
@@ -258,7 +258,7 @@ const COMPETENCES: CompetenceDetail[] = [
     ],
     evolution: [
       'Objectif moyen terme : standardiser mes supports de communication technique.',
-      'Autoformation prévue : approfondir les techniques de facilitation et de synthèse décisionnelle.',
+      'Autoformation prévue : approfondir les techniques d’animation d’équipe et de synthèse des décisions.',
     ],
     projects: [
       { title: 'crewai-projet-agent-voyage', path: '/realisations/project-crewai-voyage' },
@@ -293,7 +293,7 @@ const COMPETENCES: CompetenceDetail[] = [
     ],
     evolution: [
       'Objectif moyen terme : renforcer la validation par tests utilisateurs.',
-      'Autoformation prévue : approfondir les référentiels d’accessibilité et les méthodes UX de terrain.',
+      'Autoformation prévue : approfondir les bases d’accessibilité et les méthodes UX appliquées sur le terrain.',
     ],
     projects: [
       { title: 'v0-vastrion-mobile-prototype', path: '/realisations/project-v0-vastrion-mobile-prototype' },
@@ -305,7 +305,7 @@ const COMPETENCES: CompetenceDetail[] = [
     order: 'Compétence détaillée 9/10',
     title: 'Automatisation et amélioration continue',
     definition: [
-      'Je définis cette compétence comme la capacité à transformer des tâches manuelles fragiles en processus fiables, mesurables et répétables.',
+      'Je définis cette compétence comme la capacité à transformer des tâches manuelles fragiles en processus plus fiables et reproductibles.',
       'Dans l’ingénierie logicielle actuelle, l’automatisation est indispensable pour soutenir la cadence sans sacrifier la qualité.',
     ],
     anecdotes: [
@@ -324,11 +324,11 @@ const COMPETENCES: CompetenceDetail[] = [
       'Niveau actuel : débutant, en progression active.',
       'Place dans mon profil : compétence accélératrice de qualité et de productivité.',
       'Vitesse d’acquisition : rapide sur les derniers mois grâce à la pratique CI/CD.',
-      'Recul : l’automatisation utile est celle qui reste compréhensible, diagnostiquable et maintenable.',
+      'Recul : une automatisation utile doit rester compréhensible, facile à suivre et simple à maintenir.',
     ],
     evolution: [
       'Objectif moyen terme : enrichir les contrôles post-déploiement et le suivi de qualité.',
-      'Autoformation prévue : approfondir les pratiques DevOps/observabilité adaptées aux projets web.',
+      'Autoformation prévue : approfondir les pratiques DevOps et les outils de suivi adaptés aux projets web.',
     ],
     projects: [
       { title: '360-media-auto-cleanup', path: '/realisations/project-360-media-auto-cleanup' },
@@ -340,8 +340,8 @@ const COMPETENCES: CompetenceDetail[] = [
     order: 'Compétence détaillée 10/10',
     title: 'Analyse critique et prise de décision technique',
     definition: [
-      'Je définis cette compétence comme la capacité à choisir entre plusieurs options en tenant compte du temps, du coût, du risque et de la maintenabilité.',
-      'Dans des contextes contraints, cette compétence conditionne la viabilité des projets à moyen terme.',
+      'Je définis cette compétence comme la capacité à choisir entre plusieurs options en tenant compte du temps, du coût, du risque et de la maintenance.',
+      'Dans un contexte contraint, cette compétence aide à garder un projet viable sur la durée.',
     ],
     anecdotes: [
       {
@@ -359,11 +359,11 @@ const COMPETENCES: CompetenceDetail[] = [
       'Niveau actuel : intermédiaire, avec progression régulière.',
       'Place dans mon profil : compétence de pilotage stratégique des choix techniques.',
       'Vitesse d’acquisition : progressive, enrichie par des contextes variés.',
-      'Recul : décider vite est utile, mais décider juste reste la priorité.',
+      'Recul : décider vite est utile, mais décider juste reste le plus important.',
     ],
     evolution: [
       'Objectif moyen terme : appuyer systématiquement les décisions sur des indicateurs chiffrés.',
-      'Autoformation prévue : approfondir l’évaluation d’architecture et la gestion de trade-offs.',
+      'Autoformation prévue : approfondir l’évaluation d’architecture et la gestion des compromis techniques.',
     ],
     projects: [
       { title: 'crewai-projet-agent-voyage', path: '/realisations/project-crewai-voyage' },
@@ -376,7 +376,7 @@ const COMPETENCES: CompetenceDetail[] = [
   selector: 'app-competence-detail-page',
   template: `
     <section class="page-section">
-      <button class="btn btn--ghost btn--back" type="button" (click)="goBack()">Retour à la page précédente</button>
+      <button class="btn btn--ghost btn--back" type="button" (click)="goBack()">&lt; Retour</button>
 
       @if (competence; as skill) {
         <header class="section-header">
@@ -393,17 +393,19 @@ const COMPETENCES: CompetenceDetail[] = [
 
         <article class="panel detail-block">
           <h2>2. Mes éléments de preuve</h2>
-          <ul class="detail-list detail-list--rich">
+          <ul class="detail-list detail-list--rich detail-list--cards">
             @for (anecdote of skill.anecdotes; track anecdote.title) {
               <li>
                 <h3>{{ anecdote.title }}</h3>
-                <p><strong>Contexte :</strong> {{ anecdote.situation }}</p>
-                <p><strong>Résultat :</strong> {{ anecdote.result }}</p>
-                <p><strong>Valeur ajoutée :</strong> {{ anecdote.valueAdded }}</p>
-                <p>
-                  <strong>Réalisation liée :</strong>
-                  <a [href]="anecdote.linkedProject.path">{{ anecdote.linkedProject.title }}</a>
-                </p>
+                <div class="detail-points">
+                  <p><strong>Contexte :</strong> {{ anecdote.situation }}</p>
+                  <p><strong>Résultat :</strong> {{ anecdote.result }}</p>
+                  <p><strong>Valeur ajoutée :</strong> {{ anecdote.valueAdded }}</p>
+                  <p>
+                    <strong>Réalisation liée :</strong>
+                    <a [href]="anecdote.linkedProject.path">{{ anecdote.linkedProject.title }}</a>
+                  </p>
+                </div>
               </li>
             }
           </ul>

@@ -35,7 +35,7 @@ const REALISATIONS: RealisationDetail[] = [
     objectivesContextRisks: [
       'Objectif principal : éviter les copier-coller manuels et sécuriser les transferts.',
       'Contexte : besoins de maintenance multi-sites avec des volumes et structures hétérogènes.',
-      'Enjeu : fiabiliser des opérations récurrentes sans alourdir la charge opérationnelle.',
+      'Enjeu : rendre des opérations régulières plus fiables sans compliquer le travail au quotidien.',
       'Risque : perte de cohérence de données en cas de mapping incomplet ou de cas limites non couverts.',
     ],
     steps: [
@@ -50,18 +50,18 @@ const REALISATIONS: RealisationDetail[] = [
       'Utilisateurs back-office : exploitation des fonctions d’import/export.',
     ],
     resultsForMe: [
-      'Montée en compétences sur la robustesse de traitements de données.',
-      'Amélioration de ma capacité à concevoir des outils orientés exploitation.',
+      'J’ai progressé sur la façon de traiter des données sans casser les cas existants.',
+      'J’ai aussi mieux compris comment concevoir un outil utile pour les personnes qui l’utilisent vraiment.',
     ],
     resultsForCompany: [
-      'Réduction des manipulations manuelles et du risque d’erreurs.',
-      'Gain de temps sur les opérations de contenu récurrentes.',
+      'Moins de manipulations manuelles et donc moins de risques d’erreur.',
+      'Gain de temps sur les opérations de contenu répétitives.',
     ],
     futureImmediate: 'Améliorer l’interface utilisateur et renforcer les validations sur cas limites.',
     futureDistance: 'Étendre les options de mapping pour des structures de données plus complexes.',
     futureToday: 'Le plugin est fonctionnel et constitue une base solide, mais encore perfectible sur la robustesse.',
     criticalView:
-      'Je suis satisfait de la valeur opérationnelle livrée. Avec du recul, j’aurais dû anticiper plus tôt certains scénarios d’erreur et renforcer la documentation utilisateur dès la première version.',
+      'Je suis satisfait de l’utilité du projet. Avec le recul, j’aurais dû prévoir plus tôt certains cas d’erreur et mieux documenter l’outil dès la première version.',
     repository: 'https://github.com/imaurelsan/360-content-bridge',
     linkedSkills: [
       { title: 'Architecture web mutualisée (WordPress multisite)', path: '/competences/architecture-web-mutualisee' },
@@ -78,7 +78,7 @@ const REALISATIONS: RealisationDetail[] = [
     objectivesContextRisks: [
       'Objectif principal : réduire le volume de fichiers inutilisés.',
       'Contexte : médiathèques encombrées sur plusieurs projets et coûts de stockage croissants.',
-      'Enjeu : automatiser le nettoyage tout en conservant un niveau élevé de sécurité.',
+      'Enjeu : automatiser le nettoyage sans prendre de risque inutile.',
       'Risque : faux positifs et suppression accidentelle de médias encore utiles.',
     ],
     steps: [
@@ -93,8 +93,8 @@ const REALISATIONS: RealisationDetail[] = [
       'Exploitation : suivi des effets en production.',
     ],
     resultsForMe: [
-      'Approfondissement de mon approche de sécurisation des automatismes.',
-      'Meilleure compréhension des compromis entre performance et sûreté.',
+      'J’ai approfondi ma façon de sécuriser un automatisme.',
+      'J’ai mieux compris l’équilibre entre vitesse, efficacité et prudence.',
     ],
     resultsForCompany: [
       'Réduction du volume de fichiers inutiles.',
@@ -104,7 +104,7 @@ const REALISATIONS: RealisationDetail[] = [
     futureDistance: 'Ajouter des rapports plus détaillés et exploitables par les équipes.',
     futureToday: 'Le plugin est utile en exploitation et déjà générateur de gains concrets.',
     criticalView:
-      'Le projet apporte de la valeur rapidement, mais sa qualité dépend fortement de la précision des règles. C’est un point que je continue d’améliorer en priorité.',
+      'Le projet apporte de la valeur rapidement, mais tout repose sur la qualité des règles mises en place. C’est donc un point que je continue d’améliorer en priorité.',
     repository: 'https://github.com/imaurelsan/360-media-auto-cleanup',
     linkedSkills: [
       { title: 'Architecture web mutualisée (WordPress multisite)', path: '/competences/architecture-web-mutualisee' },
@@ -120,7 +120,7 @@ const REALISATIONS: RealisationDetail[] = [
       '360tranquilité est un plugin WordPress qui centralise des fonctions de sécurité, monitoring et exploitation pour éviter la dispersion des outils.',
     objectivesContextRisks: [
       'Objectif principal : centraliser des besoins opérationnels récurrents dans un socle unique.',
-      'Contexte : empilement d’extensions hétérogènes et manque de vision globale.',
+      'Contexte : trop d’extensions différentes et pas assez de vision d’ensemble.',
       'Enjeu : renforcer la stabilité et la capacité de diagnostic des sites.',
       'Risque : complexité croissante si la modularité et la qualité ne sont pas strictement maintenues.',
     ],
@@ -141,13 +141,13 @@ const REALISATIONS: RealisationDetail[] = [
     ],
     resultsForCompany: [
       'Meilleure centralisation des opérations de surveillance et de sécurité.',
-      'Réduction des dépendances dispersées sur des extensions externes.',
+      'Moins de dépendance à un ensemble d’extensions externes dispersées.',
     ],
     futureImmediate: 'Poursuivre l’amélioration de l’ergonomie et de la cohérence inter-modules.',
     futureDistance: 'Renforcer les scénarios de supervision, alerting et reporting.',
     futureToday: 'Le plugin est déjà exploitable et continue d’évoluer de manière incrémentale.',
     criticalView:
-      'C’est mon projet le plus structurant. Il reste ambitieux et exigeant: la vraie difficulté est de maintenir une qualité homogène à mesure que le périmètre grandit.',
+      'C’est mon projet le plus important aujourd’hui. Il reste ambitieux, et la vraie difficulté est de garder la même qualité à mesure qu’il grandit.',
     repository: 'https://github.com/imaurelsan/360tranquilite',
     linkedSkills: [
       { title: 'Architecture web mutualisée (WordPress multisite)', path: '/competences/architecture-web-mutualisee' },
@@ -164,7 +164,7 @@ const REALISATIONS: RealisationDetail[] = [
     objectivesContextRisks: [
       'Objectif principal : produire des recommandations exploitables et compréhensibles.',
       'Contexte : apprentissage de nouvelles approches IA appliquées à un cas concret.',
-      'Enjeu : transformer une logique expérimentale en résultat utile pour l’utilisateur.',
+      'Enjeu : transformer une idée expérimentale en résultat vraiment utile pour l’utilisateur.',
       'Risque : incohérences de sortie si le cadrage et les garde-fous sont insuffisants.',
     ],
     steps: [
@@ -190,7 +190,7 @@ const REALISATIONS: RealisationDetail[] = [
     futureDistance: 'Explorer des scénarios plus riches et une meilleure personnalisation.',
     futureToday: 'Prototype fonctionnel et exploratoire, utile pour comprendre le potentiel de la technologie.',
     criticalView:
-      'Le projet est volontairement expérimental. Sa valeur repose surtout sur la démarche et l’apprentissage, plus que sur un niveau de maturité produit final.',
+      'Le projet reste volontairement expérimental. Sa valeur vient surtout de la démarche et de ce qu’il m’a appris, plus que d’un produit déjà mature.',
     repository: 'https://github.com/imaurelsan/crewai-projet-agent-voyage',
     linkedSkills: [
       { title: 'Analyse critique et prise de décision', path: '/competences/analyse-critique-decision-technique' },
@@ -207,7 +207,7 @@ const REALISATIONS: RealisationDetail[] = [
     objectivesContextRisks: [
       'Objectif principal : structurer un socle produit pour tester les hypothèses de valeur.',
       'Contexte : phase amont d’un produit en cours de définition.',
-      'Enjeu : concilier rapidité d’exploration et cohérence d’architecture.',
+      'Enjeu : avancer vite sans perdre la cohérence d’ensemble.',
       'Risque : dérive de périmètre et dette technique si les choix initiaux ne sont pas cadrés.',
     ],
     steps: [
@@ -233,7 +233,7 @@ const REALISATIONS: RealisationDetail[] = [
     futureDistance: 'Passer du prototype à une architecture plus industrialisable.',
     futureToday: 'Le projet reste un laboratoire actif plus qu’un produit finalisé.',
     criticalView:
-      'Cette réalisation est volontairement évolutive. Sa force est d’ouvrir des pistes, mais je dois encore transformer ces pistes en trajectoire technique stable.',
+      'Cette réalisation est encore en mouvement. Sa force est d’ouvrir des pistes, mais je dois encore transformer ces idées en base technique plus stable.',
     repository: 'https://github.com/imaurelsan/v0-vastrion-mobile-prototype',
     linkedSkills: [
       { title: 'UX/UI orientée usage', path: '/competences/ux-ui-orientee-usage' },
@@ -247,7 +247,7 @@ const REALISATIONS: RealisationDetail[] = [
   selector: 'app-realisation-detail-page',
   template: `
     <section class="page-section">
-      <button class="btn btn--ghost btn--back" type="button" (click)="goBack()">Retour à la page précédente</button>
+      <button class="btn btn--ghost btn--back" type="button" (click)="goBack()">&lt; Retour</button>
 
       @if (realisation; as project) {
         <header class="section-header">
@@ -287,25 +287,28 @@ const REALISATIONS: RealisationDetail[] = [
           </ul>
         </article>
 
-        <div class="two-columns">
-          <article class="panel detail-block">
-            <h2>5. Résultats pour moi</h2>
+        <article class="panel detail-block">
+          <h2>5. Résultats</h2>
+          <div class="two-columns two-columns--details">
+            <div class="detail-result-card">
+              <h3>Pour moi</h3>
             <ul class="detail-list">
               @for (item of project.resultsForMe; track item) {
                 <li>{{ item }}</li>
               }
             </ul>
-          </article>
+            </div>
 
-          <article class="panel detail-block">
-            <h2>5. Résultats pour l’entreprise</h2>
+            <div class="detail-result-card">
+              <h3>Pour l'entreprise</h3>
             <ul class="detail-list">
               @for (item of project.resultsForCompany; track item) {
                 <li>{{ item }}</li>
               }
             </ul>
-          </article>
-        </div>
+            </div>
+          </div>
+        </article>
 
         <article class="panel detail-block">
           <h2>6. Lendemains du projet</h2>

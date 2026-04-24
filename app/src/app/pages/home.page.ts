@@ -7,6 +7,17 @@ type FocusArea = {
   description: string;
 };
 
+type GuidingPrinciple = {
+  title: string;
+  description: string;
+};
+
+type StatHighlight = {
+  value: string;
+  title: string;
+  description: string;
+};
+
 type EntryPoint = {
   title: string;
   description: string;
@@ -29,45 +40,53 @@ type Proof = {
       <div class="hero__identity hero__identity--enhanced">
         <div class="hero__portrait">
           <img class="hero__photo" src="assets/images/photo-identite.jpg" alt="Photo d'identité d'Aurel YAHOUEDEOU" />
-          <p class="hero__portrait-note">
-            Profil hybride: designer UI/UX, artiste visuel, lead technique orienté produit et développeur web fullstack junior.
-          </p>
         </div>
 
         <div class="hero__text">
-          <p class="hero__kicker">Ingénieur réseaux, systèmes et sécurité · en reconversion vers l'ingénierie logicielle</p>
+          <p class="hero__kicker">Ingénieur logiciel, avec un socle réseaux, systèmes et sécurité</p>
+          <p class="hero__highlight">Profil hybride : design UI/UX, architecture, sécurité et développement fullstack.</p>
           <h1>Je conçois des solutions web claires, fiables et utiles.</h1>
           <p class="hero__lede">
-            Ce portfolio montre ma façon de travailler: cadrer proprement, livrer avec méthode et relier la technique à
-            la valeur d'usage.
+            Je cadre proprement, je relie la technique à la valeur d'usage et je livre avec méthode.
           </p>
+          <p class="hero__value">J’apporte un regard croisé entre design, architecture et sécurité pour construire des solutions fiables et faciles à comprendre.</p>
+
+          <div class="hero__divider" aria-hidden="true"></div>
 
           <div class="hero__actions">
             <a routerLink="/realisations" class="btn btn--primary">Entrer par les réalisations</a>
             <a routerLink="/competences" class="btn btn--ghost">Comparer mes compétences</a>
           </div>
 
-          <ul class="hero__signals">
-            @for (signal of signals; track signal) {
-              <li>{{ signal }}</li>
-            }
-          </ul>
+          <div class="hero__principles">
+            <p class="hero__principles-title">Ce qui guide mes décisions techniques</p>
+            <ul class="hero__signals">
+              @for (signal of guidingPrinciples; track signal.title) {
+                <li>
+                  <strong>{{ signal.title }}</strong>
+                  <span>{{ signal.description }}</span>
+                </li>
+              }
+            </ul>
+          </div>
         </div>
       </div>
 
-      <div class="hero__stats">
-        <article class="stat-card stat-card--pulse">
-          <h2>5</h2>
-          <p>réalisations détaillées et reliées aux compétences</p>
-        </article>
-        <article class="stat-card stat-card--pulse">
-          <h2>10</h2>
-          <p>compétences comparées pour rendre le niveau lisible</p>
-        </article>
-        <article class="stat-card stat-card--pulse">
-          <h2>1</h2>
-          <p>cap clair: contribuer vite aujourd'hui, progresser vite demain</p>
-        </article>
+      <div class="hero__stats-wrap">
+        <div class="hero__stats-intro">
+          <p class="section-header__kicker">En un coup d'œil</p>
+          <p class="intro-text intro-text--tight">Ce que vous trouverez dans ce portfolio pour évaluer mon niveau, ma méthode et mon potentiel.</p>
+        </div>
+
+        <div class="hero__stats">
+          @for (stat of statHighlights; track stat.title) {
+            <article class="stat-card stat-card--pulse">
+              <h2>{{ stat.value }}</h2>
+              <h3>{{ stat.title }}</h3>
+              <p>{{ stat.description }}</p>
+            </article>
+          }
+        </div>
       </div>
     </section>
 
@@ -131,10 +150,37 @@ type Proof = {
   `,
 })
 export class HomePage {
-  protected readonly signals = [
-    'Architecture web mutualisée',
-    'Industrialisation pragmatique',
-    'Décision technique expliquée',
+  protected readonly guidingPrinciples: GuidingPrinciple[] = [
+    {
+      title: 'Design vers architecture',
+      description: 'Je pars d’abord de l’usage avant de penser la structure.',
+    },
+    {
+      title: 'Sécurité vers développement',
+      description: 'Je préfère poser une base saine dès le départ plutôt que corriger trop tard.',
+    },
+    {
+      title: 'Produit vers technique',
+      description: 'Je prends mes décisions en gardant le besoin réel et la clarté en tête.',
+    },
+  ];
+
+  protected readonly statHighlights: StatHighlight[] = [
+    {
+      value: '5',
+      title: 'Réalisations détaillées',
+      description: 'Des preuves concrètes de ma méthode et de mes résultats.',
+    },
+    {
+      value: '10',
+      title: 'Compétences comparées',
+      description: 'Un positionnement clair et honnête sur mes forces actuelles.',
+    },
+    {
+      value: '1',
+      title: 'Fil conducteur',
+      description: 'Design vers architecture vers sécurité vers développement.',
+    },
   ];
 
   protected readonly focusAreas: FocusArea[] = [
@@ -142,44 +188,44 @@ export class HomePage {
       title: 'Concevoir des bases techniques sobres',
       metric: 'Architecture',
       description:
-        'Je privilégie des structures réutilisables, des dépendances maîtrisées et des choix proportionnés au contexte métier.',
+        'Je préfère des bases simples, réutilisables et adaptées au besoin réel.',
     },
     {
       title: 'Raccourcir les boucles de maintenance',
-      metric: 'Industrialisation',
+      metric: 'Méthode',
       description:
-        'J’automatise ce qui ralentit réellement l’équipe: déploiement, nettoyage, qualité d’exécution et tâches répétitives.',
+        'J’automatise ce qui fait perdre du temps : déploiement, nettoyage et tâches répétitives.',
     },
     {
       title: 'Relier technique, usage et responsabilité',
       metric: 'Impact',
       description:
-        'Je cherche des solutions que l’on peut défendre à la fois sur le plan technique, économique et humain.',
+        'Je cherche des solutions qui ont du sens à la fois pour l’équipe, pour l’usage et pour le temps passé.',
     },
   ];
 
   protected readonly entryPoints: EntryPoint[] = [
     {
       title: 'Comprendre mon profil et mes valeurs',
-      description: 'Pour situer mon projet professionnel, mes repères de travail et mon positionnement d’ingénierie.',
+      description: 'Pour comprendre d’où je viens, comment je travaille et ce que je cherche aujourd’hui.',
       path: '/presentation',
       cta: 'Ouvrir la présentation',
     },
     {
       title: 'Comparer mes compétences entre elles',
-      description: 'Pour voir rapidement les compétences où je suis le plus à l’aise aujourd’hui, celles que je consolide encore et leur articulation.',
+      description: 'Pour voir rapidement mes points forts actuels et les domaines où je progresse encore.',
       path: '/competences',
       cta: 'Voir la cartographie',
     },
     {
       title: 'Entrer par les preuves projets',
-      description: 'Pour évaluer mon niveau à travers des réalisations concrètes, leurs contraintes et les résultats obtenus.',
+      description: 'Pour juger mon niveau à partir de projets concrets, de leur contexte et de leurs résultats.',
       path: '/realisations',
       cta: 'Voir les réalisations',
     },
     {
       title: 'Lire mon évolution dans le temps',
-      description: 'Pour suivre la logique de mon parcours sans réduire le site à une simple chronologie de CV.',
+      description: 'Pour suivre mon évolution sans réduire le site à une simple suite de dates.',
       path: '/parcours',
       cta: 'Voir le parcours',
     },
@@ -190,18 +236,19 @@ export class HomePage {
       tag: 'Maintenance à l’échelle',
       title: '360-content-bridge',
       impact: 'Un plugin pensé pour accélérer l’import, l’export et la maintenance de contenus WordPress à grande échelle.',
+
       path: '/realisations/project-360-content-bridge',
     },
     {
       tag: 'Réduction de coûts',
       title: '360-media-auto-cleanup',
-      impact: 'Une approche outillée pour diminuer le poids des instances et fiabiliser le nettoyage des médias orphelins.',
+      impact: 'Un outil pensé pour alléger les sites et rendre le nettoyage des médias plus sûr.',
       path: '/realisations/project-360-media-auto-cleanup',
     },
     {
       tag: 'Sécurité et exploitation',
       title: '360tranquilité',
-      impact: 'Un socle open source combinant sécurité, surveillance et opérations pour des environnements WordPress exposés.',
+      impact: 'Un socle open source qui réunit sécurité, suivi et outils utiles pour des sites WordPress exposés.',
       path: '/realisations/project-360tranquilite',
     },
   ];
