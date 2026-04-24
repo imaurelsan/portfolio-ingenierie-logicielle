@@ -7,6 +7,7 @@ type Project = {
   summary: string;
   keyMetric: string;
   visualHint: string;
+  screenshot: string;
   repository: string;
   relatedSkills: Array<{ title: string; path: string }>;
 };
@@ -23,10 +24,9 @@ type Project = {
       <div class="cards-grid">
         @for (project of projects; track project.title) {
           <article class="card card--project" [id]="project.slug">
-            <div class="project-visual">
-              <p>{{ project.visualHint }}</p>
-              <span>Zone de capture projet (à remplacer)</span>
-            </div>
+            <figure class="project-visual">
+              <img [src]="project.screenshot" [alt]="'Capture — ' + project.title" />
+            </figure>
             <p class="chip metric-chip">{{ project.keyMetric }}</p>
             <h2>{{ project.title }}</h2>
             <p class="project-tagline">{{ project.tagline }}</p>
@@ -58,6 +58,7 @@ export class RealisationsPage {
     {
       slug: 'project-360-content-bridge',
       title: '360-content-bridge',
+      screenshot: 'assets/images/screenshots-realisations/360-content-bridge.png',
       tagline: 'Rendre les transferts de contenu plus sûrs et plus rapides.',
       summary: "Plugin d'import/export WordPress conçu pour faciliter la maintenance de contenus sur plusieurs sites.",
       keyMetric: '-40% temps opérationnel estimé',
@@ -81,6 +82,7 @@ export class RealisationsPage {
     {
       slug: 'project-360-media-auto-cleanup',
       title: '360-media-auto-cleanup',
+      screenshot: 'assets/images/screenshots-realisations/360-media-auto-cleanup.png',
       tagline: 'Nettoyer sans casser : supprimer les médias inutiles avec prudence.',
       summary: "Plugin de nettoyage des médias orphelins pour alléger les sites et réduire le stockage inutile.",
       keyMetric: '-25% stockage estimé',
@@ -104,6 +106,7 @@ export class RealisationsPage {
     {
       slug: 'project-360tranquilite',
       title: '360tranquilité',
+      screenshot: 'assets/images/screenshots-realisations/360-tranquillite.png',
       tagline: 'Réunir sécurité, suivi et exploitation dans un seul outil.',
       summary: 'Plugin WordPress open source qui centralise des fonctions utiles pour la sécurité et le suivi.',
       keyMetric: '+1 socle opérationnel centralisé',
@@ -127,6 +130,7 @@ export class RealisationsPage {
     {
       slug: 'project-crewai-voyage',
       title: 'crewai-projet-agent-voyage',
+      screenshot: 'assets/images/screenshots-realisations/travel-planner.png',
       tagline: 'Transformer une idée IA en parcours simple pour l’utilisateur.',
       summary: "Agent IA de planification de voyage pensé pour proposer des scénarios clairs et utiles.",
       keyMetric: 'Prototype fonctionnel en itérations courtes',
@@ -150,6 +154,7 @@ export class RealisationsPage {
     {
       slug: 'project-v0-vastrion-mobile-prototype',
       title: 'v0-vastrion-mobile-prototype',
+      screenshot: 'assets/images/screenshots-realisations/vastrion-super-app.png',
       tagline: 'Poser une base produit claire avant d’aller plus loin.',
       summary: 'Prototype d’une marketplace de services, encore en cours de construction.',
       keyMetric: 'MVP cadré en 4 parcours prioritaires',
