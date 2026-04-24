@@ -72,6 +72,9 @@ portfolio-ingenierie-logicielle/
 │  │  └─ assets/
 │  │     ├─ fonts/
 │  │     └─ images/
+│  │        ├─ screenshots-realisations/
+│  │        ├─ entreprises/
+│  │        └─ formations/
 │  └─ dist/app/browser/
 ├─ docs/
 │  ├─ devops-hostinger.md
