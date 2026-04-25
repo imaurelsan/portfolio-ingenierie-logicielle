@@ -1,4 +1,4 @@
-name: CI/CD Portfolio Angular
+﻿name: CI/CD Portfolio Angular
 
 on:
   push:
@@ -115,56 +115,75 @@ jobs:
           test -f dist/app/browser/assets/images/photo-identite.jpg
           test -f dist/app/browser/assets/build-info.json
 
-      - name: Normalize FTP target directory
+      - name: Install lftp
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y lftp
+
+      - name: Deploy via FTPS with retries
         env:
+          HOSTINGER_FTP_SERVER: ${{ secrets.HOSTINGER_FTP_SERVER }}
+          HOSTINGER_FTP_USERNAME: ${{ secrets.HOSTINGER_FTP_USERNAME }}
+          HOSTINGER_FTP_PASSWORD: ${{ secrets.HOSTINGER_FTP_PASSWORD }}
           HOSTINGER_FTP_TARGET_DIR: ${{ secrets.HOSTINGER_FTP_TARGET_DIR }}
           ALLOW_FTP_ROOT_DEPLOY: ${{ secrets.ALLOW_FTP_ROOT_DEPLOY }}
         run: |
-          target="${HOSTINGER_FTP_TARGET_DIR:-/portfolio/}"
-          if [ "$target" = "/" ] && [ "${ALLOW_FTP_ROOT_DEPLOY}" != "true" ]; then
-            target="/portfolio/"
+          preferred_target="${HOSTINGER_FTP_TARGET_DIR:-/portfolio/}"
+          if [ "$preferred_target" = "/" ] && [ "${ALLOW_FTP_ROOT_DEPLOY}" != "true" ]; then
+            echo "Root deploy not allowed. Falling back to /portfolio/."
+            preferred_target="/portfolio/"
           fi
-          # Normalise : slash initial garanti, slash final garanti
-          target="/${target#/}"
-          target="${target%/}/"
-          echo "FTP_TARGET_DIR=${target}" >> "$GITHUB_ENV"
-          echo "Resolved FTP target: ${target}"
 
-      - name: Deploy via FTP
-        uses: SamKirkland/FTP-Deploy-Action@v4
-        with:
-          server: ${{ secrets.HOSTINGER_FTP_SERVER }}
-          username: ${{ secrets.HOSTINGER_FTP_USERNAME }}
-          password: ${{ secrets.HOSTINGER_FTP_PASSWORD }}
-          server-dir: ${{ env.FTP_TARGET_DIR }}
-          local-dir: ./app/dist/app/browser/
-          protocol: ftps
-          port: 21
-          security: loose
-          log-level: verbose
-          timeout: 30000
-          exclude: |
-            **/.git*
-            **/.git*/**
-            **/node_modules/**
-      - name: Verify deploy — check build-info via HTTP
-        continue-on-error: true
-        run: |
-          echo "Waiting 15s for FTP propagation..."
-          sleep 15
-          found=0
-          for attempt in 1 2 3 4 5; do
-            response=$(curl -fsSL -H "Cache-Control: no-cache" \
-              "https://portfolio.yaurel.com/assets/build-info.json?v=${{ github.sha }}&a=${attempt}" || true)
-            echo "Attempt ${attempt}: ${response}"
-            if echo "$response" | grep -q "${{ github.sha }}"; then
-              found=1
+          target_dir="$preferred_target"
+          echo "Using FTPS target: ${target_dir}"
+
+          success=0
+          for attempt in 1 2 3; do
+            echo "FTPS deploy attempt ${attempt}"
+
+            echo "Trying FTPS mirror to ${target_dir}"
+            lftp -u "$HOSTINGER_FTP_USERNAME","$HOSTINGER_FTP_PASSWORD" "$HOSTINGER_FTP_SERVER" -e "set ftp:ssl-force true; set ftp:ssl-protect-data true; set ftp:passive-mode true; set ftp:prefer-epsv false; set ssl:verify-certificate no; set net:timeout 30; set net:max-retries 3; set net:reconnect-interval-base 5; set net:reconnect-interval-max 20; set cmd:fail-exit yes; mirror -R --delete --verbose --parallel=1 --ignore-time --transfer-all ./dist/app/browser/ ${target_dir}; bye" && success=1 || true
+
+            if [ "$success" -eq 1 ]; then
+              echo "FTPS deploy completed."
               break
             fi
+
             sleep 10
           done
+
+          if [ "$success" -ne 1 ]; then
+            echo "Deploy failed after 3 attempts."
+            exit 1
+          fi
+
+      - name: Verify build-info on FTP target
+        env:
+          HOSTINGER_FTP_SERVER: ${{ secrets.HOSTINGER_FTP_SERVER }}
+          HOSTINGER_FTP_USERNAME: ${{ secrets.HOSTINGER_FTP_USERNAME }}
+          HOSTINGER_FTP_PASSWORD: ${{ secrets.HOSTINGER_FTP_PASSWORD }}
+          HOSTINGER_FTP_TARGET_DIR: ${{ secrets.HOSTINGER_FTP_TARGET_DIR }}
+          ALLOW_FTP_ROOT_DEPLOY: ${{ secrets.ALLOW_FTP_ROOT_DEPLOY }}
+        run: |
+          preferred_target="${HOSTINGER_FTP_TARGET_DIR:-/portfolio}"
+          if [ "$preferred_target" = "/" ] && [ "${ALLOW_FTP_ROOT_DEPLOY}" != "true" ]; then
+            preferred_target="/portfolio"
+          fi
+          target_dir="$preferred_target"
+          target_dir="${target_dir%/}"
+          if [ -z "$target_dir" ]; then target_dir="/"; fi
+
+          found=0
+          remote_info=$(lftp -u "$HOSTINGER_FTP_USERNAME","$HOSTINGER_FTP_PASSWORD" "$HOSTINGER_FTP_SERVER" -e "set ftp:ssl-force true; set ftp:ssl-protect-data true; set ftp:passive-mode true; set ftp:prefer-epsv false; set ssl:verify-certificate no; set net:timeout 30; set cmd:fail-exit yes; cat ${target_dir}/assets/build-info.json; bye" || true)
+          echo "Remote FTP build-info [${target_dir}]: ${remote_info}"
+
+          if echo "$remote_info" | grep -q "${{ github.sha }}"; then
+            found=1
+          fi
+
           if [ "$found" -ne 1 ]; then
-            echo "::warning::build-info.json ne contient pas encore le commit courant (cache possible)."
+            echo "No FTP target contains current commit metadata."
+            exit 1
           fi
 
       - name: Verify live site serves current commit (non-blocking)
