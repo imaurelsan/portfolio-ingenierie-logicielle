@@ -195,6 +195,21 @@ a {
 	grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
+/* Cartes compétences : même hauteur + jauge/bouton en bas */
+.card--skill {
+	display: flex;
+	flex-direction: column;
+}
+
+.card__body {
+	flex: 1;
+}
+
+.card__footer {
+	margin-top: auto;
+	padding-top: 0.3rem;
+}
+
 .card p {
 	margin: 0;
 	color: var(--c-muted);
@@ -306,6 +321,11 @@ a {
 		height: 180px;
 		object-fit: cover;
 		object-position: top;
+		transition: transform 420ms ease;
+	}
+
+	&:hover img {
+		transform: scale(1.1);
 	}
 }
 
@@ -1280,42 +1300,82 @@ a {
 	gap: 0.95rem;
 }
 
-.contact-form label {
-	display: grid;
-	gap: 0.35rem;
-	font-weight: 600;
-	font-size: 0.9rem;
+/* Labels flottants : le label remonte sur la bordure du champ quand il y a du contenu ou le focus */
+.field-float {
+	position: relative;
 }
 
-.contact-form input,
-.contact-form textarea {
+.field-float input,
+.field-float textarea {
 	width: 100%;
 	border-radius: 10px;
 	border: 1px solid color-mix(in srgb, var(--c-muted) 45%, transparent);
-	padding: 0.62rem 0.72rem;
+	padding: 1.15rem 0.72rem 0.42rem;
 	font: inherit;
 	color: var(--c-text);
 	background: color-mix(in srgb, var(--c-surface) 90%, transparent);
 	transition: border-color 160ms ease, box-shadow 160ms ease, background-color 160ms ease;
 }
 
-.contact-form input::placeholder,
-.contact-form textarea::placeholder {
-	color: color-mix(in srgb, var(--c-muted) 88%, transparent);
+.field-float label {
+	position: absolute;
+	top: 50%;
+	left: 0.78rem;
+	transform: translateY(-50%);
+	font-size: 0.9rem;
+	font-weight: 600;
+	color: var(--c-muted);
+	background: transparent;
+	padding: 0 0.28rem;
+	pointer-events: none;
+	transition: top 160ms ease, transform 160ms ease, font-size 160ms ease, color 160ms ease;
+	line-height: 1;
 }
 
-.contact-form input:focus-visible,
-.contact-form textarea:focus-visible {
+.field-float--textarea label {
+	top: 1.1rem;
+	transform: none;
+}
+
+/* Le label remonte quand le champ a du contenu ou le focus */
+.field-float input:focus ~ label,
+.field-float input:not(:placeholder-shown) ~ label {
+	top: 0;
+	transform: translateY(-50%);
+	font-size: 0.72rem;
+	color: var(--c-accent);
+	background: var(--c-surface);
+}
+
+.field-float textarea:focus ~ label,
+.field-float textarea:not(:placeholder-shown) ~ label {
+	top: 0;
+	transform: translateY(-50%);
+	font-size: 0.72rem;
+	color: var(--c-accent);
+	background: var(--c-surface);
+}
+
+.field-float input:focus-visible,
+.field-float textarea:focus-visible {
 	outline: none;
 	border-color: color-mix(in srgb, var(--c-accent) 75%, transparent);
 	box-shadow: 0 0 0 3px color-mix(in srgb, var(--c-accent) 20%, transparent);
 	background: color-mix(in srgb, var(--c-surface-soft) 92%, transparent);
 }
 
-.contact-form input:disabled,
-.contact-form textarea:disabled {
+.field-float input:disabled,
+.field-float textarea:disabled {
 	opacity: 0.6;
 	cursor: not-allowed;
+}
+
+/* Compat thème clair : fond du label correspondant à la surface */
+body.theme-light .field-float input:focus ~ label,
+body.theme-light .field-float input:not(:placeholder-shown) ~ label,
+body.theme-light .field-float textarea:focus ~ label,
+body.theme-light .field-float textarea:not(:placeholder-shown) ~ label {
+	background: var(--c-surface);
 }
 
 .form-status {
@@ -1510,5 +1570,100 @@ a {
 
 	.journey-item::before {
 		display: none;
+	}
+}
+
+/* ===== Tech stack badges ===== */
+.tech-stack {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.65rem;
+	margin-top: 0.75rem;
+}
+
+.tech-badge {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.42rem;
+	padding: 0.34rem 0.72rem;
+	border-radius: 999px;
+	border: 1px solid color-mix(in srgb, var(--c-muted) 38%, transparent);
+	background: color-mix(in srgb, var(--c-surface-soft) 82%, transparent);
+	font-size: 0.82rem;
+	font-weight: 600;
+	color: var(--c-text);
+}
+
+.tech-badge__icon {
+	width: 16px;
+	height: 16px;
+	object-fit: contain;
+	flex-shrink: 0;
+}
+
+body.theme-light .tech-badge__icon {
+	filter: none;
+}
+
+/* ===== Navigation mobile en barre basse ===== */
+.mobile-bottom-nav {
+	display: none;
+}
+
+@media (max-width: 760px) {
+	.app-main {
+		padding-bottom: 5.5rem;
+	}
+
+	.mobile-bottom-nav {
+		display: flex;
+		justify-content: space-around;
+		align-items: center;
+		position: fixed;
+		bottom: 1rem;
+		left: 50%;
+		transform: translateX(-50%);
+		width: calc(100% - 2rem);
+		max-width: 440px;
+		height: 58px;
+		background: color-mix(in srgb, var(--c-accent-deep) 92%, transparent);
+		backdrop-filter: blur(12px);
+		border: 1px solid color-mix(in srgb, var(--c-muted) 28%, transparent);
+		border-radius: 999px;
+		padding: 0 0.5rem;
+		z-index: 900;
+		box-shadow: 0 4px 24px color-mix(in srgb, #000 30%, transparent);
+	}
+
+	.mobile-bottom-nav__item {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		gap: 0.18rem;
+		flex: 1;
+		text-decoration: none;
+		color: color-mix(in srgb, #fff 55%, transparent);
+		font-size: 0.6rem;
+		font-family: 'Montserrat', sans-serif;
+		font-weight: 700;
+		letter-spacing: 0.03em;
+		padding: 0.3rem 0;
+		border-radius: 999px;
+		transition: color 160ms ease;
+
+		svg {
+			width: 20px;
+			height: 20px;
+			fill: currentColor;
+		}
+	}
+
+	.mobile-bottom-nav__item.is-active {
+		color: var(--c-accent);
+	}
+
+	.mobile-bottom-nav__item:hover {
+		color: #ffffff;
 	}
 }

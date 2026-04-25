@@ -15,7 +15,6 @@ import { EmailService } from '../services/email.service';
       <div class="two-columns">
         <div class="contact-card contact-card--contact-info">
           <h2>Coordonnées principales</h2>
-          <p>Je suis disponible pour un poste fullstack junior, et aussi pour des missions freelance bien définies.</p>
 
           <div class="contact-links">
             <a class="contact-link" href="mailto:aurelandyou@gmail.com">
@@ -44,7 +43,6 @@ import { EmailService } from '../services/email.service';
           </div>
 
           <div class="contact-socials">
-            <p class="card-meta-title">Réseaux</p>
             <div class="contact-socials__list">
               <a class="contact-socials__item" href="https://github.com/imaurelsan" target="_blank" rel="noopener" aria-label="GitHub">
               <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .5A12 12 0 0 0 8.2 23.9c.6.1.8-.2.8-.6v-2.2c-3.4.8-4.2-1.4-4.2-1.4-.5-1.3-1.2-1.6-1.2-1.6-1-.7 0-.7 0-.7 1.1 0 1.8 1.1 1.8 1.1 1 .1.5 2.3 3.7 1.6.1-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-6A4.7 4.7 0 0 1 5.5 9c-.1-.3-.6-1.5.1-3 0 0 1-.3 3.3 1.2a11.2 11.2 0 0 1 6.1 0c2.3-1.5 3.3-1.2 3.3-1.2.7 1.5.2 2.7.1 3 .8.8 1.3 1.9 1.3 3.2 0 4.6-2.8 5.6-5.5 6 .4.4.8 1 .8 2v3c0 .4.2.7.8.6A12 12 0 0 0 12 .5Z"/></svg>
@@ -66,25 +64,24 @@ import { EmailService } from '../services/email.service';
 
         <div class="contact-card">
           <h2>Formulaire rapide</h2>
-          <p>Complétez ce formulaire et cliquez sur Envoyer. Je recevrai votre message directement et vous répondrai très bientôt.</p>
-          <p class="intro-text intro-text--tight">Je vous réponds sous 24h maximum.</p>
+          <p class="intro-text intro-text--tight">Je vous répondrai sous 24h maximum.</p>
           <form class="contact-form" (ngSubmit)="sendMessage()">
-            <label>
-              Nom
-              <input type="text" name="name" placeholder="Votre nom complet" [(ngModel)]="name" required [disabled]="isSubmitting" />
-            </label>
-            <label>
-              E-mail
-              <input type="email" name="email" placeholder="votreadresse@email.com" [(ngModel)]="email" required [disabled]="isSubmitting" />
-            </label>
-            <label>
-              Objet
-              <input type="text" name="subject" placeholder="Ex. : candidature, mission freelance, échange" [(ngModel)]="subject" required [disabled]="isSubmitting" />
-            </label>
-            <label>
-              Message
-              <textarea name="message" rows="6" placeholder="Présentez brièvement votre besoin, le contexte et votre délai." [(ngModel)]="message" required [disabled]="isSubmitting"></textarea>
-            </label>
+            <div class="field-float">
+              <input type="text" id="f-name" name="name" placeholder=" " [(ngModel)]="name" required [disabled]="isSubmitting" />
+              <label for="f-name">Nom</label>
+            </div>
+            <div class="field-float">
+              <input type="email" id="f-email" name="email" placeholder=" " [(ngModel)]="email" required [disabled]="isSubmitting" />
+              <label for="f-email">E-mail</label>
+            </div>
+            <div class="field-float">
+              <input type="text" id="f-subject" name="subject" placeholder=" " [(ngModel)]="subject" required [disabled]="isSubmitting" />
+              <label for="f-subject">Objet</label>
+            </div>
+            <div class="field-float field-float--textarea">
+              <textarea id="f-message" name="message" rows="6" placeholder=" " [(ngModel)]="message" required [disabled]="isSubmitting"></textarea>
+              <label for="f-message">Message</label>
+            </div>
 
             @if (statusMessage) {
               <div class="form-status" [class.form-status--success]="isSuccess" [class.form-status--error]="!isSuccess">

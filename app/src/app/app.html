@@ -131,6 +131,24 @@
     <router-outlet></router-outlet>
   </main>
 
+  <!-- Navigation mobile : barre d'icônes en bas d'écran -->
+  <nav class="mobile-bottom-nav" aria-label="Navigation mobile">
+    @for (link of navLinks; track link.path) {
+      <a
+        class="mobile-bottom-nav__item"
+        [routerLink]="link.path"
+        routerLinkActive="is-active"
+        [routerLinkActiveOptions]="{ exact: link.path === '/' }"
+        [attr.aria-label]="link.label"
+      >
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path [attr.d]="link.iconPath" />
+        </svg>
+        <span>{{ link.label }}</span>
+      </a>
+    }
+  </nav>
+
   <footer class="app-footer">
     <div class="footer-socials" aria-label="Réseaux sociaux">
       <a href="https://www.linkedin.com/in/aurel-yahouedeou/" target="_blank" rel="noopener" aria-label="LinkedIn">

@@ -40,15 +40,19 @@ type SkillFilter = 'Tous' | 'Technique' | 'Transversal';
 
       <div class="cards-grid cards-grid--skills">
         @for (skill of filteredSkills; track skill.title) {
-          <article class="card">
-            <p class="chip">{{ skill.domain }}</p>
-            <h2>{{ skill.title }}</h2>
-            <p>Niveau actuel : <strong>{{ skill.level }}</strong></p>
-            <p class="skill-note">{{ skill.note }}</p>
-            <div class="skill-meter" role="presentation" aria-hidden="true">
-              <span [style.--progress-width.%]="skill.progress"></span>
+          <article class="card card--skill">
+            <div class="card__body">
+              <p class="chip">{{ skill.domain }}</p>
+              <h2>{{ skill.title }}</h2>
+              <p>Niveau actuel : <strong>{{ skill.level }}</strong></p>
+              <p class="skill-note">{{ skill.note }}</p>
             </div>
-            <a class="card-link" [href]="'/competences/' + skill.slug">Voir le détail</a>
+            <div class="card__footer">
+              <div class="skill-meter" role="presentation" aria-hidden="true">
+                <span [style.--progress-width.%]="skill.progress"></span>
+              </div>
+              <a class="card-link" [href]="'/competences/' + skill.slug">Voir le détail</a>
+            </div>
           </article>
         }
       </div>

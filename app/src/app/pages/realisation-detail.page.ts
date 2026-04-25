@@ -2,6 +2,11 @@ import { Location } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
+type TechBadge = {
+  name: string;
+  iconUrl: string;
+};
+
 type LinkedSkill = {
   title: string;
   path: string;
@@ -23,6 +28,7 @@ type RealisationDetail = {
   futureToday: string;
   criticalView: string;
   repository: string;
+  techStack: TechBadge[];
   linkedSkills: LinkedSkill[];
 };
 
@@ -65,6 +71,12 @@ const REALISATIONS: RealisationDetail[] = [
     criticalView:
       'Je suis satisfait de l’utilité du projet. Avec le recul, j’aurais dû prévoir plus tôt certains cas d’erreur et mieux documenter l’outil dès la première version.',
     repository: 'https://github.com/imaurelsan/360-content-bridge',
+    techStack: [
+      { name: 'PHP', iconUrl: 'https://cdn.simpleicons.org/php/ffffff' },
+      { name: 'WordPress', iconUrl: 'https://cdn.simpleicons.org/wordpress/ffffff' },
+      { name: 'JavaScript', iconUrl: 'https://cdn.simpleicons.org/javascript/ffffff' },
+      { name: 'MySQL', iconUrl: 'https://cdn.simpleicons.org/mysql/ffffff' },
+    ],
     linkedSkills: [
       { title: 'Architecture web mutualisée (WordPress multisite)', path: '/competences/architecture-web-mutualisee' },
       { title: 'Développement de plugins WordPress', path: '/competences/developpement-plugins-wordpress' },
@@ -109,6 +121,11 @@ const REALISATIONS: RealisationDetail[] = [
     criticalView:
       'Le projet apporte de la valeur rapidement, mais tout repose sur la qualité des règles mises en place. C’est donc un point que je continue d’améliorer en priorité.',
     repository: 'https://github.com/imaurelsan/360-media-auto-cleanup',
+    techStack: [
+      { name: 'PHP', iconUrl: 'https://cdn.simpleicons.org/php/ffffff' },
+      { name: 'WordPress', iconUrl: 'https://cdn.simpleicons.org/wordpress/ffffff' },
+      { name: 'JavaScript', iconUrl: 'https://cdn.simpleicons.org/javascript/ffffff' },
+    ],
     linkedSkills: [
       { title: 'Architecture web mutualisée (WordPress multisite)', path: '/competences/architecture-web-mutualisee' },
       { title: 'Performance web et optimisation front', path: '/competences/performance-front-optimisation' },
@@ -153,6 +170,12 @@ const REALISATIONS: RealisationDetail[] = [
     criticalView:
       'C’est mon projet le plus important aujourd’hui. Il reste ambitieux, et la vraie difficulté est de garder la même qualité à mesure qu’il grandit.',
     repository: 'https://github.com/imaurelsan/360tranquilite',
+    techStack: [
+      { name: 'PHP', iconUrl: 'https://cdn.simpleicons.org/php/ffffff' },
+      { name: 'WordPress', iconUrl: 'https://cdn.simpleicons.org/wordpress/ffffff' },
+      { name: 'JavaScript', iconUrl: 'https://cdn.simpleicons.org/javascript/ffffff' },
+      { name: 'MySQL', iconUrl: 'https://cdn.simpleicons.org/mysql/ffffff' },
+    ],
     linkedSkills: [
       { title: 'Architecture web mutualisée (WordPress multisite)', path: '/competences/architecture-web-mutualisee' },
       { title: 'Sécurité applicative', path: '/competences/securite-applicative' },
@@ -197,6 +220,11 @@ const REALISATIONS: RealisationDetail[] = [
     criticalView:
       'Le projet reste volontairement expérimental. Sa valeur vient surtout de la démarche et de ce qu’il m’a appris, plus que d’un produit déjà mature.',
     repository: 'https://github.com/imaurelsan/crewai-projet-agent-voyage',
+    techStack: [
+      { name: 'Python', iconUrl: 'https://cdn.simpleicons.org/python/ffffff' },
+      { name: 'CrewAI', iconUrl: '' },
+      { name: 'OpenAI', iconUrl: 'https://cdn.simpleicons.org/openai/ffffff' },
+    ],
     linkedSkills: [
       { title: 'Analyse critique et prise de décision', path: '/competences/analyse-critique-decision-technique' },
       { title: 'Communication technique', path: '/competences/communication-technique' },
@@ -241,6 +269,10 @@ const REALISATIONS: RealisationDetail[] = [
     criticalView:
       'Cette réalisation est encore en mouvement. Sa force est d’ouvrir des pistes, mais je dois encore transformer ces idées en base technique plus stable.',
     repository: 'https://github.com/imaurelsan/v0-vastrion-mobile-prototype',
+    techStack: [
+      { name: 'Figma', iconUrl: 'https://cdn.simpleicons.org/figma/ffffff' },
+      { name: 'TypeScript', iconUrl: 'https://cdn.simpleicons.org/typescript/ffffff' },
+    ],
     linkedSkills: [
       { title: 'UX/UI orientée usage', path: '/competences/ux-ui-orientee-usage' },
       { title: 'Gestion de projet agile', path: '/competences/gestion-projet-agile' },
@@ -348,6 +380,22 @@ const REALISATIONS: RealisationDetail[] = [
           </ul>
           <a class="card-link" href="/realisations">Retour à la vue des réalisations</a>
         </article>
+
+        @if (project.techStack.length) {
+          <article class="panel detail-block">
+            <h2>Technologies utilisées</h2>
+            <div class="tech-stack">
+              @for (badge of project.techStack; track badge.name) {
+                <div class="tech-badge">
+                  @if (badge.iconUrl) {
+                    <img class="tech-badge__icon" [src]="badge.iconUrl" [alt]="badge.name" />
+                  }
+                  <span>{{ badge.name }}</span>
+                </div>
+              }
+            </div>
+          </article>
+        }
       } @else {
         <header class="section-header">
           <p class="section-header__kicker">Réalisation</p>
