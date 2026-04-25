@@ -140,16 +140,42 @@ jobs:
             target_dir="${target_dir%/}"
           fi
 
-          ftp_url="$HOSTINGER_FTP_SERVER"
+          ftp_server_raw="$(printf '%s' "$HOSTINGER_FTP_SERVER" | tr -d '\r\n\t ')"
+          if [ -z "$ftp_server_raw" ]; then
+            echo "HOSTINGER_FTP_SERVER is empty after normalization."
+            exit 1
+          fi
+
+          ftp_url="$ftp_server_raw"
           case "$ftp_url" in
             ftp://*|ftps://*) ;;
             *) ftp_url="ftps://${ftp_url}" ;;
           esac
 
+          ftp_host_port="${ftp_url#*://}"
+          ftp_host_port="${ftp_host_port%%/*}"
+          ftp_host="${ftp_host_port%%:*}"
+          ftp_port="${ftp_host_port##*:}"
+          if [ "$ftp_host" = "$ftp_port" ]; then
+            ftp_port="21"
+          fi
+
           echo "Using FTPS server: ${ftp_url}"
           echo "Using FTPS target: ${target_dir}"
+          echo "Parsed FTPS endpoint host=${ftp_host} port=${ftp_port}"
 
-          base_lftp_settings="set ftp:ssl-force true; set ftp:ssl-protect-data true; set ssl:verify-certificate no; set net:timeout 40; set net:max-retries 2; set net:reconnect-interval-base 8; set net:reconnect-interval-max 30; set dns:max-retries 2; set cmd:fail-exit yes;"
+          echo "DNS lookup check..."
+          getent hosts "$ftp_host" || echo "Warning: DNS lookup failed from runner"
+
+          echo "TCP connectivity check on parsed port..."
+          timeout 8 bash -c "cat < /dev/null > /dev/tcp/${ftp_host}/${ftp_port}" && echo "TCP ${ftp_port} reachable" || echo "Warning: TCP ${ftp_port} unreachable"
+
+          if [ "$ftp_port" != "990" ]; then
+            echo "Optional FTPS implicit port check (990)..."
+            timeout 8 bash -c "cat < /dev/null > /dev/tcp/${ftp_host}/990" && echo "TCP 990 reachable" || echo "TCP 990 unreachable"
+          fi
+
+          base_lftp_settings="set ftp:ssl-force true; set ftp:ssl-auth TLS; set ftp:ssl-protect-data true; set ftp:use-feat yes; set ssl:verify-certificate no; set net:timeout 40; set net:max-retries 2; set net:reconnect-interval-base 8; set net:reconnect-interval-max 30; set dns:max-retries 2; set cmd:fail-exit yes;"
 
           preflight_ok=0
           for attempt in 1 2 3; do
@@ -225,7 +251,8 @@ jobs:
           target_dir="${target_dir%/}"
           if [ -z "$target_dir" ]; then target_dir="/"; fi
 
-          ftp_url="$HOSTINGER_FTP_SERVER"
+          ftp_server_raw="$(printf '%s' "$HOSTINGER_FTP_SERVER" | tr -d '\r\n\t ')"
+          ftp_url="$ftp_server_raw"
           case "$ftp_url" in
             ftp://*|ftps://*) ;;
             *) ftp_url="ftps://${ftp_url}" ;;
