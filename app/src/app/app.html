@@ -9,61 +9,6 @@
       </div>
     </a>
 
-    <div class="header-actions">
-      <button
-        #searchtogglebtn
-        class="search-toggle"
-        type="button"
-        aria-label="Ouvrir la recherche rapide"
-        [attr.aria-expanded]="isQuickNavOpen"
-        aria-controls="quick-navigation"
-        (click)="isQuickNavOpen ? closeQuickNav() : openQuickNav()"
-      >
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10.5 3a7.5 7.5 0 0 1 5.98 12.03l4.24 4.24a1 1 0 0 1-1.42 1.42l-4.24-4.24A7.5 7.5 0 1 1 10.5 3Zm0 2a5.5 5.5 0 1 0 0 11 5.5 5.5 0 0 0 0-11Z"/></svg>
-      </button>
-
-      <button
-        class="theme-switch"
-        type="button"
-        [attr.aria-pressed]="isLightTheme"
-        [attr.aria-label]="isLightTheme ? 'Passer au mode sombre' : 'Passer au mode clair'"
-        (click)="toggleTheme()"
-      >
-        <span class="theme-switch__icon" aria-hidden="true"><img src="assets/images/switcher/night-mode.svg" alt="" /></span>
-        <span class="theme-switch__track" aria-hidden="true">
-          <span class="theme-switch__thumb"></span>
-        </span>
-        <span class="theme-switch__icon" aria-hidden="true"><img src="assets/images/switcher/day-mode.svg" alt="" /></span>
-      </button>
-
-      <a
-        class="header-contact-cta"
-        routerLink="/contact"
-        aria-label="Page Contact"
-        (click)="closeMobileNav()"
-      >Contact</a>
-
-      <!-- Ici j'affiche un bouton hamburger en mobile pour garder un header compact et lisible. -->
-      <button
-        #navtogglebtn
-        class="nav-toggle"
-        type="button"
-        [attr.aria-expanded]="isMobileNavOpen"
-        aria-controls="main-navigation"
-        aria-label="Ouvrir ou fermer le menu"
-        (click)="toggleMobileNav()"
-      >
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-    </div>
-
-    <!-- Ici je boucle sur les liens de menu pour éviter de dupliquer le HTML et garder la navigation simple à maintenir. -->
-    @if (isMobileNavOpen) {
-      <button class="mobile-nav-backdrop" type="button" aria-label="Fermer le menu" (click)="closeMobileNav()"></button>
-    }
-
     <nav
       #mainnavpanel
       id="main-navigation"
@@ -96,6 +41,61 @@
         </a>
       </div>
     </nav>
+
+    <a
+      class="header-contact-cta"
+      routerLink="/contact"
+      aria-label="Page Contact"
+      (click)="closeMobileNav()"
+    >Contact</a>
+
+    <div class="header-actions">
+      <button
+        #searchtogglebtn
+        class="search-toggle"
+        type="button"
+        aria-label="Ouvrir la recherche rapide"
+        [attr.aria-expanded]="isQuickNavOpen"
+        aria-controls="quick-navigation"
+        (click)="isQuickNavOpen ? closeQuickNav() : openQuickNav()"
+      >
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10.5 3a7.5 7.5 0 0 1 5.98 12.03l4.24 4.24a1 1 0 0 1-1.42 1.42l-4.24-4.24A7.5 7.5 0 1 1 10.5 3Zm0 2a5.5 5.5 0 1 0 0 11 5.5 5.5 0 0 0 0-11Z"/></svg>
+      </button>
+
+      <button
+        class="theme-switch"
+        type="button"
+        [attr.aria-pressed]="isLightTheme"
+        [attr.aria-label]="isLightTheme ? 'Passer au mode sombre' : 'Passer au mode clair'"
+        (click)="toggleTheme()"
+      >
+        <span class="theme-switch__icon" aria-hidden="true"><img src="assets/images/switcher/night-mode.svg" alt="" /></span>
+        <span class="theme-switch__track" aria-hidden="true">
+          <span class="theme-switch__thumb"></span>
+        </span>
+        <span class="theme-switch__icon" aria-hidden="true"><img src="assets/images/switcher/day-mode.svg" alt="" /></span>
+      </button>
+
+      <!-- Ici j'affiche un bouton hamburger en mobile pour garder un header compact et lisible. -->
+      <button
+        #navtogglebtn
+        class="nav-toggle"
+        type="button"
+        [attr.aria-expanded]="isMobileNavOpen"
+        aria-controls="main-navigation"
+        aria-label="Ouvrir ou fermer le menu"
+        (click)="toggleMobileNav()"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+
+    <!-- Ici je boucle sur les liens de menu pour éviter de dupliquer le HTML et garder la navigation simple à maintenir. -->
+    @if (isMobileNavOpen) {
+      <button class="mobile-nav-backdrop" type="button" aria-label="Fermer le menu" (click)="closeMobileNav()"></button>
+    }
 
     @if (isQuickNavOpen) {
       <section #quicknavpanel id="quick-navigation" class="quick-nav" aria-label="Recherche par mots-clés">

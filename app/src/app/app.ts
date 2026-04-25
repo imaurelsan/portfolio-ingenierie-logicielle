@@ -119,7 +119,7 @@ export class App {
       return 'assets/images/photo-identite.jpg';
     }
 
-    return '/favicon.svg';
+    return this.isLightTheme ? '/favicon-noir.svg' : '/favicon.svg';
   }
 
   protected get brandImageAlt(): string {

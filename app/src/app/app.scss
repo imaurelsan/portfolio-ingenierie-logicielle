@@ -9,9 +9,9 @@
 	top: 0;
 	z-index: 20;
 	display: grid;
-	grid-template-columns: minmax(210px, 1fr) auto auto;
+	grid-template-columns: minmax(200px, 1fr) auto auto auto;
 	align-items: center;
-	gap: 0.8rem;
+	gap: 1rem;
 	padding: 0.95rem 1.35rem;
 	background: color-mix(in srgb, var(--c-accent-deep) 88%, transparent);
 	backdrop-filter: blur(8px);
@@ -51,10 +51,10 @@
 .header-actions {
 	display: inline-flex;
 	align-items: center;
-	justify-content: center;
+	justify-content: flex-end;
 	gap: 0.55rem;
 	height: 40px;
-	justify-self: center;
+	justify-self: end;
 }
 
 .search-toggle {
@@ -117,7 +117,7 @@
 .theme-switch__icon img {
 	width: 100%;
 	height: 100%;
-	filter: brightness(0) invert(1);
+	filter: none;
 }
 
 .theme-switch__track {
@@ -324,10 +324,10 @@
 	filter: brightness(0) invert(1);
 }
 
-body.theme-light {
+body:not(.theme-light) {
 	.app-header .theme-switch__icon img,
 	.theme-switch-fab img {
-		filter: none;
+		filter: brightness(0) invert(1);
 	}
 }
 
