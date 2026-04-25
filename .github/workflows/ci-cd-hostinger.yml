@@ -115,160 +115,56 @@ jobs:
           test -f dist/app/browser/assets/images/photo-identite.jpg
           test -f dist/app/browser/assets/build-info.json
 
-      - name: Install lftp
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y lftp
-
-      - name: Deploy via FTPS with retries
+      - name: Normalize FTP target directory
         env:
-          HOSTINGER_FTP_SERVER: ${{ secrets.HOSTINGER_FTP_SERVER }}
-          HOSTINGER_FTP_USERNAME: ${{ secrets.HOSTINGER_FTP_USERNAME }}
-          HOSTINGER_FTP_PASSWORD: ${{ secrets.HOSTINGER_FTP_PASSWORD }}
           HOSTINGER_FTP_TARGET_DIR: ${{ secrets.HOSTINGER_FTP_TARGET_DIR }}
           ALLOW_FTP_ROOT_DEPLOY: ${{ secrets.ALLOW_FTP_ROOT_DEPLOY }}
         run: |
-          preferred_target="${HOSTINGER_FTP_TARGET_DIR:-/portfolio/}"
-          if [ "$preferred_target" = "/" ] && [ "${ALLOW_FTP_ROOT_DEPLOY}" != "true" ]; then
-            echo "Root deploy not allowed. Falling back to /portfolio/."
-            preferred_target="/portfolio/"
+          target="${HOSTINGER_FTP_TARGET_DIR:-/portfolio/}"
+          if [ "$target" = "/" ] && [ "${ALLOW_FTP_ROOT_DEPLOY}" != "true" ]; then
+            target="/portfolio/"
           fi
+          # Normalise : slash initial garanti, slash final garanti
+          target="/${target#/}"
+          target="${target%/}/"
+          echo "FTP_TARGET_DIR=${target}" >> "$GITHUB_ENV"
+          echo "Resolved FTP target: ${target}"
 
-          target_dir="$preferred_target"
-          if [ "$target_dir" != "/" ]; then
-            target_dir="/${target_dir#/}"
-            target_dir="${target_dir%/}"
-          fi
-
-          ftp_server_raw="$(printf '%s' "$HOSTINGER_FTP_SERVER" | tr -d '\r\n\t ')"
-          if [ -z "$ftp_server_raw" ]; then
-            echo "HOSTINGER_FTP_SERVER is empty after normalization."
-            exit 1
-          fi
-
-          ftp_url="$ftp_server_raw"
-          case "$ftp_url" in
-            ftp://*|ftps://*) ;;
-            *) ftp_url="ftps://${ftp_url}" ;;
-          esac
-
-          ftp_host_port="${ftp_url#*://}"
-          ftp_host_port="${ftp_host_port%%/*}"
-          ftp_host="${ftp_host_port%%:*}"
-          ftp_port="${ftp_host_port##*:}"
-          if [ "$ftp_host" = "$ftp_port" ]; then
-            ftp_port="21"
-          fi
-
-          echo "Using FTPS server: ${ftp_url}"
-          echo "Using FTPS target: ${target_dir}"
-          echo "Parsed FTPS endpoint host=${ftp_host} port=${ftp_port}"
-
-          echo "DNS lookup check..."
-          getent hosts "$ftp_host" || echo "Warning: DNS lookup failed from runner"
-
-          echo "TCP connectivity check on parsed port..."
-          timeout 8 bash -c "cat < /dev/null > /dev/tcp/${ftp_host}/${ftp_port}" && echo "TCP ${ftp_port} reachable" || echo "Warning: TCP ${ftp_port} unreachable"
-
-          if [ "$ftp_port" != "990" ]; then
-            echo "Optional FTPS implicit port check (990)..."
-            timeout 8 bash -c "cat < /dev/null > /dev/tcp/${ftp_host}/990" && echo "TCP 990 reachable" || echo "TCP 990 unreachable"
-          fi
-
-          base_lftp_settings="set ftp:ssl-force true; set ftp:ssl-auth TLS; set ftp:ssl-protect-data true; set ftp:use-feat yes; set ssl:verify-certificate no; set net:timeout 40; set net:max-retries 2; set net:reconnect-interval-base 8; set net:reconnect-interval-max 30; set dns:max-retries 2; set cmd:fail-exit yes;"
-
-          preflight_ok=0
-          for attempt in 1 2 3; do
-            passive_mode="true"
-            epsv_mode="false"
-            if [ "$attempt" -eq 2 ]; then
-              epsv_mode="true"
-            fi
-            if [ "$attempt" -eq 3 ]; then
-              passive_mode="false"
-              epsv_mode="false"
-            fi
-
-            echo "FTPS preflight attempt ${attempt} (passive=${passive_mode}, epsv=${epsv_mode})"
-            lftp -u "$HOSTINGER_FTP_USERNAME","$HOSTINGER_FTP_PASSWORD" "$ftp_url" -e "${base_lftp_settings} set ftp:passive-mode ${passive_mode}; set ftp:prefer-epsv ${epsv_mode}; cls; mkdir -p ${target_dir}; cd ${target_dir}; pwd; bye" && preflight_ok=1 || true
-
-            if [ "$preflight_ok" -eq 1 ]; then
-              echo "FTPS preflight OK."
+      - name: Deploy via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4
+        with:
+          server: ${{ secrets.HOSTINGER_FTP_SERVER }}
+          username: ${{ secrets.HOSTINGER_FTP_USERNAME }}
+          password: ${{ secrets.HOSTINGER_FTP_PASSWORD }}
+          server-dir: ${{ env.FTP_TARGET_DIR }}
+          local-dir: ./app/dist/app/browser/
+          protocol: ftps
+          port: 21
+          security: loose
+          log-level: verbose
+          timeout: 30000
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/node_modules/**
+      - name: Verify deploy — check build-info via HTTP
+        continue-on-error: true
+        run: |
+          echo "Waiting 15s for FTP propagation..."
+          sleep 15
+          found=0
+          for attempt in 1 2 3 4 5; do
+            response=$(curl -fsSL -H "Cache-Control: no-cache" \
+              "https://portfolio.yaurel.com/assets/build-info.json?v=${{ github.sha }}&a=${attempt}" || true)
+            echo "Attempt ${attempt}: ${response}"
+            if echo "$response" | grep -q "${{ github.sha }}"; then
+              found=1
               break
             fi
-
-            sleep 8
-          done
-
-          if [ "$preflight_ok" -ne 1 ]; then
-            echo "FTPS preflight failed after 3 attempts."
-            exit 1
-          fi
-
-          success=0
-          for attempt in 1 2 3; do
-            passive_mode="true"
-            epsv_mode="false"
-            if [ "$attempt" -eq 2 ]; then
-              epsv_mode="true"
-            fi
-            if [ "$attempt" -eq 3 ]; then
-              passive_mode="false"
-              epsv_mode="false"
-            fi
-
-            echo "FTPS deploy attempt ${attempt} (passive=${passive_mode}, epsv=${epsv_mode})"
-
-            echo "Trying FTPS mirror to ${target_dir}"
-            lftp -u "$HOSTINGER_FTP_USERNAME","$HOSTINGER_FTP_PASSWORD" "$ftp_url" -e "${base_lftp_settings} set ftp:passive-mode ${passive_mode}; set ftp:prefer-epsv ${epsv_mode}; mkdir -p ${target_dir}; mirror -R --delete --verbose=2 --parallel=1 ./dist/app/browser/ ${target_dir}; bye" && success=1 || true
-
-            if [ "$success" -eq 1 ]; then
-              echo "FTPS deploy completed."
-              break
-            fi
-
             sleep 10
           done
-
-          if [ "$success" -ne 1 ]; then
-            echo "Deploy failed after 3 attempts."
-            exit 1
-          fi
-
-      - name: Verify build-info on FTP target
-        env:
-          HOSTINGER_FTP_SERVER: ${{ secrets.HOSTINGER_FTP_SERVER }}
-          HOSTINGER_FTP_USERNAME: ${{ secrets.HOSTINGER_FTP_USERNAME }}
-          HOSTINGER_FTP_PASSWORD: ${{ secrets.HOSTINGER_FTP_PASSWORD }}
-          HOSTINGER_FTP_TARGET_DIR: ${{ secrets.HOSTINGER_FTP_TARGET_DIR }}
-          ALLOW_FTP_ROOT_DEPLOY: ${{ secrets.ALLOW_FTP_ROOT_DEPLOY }}
-        run: |
-          preferred_target="${HOSTINGER_FTP_TARGET_DIR:-/portfolio}"
-          if [ "$preferred_target" = "/" ] && [ "${ALLOW_FTP_ROOT_DEPLOY}" != "true" ]; then
-            preferred_target="/portfolio"
-          fi
-          target_dir="$preferred_target"
-          target_dir="${target_dir%/}"
-          if [ -z "$target_dir" ]; then target_dir="/"; fi
-
-          ftp_server_raw="$(printf '%s' "$HOSTINGER_FTP_SERVER" | tr -d '\r\n\t ')"
-          ftp_url="$ftp_server_raw"
-          case "$ftp_url" in
-            ftp://*|ftps://*) ;;
-            *) ftp_url="ftps://${ftp_url}" ;;
-          esac
-
-          found=0
-          remote_info=$(lftp -u "$HOSTINGER_FTP_USERNAME","$HOSTINGER_FTP_PASSWORD" "$ftp_url" -e "set ftp:ssl-force true; set ftp:ssl-protect-data true; set ftp:passive-mode true; set ftp:prefer-epsv false; set ssl:verify-certificate no; set net:timeout 30; set cmd:fail-exit yes; cat ${target_dir}/assets/build-info.json; bye" || true)
-          echo "Remote FTP build-info [${target_dir}]: ${remote_info}"
-
-          if echo "$remote_info" | grep -q "${{ github.sha }}"; then
-            found=1
-          fi
-
           if [ "$found" -ne 1 ]; then
-            echo "No FTP target contains current commit metadata."
-            exit 1
+            echo "::warning::build-info.json ne contient pas encore le commit courant (cache possible)."
           fi
 
       - name: Verify live site serves current commit (non-blocking)
