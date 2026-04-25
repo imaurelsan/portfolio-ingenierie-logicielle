@@ -114,18 +114,6 @@ export class App {
     return this.currentPath === '/';
   }
 
-  protected get brandImageSrc(): string {
-    if (!this.isHomePage) {
-      return 'assets/images/photo-identite.jpg';
-    }
-
-    return this.isLightTheme ? '/favicon-noir.svg' : '/favicon.svg';
-  }
-
-  protected get brandImageAlt(): string {
-    return this.isHomePage ? 'Symbole du site' : 'Aurel YAHOUEDEOU';
-  }
-
   protected get quickNavResults(): SearchResult[] {
     const normalized = this.normalizeText(this.quickNavQuery);
     if (!normalized) {
