@@ -9,9 +9,9 @@
 	top: 0;
 	z-index: 20;
 	display: grid;
-	grid-template-columns: minmax(220px, 1fr) auto minmax(320px, 1fr);
+	grid-template-columns: minmax(210px, 1fr) auto auto;
 	align-items: center;
-	gap: 1.1rem;
+	gap: 0.8rem;
 	padding: 0.95rem 1.35rem;
 	background: color-mix(in srgb, var(--c-accent-deep) 88%, transparent);
 	backdrop-filter: blur(8px);
@@ -63,7 +63,7 @@
 	justify-content: center;
 	width: 40px;
 	height: 40px;
-	border-radius: 999px;
+	border-radius: 8px;
 	border: 1px solid color-mix(in srgb, var(--c-muted) 45%, transparent);
 	background: color-mix(in srgb, var(--c-surface) 86%, transparent);
 	color: var(--c-text);
@@ -91,7 +91,7 @@
 	min-width: 92px;
 	height: 40px;
 	padding: 0 0.52rem;
-	border-radius: 999px;
+	border-radius: 8px;
 	border: 1px solid color-mix(in srgb, var(--c-muted) 45%, transparent);
 	background: color-mix(in srgb, var(--c-surface) 86%, transparent);
 	color: var(--c-text);
@@ -170,6 +170,59 @@
 	}
 }
 
+.header-contact-cta {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	height: 36px;
+	padding: 0 1rem;
+	border-radius: 8px;
+	background: var(--c-accent);
+	color: #fff;
+	font-family: 'Montserrat', sans-serif;
+	font-size: 0.82rem;
+	font-weight: 400;
+	letter-spacing: 0.07em;
+	text-transform: uppercase;
+	text-decoration: none;
+	flex-shrink: 0;
+	transition: background 160ms ease, transform 160ms ease;
+
+	&:hover {
+		background: color-mix(in srgb, var(--c-accent) 80%, #fff 20%);
+		transform: translateY(-1px);
+	}
+}
+
+.footer-contact-cta {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	align-self: center;
+	padding: 0.7rem 1.8rem;
+	border: 1px solid color-mix(in srgb, var(--c-accent) 60%, transparent);
+	border-radius: 8px;
+	background: color-mix(in srgb, var(--c-accent) 16%, transparent);
+	color: var(--c-text);
+	font-family: 'Montserrat', sans-serif;
+	font-size: 0.88rem;
+	font-weight: 400;
+	letter-spacing: 0.07em;
+	text-transform: uppercase;
+	text-decoration: none;
+	transition: border-color 160ms ease, background 160ms ease, transform 160ms ease;
+
+	&:hover {
+		border-color: var(--c-accent);
+		background: color-mix(in srgb, var(--c-accent) 26%, transparent);
+		transform: translateY(-1px);
+	}
+}
+
+.app-footer {
+	justify-items: center;
+}
+
 .brand__kicker {
 	margin: 0;
 	font-size: 0.72rem;
@@ -187,10 +240,12 @@
 
 .main-nav {
 	display: flex;
-	flex-wrap: wrap;
+	flex-wrap: nowrap;
 	justify-content: flex-end;
 	justify-self: end;
-	gap: 0.45rem;
+	gap: 0.75rem;
+	white-space: nowrap;
+ 	min-width: 0;
 
 	.main-nav__close,
 	.mobile-nav-socials {
@@ -200,28 +255,29 @@
 	a {
 		text-decoration: none;
 		color: var(--c-text);
-		border: 1px solid color-mix(in srgb, var(--c-muted) 48%, transparent);
-		border-radius: 999px;
-		padding: 0.52rem 0.96rem;
-		font-size: 0.92rem;
+		border: none;
+		padding: 0.2rem 0;
+		font-size: 0.84rem;
 		font-family: 'Montserrat', sans-serif;
-		font-weight: 700;
-		letter-spacing: 0.04em;
+		font-weight: 400;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		line-height: 1;
 		transition: all 180ms ease;
 	}
 
-	a:hover,
+	a:hover {
+		color: color-mix(in srgb, var(--c-accent) 84%, #ffffff 16%);
+	}
+
 	a.is-active {
-		color: #061716;
-		background: #339989;
-		border-color: #339989;
+		color: var(--c-accent);
+		font-weight: 700;
 	}
 
 	a:focus,
 	a:focus-visible {
-		color: #061716;
-		background: var(--c-accent);
-		border-color: var(--c-accent);
+		color: var(--c-accent);
 		outline: 2px solid var(--c-text);
 		outline-offset: 2px;
 	}
@@ -344,11 +400,22 @@ body.theme-light {
 	justify-content: center;
 	width: 38px;
 	height: 38px;
-	border-radius: 999px;
+	border-radius: 8px;
 	border: 1px solid color-mix(in srgb, var(--c-muted) 48%, transparent);
 	color: var(--c-text);
 	background: color-mix(in srgb, var(--c-surface) 86%, transparent);
 	transition: all 170ms ease;
+}
+
+@media (max-width: 1200px) {
+	.main-nav {
+		gap: 0.58rem;
+	}
+
+	.main-nav a {
+		font-size: 0.78rem;
+		letter-spacing: 0.06em;
+	}
 }
 
 .footer-socials a:hover {
@@ -425,6 +492,10 @@ body.theme-light {
 
 	/* La barre de navigation basse remplace le hamburger sur mobile */
 	.nav-toggle {
+		display: none;
+	}
+
+	.header-contact-cta {
 		display: none;
 	}
 

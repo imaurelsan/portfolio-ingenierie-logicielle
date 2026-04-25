@@ -33,9 +33,8 @@ export class App {
     { label: 'Accueil', path: '/', iconPath: 'M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z' },
     { label: 'Présentation', path: '/presentation', iconPath: 'M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-8 2.75c1.24 0 2.25 1.01 2.25 2.25S13.24 11.25 12 11.25 9.75 10.24 9.75 9 10.76 6.75 12 6.75zM17 16H7v-.75c0-1.66 2.24-3 5-3s5 1.34 5 3V16z' },
     { label: 'Compétences', path: '/competences', iconPath: 'M19 9l1.25-2.75L23 5l-2.75-1.25L19 1l-1.25 2.75L15 5l2.75 1.25L19 9zm-7.5.5L9 4 6.5 9.5 1 12l5.5 2.5L9 20l2.5-5.5L17 12l-5.5-2.5z' },
-    { label: 'Réalisations', path: '/realisations', iconPath: 'M20 7h-4V5c0-1.1-.9-2-2-2h-4c-1.1 0-2 .9-2 2v2H4c-1.1 0-2 .9-2 2v11c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V9c0-1.1-.9-2-2-2zm-8-2h4v2h-4V5zm8 13H4V9h16v9z' },
     { label: 'Parcours', path: '/parcours', iconPath: 'M23 8c0 1.1-.9 2-2 2-.18 0-.35-.02-.51-.07l-3.56 3.55c.05.16.07.34.07.52 0 1.1-.9 2-2 2s-2-.9-2-2c0-.18.02-.36.07-.52l-2.55-2.55c-.16.05-.34.07-.52.07s-.36-.02-.52-.07l-4.55 4.56c.05.16.07.33.07.51 0 1.1-.9 2-2 2s-2-.9-2-2 .9-2 2-2c.18 0 .35.02.51.07l4.56-4.55C8.02 12.36 8 12.18 8 12c0-1.1.9-2 2-2s2 .9 2 2c0 .18-.02.36-.07.52l2.55 2.55c.16-.05.34-.07.52-.07s.36.02.52.07l3.55-3.56C19.02 11.35 19 11.18 19 11c0-1.1.9-2 2-2s2 .9 2 2z' },
-    { label: 'Contact', path: '/contact', iconPath: 'M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H5.17L4 17.17V4h16v12z' },
+    { label: 'Réalisations', path: '/realisations', iconPath: 'M20 7h-4V5c0-1.1-.9-2-2-2h-4c-1.1 0-2 .9-2 2v2H4c-1.1 0-2 .9-2 2v11c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V9c0-1.1-.9-2-2-2zm-8-2h4v2h-4V5zm8 13H4V9h16v9z' },
   ];
 
   // Ici je pilote l'ouverture du menu mobile (hamburger) sans impacter l'affichage desktop.
@@ -107,7 +106,7 @@ export class App {
       });
 
     const savedTheme = localStorage.getItem('portfolio-theme');
-    this.isLightTheme = savedTheme === 'light';
+    this.isLightTheme = savedTheme !== 'dark';
     this.applyTheme();
   }
 

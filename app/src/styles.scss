@@ -247,11 +247,26 @@ a {
 }
 
 .card-link {
-	display: block;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
 	margin-top: 1rem;
 	margin-bottom: 0.6rem;
-	font-weight: 700;
+	font-weight: 400;
+	font-family: 'Montserrat', sans-serif;
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
+	font-size: 0.82rem;
+	padding: 0.52rem 0.75rem;
+	border: 1px solid color-mix(in srgb, var(--c-muted) 42%, transparent);
+	border-radius: 8px;
+	transition: border-color 160ms ease, color 160ms ease, background 160ms ease;
 	text-decoration: none;
+}
+
+.card-link:hover {
+	border-color: color-mix(in srgb, var(--c-accent) 64%, transparent);
+	background: color-mix(in srgb, var(--c-accent) 14%, transparent);
 }
 
 .card-meta-title {
@@ -543,11 +558,12 @@ a {
 	align-items: center;
 	justify-content: center;
 	text-decoration: none;
-	border-radius: 999px;
-	font-weight: 700;
+	border-radius: 8px;
+	font-weight: 400;
 	font-family: 'Montserrat', sans-serif;
 	font-size: 0.94rem;
-	letter-spacing: 0.05em;
+	letter-spacing: 0.04em;
+	text-transform: uppercase;
 	padding: 0.78rem 1.12rem;
 	border: 1px solid transparent;
 	transition: transform 160ms ease, background-color 160ms ease, border-color 160ms ease, color 160ms ease, box-shadow 160ms ease;
