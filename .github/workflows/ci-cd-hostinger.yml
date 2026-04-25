@@ -135,14 +135,66 @@ jobs:
           fi
 
           target_dir="$preferred_target"
+          if [ "$target_dir" != "/" ]; then
+            target_dir="/${target_dir#/}"
+            target_dir="${target_dir%/}"
+          fi
+
+          ftp_url="$HOSTINGER_FTP_SERVER"
+          case "$ftp_url" in
+            ftp://*|ftps://*) ;;
+            *) ftp_url="ftps://${ftp_url}" ;;
+          esac
+
+          echo "Using FTPS server: ${ftp_url}"
           echo "Using FTPS target: ${target_dir}"
+
+          base_lftp_settings="set ftp:ssl-force true; set ftp:ssl-protect-data true; set ssl:verify-certificate no; set net:timeout 40; set net:max-retries 2; set net:reconnect-interval-base 8; set net:reconnect-interval-max 30; set dns:max-retries 2; set cmd:fail-exit yes;"
+
+          preflight_ok=0
+          for attempt in 1 2 3; do
+            passive_mode="true"
+            epsv_mode="false"
+            if [ "$attempt" -eq 2 ]; then
+              epsv_mode="true"
+            fi
+            if [ "$attempt" -eq 3 ]; then
+              passive_mode="false"
+              epsv_mode="false"
+            fi
+
+            echo "FTPS preflight attempt ${attempt} (passive=${passive_mode}, epsv=${epsv_mode})"
+            lftp -u "$HOSTINGER_FTP_USERNAME","$HOSTINGER_FTP_PASSWORD" "$ftp_url" -e "${base_lftp_settings} set ftp:passive-mode ${passive_mode}; set ftp:prefer-epsv ${epsv_mode}; cls; mkdir -p ${target_dir}; cd ${target_dir}; pwd; bye" && preflight_ok=1 || true
+
+            if [ "$preflight_ok" -eq 1 ]; then
+              echo "FTPS preflight OK."
+              break
+            fi
+
+            sleep 8
+          done
+
+          if [ "$preflight_ok" -ne 1 ]; then
+            echo "FTPS preflight failed after 3 attempts."
+            exit 1
+          fi
 
           success=0
           for attempt in 1 2 3; do
-            echo "FTPS deploy attempt ${attempt}"
+            passive_mode="true"
+            epsv_mode="false"
+            if [ "$attempt" -eq 2 ]; then
+              epsv_mode="true"
+            fi
+            if [ "$attempt" -eq 3 ]; then
+              passive_mode="false"
+              epsv_mode="false"
+            fi
+
+            echo "FTPS deploy attempt ${attempt} (passive=${passive_mode}, epsv=${epsv_mode})"
 
             echo "Trying FTPS mirror to ${target_dir}"
-            lftp -u "$HOSTINGER_FTP_USERNAME","$HOSTINGER_FTP_PASSWORD" "$HOSTINGER_FTP_SERVER" -e "set ftp:ssl-force true; set ftp:ssl-protect-data true; set ftp:passive-mode true; set ftp:prefer-epsv false; set ssl:verify-certificate no; set net:timeout 30; set net:max-retries 3; set net:reconnect-interval-base 5; set net:reconnect-interval-max 20; set cmd:fail-exit yes; mirror -R --delete --verbose --parallel=1 --ignore-time --transfer-all ./dist/app/browser/ ${target_dir}; bye" && success=1 || true
+            lftp -u "$HOSTINGER_FTP_USERNAME","$HOSTINGER_FTP_PASSWORD" "$ftp_url" -e "${base_lftp_settings} set ftp:passive-mode ${passive_mode}; set ftp:prefer-epsv ${epsv_mode}; mkdir -p ${target_dir}; mirror -R --delete --verbose=2 --parallel=1 ./dist/app/browser/ ${target_dir}; bye" && success=1 || true
 
             if [ "$success" -eq 1 ]; then
               echo "FTPS deploy completed."
@@ -173,8 +225,14 @@ jobs:
           target_dir="${target_dir%/}"
           if [ -z "$target_dir" ]; then target_dir="/"; fi
 
+          ftp_url="$HOSTINGER_FTP_SERVER"
+          case "$ftp_url" in
+            ftp://*|ftps://*) ;;
+            *) ftp_url="ftps://${ftp_url}" ;;
+          esac
+
           found=0
-          remote_info=$(lftp -u "$HOSTINGER_FTP_USERNAME","$HOSTINGER_FTP_PASSWORD" "$HOSTINGER_FTP_SERVER" -e "set ftp:ssl-force true; set ftp:ssl-protect-data true; set ftp:passive-mode true; set ftp:prefer-epsv false; set ssl:verify-certificate no; set net:timeout 30; set cmd:fail-exit yes; cat ${target_dir}/assets/build-info.json; bye" || true)
+          remote_info=$(lftp -u "$HOSTINGER_FTP_USERNAME","$HOSTINGER_FTP_PASSWORD" "$ftp_url" -e "set ftp:ssl-force true; set ftp:ssl-protect-data true; set ftp:passive-mode true; set ftp:prefer-epsv false; set ssl:verify-certificate no; set net:timeout 30; set cmd:fail-exit yes; cat ${target_dir}/assets/build-info.json; bye" || true)
           echo "Remote FTP build-info [${target_dir}]: ${remote_info}"
 
           if echo "$remote_info" | grep -q "${{ github.sha }}"; then
