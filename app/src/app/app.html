@@ -115,7 +115,12 @@
     [attr.aria-label]="isLightTheme ? 'Passer au mode sombre' : 'Passer au mode clair'"
     (click)="toggleTheme()"
   >
-    <span class="theme-switch-fab__icon" aria-hidden="true"></span>
+    <img
+      class="theme-switch-fab__icon"
+      [src]="isLightTheme ? 'assets/images/switcher/night-mode.svg' : 'assets/images/switcher/day-mode.svg'"
+      alt=""
+      aria-hidden="true"
+    />
   </button>
 
   <main class="app-main">

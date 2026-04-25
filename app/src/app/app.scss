@@ -75,26 +75,25 @@
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
-	width: 40px;
-	height: 40px;
-	border-radius: 8px;
-	border: 1px solid color-mix(in srgb, var(--c-muted) 45%, transparent);
-	background: color-mix(in srgb, var(--c-surface) 86%, transparent);
+	width: 32px;
+	height: 32px;
+	border: none;
+	background: transparent;
 	color: var(--c-text);
 	cursor: pointer;
-	transition: all 170ms ease;
+	transition: color 170ms ease;
 	flex-shrink: 0;
+	padding: 0;
 }
 
 .search-toggle svg {
-	width: 16px;
-	height: 16px;
+	width: 18px;
+	height: 18px;
 	fill: currentColor;
 }
 
 .search-toggle:hover {
-	border-color: color-mix(in srgb, var(--c-accent) 70%, transparent);
-	background: color-mix(in srgb, var(--c-accent) 24%, transparent);
+	color: color-mix(in srgb, var(--c-accent) 84%, #fff 16%);
 }
 
 .nav-toggle {
@@ -120,7 +119,36 @@
 }
 
 .header-contact-cta {
-	margin-left: 0.15rem;
+	display: inline-flex !important;
+	align-items: center;
+	justify-content: center;
+	height: 34px;
+	padding: 0 1rem !important;
+	border-radius: 8px;
+	border: none !important;
+	background: var(--c-accent) !important;
+	color: #fff !important;
+	font-family: 'Montserrat', sans-serif;
+	font-size: 0.82rem;
+	font-weight: 400;
+	letter-spacing: 0.07em;
+	text-transform: uppercase;
+	text-decoration: none;
+	flex-shrink: 0;
+	margin-left: 0.5rem;
+	transition: background 160ms ease, transform 160ms ease !important;
+
+	&:hover {
+		background: color-mix(in srgb, var(--c-accent) 80%, #fff 20%) !important;
+		transform: translateY(-1px);
+		color: #fff !important;
+	}
+
+	&.is-active {
+		background: var(--c-accent) !important;
+		font-weight: 700;
+		color: #fff !important;
+	}
 }
 
 .footer-contact-cta {
@@ -170,6 +198,7 @@
 .main-nav {
 	display: flex;
 	flex-wrap: nowrap;
+	align-items: center;
 	justify-content: flex-end;
 	justify-self: end;
 	gap: 1rem;
@@ -267,21 +296,29 @@
 }
 
 .theme-switch-fab__icon {
-	width: 26px;
-	height: 26px;
-	background: #ffffff;
-	-webkit-mask: url('/favicon.svg') center / contain no-repeat;
-	mask: url('/favicon.svg') center / contain no-repeat;
+	width: 24px;
+	height: 24px;
+	/* SVGs noirs natifs → blancs en mode sombre */
+	filter: brightness(0) invert(1);
 }
 
 body.theme-light {
-	.brand__avatar--symbol::before,
-	.theme-switch-fab__icon {
+	.brand__avatar--symbol::before {
 		background: var(--c-accent);
 	}
 
 	.theme-switch-fab {
 		background: color-mix(in srgb, #ffffff 92%, var(--c-surface-soft));
+	}
+
+	/* SVGs noirs natifs → vert accent en mode clair */
+	.theme-switch-fab__icon {
+		filter:
+			invert(39%)
+			sepia(48%)
+			saturate(600%)
+			hue-rotate(136deg)
+			brightness(85%);
 	}
 }
 
