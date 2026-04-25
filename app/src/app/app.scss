@@ -302,7 +302,8 @@
 	filter: brightness(0) invert(1);
 }
 
-body.theme-light {
+
+:host-context(.theme-light) {
 	.brand__avatar--symbol::before {
 		background: var(--c-accent);
 	}
