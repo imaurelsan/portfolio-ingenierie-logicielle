@@ -2,7 +2,7 @@ import { Location } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-type Anecdote = {
+export type Anecdote = {
   title: string;
   situation: string;
   result: string;
@@ -10,7 +10,7 @@ type Anecdote = {
   linkedProject: { title: string; path: string };
 };
 
-type CompetenceDetail = {
+export type CompetenceDetail = {
   slug: string;
   order: string;
   title: string;
@@ -21,7 +21,7 @@ type CompetenceDetail = {
   projects: Array<{ title: string; path: string }>;
 };
 
-const COMPETENCES: CompetenceDetail[] = [
+export const COMPETENCES: CompetenceDetail[] = [
   {
     slug: 'architecture-web-mutualisee',
     order: 'Compétence détaillée 1/10',

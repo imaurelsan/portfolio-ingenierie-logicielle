@@ -418,7 +418,9 @@ body.theme-light {
 	}
 
 	.theme-switch {
-		display: none;
+		min-width: auto;
+		padding: 0 0.4rem;
+		gap: 0.22rem;
 	}
 
 	/* La barre de navigation basse remplace le hamburger sur mobile */

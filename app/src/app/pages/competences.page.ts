@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, HostListener, inject } from '@angular/core';
+import { Location } from '@angular/common';
+import { RouterLink } from '@angular/router';
+import { COMPETENCES, CompetenceDetail } from './competence-detail.page';
 
 type Skill = {
   slug: string;
@@ -13,6 +16,7 @@ type SkillFilter = 'Tous' | 'Technique' | 'Transversal';
 
 @Component({
   selector: 'app-competences-page',
+  imports: [RouterLink],
   template: `
     <section class="page-section">
       <header class="section-header">
@@ -51,17 +55,111 @@ type SkillFilter = 'Tous' | 'Technique' | 'Transversal';
               <div class="skill-meter" role="presentation" aria-hidden="true">
                 <span [style.--progress-width.%]="skill.progress"></span>
               </div>
-              <a class="card-link" [href]="'/competences/' + skill.slug">Voir le détail</a>
+              <button class="card-link" type="button" (click)="openDrawer(skill.slug)">Voir le détail</button>
             </div>
           </article>
         }
       </div>
     </section>
+
+    @if (selectedDetail) {
+      <div class="drawer-backdrop" (click)="closeDrawer()" aria-hidden="true"></div>
+      <aside class="detail-drawer" role="dialog" aria-modal="true" [attr.aria-label]="selectedDetail.title">
+        <div class="detail-drawer__header">
+          <h2 class="detail-drawer__title">{{ selectedDetail.title }}</h2>
+          <button class="detail-drawer__close" type="button" (click)="closeDrawer()" aria-label="Fermer">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 6.4L17.6 5 12 10.6 6.4 5 5 6.4 10.6 12 5 17.6 6.4 19 12 13.4 17.6 19 19 17.6 13.4 12z"/></svg>
+          </button>
+        </div>
+        <div class="detail-drawer__body">
+          <p class="section-header__kicker">{{ selectedDetail.order }}</p>
+
+          <article class="panel detail-block">
+            <h3>1. Ma définition</h3>
+            @for (p of selectedDetail.definition; track p) {
+              <p>{{ p }}</p>
+            }
+          </article>
+
+          <article class="panel detail-block">
+            <h3>2. Mes éléments de preuve</h3>
+            <ul class="detail-list detail-list--rich detail-list--cards">
+              @for (anecdote of selectedDetail.anecdotes; track anecdote.title) {
+                <li>
+                  <h4>{{ anecdote.title }}</h4>
+                  <div class="detail-points">
+                    <p><strong>Contexte :</strong> {{ anecdote.situation }}</p>
+                    <p><strong>Résultat :</strong> {{ anecdote.result }}</p>
+                    <p><strong>Valeur ajoutée :</strong> {{ anecdote.valueAdded }}</p>
+                    <p>
+                      <strong>Réalisation liée :</strong>
+                      <a [routerLink]="anecdote.linkedProject.path">{{ anecdote.linkedProject.title }}</a>
+                    </p>
+                  </div>
+                </li>
+              }
+            </ul>
+          </article>
+
+          <article class="panel detail-block">
+            <h3>3. Mon autocritique</h3>
+            <ul class="detail-list">
+              @for (item of selectedDetail.selfReview; track item) {
+                <li>{{ item }}</li>
+              }
+            </ul>
+          </article>
+
+          <article class="panel detail-block">
+            <h3>4. Mon évolution</h3>
+            <ul class="detail-list">
+              @for (item of selectedDetail.evolution; track item) {
+                <li>{{ item }}</li>
+              }
+            </ul>
+          </article>
+
+          <article class="panel detail-block">
+            <h3>Réalisations rattachées</h3>
+            <ul class="detail-list detail-list--links">
+              @for (project of selectedDetail.projects; track project.path) {
+                <li>
+                  <a [routerLink]="project.path" (click)="closeDrawer()">{{ project.title }}</a>
+                </li>
+              }
+            </ul>
+            <a class="card-link" [routerLink]="'/competences/' + selectedDetail.slug">Voir la page dédiée ↗</a>
+          </article>
+        </div>
+      </aside>
+    }
   `,
 })
 export class CompetencesPage {
+  private readonly location = inject(Location);
+
   protected readonly filters: SkillFilter[] = ['Tous', 'Technique', 'Transversal'];
   protected selectedFilter: SkillFilter = 'Tous';
+  protected selectedDetail: CompetenceDetail | null = null;
+
+  @HostListener('window:keydown.escape')
+  protected handleEscape(): void {
+    this.closeDrawer();
+  }
+
+  protected openDrawer(slug: string): void {
+    this.selectedDetail = COMPETENCES.find((c) => c.slug === slug) ?? null;
+    if (this.selectedDetail) {
+      this.location.replaceState('/competences/' + slug);
+    }
+  }
+
+  protected closeDrawer(): void {
+    if (this.selectedDetail) {
+      this.selectedDetail = null;
+      this.location.replaceState('/competences');
+    }
+  }
 
   protected get filteredSkills(): Skill[] {
     if (this.selectedFilter === 'Tous') {

@@ -2,17 +2,17 @@ import { Location } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-type TechBadge = {
+export type TechBadge = {
   name: string;
   iconUrl: string;
 };
 
-type LinkedSkill = {
+export type LinkedSkill = {
   title: string;
   path: string;
 };
 
-type RealisationDetail = {
+export type RealisationDetail = {
   slug: string;
   order: string;
   title: string;
@@ -32,7 +32,7 @@ type RealisationDetail = {
   linkedSkills: LinkedSkill[];
 };
 
-const REALISATIONS: RealisationDetail[] = [
+export const REALISATIONS: RealisationDetail[] = [
   {
     slug: 'project-360-content-bridge',
     order: 'Réalisation détaillée 1/5',
