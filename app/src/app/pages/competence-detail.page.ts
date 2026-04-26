@@ -29,6 +29,7 @@ export const COMPETENCES: CompetenceDetail[] = [
     definition: [
       'Je définis cette compétence comme la capacité à concevoir un socle unique pour plusieurs sites, avec des règles communes et des variations contrôlées.',
       'Quand plusieurs sites doivent rester cohérents sans coûter trop cher à maintenir, l’architecture mutualisée devient une réponse simple et utile.',
+      'Dans le contexte actuel de rationalisation des coûts et de maintien en conditions opérationnelles, ce type d’architecture aide les équipes à livrer plus régulièrement avec un niveau de qualité homogène.',
     ],
     anecdotes: [
       {
@@ -40,6 +41,16 @@ export const COMPETENCES: CompetenceDetail[] = [
         valueAdded:
           'J’ai aidé à rendre la maintenance plus claire et plus facile à gérer, tout en repérant les limites quand un besoin devient trop particulier.',
         linkedProject: { title: '360-content-bridge', path: '/realisations/project-360-content-bridge' },
+      },
+      {
+        title: 'Standardisation progressive des pratiques de maintenance',
+        situation:
+          'L’équipe devait appliquer les mêmes vérifications sur plusieurs sites, mais sans cadre unique la qualité variait selon les interventions.',
+        result:
+          'La mise en commun des règles de base et des séquences de contrôle a réduit les oublis et facilité les passages de relais.',
+        valueAdded:
+          'J’ai contribué à transformer un fonctionnement dépendant des habitudes individuelles en une méthode plus lisible et reproductible.',
+        linkedProject: { title: '360tranquilité', path: '/realisations/project-360tranquilite' },
       },
     ],
     selfReview: [
@@ -411,7 +422,11 @@ export const COMPETENCES: CompetenceDetail[] = [
   selector: 'app-competence-detail-page',
   template: `
     <section class="page-section">
-      <button class="btn btn--ghost btn--back" type="button" (click)="goBack()">&lt; Retour</button>
+      <button class="btn btn--ghost btn--back" type="button" (click)="goBack()" aria-label="Retour">
+        <svg viewBox="0 -960 960 960" aria-hidden="true" focusable="false">
+          <path d="m313-440 224 224-57 56-320-320 320-320 57 56-224 224h487v80H313Z" />
+        </svg>
+      </button>
 
       @if (competence; as skill) {
         <header class="section-header">
@@ -419,19 +434,22 @@ export const COMPETENCES: CompetenceDetail[] = [
           <h1>{{ skill.title }}</h1>
         </header>
 
-        <article class="panel detail-block">
-          <h2>1. Ma définition</h2>
-          @for (paragraph of skill.definition; track paragraph) {
-            <p>{{ paragraph }}</p>
-          }
+        <article class="detail-block detail-block--definition">
+          <p class="section-header__kicker">Définition</p>
+          <blockquote class="detail-quote">{{ skill.definition[0] }}</blockquote>
+          <div class="detail-definition-copy">
+            @for (paragraph of skill.definition.slice(1); track paragraph) {
+              <p>{{ paragraph }}</p>
+            }
+          </div>
         </article>
 
-        <article class="panel detail-block">
-          <h2>2. Mes éléments de preuve</h2>
-          <ul class="detail-list detail-list--rich detail-list--cards detail-list--no-bullet">
+        <article class="detail-block detail-block--anecdotes">
+          <h2>Mes éléments de preuve</h2>
+          <div class="anecdote-accordion-list">
             @for (anecdote of skill.anecdotes; track anecdote.title) {
-              <li>
-                <h3>{{ anecdote.title }}</h3>
+              <details class="anecdote-accordion">
+                <summary>{{ anecdote.title }}</summary>
                 <div class="detail-points">
                   <p><strong>Contexte :</strong> {{ anecdote.situation }}</p>
                   <p><strong>Résultat :</strong> {{ anecdote.result }}</p>
@@ -441,38 +459,44 @@ export const COMPETENCES: CompetenceDetail[] = [
                     <a [href]="anecdote.linkedProject.path">{{ anecdote.linkedProject.title }} <span aria-hidden="true">↗</span></a>
                   </p>
                 </div>
-              </li>
+              </details>
             }
-          </ul>
+          </div>
         </article>
 
-        <article class="panel detail-block">
-          <h2>3. Mon autocritique</h2>
-          <ul class="detail-list">
+        <div class="detail-section-divider" aria-hidden="true"></div>
+
+        <article class="detail-block detail-block--critical">
+          <h2>Mon autocritique</h2>
+          <p class="section-header__kicker">Regard critique</p>
+          <ul class="detail-list detail-list--critical">
             @for (item of skill.selfReview; track item) {
               <li>{{ item }}</li>
             }
           </ul>
         </article>
 
-        <article class="panel detail-block">
-          <h2>4. Mon évolution dans cette compétence</h2>
-          <ul class="detail-list">
+        <article class="detail-block detail-block--evolution">
+          <p class="section-header__kicker">Projection</p>
+          <h2>Mon évolution dans cette compétence</h2>
+          <div class="detail-evolution-copy">
             @for (item of skill.evolution; track item) {
-              <li>{{ item }}</li>
+              <p>{{ item }}</p>
             }
-          </ul>
+          </div>
         </article>
 
-        <article class="panel detail-block">
+        <article class="detail-block detail-block--linked">
           <h2>Réalisations rattachées</h2>
-          <ul class="detail-list detail-list--links">
+          <div class="linked-projects-mini">
             @for (project of skill.projects; track project.path) {
-              <li>
-                <a [href]="project.path">{{ project.title }} <span aria-hidden="true">↗</span></a>
-              </li>
+              <a class="linked-project-mini" [href]="project.path">
+                <span class="linked-project-mini__title">{{ project.title }}</span>
+                <span class="linked-project-mini__meta">{{ projectContext(project.title) }}</span>
+                <span class="linked-project-mini__arrow" aria-hidden="true">↗</span>
+              </a>
             }
-          </ul>
+          </div>
         </article>
       } @else {
         <header class="section-header">
@@ -498,4 +522,23 @@ export class CompetenceDetailPage {
     protected goBack(): void {
       this.location.back();
     }
+
+  protected projectContext(projectTitle: string): string {
+    if (projectTitle.includes('360-content-bridge')) {
+      return 'Plugin WordPress multisite et orchestration de contenu';
+    }
+    if (projectTitle.includes('360tranquilité')) {
+      return 'Suite WordPress orientée sécurité et exploitation';
+    }
+    if (projectTitle.includes('360-media-auto-cleanup')) {
+      return 'Gouvernance médias et optimisation opérationnelle';
+    }
+    if (projectTitle.includes('v0-vastrion-mobile-prototype')) {
+      return 'Prototype produit orienté UX et cadrage fonctionnel';
+    }
+    if (projectTitle.includes('crewai-projet-agent-voyage')) {
+      return 'Expérimentation IA multi-agents sur un cas concret';
+    }
+    return 'Projet lié à la compétence évaluée';
+  }
 }

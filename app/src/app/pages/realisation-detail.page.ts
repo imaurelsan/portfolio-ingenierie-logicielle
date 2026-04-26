@@ -37,7 +37,7 @@ export const REALISATIONS: RealisationDetail[] = [
   {
     slug: 'project-360-content-bridge',
     order: 'Réalisation détaillée 1/5',
-    title: '360-content-bridge',
+    title: '360 Content Bridge',
     screenshot: 'assets/images/screenshots-realisations/360-content-bridge.png',
     presentation:
       'Le projet consiste à faciliter les échanges de contenus entre différents sites WordPress, dans un contexte multisite où certaines données doivent être partagées ou dupliquées. Au départ, l’équipe passait beaucoup de temps sur des copier-coller manuels, avec des risques d’oublis et de petites erreurs. || J’ai voulu proposer un outil simple, compréhensible et rassurant à utiliser au quotidien. L’idée n’était pas de tout automatiser d’un coup, mais d’avancer étape par étape avec des garde-fous clairs et des retours terrain.',
@@ -70,7 +70,7 @@ export const REALISATIONS: RealisationDetail[] = [
     futureDistance: 'Étendre les options de mapping pour des structures de données plus complexes.',
     futureToday: 'Le plugin est fonctionnel et constitue une base solide, mais encore perfectible sur la robustesse.',
     criticalView:
-      'Je suis satisfait de l’utilité du projet. Avec le recul, j’aurais dû prévoir plus tôt certains cas d’erreur et mieux documenter l’outil dès la première version.',
+      'Je suis satisfait de l’utilité réelle du projet, mais j’aurais cadré plus tôt les scénarios d’erreur dès la phase de conception. J’aurais aussi mis en place une documentation utilisateur et technique dès la première itération, au lieu d’attendre la stabilisation. Ce projet m’a appris qu’un outil destiné à d’autres doit être pensé autant pour l’usage quotidien que pour sa maintenance future. Depuis, je conçois mes solutions avec plus de clarté opérationnelle, de garde-fous et de lisibilité pour les équipes qui les reprennent.',
     repository: 'https://github.com/imaurelsan/360-content-bridge',
     techStack: [
       { name: 'PHP', iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg' },
@@ -87,7 +87,7 @@ export const REALISATIONS: RealisationDetail[] = [
   {
     slug: 'project-360-media-auto-cleanup',
     order: 'Réalisation détaillée 2/5',
-    title: '360-media-auto-cleanup',
+    title: '360 Media Auto Cleanup',
     screenshot: 'assets/images/screenshots-realisations/360-media-auto-cleanup.png',
     presentation:
       'Le projet vise à identifier et nettoyer les médias orphelins sur des sites WordPress pour réduire la dette de stockage et améliorer l’hygiène opérationnelle. En pratique, la médiathèque devenait vite difficile à maintenir, et personne ne savait ce qui pouvait être supprimé sans risque. || J’ai construit une logique de tri progressive avec une priorité claire: éviter les suppressions dangereuses. Le but était d’apporter un vrai gain de temps sans créer de stress, en gardant une approche prudente et compréhensible pour l’équipe.',
@@ -120,7 +120,7 @@ export const REALISATIONS: RealisationDetail[] = [
     futureDistance: 'Ajouter des rapports plus détaillés et exploitables par les équipes.',
     futureToday: 'Le plugin est utile en exploitation et déjà générateur de gains concrets.',
     criticalView:
-      'Le projet apporte de la valeur rapidement, mais tout repose sur la qualité des règles mises en place. C’est donc un point que je continue d’améliorer en priorité.',
+      'Avec du recul, j’aurais cadré dès le départ une stratégie plus stricte de gestion des faux positifs, avec des seuils de confiance et des étapes de validation plus explicites avant suppression. Cela m’aurait évité certaines zones grises dans les premiers tests. Ce projet m’a appris qu’un outil de suppression irréversible destiné à d’autres utilisateurs doit d’abord être pensé pour réduire le risque, pas seulement pour accélérer l’exécution. Depuis, je privilégie systématiquement la traçabilité, les confirmations intermédiaires et la lisibilité des décisions automatiques.',
     repository: 'https://github.com/imaurelsan/360-media-auto-cleanup',
     techStack: [
       { name: 'PHP', iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg' },
@@ -137,7 +137,7 @@ export const REALISATIONS: RealisationDetail[] = [
     slug: 'project-360tranquilite',
     order: 'Réalisation détaillée 3/5',
     screenshot: 'assets/images/screenshots-realisations/360-tranquillite.png',
-    title: '360tranquilité',
+    title: '360 Tranquillité',
     presentation:
       '360tranquilité est un plugin WordPress qui centralise des fonctions de sécurité, monitoring et exploitation pour éviter la dispersion des outils. Avant ce projet, il fallait jongler avec plusieurs extensions, ce qui compliquait le suivi et la maintenance au quotidien. || J’ai voulu créer un socle unique, plus lisible, pour garder une vision claire de l’état d’un site. Le plugin avance module par module, avec un équilibre volontaire entre ambition, simplicité d’usage et stabilité générale.',
     objectivesContextRisks: [
@@ -187,7 +187,7 @@ export const REALISATIONS: RealisationDetail[] = [
     slug: 'project-crewai-voyage',
     order: 'Réalisation détaillée 4/5',
     screenshot: 'assets/images/screenshots-realisations/travel-planner.png',
-    title: 'crewai-projet-agent-voyage',
+    title: 'CrewAI Agent de voyage',
     presentation:
       'Ce projet académique explore la création d’un agent capable de proposer des itinéraires de voyage cohérents à partir d’entrées variables. L’objectif était d’aller au-delà de la démonstration technique pour obtenir un résultat lisible par un utilisateur non expert. || J’ai travaillé sur la clarté des sorties, la cohérence des étapes et la limitation des réponses trop floues. Ce prototype m’a surtout aidé à mieux cadrer ce qui est montrable aujourd’hui et ce qui doit encore être renforcé.',
     objectivesContextRisks: [
@@ -236,7 +236,7 @@ export const REALISATIONS: RealisationDetail[] = [
     slug: 'project-v0-vastrion-mobile-prototype',
     order: 'Réalisation détaillée 5/5',
     screenshot: 'assets/images/screenshots-realisations/vastrion-super-app.png',
-    title: 'v0-vastrion-mobile-prototype',
+    title: 'V0 Vastrion Mobile Prototype',
     presentation:
       'Ce projet pose les fondations d’une marketplace de services en mode prototype, avec un focus sur les parcours utilisateur et l’exploration produit. L’enjeu principal était de transformer une idée large en parcours concrets et compréhensibles dès les premiers tests. || J’ai priorisé les écrans essentiels pour vérifier rapidement la valeur de la proposition. L’approche a consisté à clarifier l’expérience avant d’alourdir la partie technique, afin de préparer une suite plus solide et mieux argumentée.',
     objectivesContextRisks: [
@@ -286,7 +286,11 @@ export const REALISATIONS: RealisationDetail[] = [
   selector: 'app-realisation-detail-page',
   template: `
     <section class="page-section">
-      <button class="btn btn--ghost btn--back" type="button" (click)="goBack()">&lt; Retour</button>
+      <button class="btn btn--ghost btn--back" type="button" (click)="goBack()" aria-label="Retour">
+        <svg viewBox="0 -960 960 960" aria-hidden="true" focusable="false">
+          <path d="m313-440 224 224-57 56-320-320 320-320 57 56-224 224h487v80H313Z" />
+        </svg>
+      </button>
 
       @if (realisation; as project) {
         <header class="section-header">
@@ -317,7 +321,7 @@ export const REALISATIONS: RealisationDetail[] = [
         </div>
 
         <article class="panel detail-block">
-          <h2>2. Objectifs, contexte, enjeux et risques</h2>
+          <h2 class="detail-heading--anchored">2. Objectifs, contexte, enjeux et risques</h2>
           <ul class="detail-list">
             @for (item of project.objectivesContextRisks; track item) {
               <li>{{ item }}</li>
@@ -326,7 +330,7 @@ export const REALISATIONS: RealisationDetail[] = [
         </article>
 
         <article class="panel detail-block">
-          <h2>3. Étapes : ce que j’ai fait</h2>
+          <h2 class="detail-heading--anchored">3. Étapes : ce que j’ai fait</h2>
           <ul class="detail-list">
             @for (item of project.steps; track item) {
               <li>{{ item }}</li>
@@ -335,7 +339,7 @@ export const REALISATIONS: RealisationDetail[] = [
         </article>
 
         <article class="panel detail-block">
-          <h2>4. Acteurs et interactions</h2>
+          <h2 class="detail-heading--anchored">4. Acteurs et interactions</h2>
           <ul class="detail-list">
             @for (item of project.stakeholders; track item) {
               <li>{{ item }}</li>
@@ -343,8 +347,8 @@ export const REALISATIONS: RealisationDetail[] = [
           </ul>
         </article>
 
-        <article class="panel detail-block">
-          <h2>5. Résultats</h2>
+        <article class="panel detail-block detail-block--results">
+          <h2 class="detail-heading--anchored">5. Résultats</h2>
           <div class="two-columns two-columns--details">
             <div class="detail-result-card">
               <h3>Pour moi</h3>
@@ -367,7 +371,7 @@ export const REALISATIONS: RealisationDetail[] = [
         </article>
 
         <article class="panel detail-block">
-          <h2>6. Lendemains du projet</h2>
+          <h2 class="detail-heading--anchored">6. Lendemains du projet</h2>
           <ul class="detail-list">
             <li><strong>Futur immédiat :</strong> {{ project.futureImmediate }}</li>
             <li><strong>À distance :</strong> {{ project.futureDistance }}</li>
@@ -376,26 +380,13 @@ export const REALISATIONS: RealisationDetail[] = [
         </article>
 
         <article class="panel detail-block">
-          <h2>7. Mon regard critique</h2>
+          <h2 class="detail-heading--anchored">7. Mon regard critique</h2>
           <p>{{ project.criticalView }}</p>
-          <a class="card-link" [href]="project.repository" target="_blank" rel="noopener">Consulter le dépôt GitHub ↗</a>
-        </article>
-
-        <article class="panel detail-block">
-          <h2>Compétences rattachées</h2>
-          <ul class="detail-list detail-list--links">
-            @for (skill of project.linkedSkills; track skill.path) {
-              <li>
-                <a [href]="skill.path">{{ skill.title }}</a>
-              </li>
-            }
-          </ul>
-          <a class="card-link" href="/realisations">Retour à la vue des réalisations</a>
         </article>
 
         @if (project.techStack.length) {
           <article class="panel detail-block">
-            <h2>Technologies utilisées</h2>
+            <h2 class="detail-heading--anchored">Technologies utilisées</h2>
             <div class="tech-stack">
               @for (badge of project.techStack; track badge.name) {
                 <div class="tech-badge">
@@ -408,6 +399,25 @@ export const REALISATIONS: RealisationDetail[] = [
             </div>
           </article>
         }
+
+        <article class="panel detail-block">
+          <h2 class="detail-heading--anchored">Compétences rattachées</h2>
+          <ul class="detail-list detail-list--links">
+            @for (skill of project.linkedSkills; track skill.path) {
+              <li>
+                <a [href]="skill.path">{{ skill.title }}</a>
+              </li>
+            }
+          </ul>
+          <a class="detail-inline-github" [href]="project.repository" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .5A12 12 0 0 0 8.2 23.9c.6.1.8-.2.8-.6v-2.2c-3.4.8-4.2-1.4-4.2-1.4-.5-1.3-1.2-1.6-1.2-1.6-1-.7 0-.7 0-.7 1.1 0 1.8 1.1 1.8 1.1 1 .1.5 2.3 3.7 1.6.1-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-6A4.7 4.7 0 0 1 5.5 9c-.1-.3-.6-1.5.1-3 0 0 1-.3 3.3 1.2a11.2 11.2 0 0 1 6.1 0c2.3-1.5 3.3-1.2 3.3-1.2.7 1.5.2 2.7.1 3 .8.8 1.3 1.9 1.3 3.2 0 4.6-2.8 5.6-5.5 6 .4.4.8 1 .8 2v3c0 .4.2.7.8.6A12 12 0 0 0 12 .5Z"/></svg>
+            <span>Consulter le dépôt ↗</span>
+          </a>
+        </article>
+
+        <div class="detail-primary-action">
+          <a class="detail-return-link" href="/realisations">Retour à la vue des réalisations</a>
+        </div>
       } @else {
         <header class="section-header">
           <p class="section-header__kicker">Réalisation</p>

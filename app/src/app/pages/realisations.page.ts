@@ -45,11 +45,11 @@ type Project = {
             >
               <img [src]="project.screenshot" [alt]="'Capture — ' + project.title" />
             </figure>
-            <p class="chip metric-chip">{{ project.keyMetric }}</p>
+            <p class="chip metric-chip">{{ cleanMetric(project.keyMetric) }}</p>
             <h2>{{ project.title }}</h2>
             <p class="project-tagline">{{ project.tagline }}</p>
             <p>{{ project.summary }}</p>
-            <button class="card-link" type="button" (click)="openDrawer(project.slug)">Voir le détail</button>
+            <button class="btn btn--ghost btn--detail" type="button" (click)="openDrawer(project.slug)">Voir le détail</button>
             <p class="card-meta-title">Compétences mobilisées</p>
             <ul class="card-meta-list card-meta-list--pretty">
               @for (skill of project.relatedSkills; track skill.path) {
@@ -102,7 +102,7 @@ type Project = {
           </article>
 
           <article class="panel detail-block">
-            <h3>2. Objectifs, contexte, enjeux et risques</h3>
+            <h3 class="detail-heading--anchored">2. Objectifs, contexte, enjeux et risques</h3>
             <ul class="detail-list">
               @for (item of selectedDetail.objectivesContextRisks; track item) {
                 <li>{{ item }}</li>
@@ -111,7 +111,7 @@ type Project = {
           </article>
 
           <article class="panel detail-block">
-            <h3>3. Ce que j’ai fait</h3>
+            <h3 class="detail-heading--anchored">3. Ce que j’ai fait</h3>
             <ul class="detail-list">
               @for (item of selectedDetail.steps; track item) {
                 <li>{{ item }}</li>
@@ -120,7 +120,7 @@ type Project = {
           </article>
 
           <article class="panel detail-block">
-            <h3>4. Acteurs</h3>
+            <h3 class="detail-heading--anchored">4. Acteurs</h3>
             <ul class="detail-list">
               @for (item of selectedDetail.stakeholders; track item) {
                 <li>{{ item }}</li>
@@ -128,8 +128,8 @@ type Project = {
             </ul>
           </article>
 
-          <article class="panel detail-block">
-            <h3>5. Résultats</h3>
+          <article class="panel detail-block detail-block--results">
+            <h3 class="detail-heading--anchored">5. Résultats</h3>
             <div class="two-columns two-columns--details">
               <div class="detail-result-card">
                 <h4>Pour moi</h4>
@@ -151,7 +151,7 @@ type Project = {
           </article>
 
           <article class="panel detail-block">
-            <h3>6. Lendemains</h3>
+            <h3 class="detail-heading--anchored">6. Lendemains</h3>
             <ul class="detail-list">
               <li><strong>Futur immédiat :</strong> {{ selectedDetail.futureImmediate }}</li>
               <li><strong>À distance :</strong> {{ selectedDetail.futureDistance }}</li>
@@ -160,17 +160,13 @@ type Project = {
           </article>
 
           <article class="panel detail-block">
-            <h3>7. Mon regard critique</h3>
+            <h3 class="detail-heading--anchored">7. Mon regard critique</h3>
             <p>{{ selectedDetail.criticalView }}</p>
-            <a [href]="selectedDetail.repository" target="_blank" rel="noopener" class="github-link">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .5A12 12 0 0 0 8.2 23.9c.6.1.8-.2.8-.6v-2.2c-3.4.8-4.2-1.4-4.2-1.4-.5-1.3-1.2-1.6-1.2-1.6-1-.7 0-.7 0-.7 1.1 0 1.8 1.1 1.8 1.1 1 .1.5 2.3 3.7 1.6.1-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-6A4.7 4.7 0 0 1 5.5 9c-.1-.3-.6-1.5.1-3 0 0 1-.3 3.3 1.2a11.2 11.2 0 0 1 6.1 0c2.3-1.5 3.3-1.2 3.3-1.2.7 1.5.2 2.7.1 3 .8.8 1.3 1.9 1.3 3.2 0 4.6-2.8 5.6-5.5 6 .4.4.8 1 .8 2v3c0 .4.2.7.8.6A12 12 0 0 0 12 .5Z"/></svg>
-              <span>Dépôt GitHub ↗</span>
-            </a>
           </article>
 
           @if (selectedDetail.techStack.length) {
             <article class="panel detail-block">
-              <h3>Technologies utilisées</h3>
+              <h3 class="detail-heading--anchored">Technologies utilisées</h3>
               <div class="tech-stack">
                 @for (badge of selectedDetail.techStack; track badge.name) {
                   <div class="tech-badge">
@@ -185,7 +181,7 @@ type Project = {
           }
 
           <article class="panel detail-block">
-            <h3>Compétences rattachées</h3>
+            <h3 class="detail-heading--anchored">Compétences rattachées</h3>
             <ul class="detail-list detail-list--links">
               @for (skill of selectedDetail.linkedSkills; track skill.path) {
                 <li>
@@ -193,7 +189,15 @@ type Project = {
                 </li>
               }
             </ul>
+            <a [href]="selectedDetail.repository" target="_blank" rel="noopener" class="detail-inline-github">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .5A12 12 0 0 0 8.2 23.9c.6.1.8-.2.8-.6v-2.2c-3.4.8-4.2-1.4-4.2-1.4-.5-1.3-1.2-1.6-1.2-1.6-1-.7 0-.7 0-.7 1.1 0 1.8 1.1 1.8 1.1 1 .1.5 2.3 3.7 1.6.1-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-6A4.7 4.7 0 0 1 5.5 9c-.1-.3-.6-1.5.1-3 0 0 1-.3 3.3 1.2a11.2 11.2 0 0 1 6.1 0c2.3-1.5 3.3-1.2 3.3-1.2.7 1.5.2 2.7.1 3 .8.8 1.3 1.9 1.3 3.2 0 4.6-2.8 5.6-5.5 6 .4.4.8 1 .8 2v3c0 .4.2.7.8.6A12 12 0 0 0 12 .5Z"/></svg>
+              <span>Consulter le dépôt ↗</span>
+            </a>
           </article>
+
+          <div class="detail-primary-action">
+            <button class="btn btn--primary detail-return-link" type="button" (click)="closeDrawer()">Retour à la vue des réalisations</button>
+          </div>
         </div>
       </aside>
     }
@@ -280,16 +284,23 @@ export class RealisationsPage {
   protected presentationParagraphs(text: string): string[] {
     return text.split('||').map((part) => part.trim()).filter((part) => part.length > 0);
   }
+
+  protected cleanMetric(metric: string): string {
+    return metric
+      .replaceAll(/\b(estim[ée]s?|estimation|estimatif|estimative|estimatifs|estimatives|approx(?:\.|imatif|imative)?|environ)\b/gi, '')
+      .replaceAll(/\s{2,}/g, ' ')
+      .trim();
+  }
   // J'ai retenu ces projets pour montrer simplement ce que j'ai fait, comment je l'ai fait et ce que cela a apporté.
   protected readonly projects: Project[] = [
     {
       slug: 'project-360-content-bridge',
-      title: '360-content-bridge',
+      title: '360 Content Bridge',
       kind: 'Plugin WordPress',
       screenshot: 'assets/images/screenshots-realisations/360-content-bridge.png',
       tagline: 'Rendre les transferts de contenu plus sûrs et plus rapides.',
       summary: "Plugin d'import/export WordPress conçu pour faciliter la maintenance de contenus sur plusieurs sites.",
-      keyMetric: '-40% temps opérationnel estimé',
+      keyMetric: '-40% temps opérationnel',
       visualHint: 'Flux import/export multisite',
       repository: 'https://github.com/imaurelsan/360-content-bridge',
       relatedSkills: [
@@ -309,12 +320,12 @@ export class RealisationsPage {
     },
     {
       slug: 'project-360-media-auto-cleanup',
-      title: '360-media-auto-cleanup',
+      title: '360 Media Auto Cleanup',
       kind: 'Plugin WordPress',
       screenshot: 'assets/images/screenshots-realisations/360-media-auto-cleanup.png',
       tagline: 'Nettoyer sans casser : supprimer les médias inutiles avec prudence.',
       summary: "Plugin de nettoyage des médias orphelins pour alléger les sites et réduire le stockage inutile.",
-      keyMetric: '-25% stockage estimé',
+      keyMetric: '-25% stockage',
       visualHint: 'Audit et nettoyage médias',
       repository: 'https://github.com/imaurelsan/360-media-auto-cleanup',
       relatedSkills: [
@@ -334,7 +345,7 @@ export class RealisationsPage {
     },
     {
       slug: 'project-360tranquilite',
-      title: '360tranquilité',
+      title: '360 Tranquillité',
       kind: 'Plugin WordPress',
       screenshot: 'assets/images/screenshots-realisations/360-tranquillite.png',
       tagline: 'Réunir sécurité, suivi et exploitation dans un seul outil.',
@@ -359,7 +370,7 @@ export class RealisationsPage {
     },
     {
       slug: 'project-crewai-voyage',
-      title: 'crewai-projet-agent-voyage',
+      title: 'CrewAI - Agent de voyage',
       kind: 'Application IA (prototype)',
       screenshot: 'assets/images/screenshots-realisations/travel-planner.png',
       tagline: 'Transformer une idée IA en parcours simple pour l’utilisateur.',
@@ -384,7 +395,7 @@ export class RealisationsPage {
     },
     {
       slug: 'project-v0-vastrion-mobile-prototype',
-      title: 'v0-vastrion-mobile-prototype',
+      title: 'Vastrion SuperApp',
       kind: 'Application mobile (prototype)',
       screenshot: 'assets/images/screenshots-realisations/vastrion-super-app.png',
       tagline: 'Poser une base produit claire avant d’aller plus loin.',

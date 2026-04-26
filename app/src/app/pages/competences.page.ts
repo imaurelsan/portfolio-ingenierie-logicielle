@@ -68,7 +68,7 @@ type SkillFilter = 'Tous' | 'Techniques' | 'Humaines';
               <div class="skill-meter" role="presentation" aria-hidden="true">
                 <span [style.--progress-width.%]="skill.progress"></span>
               </div>
-              <button class="card-link" type="button" (click)="openDrawer(skill.slug)">Voir le détail</button>
+              <button class="btn btn--ghost btn--detail" type="button" (click)="openDrawer(skill.slug)">Voir le détail</button>
             </div>
           </article>
         }

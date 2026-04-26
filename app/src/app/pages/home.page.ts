@@ -86,7 +86,7 @@ type FeaturedProject = {
       </div>
 
       <div class="home-projects__all-link">
-        <a routerLink="/realisations" class="btn btn--primary">Voir les 5 réalisations</a>
+        <a routerLink="/realisations" class="btn btn--primary">Voir toutes les réalisations</a>
       </div>
     </section>
 

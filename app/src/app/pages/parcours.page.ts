@@ -41,7 +41,7 @@ type CertificationItem = {
         <h1>Mon évolution professionnelle et académique</h1>
       </header>
 
-      <article class="panel detail-block detail-block--experience">
+      <article class="detail-block detail-block--experience">
         <h2>Expériences en entreprise</h2>
         <ol class="journey-list">
           @for (item of experiences; track item.role + item.company) {
@@ -73,7 +73,7 @@ type CertificationItem = {
                 </div>
 
                 <details class="journey-item__details">
-                  <summary>Voir le détail de l'expérience</summary>
+                  <summary>Voir le détail <span class="journey-toggle-arrow" aria-hidden="true">→</span></summary>
                   <p class="card-meta-title">Responsabilité</p>
                   <p>{{ item.responsibility }}</p>
                   <p class="card-meta-title">Statut</p>
@@ -109,11 +109,11 @@ type CertificationItem = {
         </ol>
       </article>
 
-      <article class="panel detail-block detail-block--formation">
+      <article class="detail-block detail-block--formation">
         <h2>Formations</h2>
         <ol class="journey-list">
           @for (item of formations; track item.degree + item.school) {
-            <li class="journey-item">
+            <li class="journey-item journey-item--formation">
               <div class="journey-item__logo">
                 <p class="timeline__period">{{ item.period }}</p>
                 <a class="logo-chip" [href]="item.website" target="_blank" rel="noopener" [attr.aria-label]="'Site de ' + item.school">
@@ -131,7 +131,7 @@ type CertificationItem = {
                 </div>
 
                 <details class="journey-item__details">
-                  <summary>En savoir plus</summary>
+                  <summary>Voir le détail <span class="journey-toggle-arrow" aria-hidden="true">→</span></summary>
                   @for (line of item.details; track line) {
                     <p>{{ line }}</p>
                   }
@@ -142,30 +142,17 @@ type CertificationItem = {
         </ol>
       </article>
 
-      <article class="panel detail-block detail-block--certification">
+      <article class="detail-block detail-block--certification">
         <h2>Tests et certifications</h2>
         <ul class="detail-list">
-          @for (item of certifications; track item.title) {
-            <li class="certification-item">
-              <strong>{{ item.date }}</strong>
+          @for (item of certificationsForDisplay; track item.title) {
+            <li class="certification-item" [class.certification-item--single]="certificationsForDisplay.length === 1">
+              <p class="certification-line certification-line--date">{{ item.date }}</p>
+              <p class="certification-line certification-line--summary"><strong>{{ item.school }}</strong> — {{ item.title }}</p>
               @if (item.link) {
-                <p><a [href]="item.link" target="_blank" rel="noopener">{{ item.title }}</a></p>
+                <p class="certification-line certification-line--proof"><a [href]="item.link" target="_blank" rel="noopener">Voir la preuve →</a></p>
               } @else {
-                <p>{{ item.title }}</p>
-              }
-              @if (item.school) {
-                <p class="certification-school">{{ item.school }}</p>
-              }
-              @if (item.logo) {
-                <div class="certification-logo">
-                  @if (item.link) {
-                    <a [href]="item.link" target="_blank" rel="noopener" [attr.aria-label]="'Site de ' + (item.school || 'Établissement')">
-                      <img [src]="item.logo" [alt]="'Logo ' + (item.school || 'Établissement')" />
-                    </a>
-                  } @else {
-                    <img [src]="item.logo" [alt]="'Logo ' + (item.school || 'Établissement')" />
-                  }
-                </div>
+                <p class="certification-line certification-line--proof">Voir la preuve</p>
               }
             </li>
           }
@@ -404,4 +391,13 @@ export class ParcoursPage {
       link: 'https://www.educatel.fr/formation/web-informatique/developpeur-web',
     },
   ];
+
+  protected get certificationsForDisplay(): CertificationItem[] {
+    return this.certifications.filter((item) => {
+      const text = `${item.title} ${item.school ?? ''} ${item.date}`.toLowerCase();
+      const hasRequiredFields = Boolean(item.date?.trim() && item.school?.trim() && item.title?.trim());
+      const hasPlaceholder = /oblitel|placeholder|lorem ipsum|test\s*cert/i.test(text);
+      return hasRequiredFields && !hasPlaceholder;
+    });
+  }
 }
