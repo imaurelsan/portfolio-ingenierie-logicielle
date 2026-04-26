@@ -87,6 +87,24 @@ a {
 	color: var(--c-accent);
 }
 
+a,
+button,
+[role='button'],
+summary,
+input,
+textarea,
+select {
+	-webkit-tap-highlight-color: transparent;
+}
+
+a:focus,
+button:focus,
+[role='button']:focus,
+summary:focus {
+	outline: none;
+	box-shadow: none;
+}
+
 .page-section {
 	width: min(1280px, 100%);
 	margin: 0 auto;
