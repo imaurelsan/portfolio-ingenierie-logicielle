@@ -109,3 +109,11 @@ Secrets nécessaires :
 ## 9) Message clé soutenance
 
 Ce portfolio n'est pas un simple site vitrine. C'est un produit front industrialisé, déployé automatiquement, avec des choix d'architecture assumés et justifiés par des contraintes réelles (qualité, délais, coûts, maintenabilité).
+
+## 10) Checkpoint UI/UX (préparation version finale)
+
+- Header simplifié : suppression du libellé "Portfolio", logo sans cercle, intitulé menu "Qui suis-je ?".
+- Footer simplifié : suppression du bouton "Prendre contact", conservation du lien "Contactez-moi".
+- Accueil refondu dans une logique éditoriale : hero full-width avec fond image, sections narratives A/B/C/D, CTA principal unique vers la présentation.
+- Navigation mobile clarifiée : icônes plus explicites, icône contact intégrée, taille des pictogrammes augmentée.
+- Cohérence UI globale renforcée : style de boutons harmonisé (hors menu), espacement de base renforcé avec une unité minimale de 15px sur les zones structurantes.

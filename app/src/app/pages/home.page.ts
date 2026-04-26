@@ -1,29 +1,15 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
-type FocusArea = {
-  title: string;
-  metric: string;
-  description: string;
+type AngleLine = {
+  keyword: string;
+  sentence: string;
 };
 
-type StatHighlight = {
-  value: string;
+type FeaturedProject = {
   title: string;
-  description: string;
-};
-
-type EntryPoint = {
-  title: string;
-  description: string;
-  path: string;
-  cta: string;
-};
-
-type Proof = {
-  tag: string;
-  title: string;
-  impact: string;
+  context: string;
+  screenshot: string;
   path: string;
 };
 
@@ -31,192 +17,125 @@ type Proof = {
   selector: 'app-home-page',
   imports: [RouterLink],
   template: `
-    <section class="hero">
-      <div class="hero__identity hero__identity--enhanced">
-        <div class="hero__portrait">
-          <img class="hero__photo" src="assets/images/photo-identite.jpg" alt="Photo d'identité d'Aurel YAHOUEDEOU" />
+    <section class="home-hero" aria-labelledby="home-hero-title">
+      <div class="home-hero__inner">
+        <div class="home-hero__text">
+          <p id="home-hero-title" class="home-hero__name"><span class="home-hero__name-first">Aurel</span> <span class="home-hero__name-last">YAHOUEDEOU</span></p>
+          <h1 class="home-hero__title">Développeur Fullstack</h1>
+          <p class="home-hero__junior" aria-label="Junior">Junior</p>
         </div>
 
-        <div class="hero__text">
-          <p class="hero__kicker">Ingénieur logiciel, avec un socle réseaux, systèmes et sécurité</p>
-          <p class="hero__highlight">Profil hybride : design UI/UX, architecture, sécurité et développement fullstack.</p>
-          <h1>Je conçois des solutions web claires, fiables et utiles.</h1>
-          <p class="hero__lede">
-            Je conçois mes solutions en partant toujours de l’usage réel. Le design me sert à clarifier, l’architecture à structurer, et la sécurité à fiabiliser.
-          </p>
-          <p class="hero__value">Mon objectif n’est pas d’ajouter de la complexité, mais de construire des bases simples, solides et compréhensibles, sur lesquelles on peut évoluer sereinement au fil des évolutions et des imprévus.</p>
-
-          <div class="hero__divider" aria-hidden="true"></div>
-
-          <div class="hero__actions">
-            <a routerLink="/realisations" class="btn btn--primary">Entrer par les réalisations</a>
-            <a routerLink="/competences" class="btn btn--ghost">Comparer mes compétences</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="hero__stats-wrap">
-        <div class="hero__stats-intro">
-          <p class="section-header__kicker">En un coup d'œil</p>
-          <p class="intro-text intro-text--tight">Ce que vous trouverez dans ce portfolio pour évaluer mon niveau, ma méthode et mon potentiel.</p>
+        <div class="home-hero__actions">
+          <a routerLink="/presentation" class="btn btn--primary">En savoir plus</a>
         </div>
 
-        <div class="hero__stats">
-          @for (stat of statHighlights; track stat.title) {
-            <article class="stat-card stat-card--pulse">
-              <h2>{{ stat.value }}</h2>
-              <h3>{{ stat.title }}</h3>
-              <p>{{ stat.description }}</p>
-            </article>
-          }
+        <div class="home-hero__scroll-hint" aria-hidden="true">
+          <svg viewBox="0 -960 960 960" focusable="false">
+            <path d="M80-80v-60h81q-59-72-90-159T40-480q0-94 31-181t90-159H80v-60h200v200h-60v-116q-58 66-89 147t-31 169q0 88 31 169t89 147v-116h60v200H80Zm578-47q-23 8-46.5 7.5T566-131L304-253l18-40q10-20 28-32.5t40-14.5l68-5-112-307q-6-16 1-30.5t23-20.5q16-6 30.5 1t20.5 23l148 407-100 7 131 61q7 3 15 3.5t15-1.5l157-57q31-11 45-41.5t3-61.5l-55-150q-6-16 1-30.5t23-20.5q16-6 30.5 1t20.5 23l55 150q23 63-4.5 122.5T815-184l-157 57Zm-90-265-54-151q-6-16 1-30.5t23-20.5q16-6 30.5 1t20.5 23l55 150-76 28Zm113-41-41-113q-6-16 1-30.5t23-20.5q16-6 30.5 1t20.5 23l41 112-75 28Zm8 88Z" />
+          </svg>
         </div>
       </div>
     </section>
 
-    <section class="page-section page-section--home">
-      <header class="section-header section-header--compact">
-        <p class="section-header__kicker">Angle de lecture</p>
-        <h2 class="section-title">Trois axes qui définissent ma manière d'intervenir</h2>
-      </header>
-
-      <div class="focus-grid">
-        @for (area of focusAreas; track area.title) {
-          <article class="card focus-card">
-            <p class="chip">{{ area.metric }}</p>
-            <h3>{{ area.title }}</h3>
-            <p>{{ area.description }}</p>
+    <section class="page-section home-angles" aria-labelledby="home-angles-title">
+      <h2 id="home-angles-title" class="sr-only">Ma façon d'intervenir</h2>
+      <div class="home-angles__list">
+        @for (line of angleLines; track line.keyword) {
+          <article class="home-angle-line">
+            <p class="home-angle-line__keyword">{{ line.keyword }}</p>
+            <p class="home-angle-line__sentence">{{ line.sentence }}</p>
           </article>
         }
       </div>
     </section>
 
-    <section class="page-section page-section--home">
+    <section class="page-section home-projects" aria-labelledby="home-projects-title">
       <header class="section-header section-header--compact">
-        <p class="section-header__kicker">Entrées rapides</p>
-        <h2 class="section-title">Explorer le portfolio par intention, pas seulement par rubrique</h2>
+        <h2 id="home-projects-title" class="section-title">Projets récents</h2>
+        <p class="intro-text intro-text--tight">Chaque projet illustre un problème réel et la décision qui l'a résolu.</p>
       </header>
 
-      <div class="entry-grid">
-        @for (entry of entryPoints; track entry.path) {
-          <a class="entry-card" [routerLink]="entry.path">
-            <p class="entry-card__eyebrow">Navigation guidée</p>
-            <h3>{{ entry.title }}</h3>
-            <p>{{ entry.description }}</p>
-            <span class="entry-card__cta">{{ entry.cta }}</span>
-          </a>
+      <article class="home-project home-project--lead">
+        <img [src]="featuredProject.screenshot" [alt]="featuredProject.title" />
+        <div class="home-project__content">
+          <h3><a [routerLink]="featuredProject.path">{{ featuredProject.title }}</a></h3>
+          <p>{{ featuredProject.context }}</p>
+          <a class="home-project__cta" [routerLink]="featuredProject.path">Voir le projet</a>
+        </div>
+      </article>
+
+      <div class="home-projects__grid">
+        @for (project of compactProjects; track project.path) {
+          <article class="home-project home-project--compact">
+            <img [src]="project.screenshot" [alt]="project.title" />
+            <div class="home-project__content">
+              <h3><a [routerLink]="project.path">{{ project.title }}</a></h3>
+              <p>{{ project.context }}</p>
+              <a class="home-project__cta" [routerLink]="project.path">Voir le projet</a>
+            </div>
+          </article>
         }
+      </div>
+
+      <div class="home-projects__all-link">
+        <a routerLink="/realisations">Voir les 5 réalisations -></a>
       </div>
     </section>
 
-    <section class="page-section page-section--home">
-      <div class="proof-board">
-        <div class="proof-board__intro">
-          <p class="section-header__kicker">Preuves rapides</p>
-          <h2 class="section-title">Quelques exemples concrets avant d'entrer dans le détail</h2>
-          <p class="intro-text intro-text--tight">
-            Chaque preuve renvoie ensuite à une réalisation complète et aux compétences associées. L’objectif est de
-            montrer la cohérence entre contexte, action, résultat et recul critique.
-          </p>
-        </div>
+    <section class="home-quote" aria-label="Positionnement">
+      <div class="home-quote__inner">
+        <p class="home-quote__text">
+          Je ne cherche pas à impressionner par la complexité.<br />
+          Je cherche à convaincre par la clarté.
+        </p>
+        <p class="home-quote__attribution">Ma philosophie de conception</p>
+      </div>
+    </section>
 
-        <div class="proof-list">
-          @for (proof of proofs; track proof.title) {
-            <a class="proof-item" [routerLink]="proof.path">
-              <p class="proof-item__tag">{{ proof.tag }}</p>
-              <h3>{{ proof.title }}</h3>
-              <p>{{ proof.impact }}</p>
-            </a>
-          }
-        </div>
+    <section class="page-section home-contact-invite" aria-labelledby="home-contact-title">
+      <h2 id="home-contact-title" class="sr-only">Invitation à échanger</h2>
+      <p>Une question sur un projet ou sur mon profil ?</p>
+      <div class="home-contact-invite__actions">
+        <a routerLink="/contact" class="btn btn--ghost">Entrer en relation</a>
+        <a routerLink="/parcours" class="btn btn--ghost">Voir mon parcours</a>
       </div>
     </section>
   `,
 })
 export class HomePage {
-  protected readonly statHighlights: StatHighlight[] = [
+  protected readonly angleLines: AngleLine[] = [
     {
-      value: '5',
-      title: 'Réalisations détaillées',
-      description: 'Des preuves concrètes de ma méthode et de mes résultats.',
+      keyword: 'ARCHITECTURE',
+      sentence: 'Je construis des bases simples sur lesquelles on peut évoluer.',
     },
     {
-      value: '10',
-      title: 'Compétences comparées',
-      description: 'Un positionnement clair et honnête sur mes forces actuelles.',
+      keyword: 'MÉTHODE',
+      sentence: 'J\'automatise ce qui fait perdre du temps, pas ce qui crée de la valeur.',
     },
     {
-      value: '1',
-      title: 'Fil conducteur',
-      description: 'Design -> architecture -> sécurité -> développement.',
+      keyword: 'POSTURE',
+      sentence: 'Je relie le technique, l\'usage et la responsabilité.',
     },
   ];
 
-  protected readonly focusAreas: FocusArea[] = [
-    {
-      title: 'Concevoir des bases techniques sobres',
-      metric: 'Architecture',
-      description:
-        'Je préfère des bases simples, réutilisables et adaptées au besoin réel.',
-    },
-    {
-      title: 'Raccourcir les boucles de maintenance',
-      metric: 'Méthode',
-      description:
-        'J’automatise ce qui fait perdre du temps : déploiement, nettoyage et tâches répétitives.',
-    },
-    {
-      title: 'Relier technique, usage et responsabilité',
-      metric: 'Impact',
-      description:
-        'Je cherche des solutions qui ont du sens à la fois pour l’équipe, pour l’usage et pour le temps passé.',
-    },
-  ];
+  protected readonly featuredProject: FeaturedProject = {
+    title: '360-content-bridge',
+    context: 'Plugin WordPress - réduction du temps de transfert estimée à -60%.',
+    screenshot: 'assets/images/screenshots-realisations/360-content-bridge.png',
+    path: '/realisations/project-360-content-bridge',
+  };
 
-  protected readonly entryPoints: EntryPoint[] = [
+  protected readonly compactProjects: FeaturedProject[] = [
     {
-      title: 'Comprendre mon profil et mes valeurs',
-      description: 'Pour comprendre d’où je viens, comment je travaille et ce que je cherche aujourd’hui.',
-      path: '/presentation',
-      cta: 'Ouvrir la présentation',
-    },
-    {
-      title: 'Comparer mes compétences entre elles',
-      description: 'Pour voir rapidement mes points forts actuels et les domaines où je progresse encore.',
-      path: '/competences',
-      cta: 'Voir la cartographie',
-    },
-    {
-      title: 'Entrer par les preuves projets',
-      description: 'Pour juger mon niveau à partir de projets concrets, de leur contexte et de leurs résultats.',
-      path: '/realisations',
-      cta: 'Voir les réalisations',
-    },
-    {
-      title: 'Lire mon évolution dans le temps',
-      description: 'Pour suivre mon évolution sans réduire le site à une simple suite de dates.',
-      path: '/parcours',
-      cta: 'Voir le parcours',
-    },
-  ];
-
-  protected readonly proofs: Proof[] = [
-    {
-      tag: 'Maintenance à l’échelle',
-      title: '360-content-bridge',
-      impact: 'Un plugin pensé pour accélérer l’import, l’export et la maintenance de contenus WordPress à grande échelle.',
-
-      path: '/realisations/project-360-content-bridge',
-    },
-    {
-      tag: 'Réduction de coûts',
       title: '360-media-auto-cleanup',
-      impact: 'Un outil pensé pour alléger les sites et rendre le nettoyage des médias plus sûr.',
+      context: 'Plugin WordPress - gouvernance médias et réduction du bruit opérationnel.',
+      screenshot: 'assets/images/screenshots-realisations/360-media-auto-cleanup.png',
       path: '/realisations/project-360-media-auto-cleanup',
     },
     {
-      tag: 'Sécurité et exploitation',
       title: '360tranquilité',
-      impact: 'Un socle open source qui réunit sécurité, suivi et outils utiles pour des sites WordPress exposés.',
+      context: 'Suite WordPress - sécurité applicative et exploitation unifiée.',
+      screenshot: 'assets/images/screenshots-realisations/360-tranquillite.png',
       path: '/realisations/project-360tranquilite',
     },
   ];

@@ -25,6 +25,7 @@
 	gap: 0.75rem;
 	justify-self: start;
 	width: fit-content;
+	min-height: 42px;
 	color: var(--c-text);
 	text-decoration: none;
 
@@ -44,19 +45,18 @@
 	padding: 0;
 }
 
-.brand__avatar--symbol {
+.brand__logo {
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
-	background: color-mix(in srgb, var(--c-surface) 70%, transparent);
-	object-fit: initial;
-	position: relative;
+	width: 28px;
+	height: 28px;
 }
 
-.brand__avatar--symbol::before {
+.brand__logo::before {
 	content: '';
-	width: 26px;
-	height: 26px;
+	width: 28px;
+	height: 28px;
 	background: #ffffff;
 	-webkit-mask: url('/favicon.svg') center / contain no-repeat;
 	mask: url('/favicon.svg') center / contain no-repeat;
@@ -151,35 +151,6 @@
 	}
 }
 
-.footer-contact-cta {
-	display: inline-flex;
-	align-items: center;
-	justify-content: center;
-	align-self: center;
-	padding: 0.7rem 1.8rem;
-	border: 1px solid color-mix(in srgb, var(--c-accent) 60%, transparent);
-	border-radius: 8px;
-	background: color-mix(in srgb, var(--c-accent) 16%, transparent);
-	color: var(--c-text);
-	font-family: 'Montserrat', sans-serif;
-	font-size: 0.88rem;
-	font-weight: 400;
-	letter-spacing: 0.07em;
-	text-transform: uppercase;
-	text-decoration: none;
-	transition: border-color 160ms ease, background 160ms ease, transform 160ms ease;
-
-	&:hover {
-		border-color: var(--c-accent);
-		background: color-mix(in srgb, var(--c-accent) 26%, transparent);
-		transform: translateY(-1px);
-	}
-}
-
-.app-footer {
-	justify-items: center;
-}
-
 .footer-contact-link {
 	font-size: 0.76rem;
 	font-family: 'Montserrat', sans-serif;
@@ -193,14 +164,6 @@
 	&:hover {
 		color: var(--c-accent);
 	}
-}
-
-.brand__kicker {
-	margin: 0;
-	font-size: 0.72rem;
-	text-transform: uppercase;
-	letter-spacing: 0.16em;
-	color: var(--c-muted);
 }
 
 .brand__title {
@@ -381,7 +344,7 @@
 
 
 :host-context(.theme-light) {
-	.brand__avatar--symbol::before {
+	.brand__logo::before {
 		background: var(--c-accent);
 	}
 
@@ -440,13 +403,14 @@
 }
 
 .app-main {
-	padding: 1.5rem 1.35rem 2.2rem;
+	padding: 1.5rem 15px 2.2rem;
 }
 
 .app-footer {
 	border-top: 1px solid color-mix(in srgb, var(--c-muted) 34%, transparent);
-	padding: 1rem 1.35rem 1.2rem;
+	padding: 1rem 15px 1.2rem;
 	display: grid;
+	justify-items: center;
 	gap: 0.7rem;
 
 	p {

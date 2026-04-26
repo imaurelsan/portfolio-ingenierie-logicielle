@@ -40,7 +40,7 @@ export class App {
   // Ici je centralise la navigation pour garder un menu lisible et facile a maintenir.
   protected readonly navLinks: NavLink[] = [
     { label: 'Accueil', path: '/', iconPath: 'M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z' },
-    { label: 'Présentation', path: '/presentation', iconPath: 'M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-8 2.75c1.24 0 2.25 1.01 2.25 2.25S13.24 11.25 12 11.25 9.75 10.24 9.75 9 10.76 6.75 12 6.75zM17 16H7v-.75c0-1.66 2.24-3 5-3s5 1.34 5 3V16z' },
+    { label: 'Qui suis-je ?', path: '/presentation', iconPath: 'M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-8 2.75c1.24 0 2.25 1.01 2.25 2.25S13.24 11.25 12 11.25 9.75 10.24 9.75 9 10.76 6.75 12 6.75zM17 16H7v-.75c0-1.66 2.24-3 5-3s5 1.34 5 3V16z' },
     {
       label: 'Compétences',
       path: '/competences',
@@ -78,7 +78,7 @@ export class App {
       iconPath: 'M240-120q-50 0-85-35t-35-85v-240q0-24 9-46t26-39l240-240q17-18 39.5-26.5T480-840q23 0 45 8.5t40 26.5l30 30-315 315v180h400v-180L536-604l115-114 154 153q17 17 26 39t9 46v240q0 50-35 85t-85 35H240Z'
     },
     {
-      label: 'Présentation',
+      label: 'Qui suis-je ?',
       path: '/presentation',
       iconViewBox: '0 -960 960 960',
       iconPath: 'M555-435q-35-35-35-85t35-85q35-35 85-35t85 35q35 35 35 85t-35 85q-35 35-85 35t-85-35ZM400-160v-76q0-21 10-40t28-30q45-27 95.5-40.5T640-360q56 0 106.5 13.5T842-306q18 11 28 30t10 40v76H400ZM120-400v-80h320v80H120Zm0-320v-80h480v80H120Zm324 160H120v-80h360q-14 17-22.5 37T444-560Z'
@@ -130,10 +130,10 @@ export class App {
       ],
     },
     {
-      label: 'Présentation',
+      label: 'Qui suis-je ?',
       path: '/presentation',
       keywords: [
-        'presentation', 'profil', 'valeurs', 'positionnement', 'aurel', 'yahouedeou', 'bio', 'parcours global',
+        'qui suis je', 'presentation', 'profil', 'valeurs', 'positionnement', 'aurel', 'yahouedeou', 'bio', 'parcours global',
       ],
     },
     {
