@@ -141,15 +141,15 @@
 
   <!-- Navigation mobile : barre d'icônes en bas d'écran -->
   <nav class="mobile-bottom-nav" aria-label="Navigation mobile">
-    @for (link of navLinks; track link.path) {
+    @for (link of mobileNavLinks; track link.path) {
       <a
         class="mobile-bottom-nav__item"
         [routerLink]="link.path"
         routerLinkActive="is-active"
-        [routerLinkActiveOptions]="{ exact: link.path === '/' }"
+        [routerLinkActiveOptions]="{ exact: !!link.exact }"
         [attr.aria-label]="link.label"
       >
-        <svg viewBox="0 0 24 24" aria-hidden="true">
+        <svg [attr.viewBox]="link.iconViewBox || '0 0 24 24'" aria-hidden="true">
           <path [attr.d]="link.iconPath" />
         </svg>
       </a>

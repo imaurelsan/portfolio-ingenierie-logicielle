@@ -1996,6 +1996,16 @@ body.theme-light .field-float textarea:not(:placeholder-shown) ~ label {
 }
 
 @media (max-width: 760px) {
+	:root {
+		--mobile-nav-icon-color: color-mix(in srgb, var(--c-accent) 72%, var(--c-text) 28%);
+		--mobile-nav-icon-active-color: var(--c-accent-light);
+	}
+
+	body.theme-light {
+		--mobile-nav-icon-color: color-mix(in srgb, var(--c-accent) 86%, #2d4f4c 14%);
+		--mobile-nav-icon-active-color: #124742;
+	}
+
 	.app-main {
 		padding-bottom: 5.5rem;
 	}
@@ -2026,7 +2036,7 @@ body.theme-light .field-float textarea:not(:placeholder-shown) ~ label {
 		justify-content: center;
 		flex: 1;
 		text-decoration: none;
-		color: color-mix(in srgb, #fff 50%, transparent);
+		color: var(--mobile-nav-icon-color);
 		padding: 0.5rem 0;
 		border-radius: 999px;
 		transition: color 160ms ease;
@@ -2039,10 +2049,10 @@ body.theme-light .field-float textarea:not(:placeholder-shown) ~ label {
 	}
 
 	.mobile-bottom-nav__item.is-active {
-		color: var(--c-accent);
+		color: var(--mobile-nav-icon-active-color);
 	}
 
 	.mobile-bottom-nav__item:hover {
-		color: #ffffff;
+		color: var(--mobile-nav-icon-active-color);
 	}
 }

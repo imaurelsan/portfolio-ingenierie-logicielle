@@ -9,6 +9,14 @@ type NavLink = {
   children?: Array<{ label: string; path: string }>;
 };
 
+type MobileNavLink = {
+  label: string;
+  path: string;
+  iconPath: string;
+  iconViewBox?: string;
+  exact?: boolean;
+};
+
 type SearchResult = {
   label: string;
   path: string;
@@ -58,6 +66,47 @@ export class App {
       ],
     },
     { label: 'Parcours', path: '/parcours', iconPath: 'M23 8c0 1.1-.9 2-2 2-.18 0-.35-.02-.51-.07l-3.56 3.55c.05.16.07.34.07.52 0 1.1-.9 2-2 2s-2-.9-2-2c0-.18.02-.36.07-.52l-2.55-2.55c-.16.05-.34.07-.52.07s-.36-.02-.52-.07l-4.55 4.56c.05.16.07.33.07.51 0 1.1-.9 2-2 2s-2-.9-2-2 .9-2 2-2c.18 0 .35.02.51.07l4.56-4.55C8.02 12.36 8 12.18 8 12c0-1.1.9-2 2-2s2 .9 2 2c0 .18-.02.36-.07.52l2.55 2.55c.16-.05.34-.07.52-.07s.36.02.52.07l3.55-3.56C19.02 11.35 19 11.18 19 11c0-1.1.9-2 2-2s2 .9 2 2z' },
+  ];
+
+  // Barre mobile: icones explicites par section + acces direct au contact.
+  protected readonly mobileNavLinks: MobileNavLink[] = [
+    {
+      label: 'Accueil',
+      path: '/',
+      exact: true,
+      iconViewBox: '0 -960 960 960',
+      iconPath: 'M240-120q-50 0-85-35t-35-85v-240q0-24 9-46t26-39l240-240q17-18 39.5-26.5T480-840q23 0 45 8.5t40 26.5l30 30-315 315v180h400v-180L536-604l115-114 154 153q17 17 26 39t9 46v240q0 50-35 85t-85 35H240Z'
+    },
+    {
+      label: 'Présentation',
+      path: '/presentation',
+      iconViewBox: '0 -960 960 960',
+      iconPath: 'M555-435q-35-35-35-85t35-85q35-35 85-35t85 35q35 35 35 85t-35 85q-35 35-85 35t-85-35ZM400-160v-76q0-21 10-40t28-30q45-27 95.5-40.5T640-360q56 0 106.5 13.5T842-306q18 11 28 30t10 40v76H400ZM120-400v-80h320v80H120Zm0-320v-80h480v80H120Zm324 160H120v-80h360q-14 17-22.5 37T444-560Z'
+    },
+    {
+      label: 'Compétences',
+      path: '/competences',
+      iconViewBox: '0 -960 960 960',
+      iconPath: 'M160-160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800h240l80 80h320q33 0 56.5 23.5T880-640v200H600q-100 0-170 70t-70 170v40H160ZM584-56 440-200l144-144 56 57-87 87 87 87-56 57Zm192 0-56-57 87-87-87-87 56-57 144 144L776-56Z'
+    },
+    {
+      label: 'Réalisations',
+      path: '/realisations',
+      iconViewBox: '0 -960 960 960',
+      iconPath: 'M160-120q-33 0-56.5-23.5T80-200v-440q0-33 23.5-56.5T160-720h160v-80q0-33 23.5-56.5T400-880h160q33 0 56.5 23.5T640-800v80h160q33 0 56.5 23.5T880-640v440q0 33-23.5 56.5T800-120H160Zm240-600h160v-80H400v80Z'
+    },
+    {
+      label: 'Parcours',
+      path: '/parcours',
+      iconViewBox: '0 -960 960 960',
+      iconPath: 'M840-280v-276L480-360 40-600l440-240 440 240v320h-80ZM480-120 200-272v-200l280 152 280-152v200L480-120Z'
+    },
+    {
+      label: 'Contact',
+      path: '/contact',
+      iconViewBox: '0 -960 960 960',
+      iconPath: 'M80-80v-720q0-33 23.5-56.5T160-880h640q33 0 56.5 23.5T880-800v480q0 33-23.5 56.5T800-240H240L80-80Zm160-320h320v-80H240v80Zm0-120h480v-80H240v80Zm0-120h480v-80H240v80Z'
+    },
   ];
 
   // Ici je pilote l'ouverture du menu mobile (hamburger) sans impacter l'affichage desktop.
