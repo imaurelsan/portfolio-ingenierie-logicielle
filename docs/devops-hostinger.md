@@ -67,6 +67,17 @@ $u='https://portfolio.yaurel.com/assets/build-info.json?ts=' + [int][double]::Pa
 Invoke-WebRequest -Uri $u -UseBasicParsing | Select-Object StatusCode,Content | Format-List
 ```
 
+## Prévisualisation locale avant push
+
+Checklist recommandée avant tout `git push` :
+1. Se placer dans `app`
+2. Lancer la prévisualisation locale : `npm start -- --host 0.0.0.0 --port 4200`
+3. Ouvrir `http://localhost:4200/`
+4. Vérifier desktop + mobile (menu, sous-menus, drawers, formulaires)
+5. Valider avec un build prod : `npm run build -- --configuration production`
+
+Principe : ne pousser que les modifications validées visuellement en local.
+
 ## Argumentaire soutenance
 
 - Maintenance : process standardisé, moins d'erreurs humaines

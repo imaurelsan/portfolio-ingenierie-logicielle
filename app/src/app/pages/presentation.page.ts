@@ -10,78 +10,47 @@ import { Component } from '@angular/core';
       </header>
 
       <div class="presentation-stack">
-        <div class="panel presentation-hero">
-          <img src="assets/images/photo-identite.jpg" alt="Portrait d'Aurel YAHOUEDEOU" />
-          <div class="text-block">
-            <p>
-              J'ai toujours évolué à la frontière entre création et ingénierie. Le design m'a appris à penser expérience
-              utilisateur, l'architecture réseau m'a appris à penser robustesse, et la sécurité m'a appris à penser
-              risques et responsabilités.
-            </p>
-            <p>
-              En me réorientant vers le développement logiciel, j'ai trouvé un terrain où ces dimensions se rejoignent:
-              concevoir des produits utiles, fiables et compréhensibles, puis les livrer proprement.
-            </p>
-            <p>
-              Aujourd'hui, je construis mon profil autour de cette cohérence : relier design, architecture, sécurité et
-              développement pour créer des solutions utiles et solides.
-            </p>
-            <ul class="presentation-chips">
-              <li>Fil conducteur : design -> architecture -> sécurité -> développement</li>
-              <li>Ma façon de travailler : être clair, utile et concret</li>
-              <li>Mon objectif : progresser vite sur un poste fullstack junior</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="panel text-block presentation-focus">
-          <h2>Ce que je recherche</h2>
+        <div class="panel text-block presentation-intro">
           <p>
-            Je cherche un environnement où mon profil hybride peut apporter de la valeur : design, architecture, sécurité
-            et développement réunis au service de produits utiles.
+            J’ai construit mon parcours entre création visuelle, ingénierie réseaux/systèmes et développement logiciel.
+            Cette trajectoire me permet aujourd’hui de relier plusieurs exigences sans les opposer : la clarté pour
+            l’utilisateur, la robustesse technique, et la sécurité dans la durée.
           </p>
           <p>
-            Je privilégie les équipes qui misent sur la qualité, la collaboration et la capacité à transformer des
-            contraintes métier en solutions simples, solides et lisibles.
+            Je recherche un environnement où l’on conçoit des produits utiles, lisibles et maintenables, avec une vraie
+            culture d’équipe. Mon objectif est de progresser sur un poste de développeur fullstack junior en continuant à
+            apporter cette lecture transversale entre design, architecture et fiabilité.
           </p>
         </div>
       </div>
 
       <div class="two-columns">
-        <article class="panel">
+        <article class="panel text-block">
           <h2>Mes valeurs</h2>
-          <ul class="icon-list">
-            <li>
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h8V3H3v9Zm10 9h8v-9h-8v9ZM3 21h8v-7H3v7Zm10-9h8V3h-8v9Z"/></svg>
-              <span>Clarté technique et communication simple</span>
-            </li>
-            <li>
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 4 5v6c0 5 3.4 9.7 8 11 4.6-1.3 8-6 8-11V5l-8-3Zm0 3.1 5 1.9V11c0 3.7-2.3 7.3-5 8.5-2.7-1.2-5-4.8-5-8.5V7l5-1.9Z"/></svg>
-              <span>Responsabilité sur la sécurité et la fiabilité</span>
-            </li>
-            <li>
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 6a6 6 0 0 1 5.66 4H20l-3 3-3-3h1.58A4 4 0 1 0 12 16v2a6 6 0 1 1 0-12Z"/></svg>
-              <span>Amélioration continue guidée par les preuves</span>
-            </li>
-          </ul>
+          <p>
+            Je privilégie la clarté : expliquer simplement un choix technique, rendre les impacts compréhensibles et
+            garder une communication honnête avec l’équipe comme avec les métiers.
+          </p>
+          <p>
+            Je défends aussi la responsabilité technique : anticiper les risques, éviter les solutions fragiles et
+            construire des bases qui restent maintenables quand le produit évolue.
+          </p>
+          <p>
+            Enfin, je crois à l’amélioration continue guidée par des preuves concrètes : tester, mesurer, ajuster, puis
+            documenter pour capitaliser au lieu de repartir de zéro.
+          </p>
         </article>
 
-        <article class="panel">
+        <article class="panel text-block">
           <h2>Mon projet</h2>
-          <ul class="icon-list">
-            <li>
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 2 7l10 5 10-5-10-5Zm0 8.2L4.4 7 12 3.8 19.6 7 12 10.2ZM4 10.8l8 4 8-4V16l-8 4-8-4v-5.2Z"/></svg>
-              <span>Évoluer vers un rôle fullstack à forte composante architecture</span>
-            </li>
-            <li>
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h14v2H5V4Zm0 4h14v2H5V8Zm0 4h9v2H5v-2Zm0 4h9v2H5v-2Zm12 0 4 3v-6l-4 3Z"/></svg>
-              <span>Développer des solutions réutilisables et économiquement viables</span>
-            </li>
-            <li>
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 4 7v6c0 4.6 3 8.9 8 10 5-1.1 8-5.4 8-10V7l-8-4Zm-1 5h2v2h-2V8Zm0 4h2v4h-2v-4Z"/></svg>
-              <span>Construire une spécialisation IA appliquée au développement</span>
-            </li>
-          </ul>
+          <p>
+            Je vise un rôle fullstack junior où je peux contribuer à la fois au front et au back, avec une attention
+            particulière à l’architecture et à la qualité des livrables.
+          </p>
+          <p>
+            À moyen terme, je veux développer des solutions réutilisables et économiquement viables, puis approfondir une
+            spécialisation IA appliquée à des usages métier concrets.
+          </p>
         </article>
 
         <article class="panel">

@@ -24,7 +24,7 @@ export type CompetenceDetail = {
 export const COMPETENCES: CompetenceDetail[] = [
   {
     slug: 'architecture-web-mutualisee',
-    order: 'Compétence détaillée 1/10',
+    order: 'Compétence détaillée 1/11',
     title: 'Architecture web mutualisée (WordPress multisite)',
     definition: [
       'Je définis cette compétence comme la capacité à concevoir un socle unique pour plusieurs sites, avec des règles communes et des variations contrôlées.',
@@ -44,7 +44,7 @@ export const COMPETENCES: CompetenceDetail[] = [
     ],
     selfReview: [
       'Niveau actuel : intermédiaire avancé ; je continue de la renforcer.',
-      'Place dans mon profil : c’est une compétence de base pour construire des solutions simples à maintenir.',
+      'Place dans mon profil : c’est une compétence socle pour construire des solutions simples à maintenir.',
       'Vitesse d’acquisition : j’ai progressé assez vite grâce à la répétition sur plusieurs projets réels.',
       'Avec le recul : il faut documenter tôt les cas particuliers pour éviter les problèmes cachés plus tard.',
     ],
@@ -59,7 +59,7 @@ export const COMPETENCES: CompetenceDetail[] = [
   },
   {
     slug: 'developpement-plugins-wordpress',
-    order: 'Compétence détaillée 2/10',
+    order: 'Compétence détaillée 2/11',
     title: 'Développement de plugins WordPress',
     definition: [
       'Je définis cette compétence comme la capacité à mettre une logique métier dans un plugin clair, réutilisable et facile à faire évoluer.',
@@ -95,7 +95,7 @@ export const COMPETENCES: CompetenceDetail[] = [
   },
   {
     slug: 'integrations-api-rest',
-    order: 'Compétence détaillée 3/10',
+    order: 'Compétence détaillée 3/11',
     title: 'Intégrations API REST et interconnexion services',
     definition: [
       'Je définis cette compétence comme la capacité à faire communiquer des systèmes entre eux de façon claire et fiable.',
@@ -130,7 +130,7 @@ export const COMPETENCES: CompetenceDetail[] = [
   },
   {
     slug: 'performance-front-optimisation',
-    order: 'Compétence détaillée 4/10',
+    order: 'Compétence détaillée 4/11',
     title: 'Performance web et optimisation front',
     definition: [
       'Je définis cette compétence comme l’ensemble des actions qui réduisent le temps de chargement et améliorent la perception utilisateur.',
@@ -165,7 +165,7 @@ export const COMPETENCES: CompetenceDetail[] = [
   },
   {
     slug: 'securite-applicative',
-    order: 'Compétence détaillée 5/10',
+    order: 'Compétence détaillée 5/11',
     title: 'Sécurité applicative et durcissement WordPress',
     definition: [
       'Je définis cette compétence comme la capacité à réduire l’exposition au risque applicatif par des mécanismes simples, utiles et maintenables.',
@@ -197,7 +197,7 @@ export const COMPETENCES: CompetenceDetail[] = [
   },
   {
     slug: 'gestion-projet-agile',
-    order: 'Compétence détaillée 6/10',
+    order: 'Compétence détaillée 6/11',
     title: 'Gestion de projet agile et priorisation',
     definition: [
       'Je définis cette compétence comme la capacité à prioriser par valeur, à découper les livrables et à piloter sous contrainte.',
@@ -232,7 +232,7 @@ export const COMPETENCES: CompetenceDetail[] = [
   },
   {
     slug: 'communication-technique',
-    order: 'Compétence détaillée 7/10',
+    order: 'Compétence détaillée 7/11',
     title: 'Communication technique avec parties prenantes',
     definition: [
       'Je définis cette compétence comme la capacité à traduire des contraintes techniques en décisions compréhensibles par des profils non techniques.',
@@ -267,7 +267,7 @@ export const COMPETENCES: CompetenceDetail[] = [
   },
   {
     slug: 'ux-ui-orientee-usage',
-    order: 'Compétence détaillée 8/10',
+    order: 'Compétence détaillée 8/11',
     title: 'UX/UI orientée usage et accessibilité',
     definition: [
       'Je définis cette compétence comme la capacité à concevoir des interfaces lisibles et utiles, au service d’un usage concret.',
@@ -302,7 +302,7 @@ export const COMPETENCES: CompetenceDetail[] = [
   },
   {
     slug: 'automatisation-amelioration-continue',
-    order: 'Compétence détaillée 9/10',
+    order: 'Compétence détaillée 9/11',
     title: 'Automatisation et amélioration continue',
     definition: [
       'Je définis cette compétence comme la capacité à transformer des tâches manuelles fragiles en processus plus fiables et reproductibles.',
@@ -337,7 +337,7 @@ export const COMPETENCES: CompetenceDetail[] = [
   },
   {
     slug: 'analyse-critique-decision-technique',
-    order: 'Compétence détaillée 10/10',
+    order: 'Compétence détaillée 10/11',
     title: 'Analyse critique et prise de décision technique',
     definition: [
       'Je définis cette compétence comme la capacité à choisir entre plusieurs options en tenant compte du temps, du coût, du risque et de la maintenance.',
@@ -370,6 +370,41 @@ export const COMPETENCES: CompetenceDetail[] = [
       { title: 'v0-vastrion-mobile-prototype', path: '/realisations/project-v0-vastrion-mobile-prototype' },
     ],
   },
+  {
+    slug: 'collaboration-interdisciplinaire',
+    order: 'Compétence détaillée 11/11',
+    title: 'Collaboration interdisciplinaire',
+    definition: [
+      'Je définis cette compétence comme la capacité à faire travailler ensemble des profils différents autour d’un objectif concret et partagé.',
+      'Elle est essentielle dès qu’un projet implique à la fois des enjeux métier, design, techniques et de delivery.',
+    ],
+    anecdotes: [
+      {
+        title: 'Coordination produit, design et technique sur des sujets web',
+        situation:
+          'Sur plusieurs projets, les décisions devaient rester cohérentes entre attentes métier, expérience utilisateur et contraintes techniques.',
+        result:
+          'En clarifiant les priorités et les compromis, nous avons réduit les allers-retours et conservé un rythme de livraison stable.',
+        valueAdded:
+          'J’ai facilité les arbitrages en traduisant les contraintes de chaque partie prenante dans un langage commun.',
+        linkedProject: { title: 'v0-vastrion-mobile-prototype', path: '/realisations/project-v0-vastrion-mobile-prototype' },
+      },
+    ],
+    selfReview: [
+      'Niveau actuel : intermédiaire, consolidé par des contextes multi-acteurs.',
+      'Place dans mon profil : compétence humaine structurante pour transformer une intention en livraison concrète.',
+      'Vitesse d’acquisition : progressive, grâce à des rôles hybrides entre exécution et coordination.',
+      'Recul : la collaboration efficace repose sur des objectifs explicites et des décisions tracées.',
+    ],
+    evolution: [
+      'Objectif moyen terme : renforcer mes pratiques de facilitation et de cadrage inter-équipes.',
+      'Autoformation prévue : approfondir les méthodes de communication projet et de pilotage collaboratif.',
+    ],
+    projects: [
+      { title: 'v0-vastrion-mobile-prototype', path: '/realisations/project-v0-vastrion-mobile-prototype' },
+      { title: 'crewai-projet-agent-voyage', path: '/realisations/project-crewai-voyage' },
+    ],
+  },
 ];
 
 @Component({
@@ -393,7 +428,7 @@ export const COMPETENCES: CompetenceDetail[] = [
 
         <article class="panel detail-block">
           <h2>2. Mes éléments de preuve</h2>
-          <ul class="detail-list detail-list--rich detail-list--cards">
+          <ul class="detail-list detail-list--rich detail-list--cards detail-list--no-bullet">
             @for (anecdote of skill.anecdotes; track anecdote.title) {
               <li>
                 <h3>{{ anecdote.title }}</h3>
@@ -402,8 +437,8 @@ export const COMPETENCES: CompetenceDetail[] = [
                   <p><strong>Résultat :</strong> {{ anecdote.result }}</p>
                   <p><strong>Valeur ajoutée :</strong> {{ anecdote.valueAdded }}</p>
                   <p>
-                    <strong>Réalisation liée :</strong>
-                    <a [href]="anecdote.linkedProject.path">{{ anecdote.linkedProject.title }}</a>
+                    <strong>Réalisation liée :</strong>&nbsp;
+                    <a [href]="anecdote.linkedProject.path">{{ anecdote.linkedProject.title }} <span aria-hidden="true">↗</span></a>
                   </p>
                 </div>
               </li>
@@ -434,7 +469,7 @@ export const COMPETENCES: CompetenceDetail[] = [
           <ul class="detail-list detail-list--links">
             @for (project of skill.projects; track project.path) {
               <li>
-                <a [href]="project.path">{{ project.title }}</a>
+                <a [href]="project.path">{{ project.title }} <span aria-hidden="true">↗</span></a>
               </li>
             }
           </ul>

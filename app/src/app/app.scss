@@ -180,6 +180,21 @@
 	justify-items: center;
 }
 
+.footer-contact-link {
+	font-size: 0.76rem;
+	font-family: 'Montserrat', sans-serif;
+	letter-spacing: 0.09em;
+	text-transform: uppercase;
+	text-decoration: none;
+	font-weight: 600;
+	color: var(--c-muted);
+	transition: color 160ms ease;
+
+	&:hover {
+		color: var(--c-accent);
+	}
+}
+
 .brand__kicker {
 	margin: 0;
 	font-size: 0.72rem;
@@ -201,9 +216,71 @@
 	align-items: center;
 	justify-content: flex-end;
 	justify-self: end;
-	gap: 1rem;
+	gap: 1.28rem;
 	white-space: nowrap;
 	min-width: 0;
+
+	.main-nav__item {
+		position: relative;
+		display: inline-flex;
+		align-items: center;
+	}
+
+	.main-nav__item--has-submenu::after {
+		content: '';
+		position: absolute;
+		left: 0;
+		top: 100%;
+		width: 100%;
+		height: 0.7rem;
+	}
+
+	.main-nav__item--has-submenu > a::after {
+		content: '▾';
+		font-size: 0.7rem;
+		margin-left: 0.35rem;
+		opacity: 0.8;
+	}
+
+	.main-nav__item--has-submenu.is-active > a {
+		color: var(--c-accent);
+		font-weight: 700;
+	}
+
+	.main-nav__submenu {
+		position: absolute;
+		top: calc(100% + 0.12rem);
+		left: 0;
+		min-width: 245px;
+		display: none;
+		padding: 0.5rem;
+		border-radius: 12px;
+		border: 1px solid color-mix(in srgb, var(--c-muted) 35%, transparent);
+		background: color-mix(in srgb, var(--c-surface) 94%, transparent);
+		box-shadow: var(--shadow-soft);
+		z-index: 25;
+
+		a {
+			display: block;
+			padding: 0.52rem 0.6rem;
+			border-radius: 8px;
+			font-size: 0.76rem;
+			letter-spacing: 0.05em;
+			text-transform: none;
+			font-weight: 500;
+			line-height: 1.25;
+		}
+
+		a:hover {
+			background: color-mix(in srgb, var(--c-accent) 20%, transparent);
+			color: var(--c-text);
+		}
+	}
+
+	.main-nav__item--has-submenu:hover .main-nav__submenu,
+	.main-nav__item--has-submenu:focus-within .main-nav__submenu {
+		display: block;
+	}
 
 	.main-nav__close,
 	.mobile-nav-socials {
@@ -214,7 +291,7 @@
 		text-decoration: none;
 		color: var(--c-text);
 		border: none;
-		padding: 0.2rem 0;
+		padding: 0.24rem 0.12rem;
 		font-size: 0.84rem;
 		font-family: 'Montserrat', sans-serif;
 		font-weight: 400;
@@ -452,6 +529,24 @@
 		justify-content: flex-start;
 		gap: 0.55rem;
 		padding-top: 0.55rem;
+
+		.main-nav__item {
+			width: 100%;
+			display: block;
+		}
+
+		.main-nav__item--has-submenu > a::after {
+			display: none;
+		}
+
+		.main-nav__submenu {
+			position: static;
+			display: grid;
+			min-width: 0;
+			margin-top: 0.35rem;
+			border-radius: 10px;
+			padding: 0.38rem;
+		}
 
 		a {
 			text-align: center;

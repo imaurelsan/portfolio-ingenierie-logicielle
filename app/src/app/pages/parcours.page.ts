@@ -38,7 +38,7 @@ type CertificationItem = {
     <section class="page-section">
       <header class="section-header">
         <p class="section-header__kicker">Parcours</p>
-        <h1>Frise anti-chronologique de mon évolution</h1>
+        <h1>Mon évolution professionnelle et académique</h1>
       </header>
 
       <article class="panel detail-block detail-block--experience">
@@ -47,10 +47,16 @@ type CertificationItem = {
           @for (item of experiences; track item.role + item.company) {
             <li class="journey-item">
               <div class="journey-item__logo">
-                <div class="logo-chip">
-                  <img [src]="item.logo" [alt]="'Logo ' + item.company" />
-                </div>
                 <p class="timeline__period">{{ item.period }}</p>
+                @if (item.website) {
+                  <a class="logo-chip" [href]="item.website" target="_blank" rel="noopener" [attr.aria-label]="'Site de ' + item.company">
+                    <img [src]="item.logo" [alt]="'Logo ' + item.company" />
+                  </a>
+                } @else {
+                  <div class="logo-chip">
+                    <img [src]="item.logo" [alt]="'Logo ' + item.company" />
+                  </div>
+                }
               </div>
 
               <div class="journey-item__content">
@@ -68,18 +74,23 @@ type CertificationItem = {
 
                 <details class="journey-item__details">
                   <summary>Voir le détail de l'expérience</summary>
-                  <p><strong>Responsabilité :</strong> {{ item.responsibility }}</p>
-                  <p><strong>Statut :</strong> {{ item.status }}</p>
+                  <p class="card-meta-title">Responsabilité</p>
+                  <p>{{ item.responsibility }}</p>
+                  <p class="card-meta-title">Statut</p>
+                  <p>{{ item.status }}</p>
+                  <p class="card-meta-title">Détail des missions</p>
                   <ul class="detail-list">
                     @for (line of item.details; track line) {
-                      <li>{{ line }}</li>
+                      <li [innerHTML]="line"></li>
                     }
                   </ul>
                   <p class="card-meta-title">Réalisations clés liées</p>
                   <ul class="detail-list detail-list--links">
                     @for (project of item.linkedProjects; track project.path) {
                       <li>
-                        <a [href]="project.path">{{ project.title }}</a>
+                        <a [href]="project.path">
+                          {{ project.title }} <span aria-hidden="true">↗</span>
+                        </a>
                       </li>
                     }
                   </ul>
@@ -104,10 +115,10 @@ type CertificationItem = {
           @for (item of formations; track item.degree + item.school) {
             <li class="journey-item">
               <div class="journey-item__logo">
-                <div class="logo-chip">
-                  <img [src]="item.logo" [alt]="'Logo ' + item.school" />
-                </div>
                 <p class="timeline__period">{{ item.period }}</p>
+                <a class="logo-chip" [href]="item.website" target="_blank" rel="noopener" [attr.aria-label]="'Site de ' + item.school">
+                  <img [src]="item.logo" [alt]="'Logo ' + item.school" />
+                </a>
               </div>
 
               <div class="journey-item__content">
@@ -120,12 +131,10 @@ type CertificationItem = {
                 </div>
 
                 <details class="journey-item__details">
-                  <summary>Voir le détail de la formation</summary>
-                  <ul class="detail-list">
-                    @for (line of item.details; track line) {
-                      <li>{{ line }}</li>
-                    }
-                  </ul>
+                  <summary>En savoir plus</summary>
+                  @for (line of item.details; track line) {
+                    <p>{{ line }}</p>
+                  }
                 </details>
               </div>
             </li>
@@ -149,7 +158,13 @@ type CertificationItem = {
               }
               @if (item.logo) {
                 <div class="certification-logo">
-                  <img [src]="item.logo" [alt]="'Logo ' + (item.school || 'Établissement')" />
+                  @if (item.link) {
+                    <a [href]="item.link" target="_blank" rel="noopener" [attr.aria-label]="'Site de ' + (item.school || 'Établissement')">
+                      <img [src]="item.logo" [alt]="'Logo ' + (item.school || 'Établissement')" />
+                    </a>
+                  } @else {
+                    <img [src]="item.logo" [alt]="'Logo ' + (item.school || 'Établissement')" />
+                  }
                 </div>
               }
             </li>
@@ -171,9 +186,8 @@ export class ParcoursPage {
       responsibility: 'Développement fullstack et structuration de l’écosystème web.',
       status: 'Alternant',
       details: [
-        'Architecture et administration d’un réseau WordPress multisite.',
-        'Refonte de plateformes et intégrations API.',
-        'Développement de plugins et widgets WordPress sur mesure.',
+        'Développement fullstack d’un écosystème multisite : refonte complète du site <a href="https://formation.askida.fr/" target="_blank" rel="noopener">Aski-Da Formation ↗</a>, conception de A à Z du site <a href="https://synergies.askida.fr/" target="_blank" rel="noopener">Aski-Da Synergies ↗</a>, intégration API, création de plugins et de widgets WordPress sur mesure.',
+        'Structuration technique du réseau WordPress du groupe, optimisation des workflows et conception de mini plugins open source pour automatiser les tâches récurrentes.',
       ],
       linkedProjects: [
         { title: '360-content-bridge', path: '/realisations/project-360-content-bridge' },
@@ -195,9 +209,9 @@ export class ParcoursPage {
       responsibility: 'Pilotage de plateformes web et coordination fonctionnelle.',
       status: 'Alternant',
       details: [
-        'Développement et lancement de plateformes à partir de zéro.',
-        'Co-pilotage de nouvelles évolutions produit.',
-        'Optimisation de process et réduction des délais de traitement.',
+        'Développement et lancement de plateformes LMS de A à Z : <a href="https://fon.empow-her.com/" target="_blank" rel="noopener">FON x Empow\'Her ↗</a> et <a href="https://fameproject.org/fr/" target="_blank" rel="noopener">FAME ↗</a>, avec pilotage des évolutions produit et coordination des parties prenantes.',
+        'Optimisation des flux Airtable (SSO, API, automatisations), réduisant les temps de traitement de 25 % et améliorant la fiabilité des données.',
+        'Pilotage du backlog digital et résolution de plus de 90 % des tickets confiés.',
       ],
       linkedProjects: [
         { title: '360-content-bridge', path: '/realisations/project-360-content-bridge' },
@@ -217,9 +231,8 @@ export class ParcoursPage {
       responsibility: 'Conception web, identité visuelle et delivery client.',
       status: 'CDD',
       details: [
-        'Développement de sites web responsifs.',
-        'Conception d’identités visuelles complètes.',
-        'Livraison de sites et supports digitaux sur mesure.',
+        'Conception et développement de plus de 10 sites web responsifs, création d’identités visuelles complètes et accompagnement client sur leurs besoins digitaux.',
+        'Production de maquettes, interfaces et supports graphiques <a href="https://yaurel.com/wp-content/uploads/2026/04/Design-Portfolio-Aurel-Yahouedeou.pdf" target="_blank" rel="noopener">sur mesure ↗</a>, avec une exigence forte de cohérence visuelle et d’expérience utilisateur.',
       ],
       linkedProjects: [
         { title: 'v0-vastrion-mobile-prototype', path: '/realisations/project-v0-vastrion-mobile-prototype' },
@@ -238,9 +251,8 @@ export class ParcoursPage {
       responsibility: 'Conception de solutions web et production de contenus digitaux.',
       status: 'Indépendant',
       details: [
-        'Création de sites, supports visuels et expériences UI.',
-        'Conseil technique et accompagnement client.',
-        'Développement de solutions adaptées aux contraintes réelles.',
+        'Réalisation de sites web, supports visuels et expériences UI pour des clients variés, avec une approche orientée usage et contraintes réelles.',
+        'Prestations en audits sécurité, infographie et accompagnement digital, en autonomie complète sur la relation client et la livraison.',
       ],
       linkedProjects: [
         { title: 'v0-vastrion-mobile-prototype', path: '/realisations/project-v0-vastrion-mobile-prototype' },
@@ -261,9 +273,8 @@ export class ParcoursPage {
       responsibility: 'Administration réseau/système et supervision de la donnée.',
       status: 'CDI',
       details: [
-        'Configuration de balises GPS pour véhicules.',
-        'Supervision de bases de données client.',
-        'Maintenance de la disponibilité des services.',
+        'Configuration, supervision et maintenance d’un système de tracking GPS pour flottes de véhicules, avec gestion de la base clients.',
+        'Optimisation des processus de suivi et résolution d’incidents techniques pour garantir la continuité de service.',
       ],
       linkedProjects: [
         { title: '360tranquilité', path: '/realisations/project-360tranquilite' },
@@ -281,9 +292,8 @@ export class ParcoursPage {
       responsibility: 'Appui technique sur des opérations nationales à forte exigence.',
       status: 'CDD',
       details: [
-        'Enrôlement des populations dans un fichier électoral national.',
-        'Conception et impression des cartes électorales.',
-        'Contribution aux opérations de sécurisation des données.',
+        'Participation à l’enrôlement national pour le Fichier Électoral, gestion des équipements et supervision du réseau sur les sites d’opération.',
+        'Production et impression sécurisée des cartes électorales, avec contrôle qualité et gestion des flux de données.',
       ],
       linkedProjects: [
         { title: '360tranquilité', path: '/realisations/project-360tranquilite' },
@@ -302,9 +312,8 @@ export class ParcoursPage {
       responsibility: 'Exploitation réseau/système et consolidation de données électorales.',
       status: 'CDD',
       details: [
-        'Collecte et consolidation de données électorales.',
-        'Actualisation des informations F.E.N selon les évolutions législatives.',
-        'Contribution à la fiabilité du traitement opérationnel.',
+        'Collecte, consolidation et intégration des données électorales manquantes pour la mise à jour du Fichier Électoral National.',
+        'Contribution à la préparation technique des législatives 2019, avec contrôle des données et support opérationnel.',
       ],
       linkedProjects: [
         { title: '360tranquilité', path: '/realisations/project-360tranquilite' },
@@ -323,9 +332,8 @@ export class ParcoursPage {
       responsibility: 'Mise en œuvre de règles de sécurité physique et logique.',
       status: 'Stagiaire',
       details: [
-        'Définition et application de règles de sécurité.',
-        'Installation et supervision des serveurs.',
-        'Support opérationnel aux équipes techniques.',
+        'Installation et supervision du réseau physique et logique du centre, avec mise en place d’un système de sauvegardes fiable et incrémentiel.',
+        'Support technique quotidien et optimisation de l’infrastructure pour améliorer la stabilité et la sécurité du réseau.',
       ],
       linkedProjects: [
         { title: '360tranquilité', path: '/realisations/project-360tranquilite' },
@@ -345,8 +353,8 @@ export class ParcoursPage {
       website: 'https://www.iscod.fr/',
       logo: 'assets/images/formations/1-logo-iscod.png',
       details: [
-        'Montée en compétences sur l’architecture logicielle, l’automatisation et le pilotage de projet.',
-        'Approche orientée pratique : cas réels, argumentation technique et amélioration continue.',
+        'L’ISCOD propose une pédagogie 100 % en ligne, très orientée projets et progression concrète. Cette approche "learning by doing" m’aide à relier chaque notion à une application directe.',
+        'J’y renforce surtout l’autonomie, la rigueur et la discipline, des qualités essentielles pour progresser durablement en ingénierie logicielle.',
       ],
     },
     {
@@ -357,8 +365,8 @@ export class ParcoursPage {
       website: 'https://supdeco.sn/',
       logo: 'assets/images/formations/2-logo-supdeco-dakar.png',
       details: [
-        'Socle solide en sécurité avancée, systèmes, réseaux et administration.',
-        'Formation déterminante pour mon orientation actuelle en ingénierie logicielle fiable.',
+        'L’école adopte une pédagogie très pratique, basée sur des travaux dirigés et des mises en situation réelles. C’est cette approche qui m’a fait aimer la sécurité des réseaux et des SI.',
+        'Ce cursus m’a aussi donné de la polyvalence technique et m’a poussé vers des sujets exigeants, comme la télégestion et la domotique autour d’un premier prototype autonome sous Arduino UNO.',
       ],
     },
     {
@@ -369,8 +377,8 @@ export class ParcoursPage {
       website: 'https://www.esmt.sn/',
       logo: 'assets/images/formations/3-logo-esmt-dakar.png',
       details: [
-        'Approche technique polyvalente: réseaux, sécurité, bases de données et systèmes.',
-        'Consolidation d’une culture opérationnelle directement utile en entreprise.',
+        'L’ESMT est une école spécialisée télécom et réseaux, avec une pédagogie exigeante et structurée. La Licence Pro m’a permis de consolider les fondamentaux : protocoles, services et administration d’infrastructures.',
+        'J’y ai appris à travailler avec méthode sur des environnements techniques concrets, et à poser mes premières bases solides en développement.',
       ],
     },
     {
@@ -381,8 +389,8 @@ export class ParcoursPage {
       website: 'https://www.esmt.sn/',
       logo: 'assets/images/formations/3-logo-esmt-dakar.png',
       details: [
-        'Fondamentaux techniques en informatique, algorithmique, réseaux et électronique.',
-        'Base solide pour ma discipline technique et ma méthode de travail.',
+        'Le DTS en Téléinformatique à l’ESMT pose les bases de la communication numérique : câblage, protocoles, systèmes et interconnexions.',
+        'Cette formation m’a donné le réflexe de comprendre comment cela fonctionne en dessous, réflexe que je conserve aujourd’hui en développement.',
       ],
     },
   ];

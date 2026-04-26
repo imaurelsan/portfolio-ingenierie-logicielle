@@ -7,12 +7,6 @@ type FocusArea = {
   description: string;
 };
 
-type GuidingPrinciple = {
-  title: string;
-  description: string;
-  iconPath: string;
-};
-
 type StatHighlight = {
   value: string;
   title: string;
@@ -48,9 +42,9 @@ type Proof = {
           <p class="hero__highlight">Profil hybride : design UI/UX, architecture, sécurité et développement fullstack.</p>
           <h1>Je conçois des solutions web claires, fiables et utiles.</h1>
           <p class="hero__lede">
-            Je cadre proprement, je relie la technique à la valeur d'usage et je livre avec méthode.
+            Je conçois mes solutions en partant toujours de l’usage réel. Le design me sert à clarifier, l’architecture à structurer, et la sécurité à fiabiliser.
           </p>
-          <p class="hero__value">J’apporte un regard croisé entre design, architecture et sécurité pour construire des solutions fiables et faciles à comprendre.</p>
+          <p class="hero__value">Mon objectif n’est pas d’ajouter de la complexité, mais de construire des bases simples, solides et compréhensibles, sur lesquelles on peut évoluer sereinement au fil des évolutions et des imprévus.</p>
 
           <div class="hero__divider" aria-hidden="true"></div>
 
@@ -59,21 +53,6 @@ type Proof = {
             <a routerLink="/competences" class="btn btn--ghost">Comparer mes compétences</a>
           </div>
         </div>
-      </div>
-
-      <div class="hero__principles">
-        <p class="hero__principles-title">Ce qui guide mes décisions techniques</p>
-        <ul class="hero__signals">
-          @for (signal of guidingPrinciples; track signal.title) {
-            <li>
-              <svg class="hero__signal-icon" viewBox="0 0 24 24" aria-hidden="true">
-                <path [attr.d]="signal.iconPath" />
-              </svg>
-              <strong>{{ signal.title }}</strong>
-              <span>{{ signal.description }}</span>
-            </li>
-          }
-        </ul>
       </div>
 
       <div class="hero__stats-wrap">
@@ -135,7 +114,7 @@ type Proof = {
           <p class="section-header__kicker">Preuves rapides</p>
           <h2 class="section-title">Quelques exemples concrets avant d'entrer dans le détail</h2>
           <p class="intro-text intro-text--tight">
-            Chaque preuve renvoie ensuite à une réalisation complète et aux compétences associées. L'objectif est de
+            Chaque preuve renvoie ensuite à une réalisation complète et aux compétences associées. L’objectif est de
             montrer la cohérence entre contexte, action, résultat et recul critique.
           </p>
         </div>
@@ -154,24 +133,6 @@ type Proof = {
   `,
 })
 export class HomePage {
-  protected readonly guidingPrinciples: GuidingPrinciple[] = [
-    {
-      title: 'Design vers architecture',
-      description: 'Je pars d\u2019abord de l\u2019usage avant de penser la structure.',
-      iconPath: 'M3 3h8v8H3zm10 0h8v8h-8zM3 13h8v8H3zm13 2v2h-2v2h2v2h2v-2h2v-2h-2v-2z',
-    },
-    {
-      title: 'Sécurité vers développement',
-      description: 'Je préfère poser une base saine dès le départ plutôt que corriger trop tard.',
-      iconPath: 'M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z',
-    },
-    {
-      title: 'Produit vers technique',
-      description: 'Je prends mes décisions en gardant le besoin réel et la clarté en tête.',
-      iconPath: 'M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm3.88-11.71L10 14.17l-1.88-1.88c-.39-.39-1.02-.39-1.41 0-.39.39-.39 1.02 0 1.41l2.59 2.59c.39.39 1.02.39 1.41 0L17.3 9.7c.39-.39.39-1.02 0-1.41-.39-.39-1.03-.39-1.42 0z',
-    },
-  ];
-
   protected readonly statHighlights: StatHighlight[] = [
     {
       value: '5',
@@ -186,7 +147,7 @@ export class HomePage {
     {
       value: '1',
       title: 'Fil conducteur',
-      description: 'Design vers architecture vers sécurité vers développement.',
+      description: 'Design -> architecture -> sécurité -> développement.',
     },
   ];
 

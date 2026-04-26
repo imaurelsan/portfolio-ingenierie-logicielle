@@ -1,5 +1,6 @@
 import { Location } from '@angular/common';
 import { Component, inject } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute } from '@angular/router';
 
 export type TechBadge = {
@@ -39,7 +40,7 @@ export const REALISATIONS: RealisationDetail[] = [
     title: '360-content-bridge',
     screenshot: 'assets/images/screenshots-realisations/360-content-bridge.png',
     presentation:
-      'Le projet consiste à faciliter les échanges de contenus entre différents sites WordPress, notamment dans un contexte multisite où certaines données doivent être partagées ou dupliquées.',
+      'Le projet consiste à faciliter les échanges de contenus entre différents sites WordPress, dans un contexte multisite où certaines données doivent être partagées ou dupliquées. Au départ, l’équipe passait beaucoup de temps sur des copier-coller manuels, avec des risques d’oublis et de petites erreurs. || J’ai voulu proposer un outil simple, compréhensible et rassurant à utiliser au quotidien. L’idée n’était pas de tout automatiser d’un coup, mais d’avancer étape par étape avec des garde-fous clairs et des retours terrain.',
     objectivesContextRisks: [
       'Objectif principal : éviter les copier-coller manuels et sécuriser les transferts.',
       'Contexte : besoins de maintenance multi-sites avec des volumes et structures hétérogènes.',
@@ -72,10 +73,10 @@ export const REALISATIONS: RealisationDetail[] = [
       'Je suis satisfait de l’utilité du projet. Avec le recul, j’aurais dû prévoir plus tôt certains cas d’erreur et mieux documenter l’outil dès la première version.',
     repository: 'https://github.com/imaurelsan/360-content-bridge',
     techStack: [
-      { name: 'PHP', iconUrl: 'https://cdn.simpleicons.org/php/ffffff' },
-      { name: 'WordPress', iconUrl: 'https://cdn.simpleicons.org/wordpress/ffffff' },
-      { name: 'JavaScript', iconUrl: 'https://cdn.simpleicons.org/javascript/ffffff' },
-      { name: 'MySQL', iconUrl: 'https://cdn.simpleicons.org/mysql/ffffff' },
+      { name: 'PHP', iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg' },
+      { name: 'WordPress', iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/wordpress/wordpress-plain.svg' },
+      { name: 'JavaScript', iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg' },
+      { name: 'MySQL', iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg' },
     ],
     linkedSkills: [
       { title: 'Architecture web mutualisée (WordPress multisite)', path: '/competences/architecture-web-mutualisee' },
@@ -89,7 +90,7 @@ export const REALISATIONS: RealisationDetail[] = [
     title: '360-media-auto-cleanup',
     screenshot: 'assets/images/screenshots-realisations/360-media-auto-cleanup.png',
     presentation:
-      'Le projet vise à identifier et nettoyer les médias orphelins sur des sites WordPress pour réduire la dette de stockage et améliorer l’hygiène opérationnelle.',
+      'Le projet vise à identifier et nettoyer les médias orphelins sur des sites WordPress pour réduire la dette de stockage et améliorer l’hygiène opérationnelle. En pratique, la médiathèque devenait vite difficile à maintenir, et personne ne savait ce qui pouvait être supprimé sans risque. || J’ai construit une logique de tri progressive avec une priorité claire: éviter les suppressions dangereuses. Le but était d’apporter un vrai gain de temps sans créer de stress, en gardant une approche prudente et compréhensible pour l’équipe.',
     objectivesContextRisks: [
       'Objectif principal : réduire le volume de fichiers inutilisés.',
       'Contexte : médiathèques encombrées sur plusieurs projets et coûts de stockage croissants.',
@@ -122,9 +123,9 @@ export const REALISATIONS: RealisationDetail[] = [
       'Le projet apporte de la valeur rapidement, mais tout repose sur la qualité des règles mises en place. C’est donc un point que je continue d’améliorer en priorité.',
     repository: 'https://github.com/imaurelsan/360-media-auto-cleanup',
     techStack: [
-      { name: 'PHP', iconUrl: 'https://cdn.simpleicons.org/php/ffffff' },
-      { name: 'WordPress', iconUrl: 'https://cdn.simpleicons.org/wordpress/ffffff' },
-      { name: 'JavaScript', iconUrl: 'https://cdn.simpleicons.org/javascript/ffffff' },
+      { name: 'PHP', iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg' },
+      { name: 'WordPress', iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/wordpress/wordpress-plain.svg' },
+      { name: 'JavaScript', iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg' },
     ],
     linkedSkills: [
       { title: 'Architecture web mutualisée (WordPress multisite)', path: '/competences/architecture-web-mutualisee' },
@@ -138,7 +139,7 @@ export const REALISATIONS: RealisationDetail[] = [
     screenshot: 'assets/images/screenshots-realisations/360-tranquillite.png',
     title: '360tranquilité',
     presentation:
-      '360tranquilité est un plugin WordPress qui centralise des fonctions de sécurité, monitoring et exploitation pour éviter la dispersion des outils.',
+      '360tranquilité est un plugin WordPress qui centralise des fonctions de sécurité, monitoring et exploitation pour éviter la dispersion des outils. Avant ce projet, il fallait jongler avec plusieurs extensions, ce qui compliquait le suivi et la maintenance au quotidien. || J’ai voulu créer un socle unique, plus lisible, pour garder une vision claire de l’état d’un site. Le plugin avance module par module, avec un équilibre volontaire entre ambition, simplicité d’usage et stabilité générale.',
     objectivesContextRisks: [
       'Objectif principal : centraliser des besoins opérationnels récurrents dans un socle unique.',
       'Contexte : trop d’extensions différentes et pas assez de vision d’ensemble.',
@@ -171,10 +172,10 @@ export const REALISATIONS: RealisationDetail[] = [
       'C’est mon projet le plus important aujourd’hui. Il reste ambitieux, et la vraie difficulté est de garder la même qualité à mesure qu’il grandit.',
     repository: 'https://github.com/imaurelsan/360tranquilite',
     techStack: [
-      { name: 'PHP', iconUrl: 'https://cdn.simpleicons.org/php/ffffff' },
-      { name: 'WordPress', iconUrl: 'https://cdn.simpleicons.org/wordpress/ffffff' },
-      { name: 'JavaScript', iconUrl: 'https://cdn.simpleicons.org/javascript/ffffff' },
-      { name: 'MySQL', iconUrl: 'https://cdn.simpleicons.org/mysql/ffffff' },
+      { name: 'PHP', iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg' },
+      { name: 'WordPress', iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/wordpress/wordpress-plain.svg' },
+      { name: 'JavaScript', iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg' },
+      { name: 'MySQL', iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg' },
     ],
     linkedSkills: [
       { title: 'Architecture web mutualisée (WordPress multisite)', path: '/competences/architecture-web-mutualisee' },
@@ -188,7 +189,7 @@ export const REALISATIONS: RealisationDetail[] = [
     screenshot: 'assets/images/screenshots-realisations/travel-planner.png',
     title: 'crewai-projet-agent-voyage',
     presentation:
-      'Ce projet académique explore la création d’un agent capable de proposer des itinéraires de voyage cohérents à partir d’entrées variables.',
+      'Ce projet académique explore la création d’un agent capable de proposer des itinéraires de voyage cohérents à partir d’entrées variables. L’objectif était d’aller au-delà de la démonstration technique pour obtenir un résultat lisible par un utilisateur non expert. || J’ai travaillé sur la clarté des sorties, la cohérence des étapes et la limitation des réponses trop floues. Ce prototype m’a surtout aidé à mieux cadrer ce qui est montrable aujourd’hui et ce qui doit encore être renforcé.',
     objectivesContextRisks: [
       'Objectif principal : produire des recommandations exploitables et compréhensibles.',
       'Contexte : apprentissage de nouvelles approches IA appliquées à un cas concret.',
@@ -221,9 +222,9 @@ export const REALISATIONS: RealisationDetail[] = [
       'Le projet reste volontairement expérimental. Sa valeur vient surtout de la démarche et de ce qu’il m’a appris, plus que d’un produit déjà mature.',
     repository: 'https://github.com/imaurelsan/crewai-projet-agent-voyage',
     techStack: [
-      { name: 'Python', iconUrl: 'https://cdn.simpleicons.org/python/ffffff' },
-      { name: 'CrewAI', iconUrl: '' },
-      { name: 'OpenAI', iconUrl: 'https://cdn.simpleicons.org/openai/ffffff' },
+      { name: 'Python', iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg' },
+      { name: 'CrewAI', iconUrl: 'https://cdn.simpleicons.org/langchain/0F172A' },
+      { name: 'OpenAI', iconUrl: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/openai.svg' },
     ],
     linkedSkills: [
       { title: 'Analyse critique et prise de décision', path: '/competences/analyse-critique-decision-technique' },
@@ -237,7 +238,7 @@ export const REALISATIONS: RealisationDetail[] = [
     screenshot: 'assets/images/screenshots-realisations/vastrion-super-app.png',
     title: 'v0-vastrion-mobile-prototype',
     presentation:
-      'Ce projet pose les fondations d’une marketplace de services en mode prototype, avec un focus sur les parcours utilisateur et l’exploration produit.',
+      'Ce projet pose les fondations d’une marketplace de services en mode prototype, avec un focus sur les parcours utilisateur et l’exploration produit. L’enjeu principal était de transformer une idée large en parcours concrets et compréhensibles dès les premiers tests. || J’ai priorisé les écrans essentiels pour vérifier rapidement la valeur de la proposition. L’approche a consisté à clarifier l’expérience avant d’alourdir la partie technique, afin de préparer une suite plus solide et mieux argumentée.',
     objectivesContextRisks: [
       'Objectif principal : structurer un socle produit pour tester les hypothèses de valeur.',
       'Contexte : phase amont d’un produit en cours de définition.',
@@ -270,8 +271,8 @@ export const REALISATIONS: RealisationDetail[] = [
       'Cette réalisation est encore en mouvement. Sa force est d’ouvrir des pistes, mais je dois encore transformer ces idées en base technique plus stable.',
     repository: 'https://github.com/imaurelsan/v0-vastrion-mobile-prototype',
     techStack: [
-      { name: 'Figma', iconUrl: 'https://cdn.simpleicons.org/figma/ffffff' },
-      { name: 'TypeScript', iconUrl: 'https://cdn.simpleicons.org/typescript/ffffff' },
+      { name: 'Figma', iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg' },
+      { name: 'TypeScript', iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg' },
     ],
     linkedSkills: [
       { title: 'UX/UI orientée usage', path: '/competences/ux-ui-orientee-usage' },
@@ -293,19 +294,30 @@ export const REALISATIONS: RealisationDetail[] = [
           <h1>{{ project.title }}</h1>
         </header>
 
-        @if (project.screenshot) {
-          <figure class="realisation-screenshot">
-            <img [src]="project.screenshot" [alt]="'Capture — ' + project.title" />
-          </figure>
-        }
+        <div class="detail-hero-split">
+          @if (project.screenshot) {
+            <figure
+              class="realisation-screenshot realisation-screenshot--interactive"
+              (mousemove)="onImageMove($event)"
+              (mouseleave)="onImageLeave($event)"
+              (click)="openImageViewer(project.screenshot, project.title)"
+            >
+              <img [src]="project.screenshot" [alt]="'Capture — ' + project.title" />
+            </figure>
+          }
+
+          <article class="panel detail-block">
+            <h2>1. Présentation de la réalisation</h2>
+            <div class="detail-intro-copy">
+              @for (paragraph of presentationParagraphs(project.presentation); track paragraph) {
+                <p>{{ paragraph }}</p>
+              }
+            </div>
+          </article>
+        </div>
 
         <article class="panel detail-block">
-          <h2>1. Présentation de la réalisation</h2>
-          <p>{{ project.presentation }}</p>
-        </article>
-
-        <article class="panel detail-block">
-          <h2>2. Objectifs, contexte, enjeu et risques</h2>
+          <h2>2. Objectifs, contexte, enjeux et risques</h2>
           <ul class="detail-list">
             @for (item of project.objectivesContextRisks; track item) {
               <li>{{ item }}</li>
@@ -314,7 +326,7 @@ export const REALISATIONS: RealisationDetail[] = [
         </article>
 
         <article class="panel detail-block">
-          <h2>3. Étapes - ce que j’ai fait</h2>
+          <h2>3. Étapes : ce que j’ai fait</h2>
           <ul class="detail-list">
             @for (item of project.steps; track item) {
               <li>{{ item }}</li>
@@ -323,7 +335,7 @@ export const REALISATIONS: RealisationDetail[] = [
         </article>
 
         <article class="panel detail-block">
-          <h2>4. Acteurs - interactions</h2>
+          <h2>4. Acteurs et interactions</h2>
           <ul class="detail-list">
             @for (item of project.stakeholders; track item) {
               <li>{{ item }}</li>
@@ -344,7 +356,7 @@ export const REALISATIONS: RealisationDetail[] = [
             </div>
 
             <div class="detail-result-card">
-              <h3>Pour l'entreprise</h3>
+              <h3>Pour l’entreprise</h3>
             <ul class="detail-list">
               @for (item of project.resultsForCompany; track item) {
                 <li>{{ item }}</li>
@@ -366,7 +378,7 @@ export const REALISATIONS: RealisationDetail[] = [
         <article class="panel detail-block">
           <h2>7. Mon regard critique</h2>
           <p>{{ project.criticalView }}</p>
-          <a class="card-link" [href]="project.repository" target="_blank" rel="noopener">Consulter le dépôt GitHub</a>
+          <a class="card-link" [href]="project.repository" target="_blank" rel="noopener">Consulter le dépôt GitHub ↗</a>
         </article>
 
         <article class="panel detail-block">
@@ -406,6 +418,16 @@ export const REALISATIONS: RealisationDetail[] = [
           <a class="card-link" href="/realisations">Retour à la vue des réalisations</a>
         </article>
       }
+
+      @if (isImageViewerOpen) {
+        <div class="image-viewer" role="dialog" aria-modal="true" [attr.aria-label]="imageViewerAlt">
+          <button class="image-viewer__backdrop" type="button" aria-label="Fermer l'aperçu" (click)="closeImageViewer()"></button>
+          <figure class="image-viewer__content">
+            <button class="image-viewer__close" type="button" aria-label="Fermer l'aperçu" (click)="closeImageViewer()">✕</button>
+            <img [src]="imageViewerSrc" [alt]="imageViewerAlt" />
+          </figure>
+        </div>
+      }
     </section>
   `,
 })
@@ -413,11 +435,63 @@ export class RealisationDetailPage {
   private readonly route = inject(ActivatedRoute);
   private readonly location = inject(Location);
 
-  protected readonly realisation = REALISATIONS.find(
-    (item) => item.slug === this.route.snapshot.paramMap.get('slug')
-  );
+  protected realisation: RealisationDetail | null = null;
+
+  protected isImageViewerOpen = false;
+  protected imageViewerSrc = '';
+  protected imageViewerAlt = '';
+
+  constructor() {
+    this.route.paramMap
+      .pipe(takeUntilDestroyed())
+      .subscribe((params) => {
+        const slug = params.get('slug');
+        this.realisation = REALISATIONS.find((item) => item.slug === slug) ?? null;
+        this.closeImageViewer();
+        window.scrollTo({ top: 0, behavior: 'auto' });
+      });
+  }
 
   protected goBack(): void {
     this.location.back();
+  }
+
+  protected onImageMove(event: MouseEvent): void {
+    const container = event.currentTarget as HTMLElement | null;
+    if (!container) {
+      return;
+    }
+
+    const rect = container.getBoundingClientRect();
+    const x = ((event.clientX - rect.left) / rect.width) * 100;
+    const y = ((event.clientY - rect.top) / rect.height) * 100;
+    container.style.setProperty('--zoom-x', `${x}%`);
+    container.style.setProperty('--zoom-y', `${y}%`);
+  }
+
+  protected onImageLeave(event: MouseEvent): void {
+    const container = event.currentTarget as HTMLElement | null;
+    if (!container) {
+      return;
+    }
+
+    container.style.setProperty('--zoom-x', '50%');
+    container.style.setProperty('--zoom-y', '50%');
+  }
+
+  protected openImageViewer(src: string, title: string): void {
+    this.imageViewerSrc = src;
+    this.imageViewerAlt = `Aperçu agrandi — ${title}`;
+    this.isImageViewerOpen = true;
+  }
+
+  protected closeImageViewer(): void {
+    this.isImageViewerOpen = false;
+    this.imageViewerSrc = '';
+    this.imageViewerAlt = '';
+  }
+
+  protected presentationParagraphs(text: string): string[] {
+    return text.split('||').map((part) => part.trim()).filter((part) => part.length > 0);
   }
 }

@@ -6,6 +6,7 @@ import { REALISATIONS, RealisationDetail } from './realisation-detail.page';
 type Project = {
   slug: string;
   title: string;
+  kind: string;
   tagline: string;
   summary: string;
   keyMetric: string;
@@ -25,10 +26,23 @@ type Project = {
         <h1>Mes 5 projets de référence</h1>
       </header>
 
+      <div class="mobile-realisations-summary" aria-label="Sommaire des réalisations">
+        @for (project of projects; track project.slug) {
+          <a [href]="'#' + project.slug">
+            <strong>{{ project.title }}</strong>
+            <span>{{ project.kind }} · {{ project.tagline }}</span>
+          </a>
+        }
+      </div>
+
       <div class="cards-grid">
         @for (project of projects; track project.title) {
           <article class="card card--project" [id]="project.slug">
-            <figure class="project-visual">
+            <figure
+              class="project-visual"
+              (mousemove)="onImageMove($event)"
+              (mouseleave)="onImageLeave($event)"
+            >
               <img [src]="project.screenshot" [alt]="'Capture — ' + project.title" />
             </figure>
             <p class="chip metric-chip">{{ project.keyMetric }}</p>
@@ -48,7 +62,7 @@ type Project = {
               <svg viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M12 .5A12 12 0 0 0 8.2 23.9c.6.1.8-.2.8-.6v-2.2c-3.4.8-4.2-1.4-4.2-1.4-.5-1.3-1.2-1.6-1.2-1.6-1-.7 0-.7 0-.7 1.1 0 1.8 1.1 1.8 1.1 1 .1.5 2.3 3.7 1.6.1-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-6A4.7 4.7 0 0 1 5.5 9c-.1-.3-.6-1.5.1-3 0 0 1-.3 3.3 1.2a11.2 11.2 0 0 1 6.1 0c2.3-1.5 3.3-1.2 3.3-1.2.7 1.5.2 2.7.1 3 .8.8 1.3 1.9 1.3 3.2 0 4.6-2.8 5.6-5.5 6 .4.4.8 1 .8 2v3c0 .4.2.7.8.6A12 12 0 0 0 12 .5Z"/>
               </svg>
-              <span>Consulter le dépôt GitHub</span>
+              <span>Consulter le dépôt GitHub ↗</span>
             </a>
           </article>
         }
@@ -68,14 +82,23 @@ type Project = {
           <p class="section-header__kicker">{{ selectedDetail.order }}</p>
 
           @if (selectedDetail.screenshot) {
-            <figure class="realisation-screenshot">
+            <figure
+              class="realisation-screenshot realisation-screenshot--interactive"
+              (mousemove)="onImageMove($event)"
+              (mouseleave)="onImageLeave($event)"
+              (click)="openImageViewer(selectedDetail.screenshot, selectedDetail.title)"
+            >
               <img [src]="selectedDetail.screenshot" [alt]="'Capture — ' + selectedDetail.title" />
             </figure>
           }
 
           <article class="panel detail-block">
             <h3>1. Présentation</h3>
-            <p>{{ selectedDetail.presentation }}</p>
+            <div class="detail-intro-copy">
+              @for (paragraph of presentationParagraphs(selectedDetail.presentation); track paragraph) {
+                <p>{{ paragraph }}</p>
+              }
+            </div>
           </article>
 
           <article class="panel detail-block">
@@ -88,7 +111,7 @@ type Project = {
           </article>
 
           <article class="panel detail-block">
-            <h3>3. Ce que j'ai fait</h3>
+            <h3>3. Ce que j’ai fait</h3>
             <ul class="detail-list">
               @for (item of selectedDetail.steps; track item) {
                 <li>{{ item }}</li>
@@ -117,7 +140,7 @@ type Project = {
                 </ul>
               </div>
               <div class="detail-result-card">
-                <h4>Pour l'entreprise</h4>
+                <h4>Pour l’entreprise</h4>
                 <ul class="detail-list">
                   @for (item of selectedDetail.resultsForCompany; track item) {
                     <li>{{ item }}</li>
@@ -132,7 +155,7 @@ type Project = {
             <ul class="detail-list">
               <li><strong>Futur immédiat :</strong> {{ selectedDetail.futureImmediate }}</li>
               <li><strong>À distance :</strong> {{ selectedDetail.futureDistance }}</li>
-              <li><strong>Aujourd'hui :</strong> {{ selectedDetail.futureToday }}</li>
+              <li><strong>Aujourd’hui :</strong> {{ selectedDetail.futureToday }}</li>
             </ul>
           </article>
 
@@ -141,7 +164,7 @@ type Project = {
             <p>{{ selectedDetail.criticalView }}</p>
             <a [href]="selectedDetail.repository" target="_blank" rel="noopener" class="github-link">
               <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .5A12 12 0 0 0 8.2 23.9c.6.1.8-.2.8-.6v-2.2c-3.4.8-4.2-1.4-4.2-1.4-.5-1.3-1.2-1.6-1.2-1.6-1-.7 0-.7 0-.7 1.1 0 1.8 1.1 1.8 1.1 1 .1.5 2.3 3.7 1.6.1-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-6A4.7 4.7 0 0 1 5.5 9c-.1-.3-.6-1.5.1-3 0 0 1-.3 3.3 1.2a11.2 11.2 0 0 1 6.1 0c2.3-1.5 3.3-1.2 3.3-1.2.7 1.5.2 2.7.1 3 .8.8 1.3 1.9 1.3 3.2 0 4.6-2.8 5.6-5.5 6 .4.4.8 1 .8 2v3c0 .4.2.7.8.6A12 12 0 0 0 12 .5Z"/></svg>
-              <span>Dépôt GitHub</span>
+              <span>Dépôt GitHub ↗</span>
             </a>
           </article>
 
@@ -170,19 +193,35 @@ type Project = {
                 </li>
               }
             </ul>
-            <a class="card-link" [routerLink]="'/realisations/' + selectedDetail.slug">Voir la page dédiée ↗</a>
           </article>
         </div>
       </aside>
+    }
+
+    @if (isImageViewerOpen) {
+      <div class="image-viewer" role="dialog" aria-modal="true" [attr.aria-label]="imageViewerAlt">
+        <button class="image-viewer__backdrop" type="button" aria-label="Fermer l'aperçu" (click)="closeImageViewer()"></button>
+        <figure class="image-viewer__content">
+          <button class="image-viewer__close" type="button" aria-label="Fermer l'aperçu" (click)="closeImageViewer()">✕</button>
+          <img [src]="imageViewerSrc" [alt]="imageViewerAlt" />
+        </figure>
+      </div>
     }
   `,
 })
 export class RealisationsPage {
   private readonly location = inject(Location);
   protected selectedDetail: RealisationDetail | null = null;
+  protected isImageViewerOpen = false;
+  protected imageViewerSrc = '';
+  protected imageViewerAlt = '';
 
   @HostListener('window:keydown.escape')
   protected handleEscape(): void {
+    if (this.isImageViewerOpen) {
+      this.closeImageViewer();
+      return;
+    }
     this.closeDrawer();
   }
 
@@ -198,12 +237,55 @@ export class RealisationsPage {
       this.selectedDetail = null;
       this.location.replaceState('/realisations');
     }
+
+    this.closeImageViewer();
+  }
+
+  protected onImageMove(event: MouseEvent): void {
+    const container = event.currentTarget as HTMLElement | null;
+    if (!container) {
+      return;
+    }
+
+    const rect = container.getBoundingClientRect();
+    const x = ((event.clientX - rect.left) / rect.width) * 100;
+    const y = ((event.clientY - rect.top) / rect.height) * 100;
+
+    container.style.setProperty('--zoom-x', `${x}%`);
+    container.style.setProperty('--zoom-y', `${y}%`);
+  }
+
+  protected onImageLeave(event: MouseEvent): void {
+    const container = event.currentTarget as HTMLElement | null;
+    if (!container) {
+      return;
+    }
+
+    container.style.setProperty('--zoom-x', '50%');
+    container.style.setProperty('--zoom-y', '50%');
+  }
+
+  protected openImageViewer(src: string, title: string): void {
+    this.imageViewerSrc = src;
+    this.imageViewerAlt = `Aperçu agrandi — ${title}`;
+    this.isImageViewerOpen = true;
+  }
+
+  protected closeImageViewer(): void {
+    this.isImageViewerOpen = false;
+    this.imageViewerSrc = '';
+    this.imageViewerAlt = '';
+  }
+
+  protected presentationParagraphs(text: string): string[] {
+    return text.split('||').map((part) => part.trim()).filter((part) => part.length > 0);
   }
   // J'ai retenu ces projets pour montrer simplement ce que j'ai fait, comment je l'ai fait et ce que cela a apporté.
   protected readonly projects: Project[] = [
     {
       slug: 'project-360-content-bridge',
       title: '360-content-bridge',
+      kind: 'Plugin WordPress',
       screenshot: 'assets/images/screenshots-realisations/360-content-bridge.png',
       tagline: 'Rendre les transferts de contenu plus sûrs et plus rapides.',
       summary: "Plugin d'import/export WordPress conçu pour faciliter la maintenance de contenus sur plusieurs sites.",
@@ -228,6 +310,7 @@ export class RealisationsPage {
     {
       slug: 'project-360-media-auto-cleanup',
       title: '360-media-auto-cleanup',
+      kind: 'Plugin WordPress',
       screenshot: 'assets/images/screenshots-realisations/360-media-auto-cleanup.png',
       tagline: 'Nettoyer sans casser : supprimer les médias inutiles avec prudence.',
       summary: "Plugin de nettoyage des médias orphelins pour alléger les sites et réduire le stockage inutile.",
@@ -252,6 +335,7 @@ export class RealisationsPage {
     {
       slug: 'project-360tranquilite',
       title: '360tranquilité',
+      kind: 'Plugin WordPress',
       screenshot: 'assets/images/screenshots-realisations/360-tranquillite.png',
       tagline: 'Réunir sécurité, suivi et exploitation dans un seul outil.',
       summary: 'Plugin WordPress open source qui centralise des fonctions utiles pour la sécurité et le suivi.',
@@ -276,6 +360,7 @@ export class RealisationsPage {
     {
       slug: 'project-crewai-voyage',
       title: 'crewai-projet-agent-voyage',
+      kind: 'Application IA (prototype)',
       screenshot: 'assets/images/screenshots-realisations/travel-planner.png',
       tagline: 'Transformer une idée IA en parcours simple pour l’utilisateur.',
       summary: "Agent IA de planification de voyage pensé pour proposer des scénarios clairs et utiles.",
@@ -300,6 +385,7 @@ export class RealisationsPage {
     {
       slug: 'project-v0-vastrion-mobile-prototype',
       title: 'v0-vastrion-mobile-prototype',
+      kind: 'Application mobile (prototype)',
       screenshot: 'assets/images/screenshots-realisations/vastrion-super-app.png',
       tagline: 'Poser une base produit claire avant d’aller plus loin.',
       summary: 'Prototype d’une marketplace de services, encore en cours de construction.',

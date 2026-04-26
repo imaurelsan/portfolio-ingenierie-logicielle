@@ -9,7 +9,7 @@ import { EmailService } from '../services/email.service';
     <section class="page-section">
       <header class="section-header">
         <p class="section-header__kicker">Contact</p>
-        <h1>Entrer en contact</h1>
+        <h1>Entrons en relation</h1>
       </header>
 
       <div class="two-columns">
@@ -40,31 +40,21 @@ import { EmailService } from '../services/email.service';
                 <small>yaurel.com</small>
               </span>
             </a>
-          </div>
 
-          <div class="contact-socials">
-            <div class="contact-socials__list">
-              <a class="contact-socials__item" href="https://github.com/imaurelsan" target="_blank" rel="noopener" aria-label="GitHub">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .5A12 12 0 0 0 8.2 23.9c.6.1.8-.2.8-.6v-2.2c-3.4.8-4.2-1.4-4.2-1.4-.5-1.3-1.2-1.6-1.2-1.6-1-.7 0-.7 0-.7 1.1 0 1.8 1.1 1.8 1.1 1 .1.5 2.3 3.7 1.6.1-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-6A4.7 4.7 0 0 1 5.5 9c-.1-.3-.6-1.5.1-3 0 0 1-.3 3.3 1.2a11.2 11.2 0 0 1 6.1 0c2.3-1.5 3.3-1.2 3.3-1.2.7 1.5.2 2.7.1 3 .8.8 1.3 1.9 1.3 3.2 0 4.6-2.8 5.6-5.5 6 .4.4.8 1 .8 2v3c0 .4.2.7.8.6A12 12 0 0 0 12 .5Z"/></svg>
-                <span>GitHub</span>
-              </a>
-
-              <a class="contact-socials__item" href="https://www.linkedin.com/in/aurel-yahouedeou/" target="_blank" rel="noopener" aria-label="LinkedIn">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.94 8.5H3.56V20h3.38V8.5Zm.22-3.56A1.96 1.96 0 1 0 5.2 6.9a1.96 1.96 0 0 0 1.96-1.96ZM20.44 13.4c0-3.44-1.84-5.04-4.3-5.04-1.98 0-2.86 1.1-3.36 1.86V8.5H9.42V20h3.36v-6.42c0-1.7.32-3.34 2.42-3.34 2.06 0 2.08 1.92 2.08 3.46V20h3.36v-6.6Z"/></svg>
-                <span>LinkedIn</span>
-              </a>
-
-              <a class="contact-socials__item" href="https://www.instagram.com/imaurelsan/" target="_blank" rel="noopener" aria-label="Instagram">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 7.1A4.9 4.9 0 1 0 16.9 12 4.9 4.9 0 0 0 12 7.1Zm0 8.1a3.2 3.2 0 1 1 3.2-3.2 3.2 3.2 0 0 1-3.2 3.2Zm6.2-8.3a1.1 1.1 0 1 1-1.1-1.1 1.1 1.1 0 0 1 1.1 1.1ZM22 7a7 7 0 0 0-1.9-4.9A7 7 0 0 0 15.2.2C13.3.1 10.7.1 8.8.2A7 7 0 0 0 3.9 2 7 7 0 0 0 2 7c-.1 1.9-.1 4.5 0 6.4a7 7 0 0 0 1.9 4.9 7 7 0 0 0 4.9 1.9c1.9.1 4.5.1 6.4 0a7 7 0 0 0 4.9-1.9 7 7 0 0 0 1.9-4.9c.1-1.9.1-4.5 0-6.4ZM20 14c0 1.7-.1 2.6-.4 3.4a4.9 4.9 0 0 1-2.8 2.8c-.8.3-1.7.4-3.4.4s-2.6-.1-3.4-.4a4.9 4.9 0 0 1-2.8-2.8c-.3-.8-.4-1.7-.4-3.4s.1-2.6.4-3.4a4.9 4.9 0 0 1 2.8-2.8c.8-.3 1.7-.4 3.4-.4s2.6.1 3.4.4a4.9 4.9 0 0 1 2.8 2.8c.3.8.4 1.7.4 3.4Z"/></svg>
-                <span>Instagram</span>
-              </a>
+            <div class="contact-link" aria-label="Localisation">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5Z"/></svg>
+              <span>
+                <strong>Localisation</strong>
+                <small>Rueil-Malmaison / Remote</small>
+              </span>
             </div>
           </div>
+
         </div>
 
         <div class="contact-card">
           <h2>Formulaire rapide</h2>
-          <p class="intro-text intro-text--tight">Je vous répondrai sous 24h maximum.</p>
+          <p class="intro-text intro-text--tight">Je vous répondrai sous 24 h maximum.</p>
           <form class="contact-form" (ngSubmit)="sendMessage()">
             <div class="field-float">
               <input type="text" id="f-name" name="name" placeholder=" " [(ngModel)]="name" required [disabled]="isSubmitting" />
@@ -95,14 +85,14 @@ import { EmailService } from '../services/email.service';
               [disabled]="isSubmitting || !isFormValid()"
               [class.btn--loading]="isSubmitting"
             >
-              {{ isSubmitting ? 'Envoi en cours...' : 'Envoyer' }}
+              {{ isSubmitting ? 'Envoi en cours…' : 'Envoyer le message' }}
             </button>
           </form>
         </div>
       </div>
 
       <div class="contact-actions contact-actions--band">
-        <a class="btn btn--primary" href="https://canva.link/9fgszui3l3xedxs" target="_blank" rel="noopener">Télécharger mon CV</a>
+        <a class="btn btn--ghost" href="https://canva.link/9fgszui3l3xedxs" target="_blank" rel="noopener">Voir mon CV</a>
         <a class="btn btn--ghost" href="https://yaurel.com/wp-content/uploads/2026/04/Art-Portfolio-Aurel-Yahouedeou.pdf" target="_blank" rel="noopener">Voir mon portfolio artiste</a>
         <a class="btn btn--ghost" href="https://yaurel.com/wp-content/uploads/2026/04/Design-Portfolio-Aurel-Yahouedeou.pdf" target="_blank" rel="noopener">Voir mon portfolio designer</a>
       </div>
