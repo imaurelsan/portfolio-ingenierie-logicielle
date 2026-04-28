@@ -173,7 +173,7 @@ export class ParcoursPage {
       responsibility: 'Développement fullstack et structuration de l’écosystème web.',
       status: 'Alternant',
       details: [
-        'Développement fullstack d’un écosystème multisite : refonte complète du site <a href="https://formation.askida.fr/" target="_blank" rel="noopener">Aski-Da Formation ↗</a>, conception de A à Z du site <a href="https://synergies.askida.fr/" target="_blank" rel="noopener">Aski-Da Synergies ↗</a>, intégration API, création de plugins et de widgets WordPress sur mesure.',
+        'Développement fullstack d’un écosystème multisite : refonte complète du site <a href="https://formation.askida.fr/" target="_blank" rel="noopener">Aski-da Formation ↗</a>, conception de A à Z du site <a href="https://synergies.askida.fr/" target="_blank" rel="noopener">Aski-da Synergies ↗</a>, intégration API, création de plugins et de widgets WordPress sur mesure.',
         'Structuration technique du réseau WordPress du groupe, optimisation des workflows et conception de mini plugins open source pour automatiser les tâches récurrentes.',
       ],
       linkedProjects: [
