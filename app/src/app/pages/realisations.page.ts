@@ -230,6 +230,16 @@ export class RealisationsPage {
     this.closeDrawer();
   }
 
+  protected scrollTo(slug: string): void {
+    const target = document.getElementById(slug);
+    if (!target) return;
+  
+    target.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start',
+    });
+  }
+
   protected openDrawer(slug: string): void {
     this.selectedDetail = REALISATIONS.find((r) => r.slug === slug) ?? null;
     if (this.selectedDetail) {
