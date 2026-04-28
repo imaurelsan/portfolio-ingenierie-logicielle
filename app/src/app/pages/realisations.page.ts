@@ -28,7 +28,8 @@ type Project = {
 
       <div class="mobile-realisations-summary" aria-label="Sommaire des réalisations">
         @for (project of projects; track project.slug) {
-          <a [href]="'#' + project.slug">
+          <a [href]="#"
+          (click)="$event.preventDefault(); scrollTo(project.slug)">
             <strong>{{ project.title }}</strong>
             <span>{{ project.kind }} · {{ project.tagline }}</span>
           </a>
