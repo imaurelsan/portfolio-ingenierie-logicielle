@@ -22,7 +22,7 @@ type FeaturedProject = {
     <section class="home-hero" aria-labelledby="home-hero-title">
       <div class="home-hero__inner">
         <div class="home-hero__text">
-          <p id="home-hero-title" class="home-hero__name"><span class="home-hero__name-first">Aurel</span> <span class="home-hero__name-last">YAHOUEDEOU</span></p>
+          <p id="home-hero-title" class="home-hero__name"><span class="home-hero__name-first">Aurel </span> <span class="home-hero__name-last">YAHOUEDEOU</span></p>
           <h1 class="home-hero__title">Développeur Fullstack</h1>
           <p class="home-hero__junior" aria-label="Junior">Junior</p>
         </div>

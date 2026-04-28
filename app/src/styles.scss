@@ -21,6 +21,10 @@
 	font-style: normal;
 }
 
+/* =========================
+   Tokens de theme globaux
+   ========================= */
+
 :root {
 	--space-15: 0.9375rem;
 	--c-bg: #2d2d2d;
@@ -37,6 +41,10 @@
 * {
 	box-sizing: border-box;
 }
+
+/* =========================
+	Base HTML / Body
+	========================= */
 
 html,
 body {
@@ -63,7 +71,7 @@ body.theme-light {
 	--c-bg: #edf2f3;
 	--c-surface: #ffffff;
 	--c-surface-soft: #f6f9f9;
-	--c-text: #132122;
+	--c-text: #24545b;
 	--c-muted: #51696a;
 	--c-accent: #237d74;
 	--c-accent-deep: #d9ece9;
@@ -111,6 +119,10 @@ summary:focus {
 	margin: 0 auto;
 	padding: 3.2rem var(--space-15);
 }
+
+/* =========================
+   Helpers et titres de section
+   ========================= */
 
 .sr-only {
 	position: absolute;
@@ -187,6 +199,10 @@ summary:focus {
 	margin-top: 1.45rem;
 }
 
+/* =========================
+   Cartes reutilisables (base)
+   ========================= */
+
 .panel,
 .card,
 .contact-card,
@@ -217,7 +233,7 @@ summary:focus {
 .card h2,
 .timeline__item h2 {
 	margin-bottom: 1.5rem;
-	font-size: clamp(1.25rem, 2.2vw, 2rem);
+	font-size: clamp(1.25rem, 2.2vw, 1.8rem);
 }
 
 .cards-grid {
@@ -225,6 +241,9 @@ summary:focus {
 	grid-template-columns: repeat(2, minmax(0, 1fr));
 	gap: 1.45rem;
 }
+
+/* Cas particulier realisations:
+   quand la derniere carte est seule, on la centre visuellement. */
 
 @media (min-width: 761px) {
 	.cards-grid > .card--project:last-child:nth-child(odd) {
@@ -465,6 +484,10 @@ summary:focus {
 	font-weight: 600;
 }
 
+/* =========================
+	Home (hero, angles, projets)
+	========================= */
+
 
 .home-hero {
 	position: relative;
@@ -517,7 +540,7 @@ summary:focus {
 }
 
 .home-hero__title {
-	margin: 0;
+	margin: 20px 0 0 0;
 	font-size: clamp(1.4rem, 4.2vw, 2.85rem);
 	line-height: 1.08;
 	color: #ffffff;
@@ -828,7 +851,7 @@ summary:focus {
 }
 
 .btn--detail {
-	margin-top: 0rem;
+	margin-top: 1rem;
 	margin-bottom: 1.6rem;
 }
 
@@ -1214,6 +1237,10 @@ summary:focus {
 	display: grid;
 	gap: 0.9rem;
 }
+
+/* =========================
+	Parcours (frise et details)
+	========================= */
 
 .timeline__period {
 	margin: 0;
@@ -1702,6 +1729,10 @@ summary:focus {
 	text-decoration: none;
 	color: color-mix(in srgb, var(--c-accent) 78%, var(--c-text) 22%);
 }
+
+/* =========================
+	Liens sortants et badges techno
+	========================= */
 
 .detail-inline-github svg {
 	width: 15px;
@@ -2195,6 +2226,7 @@ body.theme-light .field-float textarea:not(:placeholder-shown) ~ label {
 }
 
 @media (max-width: 980px) {
+	/* Tablette: simplification de certaines grilles et ajustements hero/parcours. */
 	.cards-grid--skills {
 		grid-template-columns: repeat(2, minmax(0, 1fr));
 	}
@@ -2266,6 +2298,7 @@ body.theme-light .field-float textarea:not(:placeholder-shown) ~ label {
 }
 
 @media (max-width: 760px) {
+	/* Mobile: passage mono-colonne et optimisation de lisibilite. */
 	.cards-grid,
 	.cards-grid--skills,
 	.two-columns {
@@ -2307,8 +2340,8 @@ body.theme-light .field-float textarea:not(:placeholder-shown) ~ label {
 
 	.home-hero__inner {
 		min-height: 100dvh;
-		padding: 1.2rem var(--space-15) 0;
-		padding-bottom: calc(52px + 3.2rem);
+		padding: 3rem var(--space-15) 0;
+		padding-bottom: calc(52px + 5rem);
 	}
 
 	.home-hero__text {
@@ -2321,7 +2354,7 @@ body.theme-light .field-float textarea:not(:placeholder-shown) ~ label {
 	}
 
 	.home-hero__title {
-		font-size: clamp(1.25rem, 8vw, 2.05rem);
+		font-size: clamp(1.8rem, 4.2vw, 2.5rem);
 		white-space: normal;
 	}
 
@@ -2330,7 +2363,7 @@ body.theme-light .field-float textarea:not(:placeholder-shown) ~ label {
 	}
 
 	.home-hero__actions {
-		margin-bottom: 0.5rem;
+		margin-bottom: 3rem;
 	}
 
 	.home-hero__scroll-hint {

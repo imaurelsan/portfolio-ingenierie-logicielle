@@ -21,7 +21,7 @@ import { RouterLink } from '@angular/router';
       </header>
       <div class="presentation-intro-editorial__copy">
         <p>
-          J’ai construit mon parcours entre création visuelle, ingénierie réseaux/systèmes et développement logiciel.
+          J’ai construit mon parcours entre création visuelle, ingénierie réseaux/systèmes et développement d'applications web.
           Cette trajectoire me permet aujourd’hui de relier plusieurs exigences sans les opposer : la clarté pour
           l’utilisateur, la robustesse technique, et la sécurité dans la durée.
         </p>
@@ -40,15 +40,15 @@ import { RouterLink } from '@angular/router';
         <p class="section-header__kicker">MES VALEURS</p>
         <h2>Ce qui guide mes décisions au quotidien</h2>
         <p>
-          Je privilégie la clarté : expliquer simplement un choix technique, rendre les impacts compréhensibles et
+          Je privilégie la <strong>clarté</strong> : expliquer simplement un choix technique, rendre les impacts compréhensibles et
           garder une communication honnête avec l’équipe comme avec les métiers.
         </p>
         <p>
-          Je défends aussi la responsabilité technique : anticiper les risques, éviter les solutions fragiles et
+          Je défends aussi la <strong>responsabilité technique</strong> : anticiper les risques, éviter les solutions fragiles et
           construire des bases qui restent maintenables quand le produit évolue.
         </p>
         <p>
-          Enfin, je crois à l’amélioration continue guidée par des preuves concrètes : tester, mesurer, ajuster, puis
+          Enfin, je crois à l’<strong>amélioration continue</strong> guidée par des preuves concrètes : tester, mesurer, ajuster, puis
           documenter pour capitaliser au lieu de repartir de zéro.
         </p>
       </article>
@@ -57,7 +57,7 @@ import { RouterLink } from '@angular/router';
         <p class="section-header__kicker">MON PROJET</p>
         <h2>Là où je veux aller, et pourquoi</h2>
         <p>
-          Je vise un rôle fullstack junior où je peux contribuer à la fois au front et au back, avec une attention
+          Je vise un titre fullstack, où je peux contribuer à la fois au front et au back, avec une attention
           particulière à l’architecture et à la qualité des livrables.
         </p>
         <p>
@@ -80,9 +80,9 @@ import { RouterLink } from '@angular/router';
         <p class="section-header__kicker">MES CENTRES D'INTÉRÊT</p>
         <h2>Ce qui m'anime en dehors du code</h2>
         <ul class="presentation-plain-list">
-          <li><strong>R&amp;D</strong> : IA appliquée, optimisation web, sécurité</li>
-          <li><strong>Création</strong> : design visuel, UI/UX, photographie</li>
-          <li><strong>Équilibre personnel</strong> : sport, lecture, apprentissage continu</li>
+          <li><strong>Recherche et Développement</strong> : veille technologique, IA appliquée, optimisation web, cyber-sécurité.</li>
+          <li><strong>Création</strong> : design graphique, UI/UX, dessin et photographie.</li>
+          <li><strong>Équilibre personnel</strong> : sport, lecture, méditation, apprentissage continu.</li>
         </ul>
       </article>
     </section>
