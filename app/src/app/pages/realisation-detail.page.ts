@@ -373,9 +373,9 @@ export const REALISATIONS: RealisationDetail[] = [
         <article class="panel detail-block">
           <h2 class="detail-heading--anchored">6. Lendemains du projet</h2>
           <ul class="detail-list">
-            <li><strong>Futur immédiat :</strong> {{ project.futureImmediate }}</li>
-            <li><strong>À distance :</strong> {{ project.futureDistance }}</li>
-            <li><strong>Aujourd’hui :</strong> {{ project.futureToday }}</li>
+            <li><span><strong>Futur immédiat :</strong> {{ project.futureImmediate }}</span></li>
+            <li><span><strong>À distance :</strong> {{ project.futureDistance }}</span></li>
+            <li><span><strong>Aujourd'hui :</strong> {{ project.futureToday }}</span></li>
           </ul>
         </article>
 
@@ -452,6 +452,7 @@ export class RealisationDetailPage {
   protected imageViewerAlt = '';
 
   constructor() {
+    // Synchronise le composant avec le slug de route pour afficher la bonne realisation.
     this.route.paramMap
       .pipe(takeUntilDestroyed())
       .subscribe((params) => {
@@ -462,10 +463,12 @@ export class RealisationDetailPage {
       });
   }
 
+  // Bouton retour: on respecte l'historique navigateur plutot qu'un lien force.
   protected goBack(): void {
     this.location.back();
   }
 
+  // Meme logique de zoom que dans le drawer pour garder un comportement coherent.
   protected onImageMove(event: MouseEvent): void {
     const container = event.currentTarget as HTMLElement | null;
     if (!container) {

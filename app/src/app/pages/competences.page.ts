@@ -1,6 +1,7 @@
-import { Component, HostListener, inject } from '@angular/core';
+import { Component, HostListener, OnDestroy, OnInit, inject } from '@angular/core';
 import { Location } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { COMPETENCES, CompetenceDetail } from './competence-detail.page';
 
 type Skill = {
@@ -147,18 +148,33 @@ type SkillFilter = 'Tous' | 'Techniques' | 'Humaines';
     }
   `,
 })
-export class CompetencesPage {
+export class CompetencesPage implements OnInit, OnDestroy {
   private readonly location = inject(Location);
+  private readonly route = inject(ActivatedRoute);
+  private filterQuerySub: Subscription | null = null;
 
   protected readonly filters: SkillFilter[] = ['Tous', 'Techniques', 'Humaines'];
   protected selectedFilter: SkillFilter = 'Tous';
   protected selectedDetail: CompetenceDetail | null = null;
+
+  // Le composant reste monte quand seul le query param change: on ecoute donc les changements en continu.
+  ngOnInit(): void {
+    this.filterQuerySub = this.route.queryParamMap.subscribe((params) => {
+      const param = params.get('filter') as SkillFilter | null;
+      this.selectedFilter = param === 'Techniques' || param === 'Humaines' ? param : 'Tous';
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.filterQuerySub?.unsubscribe();
+  }
 
   @HostListener('window:keydown.escape')
   protected handleEscape(): void {
     this.closeDrawer();
   }
 
+  // J'ouvre le tiroir detaille sans changer de composant, pour garder la navigation fluide.
   protected openDrawer(slug: string): void {
     this.selectedDetail = COMPETENCES.find((c) => c.slug === slug) ?? null;
     if (this.selectedDetail) {
@@ -174,6 +190,7 @@ export class CompetencesPage {
   }
 
   protected get filteredSkills(): Skill[] {
+    // Le filtre est calcule a la volee pour eviter de dupliquer les tableaux en memoire.
     if (this.selectedFilter === 'Tous') {
       return this.skills;
     }

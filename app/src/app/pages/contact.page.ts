@@ -110,6 +110,7 @@ export class ContactPage {
   protected statusMessage = '';
   protected isSuccess = false;
 
+  // Sequence d'envoi: validation, feedback utilisateur, puis reset si succes.
   protected async sendMessage(): Promise<void> {
     if (!this.isFormValid()) return;
 
@@ -142,6 +143,7 @@ export class ContactPage {
   }
 
   protected isFormValid(): boolean {
+    // Validation volontairement minimale cote UI; le service applique ses propres controles.
     return (
       this.name.trim().length > 0 &&
       this.email.trim().length > 0 &&

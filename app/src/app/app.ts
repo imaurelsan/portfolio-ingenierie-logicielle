@@ -1,12 +1,14 @@
 import { Component, ElementRef, HostListener, ViewChild, inject } from '@angular/core';
 import { NavigationEnd, Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { filter } from 'rxjs/operators';
+import { COMPETENCES } from './pages/competence-detail.page';
+import { REALISATIONS } from './pages/realisation-detail.page';
 
 type NavLink = {
   label: string;
   path: string;
   iconPath: string;
-  children?: Array<{ label: string; path: string }>;
+  children?: Array<{ label: string; path: string; queryParams?: Record<string, string> }>;
 };
 
 type MobileNavLink = {
@@ -33,7 +35,9 @@ export class App {
   private readonly router = inject(Router);
 
   @ViewChild('quicknavpanel') private readonly quickNavPanel?: ElementRef<HTMLElement>;
+  @ViewChild('quicknavinput') private readonly quickNavInput?: ElementRef<HTMLInputElement>;
   @ViewChild('searchtogglebtn') private readonly searchToggleBtn?: ElementRef<HTMLButtonElement>;
+  @ViewChild('mobilesearchtogglebtn') private readonly mobileSearchToggleBtn?: ElementRef<HTMLButtonElement>;
   @ViewChild('mainnavpanel') private readonly mainNavPanel?: ElementRef<HTMLElement>;
   @ViewChild('navtogglebtn') private readonly navToggleBtn?: ElementRef<HTMLButtonElement>;
 
@@ -46,10 +50,8 @@ export class App {
       path: '/competences',
       iconPath: 'M19 9l1.25-2.75L23 5l-2.75-1.25L19 1l-1.25 2.75L15 5l2.75 1.25L19 9zm-7.5.5L9 4 6.5 9.5 1 12l5.5 2.5L9 20l2.5-5.5L17 12l-5.5-2.5z',
       children: [
-        { label: 'Vue comparative', path: '/competences' },
-        { label: 'Architecture web mutualisée', path: '/competences/architecture-web-mutualisee' },
-        { label: 'Développement plugins WordPress', path: '/competences/developpement-plugins-wordpress' },
-        { label: 'Sécurité applicative', path: '/competences/securite-applicative' },
+        { label: 'Techniques', path: '/competences', queryParams: { filter: 'Techniques' } },
+        { label: 'Humaines', path: '/competences', queryParams: { filter: 'Humaines' } },
       ],
     },
     {
@@ -120,55 +122,11 @@ export class App {
   protected isQuickNavOpen = false;
   protected quickNavQuery = '';
 
-  // Système de recherche par mots-clés pour une meilleure expérience utilisateur.
-  protected readonly searchDatabase: SearchResult[] = [
-    {
-      label: 'Accueil',
-      path: '/',
-      keywords: [
-        'accueil', 'hero', 'portfolio', 'axes', 'preuves', 'architecture', 'industrialisation', 'impact',
-      ],
-    },
-    {
-      label: 'Qui suis-je ?',
-      path: '/presentation',
-      keywords: [
-        'qui suis je', 'presentation', 'profil', 'valeurs', 'positionnement', 'aurel', 'yahouedeou', 'bio', 'parcours global',
-      ],
-    },
-    {
-      label: 'Compétences',
-      path: '/competences',
-      keywords: [
-        'competences', 'niveau', 'avance', 'intermediaire', 'debutant', 'jauge', 'skills', 'wordpress', 'api',
-        'securite', 'communication', 'ux', 'ui', 'automatisation', 'agile',
-      ],
-    },
-    {
-      label: 'Réalisations',
-      path: '/realisations',
-      keywords: [
-        'realisations', 'projets', 'github', 'plugin', '360tranquilite', 'content bridge', 'media auto cleanup',
-      ],
-    },
-    {
-      label: 'Parcours',
-      path: '/parcours',
-      keywords: [
-        'parcours', 'experiences', 'formations', 'certifications', 'tests', 'educatel', 'iscod', 'esmt',
-        'master soft', 'aski da', 'empowher',
-      ],
-    },
-    {
-      label: 'Contact',
-      path: '/contact',
-      keywords: [
-        'contact', 'formulaire', 'email', 'telephone', 'linkedin', 'instagram', 'github', 'cv',
-      ],
-    },
-  ];
+  // Index de recherche base sur le contenu du site (pages + details competences/realisations).
+  protected readonly searchDatabase: SearchResult[] = this.buildSearchDatabase();
 
   constructor() {
+    // A chaque navigation, on synchronise l'etat UI pour repartir d'une base propre.
     this.router.events
       .pipe(filter((event): event is NavigationEnd => event instanceof NavigationEnd))
       .subscribe((event) => {
@@ -177,6 +135,7 @@ export class App {
         this.closeMobileNav();
       });
 
+    // Le theme persiste en local pour conserver la preference entre deux sessions.
     const savedTheme = localStorage.getItem('portfolio-theme');
     this.isLightTheme = savedTheme !== 'dark';
     this.applyTheme();
@@ -226,6 +185,11 @@ export class App {
   protected openQuickNav(): void {
     this.closeMobileNav();
     this.isQuickNavOpen = true;
+
+    // Focus auto du champ apres rendu pour permettre de taper immediatement.
+    setTimeout(() => {
+      this.quickNavInput?.nativeElement.focus();
+    }, 0);
   }
 
   protected closeQuickNav(): void {
@@ -250,6 +214,7 @@ export class App {
   }
 
   private applyTheme(): void {
+    // Le style est pilote par une classe body afin de laisser le CSS gerer toutes les variantes.
     document.body.classList.toggle('theme-light', this.isLightTheme);
   }
 
@@ -266,7 +231,8 @@ export class App {
     if (this.isQuickNavOpen) {
       const isInsideQuickNav = !!this.quickNavPanel?.nativeElement.contains(target);
       const isOnSearchButton = !!this.searchToggleBtn?.nativeElement.contains(target);
-      if (!isInsideQuickNav && !isOnSearchButton) {
+      const isOnMobileSearchButton = !!this.mobileSearchToggleBtn?.nativeElement.contains(target);
+      if (!isInsideQuickNav && !isOnSearchButton && !isOnMobileSearchButton) {
         this.closeQuickNav();
       }
     }
@@ -281,6 +247,7 @@ export class App {
   }
 
   private scoreResult(result: SearchResult, tokens: string[]): number {
+    // Score simple mais efficace: label prioritaire, puis mots-cles exacts/prefixes/partiels.
     const normalizedLabel = this.normalizeText(result.label);
     const normalizedKeywords = result.keywords.map((keyword) => this.normalizeText(keyword));
     let score = 0;
@@ -302,6 +269,149 @@ export class App {
     }
 
     return score;
+  }
+
+  private buildSearchDatabase(): SearchResult[] {
+    const staticEntries: SearchResult[] = [
+      {
+        label: 'Accueil',
+        path: '/',
+        keywords: this.collectKeywords([
+          'accueil', 'hero', 'portfolio', 'ingenierie logicielle', 'projets de reference',
+          'angles', 'preuves', 'architecture', 'industrialisation', 'impact', 'aurel yahouedeou',
+          'developpeur fullstack junior', 'en savoir plus', 'ma facon d intervenir',
+          'projets recents', 'chaque projet illustre un probleme reel et la decision qui l a resolu',
+          'je ne cherche pas a impressionner par la complexite', 'je cherche a convaincre par la clarte',
+          'entrer en relation', 'voir mon parcours',
+        ]),
+      },
+      {
+        label: 'Qui suis-je ?',
+        path: '/presentation',
+        keywords: this.collectKeywords([
+          'presentation', 'qui suis je', 'profil', 'valeurs', 'positionnement', 'parcours',
+          'forces', 'interets', 'ui ux', 'design', 'photographie',
+          'mon positionnement professionnel', 'en quelques mots', 'mes valeurs', 'mon projet',
+          'mes qualites humaines', 'mes centres d interet', 'recherche et developpement',
+          'veille technologique', 'ia appliquee', 'optimisation web', 'cyber securite',
+          'je recherche un environnement', 'produits utiles lisibles et maintenables',
+        ]),
+      },
+      {
+        label: 'Parcours',
+        path: '/parcours',
+        keywords: this.collectKeywords([
+          'parcours', 'experiences', 'formations', 'certifications', 'iscod', 'educatel',
+          'esmt', 'master soft', 'aski da', 'empowher',
+          'evolution professionnelle et academique', 'experiences en entreprise',
+          'tests et certifications', 'developpeur web fullstack', 'chef de projets web',
+          'administrateur systeme de tracking', 'agence yele', 'ay studio',
+        ]),
+      },
+      {
+        label: 'Contact',
+        path: '/contact',
+        keywords: this.collectKeywords([
+          'contact', 'formulaire', 'email', 'telephone', 'linkedin', 'instagram', 'github', 'cv',
+          'entrons en relation', 'coordonnees principales', 'formulaire rapide',
+          'envoyer le message', 'site principal', 'localisation', 'portfolio artiste', 'portfolio designer',
+        ]),
+      },
+    ];
+
+    const competenceIndex: SearchResult[] = COMPETENCES.map((competence) => {
+      const texts = [
+        competence.title,
+        ...competence.definition,
+        ...competence.selfReview,
+        ...competence.evolution,
+        ...competence.anecdotes.flatMap((anecdote) => [
+          anecdote.title,
+          anecdote.situation,
+          anecdote.result,
+          anecdote.valueAdded,
+          anecdote.linkedProject.title,
+        ]),
+        ...competence.projects.map((project) => project.title),
+      ];
+
+      return {
+        label: `Compétence — ${competence.title}`,
+        path: `/competences/${competence.slug}`,
+        keywords: this.collectKeywords(['competences', 'skills', ...texts]),
+      };
+    });
+
+    const realisationIndex: SearchResult[] = REALISATIONS.map((realisation) => {
+      const texts = [
+        realisation.title,
+        realisation.presentation,
+        ...realisation.objectivesContextRisks,
+        ...realisation.steps,
+        ...realisation.stakeholders,
+        ...realisation.resultsForMe,
+        ...realisation.resultsForCompany,
+        realisation.futureImmediate,
+        realisation.futureDistance,
+        realisation.futureToday,
+        realisation.criticalView,
+        ...realisation.techStack.map((tech) => tech.name),
+        ...realisation.linkedSkills.map((skill) => skill.title),
+      ];
+
+      return {
+        label: `Réalisation — ${realisation.title}`,
+        path: `/realisations/${realisation.slug}`,
+        keywords: this.collectKeywords(['realisations', 'projets', ...texts]),
+      };
+    });
+
+    return [
+      ...staticEntries,
+      {
+        label: 'Compétences',
+        path: '/competences',
+        keywords: this.collectKeywords([
+          'competences', 'techniques', 'humaines',
+          ...COMPETENCES.map((competence) => competence.title),
+        ]),
+      },
+      {
+        label: 'Réalisations',
+        path: '/realisations',
+        keywords: this.collectKeywords([
+          'realisations', 'technologies utilisees',
+          ...REALISATIONS.map((realisation) => realisation.title),
+          ...REALISATIONS.flatMap((realisation) => realisation.techStack.map((tech) => tech.name)),
+        ]),
+      },
+      ...competenceIndex,
+      ...realisationIndex,
+    ];
+  }
+
+  private collectKeywords(texts: string[]): string[] {
+    const unique = new Set<string>();
+
+    for (const source of texts) {
+      const normalized = this.normalizeText(source)
+        .replaceAll(/[^a-z0-9\s]/g, ' ')
+        .replaceAll(/\s+/g, ' ')
+        .trim();
+
+      if (!normalized) {
+        continue;
+      }
+
+      unique.add(normalized);
+      for (const token of normalized.split(' ')) {
+        if (token.length >= 3) {
+          unique.add(token);
+        }
+      }
+    }
+
+    return Array.from(unique);
   }
 
   private normalizeText(value: string): string {

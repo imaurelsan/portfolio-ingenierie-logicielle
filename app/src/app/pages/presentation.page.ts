@@ -101,4 +101,5 @@ import { RouterLink } from '@angular/router';
     </section>
   `,
 })
+// Page editoriale: ici le contenu est volontairement statique pour privilegier la lisibilite.
 export class PresentationPage {}

@@ -111,6 +111,7 @@ type FeaturedProject = {
   `,
 })
 export class HomePage implements AfterViewInit {
+  // Cette valeur alimente l'effet de revelation progressif de la section "angles".
   protected anglesProgress = 0;
 
   ngAfterViewInit(): void {
@@ -122,6 +123,7 @@ export class HomePage implements AfterViewInit {
     this.updateAnglesProgress();
   }
 
+  // Le calcul reste volontairement simple: un ratio scroll / distance de revelation.
   private updateAnglesProgress(): void {
     if (typeof window === 'undefined') {
       this.anglesProgress = 0;

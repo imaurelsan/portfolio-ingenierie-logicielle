@@ -48,8 +48,8 @@
           <div class="main-nav__item main-nav__item--has-submenu" [class.is-active]="isSubmenuParentActive(link.path)">
             <a [routerLink]="link.path" (click)="closeMobileNav()">{{ link.label }}</a>
             <div class="main-nav__submenu">
-              @for (child of link.children; track child.path) {
-                <a [routerLink]="child.path" (click)="closeMobileNav()">{{ child.label }}</a>
+              @for (child of link.children; track child.label) {
+                <a [routerLink]="child.path" [queryParams]="child.queryParams ?? null" (click)="closeMobileNav()">{{ child.label }}</a>
               }
             </div>
           </div>
@@ -96,6 +96,7 @@
       <section #quicknavpanel id="quick-navigation" class="quick-nav" aria-label="Recherche par mots-clés">
         <label for="quick-nav-input">Chercher par mots-clés</label>
         <input
+          #quicknavinput
           id="quick-nav-input"
           type="search"
           placeholder="Ex: wordpress, api, formations..."
@@ -108,7 +109,7 @@
             <a [routerLink]="item.path" (click)="onQuickNavSelect()">{{ item.label }}</a>
           }
           @if (quickNavResults.length === 0 && quickNavQuery.trim()) {
-            <p>Aucune section ne correspond à cette recherche.</p>
+            <p>Aucun résultat ne correspond à cette recherche.</p>
           }
           @if (quickNavQuery.trim() === '') {
             <p class="quick-nav__hint">Commencez à taper pour voir les suggestions…</p>
@@ -153,6 +154,18 @@
         </svg>
       </a>
     }
+    <button
+      #mobilesearchtogglebtn
+      class="mobile-bottom-nav__item mobile-bottom-nav__item--search"
+      type="button"
+      aria-label="Recherche rapide"
+      [class.is-active]="isQuickNavOpen"
+      (click)="isQuickNavOpen ? closeQuickNav() : openQuickNav()"
+    >
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M10.5 3a7.5 7.5 0 0 1 5.98 12.03l4.24 4.24a1 1 0 0 1-1.42 1.42l-4.24-4.24A7.5 7.5 0 1 1 10.5 3Zm0 2a5.5 5.5 0 1 0 0 11 5.5 5.5 0 0 0 0-11Z"/>
+      </svg>
+    </button>
   </nav>
 
   <footer class="app-footer">

@@ -325,21 +325,28 @@
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
-	width: 52px;
-	height: 52px;
-	border-radius: 12px;
+	width: 50px;
+	height: 50px;
+	border-radius: 9px;
 	border: 1px solid color-mix(in srgb, var(--c-muted) 40%, transparent);
 	background: color-mix(in srgb, var(--c-accent-deep) 88%, transparent);
 	cursor: pointer;
 	z-index: 950;
 	box-shadow: var(--shadow-soft);
+
+	/* Mobile: 35px */
+	@media (max-width: 760px) {
+		width: 31px;
+		height: 31px;
+	}
 }
 
 .theme-switch-fab__icon {
-	width: 24px;
-	height: 24px;
+	width: 25px;
+	height: 25px;
 	/* SVGs noirs natifs → blancs en mode sombre */
 	filter: brightness(0) invert(1);
+	object-fit: contain;
 }
 
 
@@ -549,8 +556,9 @@
 	}
 
 	.theme-switch-fab {
-		bottom: 6rem;
+		top: 1.2rem;
 		right: 0.9rem;
+		bottom: auto;
 	}
 
 	.main-nav {

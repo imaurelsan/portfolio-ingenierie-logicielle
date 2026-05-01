@@ -28,12 +28,14 @@ export class EmailService {
   }
 
   private initEmailJS(): void {
+    // Initialisation defensive: on evite d'initialiser EmailJS avec une cle vide/placeholder.
     if (this.PUBLIC_KEY && this.PUBLIC_KEY !== 'YOUR_PUBLIC_KEY') {
       emailjs.init(this.PUBLIC_KEY);
     }
   }
 
   async sendContactMessage(message: ContactMessage): Promise<{ success: boolean; message: string }> {
+    // Si la configuration est absente, on renvoie un message explicite au lieu d'un echec silencieux.
     if (!this.PUBLIC_KEY || this.PUBLIC_KEY === 'YOUR_PUBLIC_KEY') {
       return {
         success: false,
@@ -42,6 +44,7 @@ export class EmailService {
     }
 
     try {
+      // Mapping des champs vers le template EmailJS configure cote tableau de bord.
       const result = await emailjs.send(this.SERVICE_ID, this.TEMPLATE_ID, {
         from_name: message.name,
         from_email: message.email,

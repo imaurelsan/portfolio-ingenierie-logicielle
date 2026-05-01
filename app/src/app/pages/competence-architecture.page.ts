@@ -110,6 +110,7 @@ type ImprovementPlan = {
   `,
 })
 export class CompetenceArchitecturePage {
+  // Les preuves sont separees des metriques pour distinguer le factuel du mesurable.
   protected readonly evidences: Evidence[] = [
     {
       title: 'Déploiement multisite en entreprise',

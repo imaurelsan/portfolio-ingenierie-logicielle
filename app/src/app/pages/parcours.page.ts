@@ -162,6 +162,7 @@ type CertificationItem = {
   `,
 })
 export class ParcoursPage {
+  // La timeline est ordonnee du plus recent au plus ancien pour une lecture plus naturelle.
   protected readonly experiences: ExperienceItem[] = [
     {
       period: 'Août 2025 - Août 2026',
@@ -392,6 +393,7 @@ export class ParcoursPage {
     },
   ];
 
+  // On filtre defensivement pour eviter d'afficher un item incomplet ou placeholder.
   protected get certificationsForDisplay(): CertificationItem[] {
     return this.certifications.filter((item) => {
       const text = `${item.title} ${item.school ?? ''} ${item.date}`.toLowerCase();

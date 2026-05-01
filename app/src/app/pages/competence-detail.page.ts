@@ -22,6 +22,7 @@ export type CompetenceDetail = {
 };
 
 export const COMPETENCES: CompetenceDetail[] = [
+  // Chaque bloc suit la meme structure pour faciliter la comparaison entre competences.
   {
     slug: 'architecture-web-mutualisee',
     order: 'Compétence détaillée 1/11',

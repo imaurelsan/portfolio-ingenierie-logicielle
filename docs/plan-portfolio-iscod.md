@@ -41,7 +41,7 @@ Règles de navigation :
 
 - Thème clair/sombre avec switch visuel
 - Header responsive avec menu mobile, fermeture par clic extérieur et touche Escape
-- Moteur de recherche de sections (matching par mots-clés)
+- Moteur de recherche global du contenu (pages, compétences détaillées, réalisations détaillées) avec scoring par pertinence
 - Routes Angular titrées page par page
 - Formulaire de contact connecté à EmailJS
 - Parcours structuré en trois blocs visuellement distincts : expériences, formations, certifications

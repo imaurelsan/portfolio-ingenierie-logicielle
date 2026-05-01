@@ -27,7 +27,7 @@ type Project = {
       </header>
 
       <div class="mobile-realisations-summary" aria-label="Sommaire des réalisations">
-        @for (project of projects; track project.slug) {
+        @for (project of visibleProjects; track project.slug) {
           <a href="#"
           (click)="$event.preventDefault(); scrollTo(project.slug)">
             <strong>{{ project.title }}</strong>
@@ -36,8 +36,34 @@ type Project = {
         }
       </div>
 
+      <!-- Section des technos : toutes les technologies citées dans les projets, cliquables pour filtrer les cartes. -->
+      <div class="tech-filter-section">
+        <p class="tech-filter-section__label">Technologies utilisées</p>
+        <div class="tech-filter-chips" role="group" aria-label="Filtrer les projets par technologie">
+          @for (badge of allTechBadges; track badge.name) {
+            <button
+              class="tech-filter-chip"
+              [class.tech-filter-chip--active]="badge.name === selectedTech"
+              type="button"
+              (click)="filterByTech(badge.name)"
+              [attr.aria-pressed]="badge.name === selectedTech"
+            >
+              @if (badge.iconUrl) {
+                <img class="tech-filter-chip__icon" [src]="badge.iconUrl" [alt]="" aria-hidden="true" />
+              }
+              {{ badge.name }}
+            </button>
+          }
+        </div>
+        @if (selectedTech) {
+          <button class="tech-filter-section__clear" type="button" (click)="selectedTech = null">
+            ← Voir tous les projets
+          </button>
+        }
+      </div>
+
       <div class="cards-grid">
-        @for (project of projects; track project.title) {
+        @for (project of visibleProjects; track project.title) {
           <article class="card card--project" [id]="project.slug">
             <figure
               class="project-visual"
@@ -154,9 +180,9 @@ type Project = {
           <article class="panel detail-block">
             <h3 class="detail-heading--anchored">6. Lendemains</h3>
             <ul class="detail-list">
-              <li><strong>Futur immédiat :</strong> {{ selectedDetail.futureImmediate }}</li>
-              <li><strong>À distance :</strong> {{ selectedDetail.futureDistance }}</li>
-              <li><strong>Aujourd’hui :</strong> {{ selectedDetail.futureToday }}</li>
+              <li><span><strong>Futur immédiat :</strong> {{ selectedDetail.futureImmediate }}</span></li>
+              <li><span><strong>À distance :</strong> {{ selectedDetail.futureDistance }}</span></li>
+              <li><span><strong>Aujourd'hui :</strong> {{ selectedDetail.futureToday }}</span></li>
             </ul>
           </article>
 
@@ -217,6 +243,7 @@ type Project = {
 export class RealisationsPage {
   private readonly location = inject(Location);
   protected selectedDetail: RealisationDetail | null = null;
+  protected selectedTech: string | null = null;
   protected isImageViewerOpen = false;
   protected imageViewerSrc = '';
   protected imageViewerAlt = '';
@@ -230,6 +257,7 @@ export class RealisationsPage {
     this.closeDrawer();
   }
 
+  // Petit sommaire mobile: scroll direct vers la carte cible.
   protected scrollTo(slug: string): void {
     const target = document.getElementById(slug);
     if (!target) return;
@@ -240,6 +268,7 @@ export class RealisationsPage {
     });
   }
 
+  // Le tiroir detail met aussi a jour l'URL pour garder un lien partageable.
   protected openDrawer(slug: string): void {
     this.selectedDetail = REALISATIONS.find((r) => r.slug === slug) ?? null;
     if (this.selectedDetail) {
@@ -256,6 +285,7 @@ export class RealisationsPage {
     this.closeImageViewer();
   }
 
+  // Effet de zoom localise selon la position de la souris sur l'image.
   protected onImageMove(event: MouseEvent): void {
     const container = event.currentTarget as HTMLElement | null;
     if (!container) {
@@ -296,12 +326,45 @@ export class RealisationsPage {
     return text.split('||').map((part) => part.trim()).filter((part) => part.length > 0);
   }
 
+  // Nettoie les formulations approximatives pour garder des metriques courtes et lisibles.
   protected cleanMetric(metric: string): string {
     return metric
       .replaceAll(/\b(estim[ée]s?|estimation|estimatif|estimative|estimatifs|estimatives|approx(?:\.|imatif|imative)?|environ)\b/gi, '')
       .replaceAll(/\s{2,}/g, ' ')
       .trim();
   }
+
+  // Toutes les technos uniques citees dans les projets, dans l'ordre de premiere apparition.
+  protected get allTechBadges(): { name: string; iconUrl: string }[] {
+    const seen = new Set<string>();
+    const result: { name: string; iconUrl: string }[] = [];
+    for (const r of REALISATIONS) {
+      for (const badge of r.techStack) {
+        if (!seen.has(badge.name)) {
+          seen.add(badge.name);
+          result.push({ name: badge.name, iconUrl: badge.iconUrl });
+        }
+      }
+    }
+    return result;
+  }
+
+  // Projets visibles apres application eventuelle du filtre techno.
+  protected get visibleProjects(): Project[] {
+    if (!this.selectedTech) return this.projects;
+    const matchingSlugs = new Set(
+      REALISATIONS
+        .filter((r) => r.techStack.some((t) => t.name === this.selectedTech))
+        .map((r) => r.slug)
+    );
+    return this.projects.filter((p) => matchingSlugs.has(p.slug));
+  }
+
+  // Active ou desactive le filtre sur une techno : cliquer deux fois remet tout a zero.
+  protected filterByTech(name: string): void {
+    this.selectedTech = this.selectedTech === name ? null : name;
+  }
+
   // J'ai retenu ces projets pour montrer simplement ce que j'ai fait, comment je l'ai fait et ce que cela a apporté.
   protected readonly projects: Project[] = [
     {
