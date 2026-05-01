@@ -1582,6 +1582,30 @@ summary:focus {
 	transform: rotate(180deg);
 }
 
+.journey-item__details[open] {
+	margin-top: 0.55rem;
+	padding-top: 1.05rem;
+	padding-bottom: 0.95rem;
+}
+
+.journey-item__details[open] > .card-meta-title {
+	margin-top: 1.45rem;
+	margin-bottom: 0.5rem;
+	padding-top: 1rem;
+	border-top: 1px dashed color-mix(in srgb, var(--c-muted) 24%, transparent);
+}
+
+.journey-item__details[open] > summary + .card-meta-title {
+	margin-top: 0.9rem;
+	padding-top: 0;
+	border-top: 0;
+}
+
+.journey-item__details[open] > p:not(.card-meta-title),
+.journey-item__details[open] > .detail-list {
+	margin-bottom: 0.25rem;
+}
+
 .journey-item__details[open] .journey-toggle-arrow {
 	transform: rotate(180deg);
 }
@@ -1670,12 +1694,55 @@ summary:focus {
 	color: var(--c-muted);
 }
 
+.journey-item__details .detail-list li > span {
+	display: block;
+	min-width: 0;
+	line-height: 1.6;
+	color: var(--c-muted);
+}
+
+.journey-item__details .detail-list li > span a {
+	display: inline;
+	text-decoration: underline;
+	text-underline-offset: 2px;
+	overflow-wrap: anywhere;
+}
+
 .certification-item {
 	list-style: none;
 	padding: 0.95rem;
 	border-radius: 12px;
 	border: 1px solid color-mix(in srgb, var(--c-muted) 34%, transparent);
 	background: color-mix(in srgb, var(--c-surface-soft) 88%, transparent);
+}
+
+.detail-block--certification .detail-list li.certification-item {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 0.55rem;
+	padding: 0.95rem;
+}
+
+.detail-block--certification .detail-list li.certification-item::before {
+	display: none;
+	content: none;
+}
+
+.certification-head {
+	display: flex;
+	align-items: center;
+	gap: 0.6rem;
+	flex-wrap: wrap;
+}
+
+.certification-logo {
+	width: 34px;
+	height: 34px;
+	padding: 4px;
+	border-radius: 8px;
+	object-fit: contain;
+	background: #ffffff;
+	border: 1px solid color-mix(in srgb, var(--c-muted) 35%, transparent);
 }
 
 .certification-item--single {
@@ -1694,7 +1761,7 @@ summary:focus {
 	text-transform: uppercase;
 	font-size: 0.78rem;
 	color: color-mix(in srgb, var(--c-muted) 78%, var(--c-accent-light) 22%);
-	text-align: center;
+	text-align: left;
 }
 
 .certification-line--school {
@@ -1722,6 +1789,12 @@ summary:focus {
 	text-decoration: none;
 	font-weight: 600;
 	color: color-mix(in srgb, var(--c-accent) 84%, var(--c-text) 16%);
+}
+
+@media (min-width: 761px) {
+	.journey-item__details .card-meta-title {
+		font-size: 11px;
+	}
 }
 
 .certification-line--proof a:hover {

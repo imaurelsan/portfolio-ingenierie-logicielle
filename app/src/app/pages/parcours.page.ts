@@ -81,7 +81,7 @@ type CertificationItem = {
                   <p class="card-meta-title">Détail des missions</p>
                   <ul class="detail-list">
                     @for (line of item.details; track line) {
-                      <li [innerHTML]="line"></li>
+                      <li><span [innerHTML]="line"></span></li>
                     }
                   </ul>
                   <p class="card-meta-title">Réalisations clés liées</p>
@@ -147,7 +147,12 @@ type CertificationItem = {
         <ul class="detail-list">
           @for (item of certificationsForDisplay; track item.title) {
             <li class="certification-item" [class.certification-item--single]="certificationsForDisplay.length === 1">
-              <p class="certification-line certification-line--date">{{ item.date }}</p>
+              <div class="certification-head">
+                <p class="certification-line certification-line--date">{{ item.date }}</p>
+                @if (item.logo) {
+                  <img class="certification-logo" [src]="item.logo" [alt]="'Logo ' + (item.school ?? 'certification')" />
+                }
+              </div>
               <p class="certification-line certification-line--summary"><strong>{{ item.school }}</strong> — {{ item.title }}</p>
               @if (item.link) {
                 <p class="certification-line certification-line--proof"><a [href]="item.link" target="_blank" rel="noopener">Voir la preuve →</a></p>
