@@ -28,6 +28,7 @@ type CertificationItem = {
   date: string;
   title: string;
   link?: string;
+  linkText?: string;
   school?: string;
   logo?: string;
 };
@@ -153,9 +154,9 @@ type CertificationItem = {
                   <img class="certification-logo" [src]="item.logo" [alt]="'Logo ' + (item.school ?? 'certification')" />
                 }
               </div>
-              <p class="certification-line certification-line--summary"><strong>{{ item.school }}</strong> — {{ item.title }}</p>
+              <p class="certification-line certification-line--summary"><strong>{{ item.school }}</strong> | {{ item.title }}</p>
               @if (item.link) {
-                <p class="certification-line certification-line--proof"><a [href]="item.link" target="_blank" rel="noopener">Voir la preuve →</a></p>
+                <p class="certification-line certification-line--proof"><a [href]="item.link" target="_blank" rel="noopener">{{ item.linkText ?? 'Voir la preuve →' }}</a></p>
               } @else {
                 <p class="certification-line certification-line--proof">Voir la preuve</p>
               }
@@ -389,6 +390,14 @@ export class ParcoursPage {
   ];
 
   protected readonly certifications: CertificationItem[] = [
+    {
+      date: '2026',
+      title: 'ASSESSFIRST : Évaluations psychométriques : Personnalité, motivations et capacités cognitives.',
+      school: 'ASSESSFIRST',
+      logo: 'assets/images/formations/5-logo-assessfirst.png',
+      link: 'assets/documents/AssessFirst - Évaluations psychométriques (Personnalité, motivations et capacités cognitives).pdf',
+      linkText: 'Voir le rapport →',
+    },
     {
       date: '2023',
       title: 'Certification : Développement Web et Web Mobile (RNCP37674).',
