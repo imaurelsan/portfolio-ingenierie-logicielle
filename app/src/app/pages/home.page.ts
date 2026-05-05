@@ -59,7 +59,7 @@ type FeaturedProject = {
 
     <section class="page-section home-projects" aria-labelledby="home-projects-title">
       <header class="section-header section-header--compact">
-        <h2 id="home-projects-title" class="section-title">Projets récents</h2>
+        <h2 id="home-projects-title" class="section-title">3 réalisations phares</h2>
         <p class="intro-text intro-text--tight">Chaque projet illustre un problème réel et la décision qui l'a résolu.</p>
       </header>
 
@@ -157,7 +157,7 @@ export class HomePage implements AfterViewInit {
   ];
 
   protected readonly featuredProject: FeaturedProject = {
-    title: '360-content-bridge',
+    title: '360 Content Bridge',
     context: 'Plugin WordPress - réduction du temps de transfert estimée à -60%.',
     screenshot: 'assets/images/screenshots-realisations/360-content-bridge.png',
     path: '/realisations/project-360-content-bridge',
@@ -165,13 +165,13 @@ export class HomePage implements AfterViewInit {
 
   protected readonly compactProjects: FeaturedProject[] = [
     {
-      title: '360-media-auto-cleanup',
+      title: '360 Media Auto Cleanup',
       context: 'Plugin WordPress - gouvernance médias et réduction du bruit opérationnel.',
       screenshot: 'assets/images/screenshots-realisations/360-media-auto-cleanup.png',
       path: '/realisations/project-360-media-auto-cleanup',
     },
     {
-      title: '360tranquilité',
+      title: '360 Tranquillité',
       context: 'Suite WordPress - sécurité applicative et exploitation unifiée.',
       screenshot: 'assets/images/screenshots-realisations/360-tranquillite.png',
       path: '/realisations/project-360tranquilite',
