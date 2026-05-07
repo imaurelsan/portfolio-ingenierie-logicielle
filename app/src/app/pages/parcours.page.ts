@@ -392,7 +392,7 @@ export class ParcoursPage {
   protected readonly certifications: CertificationItem[] = [
     {
       date: '2026',
-      title: 'ASSESSFIRST : Évaluations psychométriques : Personnalité, motivations et capacités cognitives.',
+      title: 'Évaluations psychométriques : Personnalité, motivations et capacités cognitives.',
       school: 'ASSESSFIRST',
       logo: 'assets/images/formations/5-logo-assessfirst.png',
       link: 'assets/documents/AssessFirst - Évaluations psychométriques (Personnalité, motivations et capacités cognitives).pdf',
