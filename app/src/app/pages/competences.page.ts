@@ -64,6 +64,12 @@ type SkillFilter = 'Tous' | 'Techniques' | 'Humaines';
               <p><strong>Niveau actuel :</strong> {{ skill.level }}</p>
               <p><strong>Importance pour mon projet pro :</strong> {{ skill.importance }}</p>
               <p><strong>Transférabilité inter-projets :</strong> {{ skill.transferability }}</p>
+              <p><strong>Langages et outils clés :</strong></p>
+              <div class="tech-stack tech-stack--compact">
+                @for (techName of techPreview(skill.slug); track techName) {
+                  <span class="tech-badge tech-badge--mini">{{ techName }}</span>
+                }
+              </div>
             </div>
             <div class="card__footer">
               <div class="skill-meter" role="presentation" aria-hidden="true">
@@ -96,7 +102,26 @@ type SkillFilter = 'Tous' | 'Techniques' | 'Humaines';
           </article>
 
           <article class="panel detail-block">
-            <h3>2. Mes éléments de preuve</h3>
+            <h3>2. Langages, outils et méthodes mobilisés</h3>
+            <p class="intro-text intro-text--tight">
+              Chaque badge est cliquable et mène vers une explication de mon usage réel.
+            </p>
+            <div class="tech-stack">
+              @for (tech of selectedDetail.techHighlights; track tech.name; let i = $index) {
+                <button class="tech-badge tech-badge--button" type="button" (click)="scrollToTech(selectedDetail.slug, i)">{{ tech.name }}</button>
+              }
+            </div>
+            <ul class="detail-list detail-list--cards detail-list--no-bullet detail-list--tech-usage">
+              @for (tech of selectedDetail.techHighlights; track tech.name; let i = $index) {
+                <li [attr.id]="techAnchorId(selectedDetail.slug, i)">
+                  <p><strong>{{ tech.name }} :</strong> {{ tech.usage }}</p>
+                </li>
+              }
+            </ul>
+          </article>
+
+          <article class="panel detail-block">
+            <h3>3. Mes éléments de preuve</h3>
             <ul class="detail-list detail-list--rich detail-list--cards detail-list--no-bullet">
               @for (anecdote of selectedDetail.anecdotes; track anecdote.title) {
                 <li>
@@ -116,7 +141,7 @@ type SkillFilter = 'Tous' | 'Techniques' | 'Humaines';
           </article>
 
           <article class="panel detail-block">
-            <h3>3. Mon autocritique</h3>
+            <h3>4. Mon autocritique</h3>
             <ul class="detail-list">
               @for (item of selectedDetail.selfReview; track item) {
                 <li>{{ item }}</li>
@@ -125,7 +150,7 @@ type SkillFilter = 'Tous' | 'Techniques' | 'Humaines';
           </article>
 
           <article class="panel detail-block">
-            <h3>4. Mon évolution</h3>
+            <h3>5. Mon évolution</h3>
             <ul class="detail-list">
               @for (item of selectedDetail.evolution; track item) {
                 <li>{{ item }}</li>
@@ -201,6 +226,27 @@ export class CompetencesPage implements OnInit, OnDestroy {
 
   protected setFilter(filter: SkillFilter): void {
     this.selectedFilter = filter;
+  }
+
+  protected techPreview(slug: string): string[] {
+    const detail = COMPETENCES.find((item) => item.slug === slug);
+    return detail ? detail.techHighlights.slice(0, 4).map((tech) => tech.name) : [];
+  }
+
+  protected techAnchorId(slug: string, index: number): string {
+    return 'tech-' + slug + '-' + index;
+  }
+
+  protected scrollToTech(slug: string, index: number): void {
+    const targetId = this.techAnchorId(slug, index);
+    const target = document.getElementById(targetId);
+    if (!target) {
+      return;
+    }
+
+    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    target.setAttribute('tabindex', '-1');
+    target.focus({ preventScroll: true });
   }
 
   // Ici je garde les competences dans un tableau clair pour pouvoir les brancher facilement sur l'API plus tard.

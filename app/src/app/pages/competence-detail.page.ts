@@ -10,11 +10,17 @@ export type Anecdote = {
   linkedProject: { title: string; path: string };
 };
 
+export type TechUsage = {
+  name: string;
+  usage: string;
+};
+
 export type CompetenceDetail = {
   slug: string;
   order: string;
   title: string;
   definition: string[];
+  techHighlights: TechUsage[];
   anecdotes: Anecdote[];
   selfReview: string[];
   evolution: string[];
@@ -31,6 +37,12 @@ export const COMPETENCES: CompetenceDetail[] = [
       'Je définis cette compétence comme la capacité à concevoir un socle unique pour plusieurs sites, avec des règles communes et des variations contrôlées.',
       'Quand plusieurs sites doivent rester cohérents sans coûter trop cher à maintenir, l’architecture mutualisée devient une réponse simple et utile.',
       'Dans le contexte actuel de rationalisation des coûts et de maintien en conditions opérationnelles, ce type d’architecture aide les équipes à livrer plus régulièrement avec un niveau de qualité homogène.',
+    ],
+    techHighlights: [
+      { name: 'WordPress Multisite', usage: 'Je l’utilise pour partager un socle technique commun entre plusieurs sites tout en gardant des variantes locales maîtrisées.' },
+      { name: 'PHP', usage: 'Je l’utilise pour structurer la logique métier côté serveur et fiabiliser les comportements partagés du réseau.' },
+      { name: 'MySQL', usage: 'Je m’en sers pour comprendre l’impact des choix de structure de données sur la maintenance multisite.' },
+      { name: 'GitHub', usage: 'Je l’utilise pour tracer les changements d’architecture et sécuriser les évolutions incrémentales.' },
     ],
     anecdotes: [
       {
@@ -77,6 +89,12 @@ export const COMPETENCES: CompetenceDetail[] = [
       'Je définis cette compétence comme la capacité à mettre une logique métier dans un plugin clair, réutilisable et facile à faire évoluer.',
       'C’est une compétence importante quand on veut moins dépendre d’extensions externes et garder la main sur ce qu’on construit.',
     ],
+    techHighlights: [
+      { name: 'PHP', usage: 'Je l’utilise pour le cœur des plugins, avec une structure modulaire lisible et maintenable.' },
+      { name: 'Hooks WordPress', usage: 'Je m’appuie sur actions et filters pour brancher proprement les fonctionnalités sans casser l’existant.' },
+      { name: 'JavaScript', usage: 'Je l’utilise pour améliorer l’ergonomie des écrans d’administration et simplifier les usages quotidiens.' },
+      { name: 'MySQL', usage: 'Je l’utilise pour les lectures et écritures nécessaires aux fonctions métier du plugin.' },
+    ],
     anecdotes: [
       {
         title: 'Conception d’un plugin de monitoring et sécurité',
@@ -113,6 +131,12 @@ export const COMPETENCES: CompetenceDetail[] = [
       'Je définis cette compétence comme la capacité à faire communiquer des systèmes entre eux de façon claire et fiable.',
       'Aujourd’hui, relier plusieurs services est souvent nécessaire pour gagner du temps et éviter les tâches manuelles.',
     ],
+    techHighlights: [
+      { name: 'API REST', usage: 'Je l’utilise pour connecter des services et échanger des données de manière standardisée.' },
+      { name: 'JSON', usage: 'Je l’utilise comme format d’échange pour sérialiser les données et contrôler les validations.' },
+      { name: 'PHP', usage: 'Je l’utilise pour orchestrer les appels côté serveur et gérer les erreurs de façon robuste.' },
+      { name: 'JavaScript', usage: 'Je l’utilise pour traiter les réponses API côté interface et rendre les retours plus lisibles.' },
+    ],
     anecdotes: [
       {
         title: 'Connexion de WordPress à des services externes',
@@ -147,6 +171,12 @@ export const COMPETENCES: CompetenceDetail[] = [
     definition: [
       'Je définis cette compétence comme l’ensemble des actions qui réduisent le temps de chargement et améliorent la perception utilisateur.',
       'La performance est aujourd’hui un point important, à la fois pour l’expérience utilisateur, la visibilité web et les coûts.',
+    ],
+    techHighlights: [
+      { name: 'Lighthouse', usage: 'Je l’utilise pour mesurer les points faibles puis prioriser les optimisations utiles.' },
+      { name: 'SCSS', usage: 'Je l’utilise pour structurer les styles et limiter les surcharges inutiles côté rendu.' },
+      { name: 'JavaScript', usage: 'Je l’utilise en veillant à réduire les scripts non essentiels et les coûts de chargement.' },
+      { name: 'Optimisation d’images', usage: 'Je l’applique pour réduire le poids média sans dégrader la qualité perçue.' },
     ],
     anecdotes: [
       {
@@ -183,6 +213,12 @@ export const COMPETENCES: CompetenceDetail[] = [
       'Je définis cette compétence comme la capacité à réduire l’exposition au risque applicatif par des mécanismes simples, utiles et maintenables.',
       'Dans un contexte d’attaques fréquentes sur les CMS, le durcissement WordPress reste un enjeu immédiat.',
     ],
+    techHighlights: [
+      { name: 'WordPress', usage: 'Je l’utilise avec une approche de durcissement progressif pour limiter les surfaces d’attaque courantes.' },
+      { name: 'PHP', usage: 'Je l’utilise pour contrôler les accès et sécuriser certains traitements sensibles côté plugin.' },
+      { name: 'Journalisation', usage: 'Je m’appuie sur les logs pour suivre les anomalies et accélérer le diagnostic.' },
+      { name: 'Bonnes pratiques OWASP', usage: 'Je les applique comme grille simple pour éviter les erreurs de sécurité récurrentes.' },
+    ],
     anecdotes: [
       {
         title: 'Durcissement progressif de sites WordPress',
@@ -214,6 +250,12 @@ export const COMPETENCES: CompetenceDetail[] = [
     definition: [
       'Je définis cette compétence comme la capacité à prioriser par valeur, à découper les livrables et à piloter sous contrainte.',
       'Dans des contextes où les demandes évoluent vite, l’agilité pragmatique est une compétence indispensable.',
+    ],
+    techHighlights: [
+      { name: 'Jira', usage: 'Je l’utilise pour découper les tâches et clarifier les priorités visibles par tous.' },
+      { name: 'GitHub Projects', usage: 'Je l’utilise pour suivre l’avancement et garder une vue claire des livrables.' },
+      { name: 'Méthode Agile', usage: 'Je l’utilise pour livrer par incréments et ajuster selon les retours terrain.' },
+      { name: 'Markdown', usage: 'Je l’utilise pour documenter les décisions et faciliter les passations.' },
     ],
     anecdotes: [
       {
@@ -250,6 +292,12 @@ export const COMPETENCES: CompetenceDetail[] = [
       'Je définis cette compétence comme la capacité à traduire des contraintes techniques en décisions compréhensibles par des profils non techniques.',
       'Dans les projets digitaux, cette compétence réduit fortement les malentendus et les dérives de périmètre.',
     ],
+    techHighlights: [
+      { name: 'Documentation Markdown', usage: 'Je l’utilise pour produire des explications claires, courtes et exploitables par l’équipe.' },
+      { name: 'Schémas de flux', usage: 'Je les utilise pour rendre visibles les choix techniques et leurs impacts.' },
+      { name: 'Tickets de suivi', usage: 'Je les utilise pour formaliser les demandes et éviter les zones grises.' },
+      { name: 'Compte-rendu de décision', usage: 'Je l’utilise pour garder une trace lisible des arbitrages.' },
+    ],
     anecdotes: [
       {
         title: 'Dialogue entre design, technique et usage',
@@ -284,6 +332,12 @@ export const COMPETENCES: CompetenceDetail[] = [
     definition: [
       'Je définis cette compétence comme la capacité à concevoir des interfaces lisibles et utiles, au service d’un usage concret.',
       'Avec l’exigence actuelle d’inclusivité et de clarté, l’accessibilité n’est plus optionnelle.',
+    ],
+    techHighlights: [
+      { name: 'Figma', usage: 'Je l’utilise pour structurer l’interface avant développement et valider la hiérarchie visuelle.' },
+      { name: 'HTML', usage: 'Je l’utilise pour construire une structure sémantique claire et accessible.' },
+      { name: 'SCSS', usage: 'Je l’utilise pour maintenir une interface cohérente et lisible sur plusieurs écrans.' },
+      { name: 'Tests utilisateurs', usage: 'Je les utilise pour vérifier rapidement si l’interface est réellement compréhensible.' },
     ],
     anecdotes: [
       {
@@ -320,6 +374,12 @@ export const COMPETENCES: CompetenceDetail[] = [
       'Je définis cette compétence comme la capacité à transformer des tâches manuelles fragiles en processus plus fiables et reproductibles.',
       'Dans l’ingénierie logicielle actuelle, l’automatisation est indispensable pour soutenir la cadence sans sacrifier la qualité.',
     ],
+    techHighlights: [
+      { name: 'GitHub Actions', usage: 'Je l’utilise pour automatiser build et déploiement afin de fiabiliser les livraisons.' },
+      { name: 'YAML', usage: 'Je l’utilise pour décrire les workflows CI/CD de façon traçable et versionnée.' },
+      { name: 'npm scripts', usage: 'Je les utilise pour standardiser les commandes de build et de contrôle.' },
+      { name: 'FTPS (lftp)', usage: 'Je l’utilise pour déployer automatiquement le build sur l’hébergement Hostinger.' },
+    ],
     anecdotes: [
       {
         title: 'Mise en place d’une CI/CD sur le portfolio',
@@ -355,6 +415,12 @@ export const COMPETENCES: CompetenceDetail[] = [
       'Je définis cette compétence comme la capacité à choisir entre plusieurs options en tenant compte du temps, du coût, du risque et de la maintenance.',
       'Dans un contexte contraint, cette compétence aide à garder un projet viable sur la durée.',
     ],
+    techHighlights: [
+      { name: 'Matrice de décision', usage: 'Je l’utilise pour comparer plusieurs options avant arbitrage technique.' },
+      { name: 'GitHub Issues', usage: 'Je l’utilise pour documenter les options, risques et décisions retenues.' },
+      { name: 'Indicateurs web', usage: 'Je les utilise pour appuyer les choix sur des mesures plutôt que sur l’intuition seule.' },
+      { name: 'Revue de code', usage: 'Je l’utilise pour confronter mes décisions et améliorer leur robustesse.' },
+    ],
     anecdotes: [
       {
         title: 'Arbitrages entre solution rapide et solution durable',
@@ -389,6 +455,12 @@ export const COMPETENCES: CompetenceDetail[] = [
     definition: [
       'Je définis cette compétence comme la capacité à faire travailler ensemble des profils différents autour d’un objectif concret et partagé.',
       'Elle est essentielle dès qu’un projet implique à la fois des enjeux métier, design, techniques et de delivery.',
+    ],
+    techHighlights: [
+      { name: 'GitHub', usage: 'Je l’utilise comme base commune de travail pour aligner contributions et versions.' },
+      { name: 'Figma', usage: 'Je l’utilise pour échanger avec le design sur des décisions visuelles concrètes.' },
+      { name: 'Documentation partagée', usage: 'Je l’utilise pour rendre les décisions accessibles à tous les profils.' },
+      { name: 'Ateliers de cadrage', usage: 'Je les utilise pour aligner objectifs, contraintes et priorités avant exécution.' },
     ],
     anecdotes: [
       {
@@ -443,6 +515,25 @@ export const COMPETENCES: CompetenceDetail[] = [
               <p>{{ paragraph }}</p>
             }
           </div>
+        </article>
+
+        <article class="detail-block">
+          <h2>Langages, outils et méthodes mobilisés</h2>
+          <p class="intro-text intro-text--tight">
+            Les badges sont cliquables : ils renvoient au détail de mon usage réel sur cette compétence.
+          </p>
+          <div class="tech-stack">
+            @for (tech of skill.techHighlights; track tech.name; let i = $index) {
+              <button class="tech-badge tech-badge--button" type="button" (click)="scrollToTech(skill.slug, i)">{{ tech.name }}</button>
+            }
+          </div>
+          <ul class="detail-list detail-list--cards detail-list--no-bullet detail-list--tech-usage">
+            @for (tech of skill.techHighlights; track tech.name; let i = $index) {
+              <li [attr.id]="techAnchorId(skill.slug, i)">
+                <p><strong>{{ tech.name }} :</strong> {{ tech.usage }}</p>
+              </li>
+            }
+          </ul>
         </article>
 
         <article class="detail-block detail-block--anecdotes">
@@ -541,5 +632,21 @@ export class CompetenceDetailPage {
       return 'Expérimentation IA multi-agents sur un cas concret';
     }
     return 'Projet lié à la compétence évaluée';
+  }
+
+  protected techAnchorId(slug: string, index: number): string {
+    return 'tech-' + slug + '-' + index;
+  }
+
+  protected scrollToTech(slug: string, index: number): void {
+    const targetId = this.techAnchorId(slug, index);
+    const target = document.getElementById(targetId);
+    if (!target) {
+      return;
+    }
+
+    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    target.setAttribute('tabindex', '-1');
+    target.focus({ preventScroll: true });
   }
 }

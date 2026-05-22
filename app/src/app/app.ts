@@ -279,7 +279,7 @@ export class App {
         keywords: this.collectKeywords([
           'accueil', 'hero', 'portfolio', 'ingenierie logicielle', 'projets de reference',
           'angles', 'preuves', 'architecture', 'industrialisation', 'impact', 'aurel yahouedeou',
-          'developpeur fullstack junior', 'en savoir plus', 'ma facon d intervenir',
+          'developpeur fullstack', 'en savoir plus', 'ma facon d intervenir',
           'projets recents', 'chaque projet illustre un probleme reel et la decision qui l a resolu',
           'je ne cherche pas a impressionner par la complexite', 'je cherche a convaincre par la clarte',
           'entrer en relation', 'voir mon parcours',

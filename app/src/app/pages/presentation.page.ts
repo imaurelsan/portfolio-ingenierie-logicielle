@@ -27,7 +27,7 @@ import { RouterLink } from '@angular/router';
         </p>
         <p>
           Je recherche un environnement où l’on conçoit des produits utiles, lisibles et maintenables, avec une vraie
-          culture d’équipe. Mon objectif est de progresser sur un poste de développeur fullstack junior en continuant à
+          culture d’équipe. Mon objectif est de progresser sur un poste de développeur fullstack en continuant à
           apporter cette lecture transversale entre design, architecture et fiabilité.
         </p>
       </div>

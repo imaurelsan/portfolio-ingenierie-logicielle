@@ -24,7 +24,7 @@ type FeaturedProject = {
         <div class="home-hero__text">
           <p id="home-hero-title" class="home-hero__name"><span class="home-hero__name-first">Aurel </span> <span class="home-hero__name-last">YAHOUEDEOU</span></p>
           <h1 class="home-hero__title">Développeur Fullstack</h1>
-          <p class="home-hero__junior" aria-label="Junior">Junior</p>
+          <p class="home-hero__focus" aria-label="Créativité, code et fiabilité">Créativité, code et fiabilité</p>
         </div>
 
         <div class="home-hero__actions">
@@ -125,13 +125,13 @@ export class HomePage implements AfterViewInit {
 
   // Le calcul reste volontairement simple: un ratio scroll / distance de revelation.
   private updateAnglesProgress(): void {
-    if (typeof window === 'undefined') {
+    if (typeof globalThis.window === 'undefined') {
       this.anglesProgress = 0;
       return;
     }
 
-    const revealDistance = Math.max(window.innerHeight * 0.3, 220);
-    const progress = window.scrollY / revealDistance;
+    const revealDistance = Math.max(globalThis.window.innerHeight * 0.3, 220);
+    const progress = globalThis.window.scrollY / revealDistance;
     this.anglesProgress = Math.min(Math.max(progress, 0), 1);
   }
 

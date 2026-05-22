@@ -561,20 +561,19 @@ summary:focus {
 	white-space: nowrap;
 }
 
-.home-hero__junior {
-	margin: 0;
-	font-size: 1.05rem;
-	line-height: 1.2;
+.home-hero__focus {
+	margin: 0.35rem 0 0;
+	font-size: 1.02rem;
+	line-height: 1.25;
 	font-weight: 600;
-	letter-spacing: 0.08em;
-	text-transform: uppercase;
+	letter-spacing: 0.05em;
 	color: color-mix(in srgb, var(--c-accent-light) 78%, #ffffff 22%);
 	white-space: nowrap;
 	overflow: hidden;
 	width: 0;
 	border-right: 2px solid color-mix(in srgb, var(--c-accent-light) 78%, #ffffff 22%);
 	animation:
-		typing-junior 3s steps(6, end) 0.2s 1 forwards,
+		typing-focus 3s steps(28, end) 0.2s 1 forwards,
 		caret-hide 0s linear 3.2s 1 forwards;
 }
 
@@ -1149,21 +1148,21 @@ summary:focus {
 	}
 }
 
-@keyframes typing-junior {
-	from {
-		width: 0;
-	}
-	to {
-		width: 6.8ch;
-	}
-}
-
 @keyframes typing-quote {
 	from {
 		width: 0;
 	}
 	to {
 		width: 37ch;
+	}
+}
+
+@keyframes typing-focus {
+	from {
+		width: 0;
+	}
+	to {
+		width: 28ch;
 	}
 }
 
@@ -2479,8 +2478,8 @@ body.theme-light .field-float textarea:not(:placeholder-shown) ~ label {
 		white-space: normal;
 	}
 
-	.home-hero__junior {
-		font-size: 0.92rem;
+	.home-hero__focus {
+		font-size: 0.9rem;
 	}
 
 	.home-hero__actions {
@@ -2809,6 +2808,11 @@ body.theme-light .field-float textarea:not(:placeholder-shown) ~ label {
 	margin-top: 0.75rem;
 }
 
+.tech-stack--compact {
+	margin-top: 0.35rem;
+	gap: 0.5rem;
+}
+
 .tech-badge {
 	display: inline-flex;
 	align-items: center;
@@ -2820,6 +2824,24 @@ body.theme-light .field-float textarea:not(:placeholder-shown) ~ label {
 	font-size: 0.82rem;
 	font-weight: 600;
 	color: var(--c-text);
+}
+
+.tech-badge--mini {
+	padding: 0.28rem 0.62rem;
+	font-size: 0.76rem;
+}
+
+.tech-badge--button {
+	cursor: pointer;
+	font-family: inherit;
+}
+
+.detail-list--tech-usage {
+	margin-top: 0.9rem;
+}
+
+.detail-list--tech-usage li p {
+	margin: 0;
 }
 
 .tech-badge__icon {

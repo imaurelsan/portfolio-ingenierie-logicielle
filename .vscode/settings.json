@@ -1,0 +1,8 @@
+{
+    "chat.tools.terminal.autoApprove": {
+        "/^cd \"C:\\\\Users\\\\imaur\\\\Desktop\\\\LIVRABLES ISCOD\\\\PORTFOLIO\\\\portfolio-ingenierie-logicielle\\\\docs\" ; magick convert -density 150 \"Présentation soutenance - Expert en Ingénierie du logiciel\\.pdf\" -quality 85 \"slide_%04d\\.png\" 2>&1 \\| head -20$/": {
+            "approve": true,
+            "matchCommandLine": true
+        }
+    }
+}
