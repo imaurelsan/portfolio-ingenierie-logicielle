@@ -85,24 +85,28 @@ type CertificationItem = {
                       <li><span [innerHTML]="line"></span></li>
                     }
                   </ul>
-                  <p class="card-meta-title">Réalisations clés liées</p>
-                  <ul class="detail-list detail-list--links">
-                    @for (project of item.linkedProjects; track project.path) {
-                      <li>
-                        <a [href]="project.path">
-                          {{ project.title }} <span aria-hidden="true">↗</span>
-                        </a>
-                      </li>
-                    }
-                  </ul>
-                  <p class="card-meta-title">Compétences clés liées</p>
-                  <ul class="detail-list detail-list--links">
-                    @for (skill of item.linkedSkills; track skill.path) {
-                      <li>
-                        <a [href]="skill.path">{{ skill.title }}</a>
-                      </li>
-                    }
-                  </ul>
+                  @if (item.linkedProjects.length > 0) {
+                    <p class="card-meta-title">Réalisations clés liées</p>
+                    <ul class="detail-list detail-list--links">
+                      @for (project of item.linkedProjects; track project.path) {
+                        <li>
+                          <a [href]="project.path">
+                            {{ project.title }} <span aria-hidden="true">↗</span>
+                          </a>
+                        </li>
+                      }
+                    </ul>
+                  }
+                  @if (item.linkedSkills.length > 0) {
+                    <p class="card-meta-title">Compétences clés liées</p>
+                    <ul class="detail-list detail-list--links">
+                      @for (skill of item.linkedSkills; track skill.path) {
+                        <li>
+                          <a [href]="skill.path">{{ skill.title }}</a>
+                        </li>
+                      }
+                    </ul>
+                  }
                 </details>
               </div>
             </li>
@@ -270,11 +274,10 @@ export class ParcoursPage {
         'Configuration, supervision et maintenance d’un système de tracking GPS pour flottes de véhicules, avec gestion de la base clients.',
         'Optimisation des processus de suivi et résolution d’incidents techniques pour garantir la continuité de service.',
       ],
-      linkedProjects: [
-        { title: '360tranquilité', path: '/realisations/project-360tranquilite' },
-      ],
+      linkedProjects: [],
       linkedSkills: [
         { title: 'Sécurité applicative', path: '/competences/securite-applicative' },
+        { title: 'Analyse critique et prise de décision', path: '/competences/analyse-critique-decision-technique' },
       ],
     },
     {
@@ -289,11 +292,10 @@ export class ParcoursPage {
         'Participation à l’enrôlement national pour le Fichier Électoral, gestion des équipements et supervision du réseau sur les sites d’opération.',
         'Production et impression sécurisée des cartes électorales, avec contrôle qualité et gestion des flux de données.',
       ],
-      linkedProjects: [
-        { title: '360tranquilité', path: '/realisations/project-360tranquilite' },
-      ],
+      linkedProjects: [],
       linkedSkills: [
         { title: 'Sécurité applicative', path: '/competences/securite-applicative' },
+        { title: 'Collaboration interdisciplinaire', path: '/competences/collaboration-interdisciplinaire' },
       ],
     },
     {
@@ -309,11 +311,10 @@ export class ParcoursPage {
         'Collecte, consolidation et intégration des données électorales manquantes pour la mise à jour du Fichier Électoral National.',
         'Contribution à la préparation technique des législatives 2019, avec contrôle des données et support opérationnel.',
       ],
-      linkedProjects: [
-        { title: '360tranquilité', path: '/realisations/project-360tranquilite' },
-      ],
+      linkedProjects: [],
       linkedSkills: [
         { title: 'Analyse critique et prise de décision', path: '/competences/analyse-critique-decision-technique' },
+        { title: 'Collaboration interdisciplinaire', path: '/competences/collaboration-interdisciplinaire' },
       ],
     },
     {
@@ -329,11 +330,29 @@ export class ParcoursPage {
         'Installation et supervision du réseau physique et logique du centre, avec mise en place d’un système de sauvegardes fiable et incrémentiel.',
         'Support technique quotidien et optimisation de l’infrastructure pour améliorer la stabilité et la sécurité du réseau.',
       ],
-      linkedProjects: [
-        { title: '360tranquilité', path: '/realisations/project-360tranquilite' },
-      ],
+      linkedProjects: [],
       linkedSkills: [
         { title: 'Sécurité applicative', path: '/competences/securite-applicative' },
+        { title: 'Automatisation et amélioration continue', path: '/competences/automatisation-amelioration-continue' },
+      ],
+    },
+    {
+      period: 'Janvier 2016 - Avril 2016',
+      role: 'Stage pro : Graphiste illustrateur',
+      company: 'AFRICA OUTSOURCING',
+      city: 'Dakar, Sénégal',
+      website: 'https://www.africa-outsourcing.com/',
+      logo: 'assets/images/entreprises/9-logo-africa-outsourcing.png',
+      responsibility: 'Infographie, design graphique et maintenance du parc informatique.',
+      status: 'Stagiaire',
+      details: [
+        'Production de supports d’infographie et de design graphique pour les besoins de communication interne et externe.',
+        'Maintenance réseau et maintenance du parc informatique pour améliorer la continuité de service et la disponibilité des postes.',
+      ],
+      linkedProjects: [],
+      linkedSkills: [
+        { title: 'UX/UI orientée usage', path: '/competences/ux-ui-orientee-usage' },
+        { title: 'Collaboration interdisciplinaire', path: '/competences/collaboration-interdisciplinaire' },
       ],
     },
   ];
