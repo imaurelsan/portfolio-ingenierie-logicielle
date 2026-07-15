@@ -241,7 +241,7 @@ export class ParcoursPage {
     },
     {
       period: 'Septembre 2022 - Juillet 2023',
-      role: 'Concepteur Web Freelance',
+      role: 'Freelancing : Concepteur Web Indépendant',
       company: 'Flit Africa',
       city: 'Dakar, Sénégal',
       website: 'https://www.facebook.com/flitafrica/',
@@ -261,7 +261,7 @@ export class ParcoursPage {
     },
     {
       period: 'Août 2020 - 2023',
-      role: 'Entreprise individuelle digitale',
+      role: 'Freelancing : Entreprise individuelle digitale',
       company: 'AY Studio',
       city: 'Dakar, Sénégal',
       website: 'https://yaurel.com/',
