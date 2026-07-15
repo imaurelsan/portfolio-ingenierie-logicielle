@@ -208,7 +208,7 @@ export class ParcoursPage {
       status: 'Alternant',
       details: [
         'Développement et lancement de plateformes LMS de A à Z : <a href="https://fon.empow-her.com/" target="_blank" rel="noopener">FON x Empow\'Her ↗</a> et <a href="https://fameproject.org/fr/" target="_blank" rel="noopener">FAME ↗</a>, avec pilotage des évolutions produit et coordination des parties prenantes.',
-        'Optimisation des flux Airtable (SSO, API, automatisations), réduisant les temps de traitement de 25 % et améliorant la fiabilité des données.',
+        'Optimisation des flux Airtable (SSO, API, automatisations avec Make), réduisant les temps de traitement de 25% et améliorant la fiabilité des données.',
         'Pilotage du backlog digital et résolution de plus de 90 % des tickets confiés.',
       ],
       linkedProjects: [
@@ -237,6 +237,26 @@ export class ParcoursPage {
       ],
       linkedSkills: [
         { title: 'UX/UI orientée usage', path: '/competences/ux-ui-orientee-usage' },
+      ],
+    },
+    {
+      period: 'Septembre 2022 - Juillet 2023',
+      role: 'Concepteur Web Freelance',
+      company: 'Flit Africa',
+      city: 'Dakar, Sénégal',
+      website: 'https://www.facebook.com/flitafrica/',
+      logo: 'assets/images/entreprises/10-logo-flit-africa.png',
+      responsibility: 'Conception digitale complète d’une startup de logistique durable à la demande.',
+      status: 'Freelance',
+      details: [
+        'Conception et développement de l’ensemble de l’écosystème digital de Flit Africa, startup de logistique durable à la demande.',
+        'Création complète du site web, du design de l’application mobile et de l’identité visuelle (logo, affiches, kakemonos, supports marketing, etc.).',
+        'Intervention sur l’architecture UX/UI, la cohérence de marque et la mise en place des interfaces destinées aux clients et aux partenaires.',
+      ],
+      linkedProjects: [],
+      linkedSkills: [
+        { title: 'UX/UI orientée usage', path: '/competences/ux-ui-orientee-usage' },
+        { title: 'Communication technique', path: '/competences/communication-technique' },
       ],
     },
     {
